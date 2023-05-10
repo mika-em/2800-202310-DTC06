@@ -16,7 +16,7 @@ body {
   filter: drop-shadow(4px -2px 5px #000000);
 }
 
-#start{
+button{
   background-color: #fafafa;
   font-family: "Gugi", sans-serif;
   color: rgb(0, 0, 0);
@@ -41,13 +41,13 @@ body {
     blink-caret .5s step-end infinite;
 }
 
-/* The typing effect */
+/* Typing effect */
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
 }
 
-/* The typewriter cursor effect */
+/* typewriter cursor effect */
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: white; }

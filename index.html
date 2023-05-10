@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="icon" href="../images/invsona.png" />
 
     <!-- bootstrap morph theme -->
     <link
@@ -29,10 +30,11 @@
     top-50 start-50 
     translate-middle
     rounded-5
-    p-4
+    p-1
     ">
-      <div class="card text-center p-5 rounded-5" id="innerBox">
+      <div class="card text-center p-4 rounded-5" id="innerBox">
         <img
+          id="logo"
           class="align-self-center"
           src="./images/invsona.png"
           alt="invsona logo"
@@ -40,12 +42,14 @@
           height="200px"
         />
         <p id="title">Invsona</p>
-        <blockquote id="slogan">
+        <blockquote id="slogan" class="m-2 pb-5">
             Character Creation at Your Finger Tips
-        </blockquote> 
+        </blockquote>
+
         <div>
             <button
               type="button"
+              id="start"
               class="btn btn-primary btn-lg"
               onclick="window.location.href = './login.ejs'"
             >

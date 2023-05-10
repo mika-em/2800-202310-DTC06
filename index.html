@@ -1,14 +1,59 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <!-- bootstrap morph theme -->
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/morph/bootstrap.min.css"
+    />
 
-<body>
-    <h1 id="title">This is my simple webpage</h1>
-    <div class="content clickable">
+    <!-- google font -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./styles/index.css" />
+
+    <title> Invsona</title>
+
+  </head>
+
+  <body id="background">
+    <div class="card 
+    position-absolute 
+    top-50 start-50 
+    translate-middle
+    rounded-5
+    p-4
+    ">
+      <div class="card text-center p-5 rounded-5" id="innerBox">
+        <img
+          class="align-self-center"
+          src="./images/invsona.png"
+          alt="invsona logo"
+          width="200px"
+          height="200px"
+        />
+        <p id="title">Invsona</p>
+        <blockquote id="slogan">
+            Character Creation at Your Finger Tips
+        </blockquote> 
+        <div>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              onclick="window.location.href = './login.ejs'"
+            >
+              Start
+            </button>
+        </div>
+        </div>
+      </div>
     </div>
-    <script src="app.js"></script>
-</body>
-
+  </body>
 </html>

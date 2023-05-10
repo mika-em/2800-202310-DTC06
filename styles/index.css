@@ -1,0 +1,20 @@
+body {
+  background-image: url('/images/purplebg.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+#innerBox {
+  background-color: #051726;
+  color: white;
+}
+
+#title{
+    font-size: 50px;
+    font-family: "Gugi", sans-serif;
+}
+
+#slogan {
+  font-family: "Gugi", sans-serif;
+}
+

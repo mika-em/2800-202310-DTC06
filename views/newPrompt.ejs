@@ -1,0 +1,20 @@
+<h1>This is the new prompt preset page.</h1>
+
+<div class="container">
+  <form action="/persona/new-prompt" method="post">
+    <input type="text" name="parameter" placeholder="Add a parameter" />
+    <button type="submit">Add</button>
+  </form>
+  <form action="/persona/chat" method="post">
+    <% for (var i=0; i<locals.savedPromptParameter.length; i++) { %>
+    <div class="row">
+      <%- i + "&nbsp;" + locals.savedPromptParameter[i] %>
+      <input type="text" name=<%- locals.savedPromptParameter[i] %> placeholder="Enter <%- locals.savedPromptParameter[i] %>" />
+      <% } %>
+    </div>
+    <br>
+    <button type="submit">Send</button>
+  </form>
+</div>
+<br>
+</div>

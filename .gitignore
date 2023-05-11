@@ -161,5 +161,8 @@ cython_debug/
 <<<<<<< HEAD
 =======
 
+/node_modules
+package-lock.json
+```
 
 >>>>>>> bc40d7b (fixed a bug in index.js)

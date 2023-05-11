@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invsona</title>
     <link rel="icon" type="icon" href="../images/invsona.png" />
 
     <!-- bootstrap morph theme -->
@@ -14,82 +15,106 @@
 
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="./styles/index.css" />
 
-    <title>Invsona</title>
+    <!-- google icon -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="../styles/navbar.css" />
   </head>
 
-  <body id="background">
-    <div class="container position-absolute top-50 start-50 translate-middle">
-      <div class="card rounded-5 p-1" id="outerBox">
-        <div class="card text-center p-4 rounded-5" id="innerBox">
-          <div class="row">
-            <div class="col"></div>
-            <div class="col">
-              <img
-                id="logo"
-                class="align-self-center"
-                src="./images/invsona.png"
-                alt="invsona logo"
-                width="200px"
-                height="200px"
-              />
-
-              <h1 id="title">Invsona</h1>
-              <div class="container m-2 pb-5">
-                <p class="wrap" id="slogan">
-                  Character Creation at Your Finger Tips
-                </p>
-              </div>
-            </div>
-            <div class="col"></div>
-          </div>
-        </div>
-
-        <div class="text-start p-4">
-          <form>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="name" class="form-control" id="name" />
-              </div>
-
-            <div class="mb-3">
-              <label for="loginName" class="form-label">Username / Email</label>
-              <input
-                type="loginName"
-                class="form-control"
-                id="loginName"
-                aria-describedby="emailHelp"
-              />
-              <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" />
-            </div>
-
-            <div class="p-4 text-center">
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                onclick="window.location.href = '/'"
-              >
-                SIGNUP
-              </button>
-            </div>
-          </form>
-        </div> 
-    </div>  
+  <body>
+    <div class="container">
+      <h1>hello world</h1>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio est
+        quam magnam voluptas architecto exercitationem dicta atque ipsa ea
+        cupiditate ratione, suscipit rerum, voluptates quia? Vero assumenda
+        magnam totam corporis natus iste minus doloremque maxime laborum illo
+        voluptatum aspernatur aliquid ullam mollitia nam, eius, aperiam itaque
+        ex odit odio est.
+      </p>
     </div>
 
+    <!-- bottom nav bar  -->
 
+    <div class="container text-center" id="botnav">
+      <div class="row px-4">
+        <nav class="navbar sticky-bottom">
+          <!-- save  -->
+          <div class="col-sm" id="saved">
+            <a href="#">
+              <img
+                src="../images/icons/saved.png"
+                alt="saved"
+                width="30px"
+                height="30px"
+                class="align-self-center"
+              />
+              <p>Saved</p>
+            </a>
+          </div>
 
+          <!-- persona -->
+          <div class="col-sm" id="persona">
+            <a href="#">
+              <img
+                src="../images/icons/persona.png"
+                alt="saved"
+                width="30px"
+                height="30px"
+                class="align-self-center"
+              />
+              <p>Persona</p>
+            </a>
+          </div>
 
+          <!-- home -->
+          <div class="col-sm" id="home">
+            <a href="#">
+              <img
+                src="../images/icons/home.png"
+                alt="saved"
+                width="30px"
+                height="30px"
+                class="align-self-center"
+              />
+              <p>Home</p>
+            </a>
+          </div>
+
+          <!-- dialogue -->
+          <div class="col-sm" id="dialogue">
+            <a href="#">
+              <img
+                src="../images/icons/dialogue.png"
+                alt="saved"
+                width="30px"
+                height="30px"
+                class="align-self-center"
+              />
+              <p>Dialogue</p>
+            </a>
+          </div>
+
+          <!-- profile -->
+          <div class="col-sm" id="profile">
+            <a href="#">
+              <img
+                src="../images/icons/profile.png"
+                alt="saved"
+                width="30px"
+                height="30px"
+                class="align-self-center"
+              />
+              <p>Profile</p>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
   </body>
-
-
-  
 </html>

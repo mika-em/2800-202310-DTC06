@@ -1,65 +1,61 @@
 <!-- navbar -->
-<%-include ("./navbar.ejs")%>
+<%-include ("./partials/navbar.ejs")%>
 
 <!-- content -->
 <!-- display picture and name  -->
 <body>
-    <div class="container text-center align-item-center p-5">
-      <div class="p-2">
-        <img
-          src="../images/cat_placeholder.png"
-          id="userImage"
-          alt="userImage"
-          class="p-2"
-        />
-      </div>
-      <h1><%name%></h1>
+  <div class="container text-center align-item-center p-5">
+    <div class="p-2">
+      <img
+        src="../images/cat_placeholder.png"
+        id="userImage"
+        alt="userImage"
+        class="p-2"
+      />
     </div>
+    <h1><%name%></h1>
+  </div>
 
-
-<!-- cards -->
-<div class="container px-2">
-  <div class="row">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-title">PERSONA</p>
-          <p class="card-text">Lorem ipsum dolor</p>
+  <!-- cards -->
+  <div class="container px-2">
+    <div class="row">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">PERSONA</p>
+            <p class="card-text">Lorem ipsum dolor</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">DIALOGUE</p>
+            <p class="card-text">Lorem ipsum dolor</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-title">DIALOGUE</p>
-          <p class="card-text">Lorem ipsum dolor</p>
+    <br />
+    <div class="row">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">SAVED</p>
+            <p class="card-text">Lorem ipsum dolor</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">PROFILE</p>
+            <p class="card-text">Lorem ipsum dolor</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <br />
-  <div class="row">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-title">SAVED</p>
-          <p class="card-text">Lorem ipsum dolor</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-title">PROFILE</p>
-          <p class="card-text">Lorem ipsum dolor</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-
-<!-- nav bar and footer -->
-<%-include ('./navbar.ejs')%>
-<%-include ('./footer.ejs')%>
+  <!-- nav bar and footer -->
+  <%-include ('./partials/navbar.ejs')%> <%-include ('./partials/footer.ejs')%>

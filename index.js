@@ -18,14 +18,18 @@ mongoose.connect('mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net
 
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({extended: false})); // this is to parse the body of the request
+app.use(express.urlencoded({
+    extended: false
+})); // this is to parse the body of the request
 
 app.use(express.json());
 
 
+//index page
 app.get("/", (req, res) => {
-    res.render("index");
+    res.sendFile(__dirname + "/index.html");
 });
+
 
 //signup page
 app.get("/signup", (req, res) => {
@@ -34,9 +38,14 @@ app.get("/signup", (req, res) => {
 
 //signup route
 app.post("/signup", async (req, res) => {
-    const {name, username, password} = req.body;
+    const {
+        name,
+        username,
+        password
+    } = req.body;
 
-    try {await User.create({
+    try {
+        await User.create({
             name: name,
             username: username,
             password: password
@@ -44,7 +53,7 @@ app.post("/signup", async (req, res) => {
         console.log("User created")
 
 
-    res.redirect('/login');
+        res.redirect('/login');
     } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while creating your account.');

@@ -23,98 +23,140 @@
     />
 
     <!-- custom css -->
-    <link rel="stylesheet" href="../styles/navbar.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
   </head>
 
   <body>
-    <div class="container">
-      <h1>hello world</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio est
-        quam magnam voluptas architecto exercitationem dicta atque ipsa ea
-        cupiditate ratione, suscipit rerum, voluptates quia? Vero assumenda
-        magnam totam corporis natus iste minus doloremque maxime laborum illo
-        voluptatum aspernatur aliquid ullam mollitia nam, eius, aperiam itaque
-        ex odit odio est.
-      </p>
+    <div class="container text-center align-item-center p-5">
+      <div class="p-2">
+        <img
+          src="../images/cat_placeholder.png"
+          id="userImage"
+          alt="userImage"
+          class="p-2"
+        />
+      </div>
+      <h1>Name Placeholder</h1>
+    </div>
+
+    <!-- card buttons -->
+
+    <div class="container px-2">
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">PERSONA</p>
+              <p class="card-text">Lorem ipsum dolor</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">DIALOGUE</p>
+              <p class="card-text">Lorem ipsum dolor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">SAVED</p>
+              <p class="card-text">Lorem ipsum dolor</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">PROFILE</p>
+              <p class="card-text">Lorem ipsum dolor</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- bottom nav bar  -->
-
-    <div class="container text-center" id="botnav">
-      <div class="row px-4">
-        <nav class="navbar sticky-bottom">
+    <div
+      class="container text-center position-absolute bottom-0 start-50 translate-middle-x"
+      id="botnav"
+    >
+      <div class="row">
+        <div class="navbar border-success">
           <!-- save  -->
-          <div class="col-sm" id="saved">
+          <div class="icon col pt-3">
             <a href="#">
               <img
                 src="../images/icons/saved.png"
                 alt="saved"
                 width="30px"
                 height="30px"
-                class="align-self-center"
               />
               <p>Saved</p>
             </a>
           </div>
 
           <!-- persona -->
-          <div class="col-sm" id="persona">
+          <div class="icon col pt-3">
             <a href="#">
               <img
                 src="../images/icons/persona.png"
                 alt="saved"
                 width="30px"
                 height="30px"
-                class="align-self-center"
               />
               <p>Persona</p>
             </a>
           </div>
 
           <!-- home -->
-          <div class="col-sm" id="home">
+          <div class="icon col pt-3">
             <a href="#">
               <img
                 src="../images/icons/home.png"
                 alt="saved"
                 width="30px"
                 height="30px"
-                class="align-self-center"
               />
               <p>Home</p>
             </a>
           </div>
 
           <!-- dialogue -->
-          <div class="col-sm" id="dialogue">
+          <div class="icon col pt-3">
             <a href="#">
               <img
                 src="../images/icons/dialogue.png"
                 alt="saved"
                 width="30px"
                 height="30px"
-                class="align-self-center"
               />
               <p>Dialogue</p>
             </a>
           </div>
 
           <!-- profile -->
-          <div class="col-sm" id="profile">
-            <a href="#">
+          <div class="icon col pt-3">
+            <a href="#" class="">
               <img
                 src="../images/icons/profile.png"
                 alt="saved"
                 width="30px"
                 height="30px"
-                class="align-self-center"
               />
               <p>Profile</p>
             </a>
           </div>
-        </nav>
+        </div>
       </div>
     </div>
+
+
   </body>
 </html>

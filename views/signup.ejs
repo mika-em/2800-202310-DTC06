@@ -3,8 +3,10 @@
 
 <!-- content -->
 
+<!-- content -->
 <body id="background">
-  <div class="container position-absolute top-50 start-50 translate-middle">
+  <div class="container">
+    <!-- top card -->
     <div class="card rounded-5 p-1" id="outerBox">
       <div class="card text-center p-4 rounded-5" id="innerBox">
         <div class="row">
@@ -31,18 +33,23 @@
       </div>
 
       <div class="text-start p-4">
-        <form>
+        <form action="/signup" method="post">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="name" class="form-control" id="name" />
           </div>
 
           <div class="mb-3">
-            <label for="loginName" class="form-label">Username / Email</label>
+            <label for="username" class="form-label">Username</label>
+            <input type="username" class="form-control" id="username" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
             <input
-              type="loginName"
+              type="email"
               class="form-control"
-              id="loginName"
+              id="email"
               aria-describedby="emailHelp"
             />
             <div id="emailHelp" class="form-text">
@@ -59,7 +66,7 @@
             <button
               type="button"
               class="btn btn-primary btn-lg"
-              onclick="window.location.href = '/'"
+              onclick="window.location.href='/login'"
             >
               SIGNUP
             </button>
@@ -67,36 +74,9 @@
         </form>
       </div>
     </div>
-    <br>
-
-    <div class="text-start p-4">
-      //signup form
-      <form action="/signup" method="post">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="name" class="form-control" id="name" name="name" />
-        </div>
-
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input type="username" class="form-control" id="username" name="username" aria-describedby="emailHelp" />
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" />
-        </div>
-
-        <div class="p-4 text-center">
-          <!-- <button type="submit" class="btn btn-primary btn-lg" onclick="window.location.href = '/'"> -->
-          <button type="submit" class="btn btn-primary btn-lg">
-            SIGNUP
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+    <br />
   </div>
 
   <!-- footer -->
-  <%-include ('./footer.ejs')%>
+  <%-include ('./partials/footer.ejs')%>
+</body>

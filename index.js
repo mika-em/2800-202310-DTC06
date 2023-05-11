@@ -101,7 +101,7 @@ app.post('/loginUser', async (req, res) => {
 });
 
 
-app.use(express.static(__dirname + "/images")); // this is to serve static files like images
+app.use(express.static(__dirname + "/")); // this is to serve static files like images
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

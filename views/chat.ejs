@@ -1,3 +1,12 @@
+<h1>This is the chat.</h1>
+
+<div class="container">
+  <% for (var i=0; i<locals.chatPrompt.length; i++) { %>
+  <div class="row">
+    <%- i + "&nbsp;" + locals.chatPrompt[i] %>
+    <% } %>
+  </div>
+  <br>
 <!-- header -->
 <%-include ("./partials/header.ejs")%>
 
@@ -59,6 +68,8 @@
   </form>
 </div>
 
-<!-- navbar and footer -->
-<%-include ("./partials/navbar.ejs")%>
-<%-include ("./partials/footer.ejs")%>
+  <form action="/persona/chat" method="post">
+    <input type="text" name="message" placeholder="Send a message" />
+    <button type="submit">Send</button>
+  </form>
+</div>

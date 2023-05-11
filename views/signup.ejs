@@ -1,71 +1,54 @@
 <!-- header -->
-<%-include ('./header.ejs')%>
+<%-include ('./partials/header.ejs')%>
 
 <!-- content -->
+
 <body id="background">
-    <div
-      class="card 
+  <div class="card 
       position-absolute 
       top-50 start-50 
       translate-middle 
       rounded-5 p-1
-      bg-"
-    >
-      <div class="card text-center p-4 rounded-5" id="innerBox">
-        <img
-          id="logo"
-          class="align-self-center"
-          src="./images/invsona.png"
-          alt="invsona logo"
-          width="200px"
-          height="200px"
-        />
-        <p id="title">Invsona</p>
-        <div class="m-2 pb-5">
-          <p id="slogan">Character Creation at Your Finger Tips</p>
-        </div>
-        </div>
-        <br>
-
-        <div class="text-start p-4">
-          <form>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="name" class="form-control" id="name" />
-              </div>
-
-            <div class="mb-3">
-              <label for="loginName" class="form-label">Username / Email</label>
-              <input
-                type="loginName"
-                class="form-control"
-                id="loginName"
-                aria-describedby="emailHelp"
-              />
-              <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" />
-            </div>
-
-            <div class="p-4 text-center">
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                onclick="window.location.href = '/'"
-              >
-                SIGNUP
-              </button>
-            </div>
-          </form>
-        </div>
+      bg-">
+    <div class="card text-center p-4 rounded-5" id="innerBox">
+      <img id="logo" class="align-self-center" src="./images/invsona.png" alt="invsona logo" width="200px"
+        height="200px" />
+      <p id="title">Invsona</p>
+      <div class="m-2 pb-5">
+        <p id="slogan">Character Creation at Your Finger Tips</p>
       </div>
     </div>
+    <br>
+
+    <div class="text-start p-4">
+      //signup form
+      <form action="/signup" method="post">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="name" class="form-control" id="name" name="name" />
+        </div>
+
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="username" class="form-control" id="username" name="username" aria-describedby="emailHelp" />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" />
+        </div>
+
+        <div class="p-4 text-center">
+          <!-- <button type="submit" class="btn btn-primary btn-lg" onclick="window.location.href = '/'"> -->
+          <button type="submit" class="btn btn-primary btn-lg">
+            SIGNUP
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
 
 
-<!-- footer -->
-<%-include ('./footer.ejs')%>
+  <!-- footer -->
+  <%-include ('./partials/footer.ejs')%>

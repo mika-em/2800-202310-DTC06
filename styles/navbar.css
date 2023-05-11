@@ -1,0 +1,17 @@
+#botnav{
+  font-size: 10px;
+  font-family: "Gugi", sans-serif;
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+  border: 1px solid black;
+}
+
+.icon{
+  border: 1px solid black;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+}

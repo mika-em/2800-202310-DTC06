@@ -1,4 +1,4 @@
-body {
+#background {
   background-image: url('/images/purplebg.jpg');
   background-repeat: no-repeat;
   background-size: auto;
@@ -24,30 +24,33 @@ button{
 }
 
 #title{
-    font-size: 50px;
+    font-size: 40px;
     font-family: "Gugi", sans-serif;
 }
 
+
 #slogan{
-  color: #fff;
+  color: white;
+  width: 100%;
   font-family: "Gugi", sans-serif;
+  font-size: 8px;
   overflow: hidden; /* content is hidden */
-  border-right: 0.25em solid white; /* thickness of the cursor */
+  border-right: 0.50em solid white; /* thickness of the cursor */
   white-space: nowrap; /* keeps everything in one line */
   margin: 0 auto;
   letter-spacing: .15em; 
   animation: 
-    typing 3.5s steps(30, end),
+    typing 3.5s steps(31,end),
     blink-caret .5s step-end infinite;
 }
 
-/* Typing effect */
+/* typing effect */
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
 }
 
-/* typewriter cursor effect */
+/* curser blinking effect */
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: white; }

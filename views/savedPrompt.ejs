@@ -1,3 +1,4 @@
+<h1>This is the saved prompt preset page.</h1>
 <!-- header -->
 <%-include ("./partials/header.ejs")%>
 
@@ -191,6 +192,16 @@
   </form>
 </div>
 
-<!-- navbar and footer -->
-<%-include ("./partials/navbar.ejs")%>
-<%-include ("./partials/footer.ejs")%>
+<!-- placeholder for saved prompt presets db -->
+<div class="container">
+  <form action="/persona/chat" method="post">
+    <% for (var i=0; i<locals.savedPromptParameter.length; i++) { %>
+    <div class="row">
+      <%- i + "&nbsp;" + locals.savedPromptParameter[i] %>
+      <input type="text" name=<%- locals.savedPromptParameter[i] %> placeholder=<%- locals.savedPromptParameter[i] %> />
+      <% } %>
+    </div>
+    <br>
+    <button type="submit">Send</button>
+  </form>
+</div>

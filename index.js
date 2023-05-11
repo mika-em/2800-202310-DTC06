@@ -33,8 +33,18 @@ app.use('/', (req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.render("home");
+app.set("view engine", "ejs");
+
+app.use(express.urlencoded({
+    extended: false
+})); // this is to parse the body of the request
+
+app.use(express.json());
+
+
+//index page
+app.get("/", (req, res) => {
+    res.render("index");
 });
 
 app.get('/persona', (req, res) => {
@@ -62,21 +72,35 @@ app.post('/persona/general-prompt', (req, res) => {
     res.redirect('/persona/chat');
 });
 
-app.get('/persona/saved-prompt', (req, res) => {
-    res.render("savedPrompt");
+
+        res.redirect('/login');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred while creating your account.');
+    }
 });
 
 app.get('/persona/new-prompt', (req, res) => {
     res.render("newPrompt");
 });
 
-app.post('/persona/new-prompt', (req, res) => {
-    // placeholder for db for chatPrompt/chatHistory
-    const parameter = req.body.parameter;
-    savedPromptParameter.push(parameter);
-    console.log(savedPromptParameter);
-    res.render("newPrompt");
-});
+//login route
+app.post('/loginUser', async (req, res) => {
+
+    const schema = Joi.object({
+        password: Joi.string()
+    })
+
+    try {
+        console.log(req.body.password);
+        const value = await schema.validateAsync({
+            password: req.body.password
+        });
+    } catch (err) {
+        console.log(err);
+        console.log("The password has to be a string");
+        return
+    }
 
 app.get('/persona/chat', (req, res) => {
     // placeholder for db for chatPrompt/chatHistory

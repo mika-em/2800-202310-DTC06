@@ -1,0 +1,14 @@
+<!-- navbar and footer -->
+<%-include ("./partials/header.ejs")%>
+
+<h1>This is the persona page.</h1>
+<div class="container">
+  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+  <div class="row">
+    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
+  </div>
+  <br>
+  <% } %>
+</div>
+
+<%-include ("./partials/navbar.ejs")%>

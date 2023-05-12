@@ -1,0 +1,127 @@
+<!-- header -->
+<%-include ('./partials/header.ejs')%>
+
+<!-- content -->
+
+<!-- content -->
+<body id="background">
+  <div class="container">
+    <!-- top card -->
+    <div class="card rounded-5 p-1" id="outerBox">
+      <div class="card text-center p-4 rounded-5" id="innerBox">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col">
+            <img
+              id="logo"
+              class="align-self-center"
+              src="./images/invsona.png"
+              alt="invsona logo"
+              width="200px"
+              height="200px"
+            />
+
+            <h1 id="title">Invsona</h1>
+            <div class="container m-2 pb-5">
+              <p class="wrap" id="slogan">
+                Character Creation at Your Finger Tips
+              </p>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+
+      <div class="text-start p-4">
+        <form action="/signup" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" name="name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+<<<<<<< HEAD
+            <input type="username" class="form-control" id="username" name="username"/>
+=======
+            <input
+              type="username"
+              class="form-control"
+              id="username"
+              name="username"
+            />
+>>>>>>> Fiona_Profile
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              aria-describedby="emailHelp"
+              name="email"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+            />
+          </div>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+            />
+          </div>          
+          
+          <div class="mb-3">
+            <label for="securityQuestion" class="form-label">Security Question</label>
+            <input
+              type="text"
+              class="form-control"
+              id="securityQuestion"
+              name="securityQuestion"
+            />
+            <div id="securityQuestionHelp" class="form-text">
+              Remember the answer to your security question in case you forget your password in the future.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="securityAnswer" class="form-label">Answer</label>
+            <input
+              type="password"
+              class="form-control"
+              id="securityAnswer"
+              name="securityAnswer"
+            />
+          </div>
+
+          <div class="p-4 text-center">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+            >
+              SIGNUP
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br />
+  </div>
+
+  <!-- footer -->
+  <%-include ('./partials/footer.ejs')%>
+</body>

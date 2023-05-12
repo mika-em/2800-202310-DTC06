@@ -1,7 +1,3 @@
-./node_modules
-package-lock.json
-
-./node_modules
 package-lock.json
 
 # Logs
@@ -118,3 +114,9 @@ dist
 
 # FuseBox cache
 .fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port

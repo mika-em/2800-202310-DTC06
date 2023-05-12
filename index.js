@@ -164,7 +164,9 @@ app.post("/loginUser", async (req, res) => {
 app.use(express.static(__dirname + "/")); // this is to serve static files like images
 
 app.get('/home', (req, res) => {
-  res.render("home");
+  res.render("home", {
+    name : req.session.user.name,
+  });
 });
 
 app.get('/profile', (req, res) => {

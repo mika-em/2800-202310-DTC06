@@ -31,4 +31,13 @@
     "mongoose": "^7.1.1",
     "nodemon": "^2.0.22"
   }
-}
+  "name": "2800-202310-dtc06",
+  "description": "This is our read me file To run the website: 1. Download the files. 2. Open index.html in your browser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"

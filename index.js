@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
+const expireTime = 24 * 60 * 60 * 1000;
 app.set('view engine', 'ejs');
 
 const navLinks = [
@@ -134,7 +134,6 @@ app.post("/loginUser", async (req, res) => {
   const {
     loginName,
     password,
-    name
   } = req.body;
   console.log(loginName, password)
 
@@ -158,6 +157,7 @@ app.post("/loginUser", async (req, res) => {
 
   if (passwordMatch) {
     req.session.authenticated = true;
+    req.session.cookie.maxAge = expireTime;
 
     return res.render("home", {
       name: req.session.user.name,
@@ -306,6 +306,13 @@ app.post('/persona/chat', (req, res) => {
   console.log(chatPrompt);
   res.render("chat");
 });
+
+
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.render("logout");
+});
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

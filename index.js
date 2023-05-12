@@ -100,78 +100,11 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const expireTime = 24 * 60 * 60 * 1000;
-app.set("view engine", "ejs");
 
-const navLinks = [
-  {
-    name: "Home",
-    link: "/",
-    upperName: "HOME",
-    description: "Lorem ipsum dolor",
-  },
-  {
-    name: "Persona",
-    link: "/persona",
-    upperName: "PERSONA",
-    description: "Lorem ipsum dolor",
-  },
-  {
-    name: "Dialogue",
-    link: "/dialogue",
-    upperName: "DIALOGUE",
-    description: "Lorem ipsum dolor",
-  },
-  {
-    name: "Saved",
-    link: "/saved",
-    upperName: "SAVED",
-    description: "Lorem ipsum dolor",
-  },
-  {
-    name: "Profile",
-    link: "/profile",
-    upperName: "PROFILE",
-    description: "Lorem ipsum dolor",
-  },
-];
-
-const personaLinks = [
-  {
-    name: "General prompt presets",
-    link: "/persona/general-prompt",
-  },
-  {
-    name: "Saved prompt presets",
-    link: "/persona/saved-prompt",
-  },
-  {
-    name: "Create a new prompt preset",
-    link: "/persona/new-prompt",
-  },
-  {
-    name: "Write my own prompt",
-    link: "/persona/chat",
-  },
-];
-
-// placeholder for db for chatPrompt/chatHistory
-var chatPrompt = ["test"];
-var savedPromptParameter = ["hello", "world", "test"];
-
-app.use("/", (req, res, next) => {
-  app.locals.navLinks = navLinks;
-  app.locals.personaLinks = personaLinks;
-  app.locals.chatPrompt = chatPrompt;
-  app.locals.savedPromptParameter = savedPromptParameter;
-  app.locals.currentURL = url.parse(req.url).pathname;
-  next();
-});
-
+// connect to database
 mongoose
   .connect(
-    "mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority",
-    {
+    "mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority", {
       // connect to the database
       useNewUrlParser: true, // this is to avoid deprecation warnings
     }
@@ -188,29 +121,25 @@ var mongoStore = MongoStore.create({
   // mongoUrl: mongodb_host,
 
   crypto: {
-    secret: "secret",
-  },
-});
+    secret: "secret"
+  }
+})
 
 app.set("view engine", "ejs");
 
-app.use(
-  express.urlencoded({
-    extended: false,
-  })
-); // parses bodies in urlencoded format
+app.use(express.urlencoded({
+  extended: false,
+})); // parses bodies in urlencoded format
 
 app.use(express.json()); // parses bodies in json format
 
 //more session stuff
-app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: false,
-    store: mongoStore,
-  })
-);
+app.use(session({
+  secret: "secret",
+  resave: true,
+  saveUninitialized: false,
+  store: mongoStore,
+}), );
 
 //index page
 app.get("/", (req, res) => {
@@ -226,12 +155,16 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-//signup route
+//signup route 
 app.post("/signup", async (req, res) => {
   console.log("ejs set up");
-  console.log("signup route");
-  const { name, username, email, password, securityQuestion, securityAnswer } =
-    req.body;
+  console.log("signup route")
+  const {
+    name,
+    username,
+    email,
+    password
+  } = req.body;
 
   const hashedPassword = await bcrypt.hashSync(password, saltRounds);
 
@@ -241,16 +174,12 @@ app.post("/signup", async (req, res) => {
       username: username,
       email: email,
       password: hashedPassword,
-      securityQuestion: securityQuestion,
-      securityAnswer: securityAnswer,
     });
     req.session.user = {
       name: name,
       username: username,
       email: email,
       password: hashedPassword,
-      securityQuestion: securityQuestion,
-      securityAnswer: securityAnswer,
     };
     console.log("User created");
     res.redirect("/");
@@ -260,27 +189,44 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+
 //login page
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
 //login route
+// app.post("/loginUser", async (req, res) => {
+// });
+
 app.post("/loginUser", async (req, res) => {
-  const { loginName, password } = req.body;
-  console.log(loginName, password);
+  const {
+    loginName,
+    password
+  } = req.body;
+  console.log(loginName, password)
+  // Check if the input value is an email or a username
+  // const isEmail = Joi.string().email().validate(loginName).error === null;
+  // console.log(isEmail)
 
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
+  console.log(isEmail)
 
+  // Define the query field based on whether the input value is an email or a username
   const queryField = isEmail ? "email" : "username";
+  console.log(queryField)
 
   console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
+  const result = await User.findOne({
+    [queryField]: loginName
+  }).select('name username email password _id').exec();
+  console.log(result);
 
+
+  // Query the database to find the user by email or username
   const user = await User.findOne({
-    [queryField]: loginName,
-  })
-    .select("name username email password _id")
-    .exec();
+    [queryField]: loginName
+  }).exec();
   console.log(user);
 
   if (!user) {
@@ -288,21 +234,21 @@ app.post("/loginUser", async (req, res) => {
     return res.status(400).send("Invalid email/username or password.");
   }
 
+  // Compare the encrypted password in the database with the password provided by the user
   const passwordMatch = await bcrypt.compare(password, user.password);
 
-  const name = user.name;
-
   if (passwordMatch) {
+    // If the passwords match, set the authenticated status to true in the user's session
     req.session.authenticated = true;
-    req.session.cookie.maxAge = expireTime;
 
-    return res.render("home", {
-      name: name,
-    });
+    // Redirect the user to the desired page
+    return res.redirect("/");
   } else {
+    // If the passwords do not match, return an error message
     return res.status(400).send("Invalid email/username or password.");
   }
 });
+
 
 app.use(express.static(__dirname + "/")); // this is to serve static files like images
 

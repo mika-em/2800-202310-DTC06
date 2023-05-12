@@ -286,13 +286,13 @@ app.post('/', async (req, res) => {
 
 app.get('/home', (req, res) => {
   res.render("home", {
-    name: req.session.user.name,
+    // name: req.session.user.name,
   });
 });
 
 app.get('/profile', (req, res) => {
   res.render("profile", {
-    name: req.session.user.name
+    // name: req.session.user.name
   });
 });
 

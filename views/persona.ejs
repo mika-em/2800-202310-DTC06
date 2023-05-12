@@ -1,110 +1,14 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<!-- Bootstrap css cdn -->
-<!-- just for testing purposes, should be deleted after template header is done -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
-<h1>This is the persona page.</h1>
-<div class="container">
-  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-  <div class="row">
-    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
-  </div>
-  <br>
-  <% } %>
-</div>
-=======
->>>>>>> Fiona_Profile
-<!-- header -->
+<!-- navbar and footer -->
 <%-include ("./partials/header.ejs")%>
 
-<!-- content -->
-<body>
-    <div
-      class="container align-item-center text-center text-black fw-bolder pt-5 mt-4"
-    >
-      <!-- General -->
-      <div class="row p-4">
-      <a href="#">
-        <div class="card">
-          <img
-            src="../images/persona/general.jpg"
-            class="card-img opacity-75"
-            alt="..."
-          />
-          <div class="card-img-overlay">
-            <h1 class="card-title pt-5">General</h1>
-            <p class="card-text">This is a wide.</p>
-          </div>
-        </a>
-        </div>
-      </div>
+<h1>This is the persona page.</h1>
+<div class="container">
+  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+  <div class="row">
+    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
+  </div>
+  <br>
+  <% } %>
+</div>
 
-      <!-- Specific -->
-      <div class="row p-4">
-        <a href="##">
-        <div class="card">
-          <img
-            src="../images/persona/specific.jpg"
-            class="card-img opacity-75"
-            alt="..."
-          />
-          <div class="card-img-overlay">
-            <h1 class="card-title pt-5">Specific</h1>
-            <p class="card-text">This is a wide.</p>
-          </div>
-        </a>
-        </div>
-      </div>
-
-      <!-- Creative -->
-      <div class="row p-4">
-        <a href="###">
-          <div class="card">
-            <img
-              src="../images/persona/creative.jpg"
-              class="card-img opacity-75"
-              alt="..."
-            />
-            <div class="card-img-overlay">
-              <h1 class="card-title pt-5">Creative</h1>
-              <p class="card-text">This is a wide.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-
-
-
-
-
-<!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>
-<%-include ("./partials/footer.ejs")%>
-<<<<<<< HEAD
-
-<h1>This is the persona page.</h1>
-<div class="container">
-  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-  <div class="row">
-    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
-  </div>
-  <br>
-  <% } %>
-</div>
-=======
->>>>>>> bbb2ad9 (Implement clickable cards)
->>>>>>> Fiona_Profile
-
-<h1>This is the persona page.</h1>
-<div class="container">
-  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-  <div class="row">
-    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
-  </div>
-  <br>
-  <% } %>
-</div>

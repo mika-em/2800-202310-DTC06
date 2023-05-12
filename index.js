@@ -115,9 +115,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.render("index");
 });
+
 
 //signup page
 app.get("/signup", (req, res) => {
@@ -196,12 +197,15 @@ app.post("/loginUser", async (req, res) => {
 
   const passwordMatch = await bcrypt.compare(password, user.password);
 
+  const name = user.name;
+
+
   if (passwordMatch) {
     req.session.authenticated = true;
     req.session.cookie.maxAge = expireTime;
 
     return res.render("home", {
-      name: req.session.user.name,
+      name: name
     })
     return res.redirect("/");
   } else {
@@ -959,6 +963,9 @@ app.get('/logout', (req, res) => {
   res.render("logout");
 });
 
+app.post('/signout', (req, res) => {
+  res.render("index")
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

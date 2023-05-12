@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<!-- Bootstrap css cdn -->
+<!-- just for testing purposes, should be deleted after template header is done -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+<h1>This is the persona page.</h1>
+<div class="container">
+  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+  <div class="row">
+    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
+  </div>
+  <br>
+  <% } %>
+</div>
+=======
+>>>>>>> Fiona_Profile
 <!-- header -->
 <%-include ("./partials/header.ejs")%>
 
@@ -66,6 +84,7 @@
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>
 <%-include ("./partials/footer.ejs")%>
+<<<<<<< HEAD
 
 <h1>This is the persona page.</h1>
 <div class="container">
@@ -76,3 +95,6 @@
   <br>
   <% } %>
 </div>
+=======
+>>>>>>> bbb2ad9 (Implement clickable cards)
+>>>>>>> Fiona_Profile

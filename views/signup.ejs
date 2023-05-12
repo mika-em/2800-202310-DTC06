@@ -36,12 +36,12 @@
         <form action="/signup" method="post">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" id="name" />
+            <input type="name" class="form-control" id="name" name="name" />
           </div>
 
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="username" class="form-control" id="username" />
+            <input type="username" class="form-control" id="username" name="username"/>
           </div>
 
           <div class="mb-3">
@@ -51,6 +51,7 @@
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
+              name="email"
             />
             <div id="emailHelp" class="form-text">
               We'll never share your email with anyone else.
@@ -59,14 +60,13 @@
 
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <input type="password" class="form-control" id="password" name="password" />
           </div>
 
           <div class="p-4 text-center">
             <button
-              type="button"
+              type="submit"
               class="btn btn-primary btn-lg"
-              onclick="window.location.href='/login'"
             >
               SIGNUP
             </button>

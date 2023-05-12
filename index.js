@@ -91,7 +91,16 @@ app.get("/signup", (req, res) => {
 
 //signup route 
 app.post("/signup", async (req, res) => {
-  const { name, username, email, password } = req.body;
+  console.log("ejs set up");
+  console.log("signup route")
+  const {
+    name,
+    username,
+    email,
+    password,
+    securityQuestion,
+    securityAnswer,
+  } = req.body;
 
   const hashedPassword = await bcrypt.hashSync(password, saltRounds);
 
@@ -101,12 +110,17 @@ app.post("/signup", async (req, res) => {
       username: username,
       password: password,
       email: email,
+      password: hashedPassword,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
     });
     req.session.user = {
       name: name,
       username: username,
       email: email,
       password: hashedPassword,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
     };
     console.log("User created");
     res.redirect("/");

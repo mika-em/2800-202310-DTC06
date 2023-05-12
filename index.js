@@ -97,7 +97,9 @@ app.post("/signup", async (req, res) => {
     name,
     username,
     email,
-    password
+    password,
+    securityQuestion,
+    securityAnswer,
   } = req.body;
 
   const hashedPassword = await bcrypt.hashSync(password, saltRounds);
@@ -108,12 +110,16 @@ app.post("/signup", async (req, res) => {
       username: username,
       email: email,
       password: hashedPassword,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
     });
     req.session.user = {
       name: name,
       username: username,
       email: email,
       password: hashedPassword,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
     };
     console.log("User created");
     res.redirect("/");

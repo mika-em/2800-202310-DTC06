@@ -4,6 +4,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     email: String,
+    securityQuestion: String,
+    securityAnswer: String,
     filter: {
         default: Boolean,
         status: Boolean,

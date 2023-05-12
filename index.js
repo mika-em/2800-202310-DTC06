@@ -249,14 +249,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
 app.get("/index", (req, res) => {
   res.render("index");
 });
@@ -340,6 +332,9 @@ app.post("/loginUser", async (req, res) => {
   // Compare the encrypted password in the database with the password provided by the user
   const passwordMatch = await bcrypt.compare(password, user.password);
 
+  const name = user.name;
+
+
   if (passwordMatch) {
     // If the passwords match, set the authenticated status to true in the user's session
     req.session.authenticated = true;
@@ -347,7 +342,7 @@ app.post("/loginUser", async (req, res) => {
 
     // Redirect the user to the desired page
     return res.render("home", {
-      name: req.session.user.name,
+      name: name
     })
   } else {
     // If the passwords do not match, return an error message
@@ -692,6 +687,9 @@ app.get('/logout', (req, res) => {
   res.render("logout");
 });
 
+app.post('/signout', (req, res) => {
+  res.render("index")
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

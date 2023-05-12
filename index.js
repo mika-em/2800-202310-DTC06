@@ -13,7 +13,7 @@ const MongoStore = require("connect-mongo");
 app.set('view engine', 'ejs');
 
 const navLinks = [
-  { name: 'Home', link: '/', upperName: 'HOME', description: 'Lorem ipsum dolor'},
+  { name: 'Home', link: '/', upperName: 'HOME', description: 'Lorem ipsum dolor' },
   { name: 'Persona', link: '/persona', upperName: 'PERSONA', description: 'Lorem ipsum dolor' },
   { name: 'Dialogue', link: '/dialogue', upperName: 'DIALOGUE', description: 'Lorem ipsum dolor' },
   { name: 'Saved', link: '/saved', upperName: 'SAVED', description: 'Lorem ipsum dolor' },
@@ -171,66 +171,138 @@ app.post("/loginUser", async (req, res) => {
 app.use(express.static(__dirname + "/")); // this is to serve static files like images
 
 app.get('/home', (req, res) => {
-    res.render("home");
+  res.render("home");
 });
 
 app.get('/profile', (req, res) => {
-    res.render("profile");
+  res.render("profile");
+});
+
+app.get('/profile/account-setting', async (req, res) => {
+  const currentUser = await User.findOne({ username: "mika" });
+  const name = currentUser.name;
+  const username = currentUser.username;
+  const email = currentUser.email;
+  const securityQuestion = currentUser.securityQuestion;
+  const securityAnswer = currentUser.securityAnswer;
+  console.log(securityAnswer)
+  res.render("accountsetting", {
+    name: name,
+    username: username,
+    email: email,
+    securityQuestion: securityQuestion,
+    securityAnswer: securityAnswer,
+    disabled: true
+  });
+});
+
+app.post('/profile/account-setting', async (req, res) => {
+  const usernameInput = "mika"
+  if (req.body.action === "Edit") {
+    console.log("edit")
+    console.log(usernameInput)
+    const currentUser = await User.findOne({ username: usernameInput });
+    const name = currentUser.name;
+    const username = currentUser.username;
+    const email = currentUser.email;
+    const securityQuestion = currentUser.securityQuestion;
+    const securityAnswer = currentUser.securityAnswer;
+    res.render("accountsetting", {
+      name: name,
+      username: username,
+      email: email,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
+      disabled: false
+    });
+  } else if (req.body.action === "Save") {
+    console.log("save")
+    const nameInput = req.body.name
+    const emailInput = req.body.email
+    const securityQuestionInput = req.body.securityQuestion
+    const securityAnswerInput = req.body.securityAnswer
+    console.log(nameInput)
+    console.log(usernameInput)
+    await User.updateOne(
+      { username: usernameInput },
+      {
+        $set: {
+          name: nameInput,
+          email: emailInput,
+          securityQuestion: securityQuestionInput,
+          securityAnswer: securityAnswerInput
+        }
+      })
+    const currentUser = await User.findOne({ username: usernameInput });
+    const name = currentUser.name;
+    const username = currentUser.username;
+    const email = currentUser.email;
+    const securityQuestion = currentUser.securityQuestion;
+    const securityAnswer = currentUser.securityAnswer;
+    res.render("accountsetting", {
+      name: name,
+      username: username,
+      email: email,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
+      disabled: true
+    });
+  }
 });
 
 app.get('/persona', (req, res) => {
-    res.render("persona");
+  res.render("persona");
 });
 
 app.get('/persona/general-prompt', (req, res) => {
-    console.log(chatPrompt)
-    res.render("generalPrompt");
+  console.log(chatPrompt)
+  res.render("generalPrompt");
 });
 
 app.post('/persona/general-prompt', (req, res) => {
-    const name = req.body.name || "random";
-    const age = req.body.age || "random";
-    const gender = req.body.gender || "random";
-    const situation = req.body.plot || "random";
-    const plot = req.body.plot || "random";
+  const name = req.body.name || "random";
+  const age = req.body.age || "random";
+  const gender = req.body.gender || "random";
+  const situation = req.body.plot || "random";
+  const plot = req.body.plot || "random";
 
-    const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
-    chatPrompt.push("You: " + message);
-    chatPrompt.push("hello");
-    console.log(chatPrompt)
+  const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
+  chatPrompt.push("You: " + message);
+  chatPrompt.push("hello");
+  console.log(chatPrompt)
 
-    // placeholder for db for chatPrompt/chatHistory
-    res.redirect('/persona/chat');
+  // placeholder for db for chatPrompt/chatHistory
+  res.redirect('/persona/chat');
 });
 
 app.get('/persona/saved-prompt', (req, res) => {
-    res.render("savedPrompt");
+  res.render("savedPrompt");
 });
 
 app.get('/persona/new-prompt', (req, res) => {
-    res.render("newPrompt");
+  res.render("newPrompt");
 });
 
 app.post('/persona/new-prompt', (req, res) => {
-    // placeholder for db for chatPrompt/chatHistory
-    const parameter = req.body.parameter;
-    savedPromptParameter.push(parameter);
-    console.log(savedPromptParameter);
-    res.render("newPrompt");
+  // placeholder for db for chatPrompt/chatHistory
+  const parameter = req.body.parameter;
+  savedPromptParameter.push(parameter);
+  console.log(savedPromptParameter);
+  res.render("newPrompt");
 });
 
 app.get('/persona/chat', (req, res) => {
-    // placeholder for db for chatPrompt/chatHistory
-    console.log(chatPrompt);
-    res.render("chat");
+  // placeholder for db for chatPrompt/chatHistory
+  console.log(chatPrompt);
+  res.render("chat");
 });
 
 app.post('/persona/chat', (req, res) => {
-    // placeholder for db for chatPrompt/chatHistory
-    const message = req.body.message;
-    chatPrompt.push("You: " + message);
-    console.log(chatPrompt);
-    res.render("chat");
+  // placeholder for db for chatPrompt/chatHistory
+  const message = req.body.message;
+  chatPrompt.push("You: " + message);
+  console.log(chatPrompt);
+  res.render("chat");
 });
 
 app.listen(port, () => {

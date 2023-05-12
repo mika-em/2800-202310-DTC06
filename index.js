@@ -185,31 +185,41 @@ app.get("/login", (req, res) => {
 });
 
 //login route
-// app.post("/loginUser", async (req, res) => {
-// });
-
 app.post("/loginUser", async (req, res) => {
-  const schema = Joi.object({
-    password: Joi.string(),
-  });
+  const {
+    loginName,
+    password
+  } = req.body;
+  console.log(loginName, password)
 
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
+
+  const queryField = isEmail ? "email" : "username";
+  
+  console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
+  
+  const user = await User.findOne({
+    [queryField]: loginName
+  }).select('name username email password _id').exec();
+  console.log(user);
+  
   if (!user) {
     // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
   }
 
-  try {
-    const result = await User.findOne({
-      username: req.body.username,
-    });
-    if (req.body.password == result.password) {
-      console.log("User authenticated");
-      res.redirect("/");
-    } else {
-      res.send("wrong password");
-    }
-  } catch (error) {
-    console.log(error);
+  // Compare the encrypted password in the database with the password provided by the user
+  const passwordMatch = await bcrypt.compare(password, user.password);
+
+  if (passwordMatch) {
+    // If the passwords match, set the authenticated status to true in the user's session
+    req.session.authenticated = true;
+
+    // Redirect the user to the desired page
+    return res.redirect("/");
+  } else {
+    // If the passwords do not match, return an error message
+    return res.status(400).send("Invalid email/username or password.");
   }
 });
 

@@ -1,15 +1,28 @@
+<!-- header -->
+<%-include ("./partials/header.ejs")%>
+
 <h1>This is the saved prompt preset page.</h1>
 
 <!-- placeholder for saved prompt presets db -->
 <div class="container">
-  <form action="/persona/chat" method="post">
-    <% for (var i=0; i<locals.savedPromptParameter.length; i++) { %>
+  <form action="/persona/chat" method="post" class="text-center">
     <div class="row">
-      <%- i + "&nbsp;" + locals.savedPromptParameter[i] %>
-      <input type="text" name=<%- locals.savedPromptParameter[i] %> placeholder=<%- locals.savedPromptParameter[i] %> />
+      <% for (var i=0; i<locals.savedPromptParameter.length; i++) { %>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body">
+            <label class="card-title"><%- i + "&nbsp;" + locals.savedPromptParameter[i] %></label><br>
+            <input class="form-control" type="text" name="<%- locals.savedPromptParameter[i] %>" placeholder="Enter <%- locals.savedPromptParameter[i] %>" />
+          </div>
+        </div>
+      </div>
       <% } %>
     </div>
     <br>
-    <button type="submit">Send</button>
+    <button class="btn" type="submit">Send</button>
   </form>
 </div>
+
+<!-- navbar and footer -->
+<%-include ("./partials/navbar.ejs")%>
+<%-include ("./partials/footer.ejs")%>

@@ -1,14 +1,4 @@
 {
-  "name": "2800-202310-dtc06",
-  "version": "1.0.0",
-  "description": "This is our read me file To run the website: 1. Download the files. 2. Open index.html in your browser",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-mongo": "^5.0.0",

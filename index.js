@@ -11,19 +11,54 @@ const MongoStore = require("connect-mongo");
 const expireTime = 24 * 60 * 60 * 1000;
 app.set('view engine', 'ejs');
 
-const navLinks = [
-  { name: 'Home', link: '/', upperName: 'HOME', description: 'Lorem ipsum dolor' },
-  { name: 'Persona', link: '/persona', upperName: 'PERSONA', description: 'Lorem ipsum dolor' },
-  { name: 'Dialogue', link: '/dialogue', upperName: 'DIALOGUE', description: 'Lorem ipsum dolor' },
-  { name: 'Saved', link: '/saved', upperName: 'SAVED', description: 'Lorem ipsum dolor' },
-  { name: 'Profile', link: '/profile', upperName: 'PROFILE', description: 'Lorem ipsum dolor' },
+const navLinks = [{
+    name: 'Home',
+    link: '/',
+    upperName: 'HOME',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Persona',
+    link: '/persona',
+    upperName: 'PERSONA',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Dialogue',
+    link: '/dialogue',
+    upperName: 'DIALOGUE',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Saved',
+    link: '/saved',
+    upperName: 'SAVED',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Profile',
+    link: '/profile',
+    upperName: 'PROFILE',
+    description: 'Lorem ipsum dolor'
+  },
 ];
 
-const personaLinks = [
-  { name: 'General prompt presets', link: '/persona/general-prompt' },
-  { name: 'Saved prompt presets', link: '/persona/saved-prompt' },
-  { name: 'Create a new prompt preset', link: '/persona/new-prompt' },
-  { name: 'Write my own prompt', link: '/persona/chat' },
+const personaLinks = [{
+    name: 'General prompt presets',
+    link: '/persona/general-prompt'
+  },
+  {
+    name: 'Saved prompt presets',
+    link: '/persona/saved-prompt'
+  },
+  {
+    name: 'Create a new prompt preset',
+    link: '/persona/new-prompt'
+  },
+  {
+    name: 'Write my own prompt',
+    link: '/persona/chat'
+  },
 ];
 
 // placeholder for db for chatPrompt/chatHistory
@@ -80,6 +115,10 @@ app.use(session({
 }), );
 
 //index page
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -146,14 +185,14 @@ app.post("/loginUser", async (req, res) => {
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
 
   const queryField = isEmail ? "email" : "username";
-  
+
   console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
-  
+
   const user = await User.findOne({
     [queryField]: loginName
   }).select('name username email password _id').exec();
   console.log(user);
-  
+
   if (!user) {
     // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
@@ -167,7 +206,7 @@ app.post("/loginUser", async (req, res) => {
 
     return res.render("home", {
       name: req.session.user.name,
-    } )
+    })
   } else {
     return res.status(400).send("Invalid email/username or password.");
   }
@@ -223,7 +262,9 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/profile/account-setting', async (req, res) => {
-  const currentUser = await User.findOne({ username: "mika" });
+  const currentUser = await User.findOne({
+    username: "mika"
+  });
   const name = currentUser.name;
   const username = currentUser.username;
   const email = currentUser.email;
@@ -245,7 +286,9 @@ app.post('/profile/account-setting', async (req, res) => {
   if (req.body.action === "Edit") {
     console.log("edit")
     console.log(usernameInput)
-    const currentUser = await User.findOne({ username: usernameInput });
+    const currentUser = await User.findOne({
+      username: usernameInput
+    });
     const name = currentUser.name;
     const username = currentUser.username;
     const email = currentUser.email;
@@ -267,17 +310,19 @@ app.post('/profile/account-setting', async (req, res) => {
     const securityAnswerInput = req.body.securityAnswer
     console.log(nameInput)
     console.log(usernameInput)
-    await User.updateOne(
-      { username: usernameInput },
-      {
-        $set: {
-          name: nameInput,
-          email: emailInput,
-          securityQuestion: securityQuestionInput,
-          securityAnswer: securityAnswerInput
-        }
-      })
-    const currentUser = await User.findOne({ username: usernameInput });
+    await User.updateOne({
+      username: usernameInput
+    }, {
+      $set: {
+        name: nameInput,
+        email: emailInput,
+        securityQuestion: securityQuestionInput,
+        securityAnswer: securityAnswerInput
+      }
+    })
+    const currentUser = await User.findOne({
+      username: usernameInput
+    });
     const name = currentUser.name;
     const username = currentUser.username;
     const email = currentUser.email;

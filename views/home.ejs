@@ -1,25 +1,39 @@
 <h1>This is the homepage after login.</h1>
 <a href="/persona">Persona</a>
 <!-- navbar -->
-<%-include ("./partials/navbar.ejs")%>
+<%-include ("./partials/header.ejs")%>
 
 <!-- content -->
 <!-- display picture and name  -->
-<body>
-  <div class="container text-center align-item-center p-5">
-    <div class="p-2">
-      <img
-        src="../images/cat_placeholder.png"
-        id="userImage"
-        alt="userImage"
-        class="p-2"
-      />
-    </div>
-    <h1><%name%></h1>
-  </div>
 
-  <!-- cards -->
-  <div class="container px-2">
+<div class="container text-center align-item-center p-5">
+  <div class="p-2">
+    <img src="../images/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
+  </div>
+  <!-- <h1>%- name %></h1> -->
+</div>
+
+<!-- cards -->
+
+<div class="container px-2">
+  <div class="row">
+    <% for (var i=1; i<locals.navLinks.length; i++) { %>
+    <div class="col-6">
+      <a href="<%- locals.navLinks[i].link %>">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title"><%- locals.navLinks[i].upperName %></p>
+            <p class="card-text"><%- locals.navLinks[i].description %></p>
+          </div>
+        </div>
+      </a>
+      <br>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- <div class="container px-2">
     <div class="row">
       <div class="col-6">
         <div class="card">
@@ -57,7 +71,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <!-- nav bar and footer -->
-  <%-include ('./partials/navbar.ejs')%> <%-include ('./partials/footer.ejs')%>
+<!-- nav bar and footer -->
+<%-include ('./partials/navbar.ejs')%>
+<%-include ('./partials/footer.ejs')%>

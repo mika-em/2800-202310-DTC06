@@ -1,0 +1,82 @@
+<!-- header -->
+<%-include ('./partials/header.ejs')%>
+
+<!-- content -->
+
+<!-- content -->
+<body id="background">
+  <div class="container">
+    <!-- top card -->
+    <div class="card rounded-5 p-1" id="outerBox">
+      <div class="card text-center p-4 rounded-5" id="innerBox">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col">
+            <img
+              id="logo"
+              class="align-self-center"
+              src="./images/invsona.png"
+              alt="invsona logo"
+              width="200px"
+              height="200px"
+            />
+
+            <h1 id="title">Invsona</h1>
+            <div class="container m-2 pb-5">
+              <p class="wrap" id="slogan">
+                Character Creation at Your Finger Tips
+              </p>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+
+      <div class="text-start p-4">
+        <form action="/signup" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="username" class="form-control" id="username" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" />
+          </div>
+
+          <div class="p-4 text-center">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              onclick="window.location.href='/login'"
+            >
+              SIGNUP
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br />
+  </div>
+
+  <!-- footer -->
+  <%-include ('./partials/footer.ejs')%>
+</body>

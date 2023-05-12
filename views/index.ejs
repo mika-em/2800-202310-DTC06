@@ -1,0 +1,46 @@
+<!-- header -->
+<%-include ('./partials/header.ejs')%>
+
+<!-- Purpose: Landing page for Invsona -->
+<body id="background">
+  <div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="card rounded-5 p-1" id="outerBox">
+      <div class="card text-center p-4 rounded-5" id="innerBox">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col">
+            <img
+              id="logo"
+              class="align-self-center"
+              src="./images/invsona.png"
+              alt="invsona logo"
+              width="200px"
+              height="200px"
+            />
+
+            <h1 id="title">Invsona</h1>
+            <div class="container m-2 pb-5">
+              <p class="wrap" id="slogan">
+                Character Creation at Your Finger Tips
+              </p>
+            </div>
+
+            <div class="pb-4">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                onclick="window.location.href='/login'"
+              >
+                Start
+              </button>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <%-include ('./partials/footer.ejs')%>
+

@@ -9,8 +9,11 @@ const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 const navLinks = [
-  { name: 'Home', link: '/' },
-  { name: 'Persona', link: '/persona' },
+  { name: 'Home', link: '/', upperName: 'HOME', description: 'Lorem ipsum dolor'},
+  { name: 'Persona', link: '/persona', upperName: 'PERSONA', description: 'Lorem ipsum dolor' },
+  { name: 'Dialogue', link: '/dialogue', upperName: 'DIALOGUE', description: 'Lorem ipsum dolor' },
+  { name: 'Saved', link: '/saved', upperName: 'SAVED', description: 'Lorem ipsum dolor' },
+  { name: 'Profile', link: '/profile', upperName: 'PROFILE', description: 'Lorem ipsum dolor' },
 ];
 
 const personaLinks = [
@@ -126,6 +129,10 @@ app.use(express.static(__dirname + "/")); // this is to serve static files like 
 
 app.get('/home', (req, res) => {
     res.render("home");
+});
+
+app.get('/profile', (req, res) => {
+    res.render("profile");
 });
 
 app.get('/persona', (req, res) => {

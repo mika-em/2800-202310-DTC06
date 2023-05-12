@@ -1,14 +1,67 @@
 <!-- header -->
 <%-include ("./partials/header.ejs")%>
 
-<div class="container">
-  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-  <div class="row">
-    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
-  </div>
-  <br>
-  <% } %>
-</div>
+<!-- content -->
+<body>
+    <div
+      class="container align-item-center text-center text-black fw-bolder pt-5 mt-4"
+    >
+      <!-- General -->
+      <div class="row p-4">
+      <a href="#">
+        <div class="card">
+          <img
+            src="../images/persona/general.jpg"
+            class="card-img opacity-75"
+            alt="..."
+          />
+          <div class="card-img-overlay">
+            <h1 class="card-title pt-5">General</h1>
+            <p class="card-text">This is a wide.</p>
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <!-- Specific -->
+      <div class="row p-4">
+        <a href="##">
+        <div class="card">
+          <img
+            src="../images/persona/specific.jpg"
+            class="card-img opacity-75"
+            alt="..."
+          />
+          <div class="card-img-overlay">
+            <h1 class="card-title pt-5">Specific</h1>
+            <p class="card-text">This is a wide.</p>
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <!-- Creative -->
+      <div class="row p-4">
+        <a href="###">
+          <div class="card">
+            <img
+              src="../images/persona/creative.jpg"
+              class="card-img opacity-75"
+              alt="..."
+            />
+            <div class="card-img-overlay">
+              <h1 class="card-title pt-5">Creative</h1>
+              <p class="card-text">This is a wide.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+
+
+
+
 
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>

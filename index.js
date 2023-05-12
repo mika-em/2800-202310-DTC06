@@ -101,75 +101,11 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const expireTime = 24 * 60 * 60 * 1000;
-app.set('view engine', 'ejs');
 
-const navLinks = [{
-    name: 'Home',
-    link: '/',
-    upperName: 'HOME',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Persona',
-    link: '/persona',
-    upperName: 'PERSONA',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Dialogue',
-    link: '/dialogue',
-    upperName: 'DIALOGUE',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Saved',
-    link: '/saved',
-    upperName: 'SAVED',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Profile',
-    link: '/profile',
-    upperName: 'PROFILE',
-    description: 'Lorem ipsum dolor'
-  },
-];
-
-const personaLinks = [{
-    name: 'General prompt presets',
-    link: '/persona/general-prompt'
-  },
-  {
-    name: 'Saved prompt presets',
-    link: '/persona/saved-prompt'
-  },
-  {
-    name: 'Create a new prompt preset',
-    link: '/persona/new-prompt'
-  },
-  {
-    name: 'Write my own prompt',
-    link: '/persona/chat'
-  },
-];
-
-// placeholder for db for chatPrompt/chatHistory
-var chatPrompt = ["test"];
-var savedPromptParameter = ["hello", "world", "test"];
-
-app.use('/', (req, res, next) => {
-  app.locals.navLinks = navLinks;
-  app.locals.personaLinks = personaLinks;
-  app.locals.chatPrompt = chatPrompt;
-  app.locals.savedPromptParameter = savedPromptParameter;
-  app.locals.currentURL = url.parse(req.url).pathname;
-  next();
-});
-
+// connect to database
 mongoose
   .connect(
-    "mongodb+srv://maddy:maddymaddy@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority",
     {
       // connect to the database
       useNewUrlParser: true, // this is to avoid deprecation warnings
@@ -224,16 +160,7 @@ app.get("/signup", (req, res) => {
 
 //signup route 
 app.post("/signup", async (req, res) => {
-  console.log("ejs set up");
-  console.log("signup route")
-  const {
-    name,
-    username,
-    email,
-    password,
-    securityQuestion,
-    securityAnswer,
-  } = req.body;
+  const { name, username, password } = req.body;
 
   const hashedPassword = await bcrypt.hashSync(password, saltRounds);
 
@@ -241,19 +168,8 @@ app.post("/signup", async (req, res) => {
     await User.create({
       name: name,
       username: username,
-      email: email,
-      password: hashedPassword,
-      securityQuestion: securityQuestion,
-      securityAnswer: securityAnswer,
+      password: password,
     });
-    req.session.user = {
-      name: name,
-      username: username,
-      email: email,
-      password: hashedPassword,
-      securityQuestion: securityQuestion,
-      securityAnswer: securityAnswer,
-    };
     console.log("User created");
     res.redirect("/");
   } catch (error) {
@@ -269,43 +185,31 @@ app.get("/login", (req, res) => {
 });
 
 //login route
+// app.post("/loginUser", async (req, res) => {
+// });
+
 app.post("/loginUser", async (req, res) => {
-  const {
-    loginName,
-    password,
-  } = req.body;
-  console.log(loginName, password)
-
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
-
-  const queryField = isEmail ? "email" : "username";
-
-  console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
-
-  const user = await User.findOne({
-    [queryField]: loginName
-  }).select('name username email password _id').exec();
-  console.log(user);
+  const schema = Joi.object({
+    password: Joi.string(),
+  });
 
   if (!user) {
     // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
   }
 
-  const passwordMatch = await bcrypt.compare(password, user.password);
-
-  const name = user.name;
-
-
-  if (passwordMatch) {
-    req.session.authenticated = true;
-    req.session.cookie.maxAge = expireTime;
-
-    return res.render("home", {
-      name: name
-    })
-  } else {
-    return res.status(400).send("Invalid email/username or password.");
+  try {
+    const result = await User.findOne({
+      username: req.body.username,
+    });
+    if (req.body.password == result.password) {
+      console.log("User authenticated");
+      res.redirect("/");
+    } else {
+      res.send("wrong password");
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

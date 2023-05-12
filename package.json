@@ -9,32 +9,14 @@
     "mongodb": "^5.5.0",
     "mongoose": "^7.1.1",
     "nodemon": "^2.0.22"
-  },
+  }
   "name": "2800-202310-dtc06",
-  "description": "This is our read me file To run the website: 1. Download the files. 2. Open index.html in your browser",
+  "description": "This is our read me file\r To run the website:\r 1. Download the files.\r 2. Open index.html in your browser",
   "version": "1.0.0",
   "main": "index.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC"
-}
-{
-  "name": "2800-202310-dtc06",
-  "version": "1.0.0",
-  "description": "This is our read me file\r To run the website:\r 1. Download the files.\r 2. Open index.html in your browser",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "node": "^20.1.0"
-  },
-  "devDependencies": {}
-}

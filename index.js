@@ -249,6 +249,14 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
 app.get("/index", (req, res) => {
   res.render("index");
 });
@@ -316,14 +324,14 @@ app.post("/loginUser", async (req, res) => {
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
 
   const queryField = isEmail ? "email" : "username";
-  
+
   console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
-  
+
   const user = await User.findOne({
     [queryField]: loginName
   }).select('name username email password _id').exec();
   console.log(user);
-  
+
   if (!user) {
     // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
@@ -340,7 +348,7 @@ app.post("/loginUser", async (req, res) => {
     // Redirect the user to the desired page
     return res.render("home", {
       name: req.session.user.name,
-    } )
+    })
   } else {
     // If the passwords do not match, return an error message
     return res.status(400).send("Invalid email/username or password.");
@@ -352,7 +360,7 @@ app.use(express.static(__dirname + "/")); // this is to serve static files like 
 
 app.get('/home', (req, res) => {
   res.render("home", {
-    name : req.session.user.name,
+    name: req.session.user.name,
   });
 });
 
@@ -361,7 +369,9 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/profile/account-setting', async (req, res) => {
-  const currentUser = await User.findOne({ username: "mika" });
+  const currentUser = await User.findOne({
+    username: "mika"
+  });
   const name = currentUser.name;
   const username = currentUser.username;
   const email = currentUser.email;
@@ -383,7 +393,9 @@ app.post('/profile/account-setting', async (req, res) => {
   if (req.body.action === "Edit") {
     console.log("edit")
     console.log(usernameInput)
-    const currentUser = await User.findOne({ username: usernameInput });
+    const currentUser = await User.findOne({
+      username: usernameInput
+    });
     const name = currentUser.name;
     const username = currentUser.username;
     const email = currentUser.email;
@@ -405,17 +417,19 @@ app.post('/profile/account-setting', async (req, res) => {
     const securityAnswerInput = req.body.securityAnswer
     console.log(nameInput)
     console.log(usernameInput)
-    await User.updateOne(
-      { username: usernameInput },
-      {
-        $set: {
-          name: nameInput,
-          email: emailInput,
-          securityQuestion: securityQuestionInput,
-          securityAnswer: securityAnswerInput
-        }
-      })
-    const currentUser = await User.findOne({ username: usernameInput });
+    await User.updateOne({
+      username: usernameInput
+    }, {
+      $set: {
+        name: nameInput,
+        email: emailInput,
+        securityQuestion: securityQuestionInput,
+        securityAnswer: securityAnswerInput
+      }
+    })
+    const currentUser = await User.findOne({
+      username: usernameInput
+    });
     const name = currentUser.name;
     const username = currentUser.username;
     const email = currentUser.email;

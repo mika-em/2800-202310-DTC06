@@ -112,7 +112,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: mongoStore,
-}), );
+}),);
 
 //index page
 app.get("/", (req, res) => {
@@ -218,10 +218,75 @@ app.post("/loginUser", async (req, res) => {
   }
 });
 
+app.use(express.static(__dirname + "/")); // this is to serve static files like images
+
+
+app.get('/resetPassword', (req, res) => {
+  res.render("resetPassword",
+    {
+      email: "",
+      securityQuestion: "",
+      securityAnswer: "",
+      password: "",
+      disabled: true,
+    }
+  );
+});
+
+app.post('/resetPassword', async (req, res) => {
+  try {
+    console.log(req.body.email)
+    userReset = await User.findOne({ email: req.body.email })
+    console.log(userReset)
+    res.render('resetPassword', { 
+      email: req.body.email,
+      securityQuestion: userReset.securityQuestion,
+      securityAnswer: "",
+      password: "",
+      disabled: true,
+    })
+  } catch (error) {
+    return res.status(400).send("Invalid email.");
+  }
+});
+
+app.post('/resetPassword/verified', async (req, res) => {
+  userReset = await User.findOne({ email: req.body.email })
+  const securityAnswer = userReset.securityAnswer
+  console.log(securityAnswer)
+  if (securityAnswer === req.body.securityAnswer) {
+    res.render('resetPassword', {
+      email: req.body.email,
+      securityQuestion: userReset.securityQuestion,
+      securityAnswer: userReset.securityAnswer,
+      password: "",
+      disabled: false,
+    })
+  } else {
+    res.send("Incorrect answer to security question.");
+  }
+});
+
+app.post('/', async (req, res) => {
+  const password = req.body.password;
+  const hashedPassword = await bcrypt.hashSync(password, saltRounds);
+  try {
+    await User.updateOne(
+      { email: req.body.email },
+      {
+        $set: {
+          password: hashedPassword,
+        }
+      })
+    res.render('index')
+  } catch (error) {
+    res.status(500).send("An error occurred while creating your account.");
+  }
+});
 
 app.get('/home', (req, res) => {
   res.render("home", {
-    name: req.session.user.name
+    name: req.session.user.name,
   });
 });
 

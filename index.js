@@ -264,37 +264,22 @@ app.get("/login", (req, res) => {
 });
 
 //login route
-// app.post("/loginUser", async (req, res) => {
-// });
-
 app.post("/loginUser", async (req, res) => {
   const {
     loginName,
     password
   } = req.body;
   console.log(loginName, password)
-  // Check if the input value is an email or a username
-  // const isEmail = Joi.string().email().validate(loginName).error === null;
-  // console.log(isEmail)
 
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
-  console.log(isEmail)
 
-  // Define the query field based on whether the input value is an email or a username
   const queryField = isEmail ? "email" : "username";
-  console.log(queryField)
-
+  
   console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
-  const result = await User.findOne({
-    [queryField]: loginName
-  }).select('name username email password _id').exec();
-  console.log(result);
-
-
-  // Query the database to find the user by email or username
+  
   const user = await User.findOne({
     [queryField]: loginName
-  }).exec();
+  }).select('name username email password _id').exec();
   console.log(user);
 
   if (!user) {

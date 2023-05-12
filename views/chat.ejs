@@ -24,13 +24,20 @@
 <div class="container">
   <% for (var i=0; i<locals.chatPrompt.length; i++) { %>
   <div class="row">
-    <%- i + "&nbsp;" + locals.chatPrompt[i] %>
-    <% } %>
+    <div class="col-12">
+      <%- i + "&nbsp;" + locals.chatPrompt[i] %>
+      <% } %>
+    </div>
   </div>
   <br>
-
-  <form action="/persona/chat" method="post">
-    <input type="text" name="message" placeholder="Send a message" />
-    <button type="submit">Send</button>
+  <form action="/persona/chat" method="post" class="text-center">
+    <div class="row">
+      <input class="form-control col" type="text" name="message" placeholder="Send a message" />
+      <button class="btn col-3" type="submit">Send</button>
+    </div>
   </form>
 </div>
+
+<!-- navbar and footer -->
+<%-include ("./partials/navbar.ejs")%>
+<%-include ("./partials/footer.ejs")%>

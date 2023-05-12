@@ -42,10 +42,10 @@ app.use('/', (req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority", {
-      // connect to the database
-      useNewUrlParser: true, // this is to avoid deprecation warnings
-    }
+    "mongodb+srv://maddy:maddymaddy@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority", {
+    // connect to the database
+    useNewUrlParser: true, // this is to avoid deprecation warnings
+  }
   )
   .then(() => {
     console.log("Connected to database");
@@ -55,7 +55,7 @@ mongoose
   });
 
 var mongoStore = MongoStore.create({
-  mongoUrl: `mongodb+srv://mika-em:wabisabi@teamcluster.hnn9rvs.mongodb.net/?retryWrites=true&w=majority`,
+  mongoUrl: `mongodb+srv://maddy:maddymaddy@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority`,
   // mongoUrl: mongodb_host,
 
   crypto: {
@@ -77,7 +77,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   store: mongoStore,
-}), );
+}),);
 
 //index page
 app.get("/", (req, res) => {
@@ -146,14 +146,14 @@ app.post("/loginUser", async (req, res) => {
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginName);
 
   const queryField = isEmail ? "email" : "username";
-  
+
   console.log(`isEmail: ${isEmail}, queryField: ${queryField}`);
-  
+
   const user = await User.findOne({
     [queryField]: loginName
   }).select('name username email password _id').exec();
   console.log(user);
-  
+
   if (!user) {
     // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
@@ -167,18 +167,88 @@ app.post("/loginUser", async (req, res) => {
 
     return res.render("home", {
       name: req.session.user.name,
-    } )
+    })
   } else {
     return res.status(400).send("Invalid email/username or password.");
   }
 });
 
-
 app.use(express.static(__dirname + "/")); // this is to serve static files like images
+
+
+app.get('/resetPassword', (req, res) => {
+  res.render("resetPassword",
+    {
+      email: "",
+      securityQuestion: "",
+      securityAnswer: "",
+      password: "",
+      disabled: true,
+    }
+  );
+});
+
+// var userReset = ""
+
+// app.use('/resetPassword', (req, res, next) => {
+//   app.locals.userReset = userReset;
+//   next();
+// });
+
+app.post('/resetPassword', async (req, res) => {
+  try {
+    console.log(req.body.email)
+    userReset = await User.findOne({ email: req.body.email })
+    console.log(userReset)
+    res.render('resetPassword', { 
+      email: req.body.email,
+      securityQuestion: userReset.securityQuestion,
+      securityAnswer: "",
+      password: "",
+      disabled: true,
+    })
+  } catch (error) {
+    return res.status(400).send("Invalid email.");
+  }
+});
+
+app.post('/resetPassword/verified', async (req, res) => {
+  userReset = await User.findOne({ email: req.body.email })
+  const securityAnswer = userReset.securityAnswer
+  console.log(securityAnswer)
+  if (securityAnswer === req.body.securityAnswer) {
+    res.render('resetPassword', {
+      email: req.body.email,
+      securityQuestion: userReset.securityQuestion,
+      securityAnswer: userReset.securityAnswer,
+      password: "",
+      disabled: false,
+    })
+  } else {
+    res.send("Incorrect answer to security question.");
+  }
+});
+
+app.post('/', async (req, res) => {
+  const password = req.body.password;
+  const hashedPassword = await bcrypt.hashSync(password, saltRounds);
+  try {
+    await User.updateOne(
+      { email: req.body.email },
+      {
+        $set: {
+          password: hashedPassword,
+        }
+      })
+    res.render('index')
+  } catch (error) {
+    res.status(500).send("An error occurred while creating your account.");
+  }
+});
 
 app.get('/home', (req, res) => {
   res.render("home", {
-    name : req.session.user.name,
+    name: req.session.user.name,
   });
 });
 

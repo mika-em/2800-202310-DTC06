@@ -196,7 +196,8 @@ app.get("/login", (req, res) => {
 app.post("/loginUser", async (req, res) => {
   const {
     loginName,
-    password
+    password,
+    name
   } = req.body;
   console.log(loginName, password)
 
@@ -221,7 +222,9 @@ app.post("/loginUser", async (req, res) => {
   if (passwordMatch) {
     req.session.authenticated = true;
 
-    return res.redirect("/");
+    return res.render("home", {
+      name: req.session.user.name,
+    } )
   } else {
     return res.status(400).send("Invalid email/username or password.");
   }

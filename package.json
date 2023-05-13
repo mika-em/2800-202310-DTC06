@@ -4,7 +4,8 @@
   "description": "This is our read me file To run the website: 1. Download the files. 2. Open index.html in your browser",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",

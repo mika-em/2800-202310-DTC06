@@ -1,8 +1,7 @@
 const url = require('url');
 const express = require("express");
 const mongoose = require("mongoose");
-const User = require("./models/users"); // require the users.js file
-const Joi = require("joi");
+const User = require("./models/users");
 const app = express();
 const port = process.env.PORT || 3005;
 const bcrypt = require("bcrypt");
@@ -153,14 +152,6 @@ app.post("/signup", async (req, res) => {
       securityQuestion: securityQuestion,
       securityAnswer: securityAnswer,
     });
-    req.session.user = {
-      name: name,
-      username: username,
-      email: email,
-      password: hashedPassword,
-      securityQuestion: securityQuestion,
-      securityAnswer: securityAnswer,
-    };
     console.log("User created");
     res.redirect("/");
   } catch (error) {
@@ -201,17 +192,22 @@ app.post("/loginUser", async (req, res) => {
 
   const passwordMatch = await bcrypt.compare(password, user.password);
 
-  const name = user.name;
-
-
   if (passwordMatch) {
     req.session.authenticated = true;
     req.session.cookie.maxAge = expireTime;
-    req.session.user = name
+    req.session.user = {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      securityQuestion: user.securityQuestion,
+      securityAnswer: user.securityAnswer
+    };
+    
+    console.log(req.session.user.name)
 
-
-    return res.render("home", {
-      name: name
+    return res.render("home", { 
+      name: user.name,
     })
   } else {
     return res.status(400).send("Invalid email/username or password.");
@@ -286,13 +282,13 @@ app.post('/', async (req, res) => {
 
 app.get('/home', (req, res) => {
   res.render("home", {
-    // name: req.session.user.name,
+    name: req.session.user.name,
   });
 });
 
 app.get('/profile', (req, res) => {
   res.render("profile", {
-    // name: req.session.user.name
+    name: req.session.user.name,
   });
 });
 

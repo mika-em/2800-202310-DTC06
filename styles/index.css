@@ -85,9 +85,7 @@ button{
   height: 100%;
   padding: 50px;
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  scroll-behavior: auto;
 }
 
 

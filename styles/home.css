@@ -15,14 +15,21 @@
     height: 250px;
     object-fit: cover;
     border-radius: 100%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 2px #fff;
+    border: 2px dotted #fff;
+    filter: drop-shadow(0px 0px 30px #051726);
     text-align: center;
 }
 
 #display-pic{
     padding-top:100px;
+    font-size: x-large;
 }
+
+#display-name{
+    padding-top: 10px;
+    font-size: 30pt;
+}
+
 
 #card-name{
     font-size: 25px;

@@ -2,26 +2,24 @@
 <!-- header -->
 <%-include ('./partials/header.ejs')%>
 
-<div class="container-fluid invsona-bg">
-      <div class="container text-center align-item-center pt-5" id="decor_user">
-        <div class="pt-5 pb-5">
-          <form action="upload.png" method="post" enctype="multipart/form-data">
-            <label for="fileToUpload">
-              <div
-                class="editUserImage"
-                style="background-image: url('../images/cat_placeholder.png')"
-              >
-  
-                <span>Edit Profile Picture</span>
-                <div style="position: relative">
-                  <img src="../images/icons/edit.png" class="editicon" alt="">
-                </div>
-              </div>
-            </label>
-            <input type="File" name="fileToUpload" id="fileToUpload">
-          </form>
-        </div>
+  <div class="container text-center align-item-center pt-5 px-5 py-3">
+    <div class="p-2">
+      <img
+        src="../images/cat_placeholder.png"
+        id="userImage"
+        alt="userImage"
+        class="p-2"
+      />
+
+      <div>
+        <a href="">
+          <img src="../images/icons/edit.png" id="editicon" alt="" />
+          <span>Edit Profile</span>
+        </a>
       </div>
+    </div>
+
+  </div>
 
   
       <!-- Menu -->

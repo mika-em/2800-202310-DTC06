@@ -2,68 +2,69 @@ const url = require('url');
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./models/users");
-const app = express();
-const port = process.env.PORT || 3005;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const expireTime = 24 * 60 * 60 * 1000;
+
+const app = express();
 app.set('view engine', 'ejs');
+app.use(express.json());
 
-const navLinks = [{
-    name: 'Home',
-    link: '/',
-    upperName: 'HOME',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Persona',
-    link: '/persona',
-    upperName: 'PERSONA',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Dialogue',
-    link: '/dialogue',
-    upperName: 'DIALOGUE',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Saved',
-    link: '/saved',
-    upperName: 'SAVED',
-    description: 'Lorem ipsum dolor'
-  },
-  {
-    name: 'Profile',
-    link: '/profile',
-    upperName: 'PROFILE',
-    description: 'Lorem ipsum dolor'
-  },
-];
+app.set("view engine", "ejs");
 
-const personaLinks = [{
-    name: 'General prompt presets',
-    link: '/persona/general-prompt'
-  },
-  {
-    name: 'Saved prompt presets',
-    link: '/persona/saved-prompt'
-  },
-  {
-    name: 'Create a new prompt preset',
-    link: '/persona/new-prompt'
-  },
-  {
-    name: 'Write my own prompt',
-    link: '/persona/chat'
-  },
-];
+var MongoDBStore = require('connect-mongodb-session')(session);
 
-// placeholder for db for chatPrompt/chatHistory
-var chatPrompt = ["test"];
-var savedPromptParameter = ["hello", "world", "test"];
+const dotenv = require('dotenv');
+dotenv.config();
+
+
+// secret info
+const mongodb_user = process.env.MONGODB_USER;
+const mongodb_password = process.env.MONGODB_PASSWORD;
+// const mongodb_database = process.env.MONGODB_DATABASE;
+const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
+const node_session_secret = process.env.NODE_SESSION_SECRET;
+
+var mongoStore = new MongoDBStore({
+  uri: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority`,
+  collection: 'sessions',
+
+  crypto: {
+    secret: mongodb_session_secret
+  }
+})
+
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(`mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority`);
+
+  console.log("connected to db");
+  app.listen(process.env.PORT || 3000, () => {
+    console.log('server is running on port 3000');
+  });
+}
+
+
+app.use(express.urlencoded({
+  extended: false,
+}));
+
+//more session stuff
+app.use(
+  session({
+    secret: node_session_secret,
+    resave: false,
+    saveUninitialized: false,
+    store: mongoStore,
+  })
+);
+
+
+//index page
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
 app.use('/', (req, res, next) => {
   app.locals.navLinks = navLinks;
@@ -72,50 +73,6 @@ app.use('/', (req, res, next) => {
   app.locals.savedPromptParameter = savedPromptParameter;
   app.locals.currentURL = url.parse(req.url).pathname;
   next();
-});
-
-mongoose
-  .connect(
-    "mongodb+srv://mika:mika@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority", {
-      // connect to the database
-      useNewUrlParser: true, // this is to avoid deprecation warnings
-    }
-  )
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch((error) => {
-    console.log("Error connecting to database: ", error);
-  });
-
-var mongoStore = MongoStore.create({
-  mongoUrl: `mongodb+srv://mika:mika@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority`,
-  // mongoUrl: mongodb_host,
-
-  crypto: {
-    secret: "secret"
-  }
-})
-
-app.set("view engine", "ejs");
-
-app.use(express.urlencoded({
-  extended: false,
-})); // parses bodies in urlencoded format
-
-app.use(express.json()); // parses bodies in json format
-
-//more session stuff
-app.use(session({
-  secret: "secret",
-  resave: false,
-  saveUninitialized: false,
-  store: mongoStore,
-}),);
-
-//index page
-app.get("/", (req, res) => {
-  res.render("index");
 });
 
 app.get("/index", (req, res) => {
@@ -186,7 +143,6 @@ app.post("/loginUser", async (req, res) => {
   console.log(user);
 
   if (!user) {
-    // If user is not found, return an error message
     return res.status(400).send("Invalid email/username or password.");
   }
 
@@ -203,38 +159,37 @@ app.post("/loginUser", async (req, res) => {
       securityQuestion: user.securityQuestion,
       securityAnswer: user.securityAnswer
     };
-    
+
     console.log(req.session.user.name)
 
-    return res.render("home", { 
-      name: user.name,
+    return res.render("home", {
+      name: req.session.user.name,
+
     })
   } else {
     return res.status(400).send("Invalid email/username or password.");
   }
 });
 
-app.use(express.static(__dirname + "/")); // this is to serve static files like images
-
 
 app.get('/resetPassword', (req, res) => {
-  res.render("resetPassword",
-    {
-      email: "",
-      securityQuestion: "",
-      securityAnswer: "",
-      password: "",
-      disabled: true,
-    }
-  );
+  res.render("resetPassword", {
+    email: "",
+    securityQuestion: "",
+    securityAnswer: "",
+    password: "",
+    disabled: true,
+  });
 });
 
 app.post('/resetPassword', async (req, res) => {
   try {
     console.log(req.body.email)
-    userReset = await User.findOne({ email: req.body.email })
+    userReset = await User.findOne({
+      email: req.body.email
+    })
     console.log(userReset)
-    res.render('resetPassword', { 
+    res.render('resetPassword', {
       email: req.body.email,
       securityQuestion: userReset.securityQuestion,
       securityAnswer: "",
@@ -247,7 +202,9 @@ app.post('/resetPassword', async (req, res) => {
 });
 
 app.post('/resetPassword/verified', async (req, res) => {
-  userReset = await User.findOne({ email: req.body.email })
+  userReset = await User.findOne({
+    email: req.body.email
+  })
   const securityAnswer = userReset.securityAnswer
   console.log(securityAnswer)
   if (securityAnswer === req.body.securityAnswer) {
@@ -267,13 +224,13 @@ app.post('/', async (req, res) => {
   const password = req.body.password;
   const hashedPassword = await bcrypt.hashSync(password, saltRounds);
   try {
-    await User.updateOne(
-      { email: req.body.email },
-      {
-        $set: {
-          password: hashedPassword,
-        }
-      })
+    await User.updateOne({
+      email: req.body.email
+    }, {
+      $set: {
+        password: hashedPassword,
+      }
+    })
     res.render('index')
   } catch (error) {
     res.status(500).send("An error occurred while creating your account.");
@@ -370,61 +327,6 @@ app.post('/profile/account-setting', async (req, res) => {
   }
 });
 
-app.get('/persona', (req, res) => {
-  res.render("persona");
-});
-
-app.get('/persona/general-prompt', (req, res) => {
-  console.log(chatPrompt)
-  res.render("generalPrompt");
-});
-
-app.post('/persona/general-prompt', (req, res) => {
-  const name = req.body.name || "random";
-  const age = req.body.age || "random";
-  const gender = req.body.gender || "random";
-  const situation = req.body.plot || "random";
-  const plot = req.body.plot || "random";
-
-  const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
-  chatPrompt.push("You: " + message);
-  chatPrompt.push("hello");
-  console.log(chatPrompt)
-
-  // placeholder for db for chatPrompt/chatHistory
-  res.redirect('/persona/chat');
-});
-
-app.get('/persona/saved-prompt', (req, res) => {
-  res.render("savedPrompt");
-});
-
-app.get('/persona/new-prompt', (req, res) => {
-  res.render("newPrompt");
-});
-
-app.post('/persona/new-prompt', (req, res) => {
-  // placeholder for db for chatPrompt/chatHistory
-  const parameter = req.body.parameter;
-  savedPromptParameter.push(parameter);
-  console.log(savedPromptParameter);
-  res.render("newPrompt");
-});
-
-app.get('/persona/chat', (req, res) => {
-  // placeholder for db for chatPrompt/chatHistory
-  console.log(chatPrompt);
-  res.render("chat");
-});
-
-app.post('/persona/chat', (req, res) => {
-  // placeholder for db for chatPrompt/chatHistory
-  const message = req.body.message;
-  chatPrompt.push("You: " + message);
-  console.log(chatPrompt);
-  res.render("chat");
-});
-
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
@@ -435,8 +337,61 @@ app.post('/signout', (req, res) => {
   res.render("index")
 });
 
+
 app.use(express.static(__dirname + "/"));
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+const navLinks = [{
+    name: 'Home',
+    link: '/',
+    upperName: 'HOME',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Persona',
+    link: '/persona',
+    upperName: 'PERSONA',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Dialogue',
+    link: '/dialogue',
+    upperName: 'DIALOGUE',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Saved',
+    link: '/saved',
+    upperName: 'SAVED',
+    description: 'Lorem ipsum dolor'
+  },
+  {
+    name: 'Profile',
+    link: '/profile',
+    upperName: 'PROFILE',
+    description: 'Lorem ipsum dolor'
+  },
+];
+
+const personaLinks = [{
+    name: 'General prompt presets',
+    link: '/persona/general-prompt'
+  },
+  {
+    name: 'Saved prompt presets',
+    link: '/persona/saved-prompt'
+  },
+  {
+    name: 'Create a new prompt preset',
+    link: '/persona/new-prompt'
+  },
+  {
+    name: 'Write my own prompt',
+    link: '/persona/chat'
+  },
+];
+
+// placeholder for db for chatPrompt/chatHistory
+var chatPrompt = ["test"];
+var savedPromptParameter = ["hello", "world", "test"];
+
+module.exports = app;

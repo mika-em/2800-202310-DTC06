@@ -1,28 +1,26 @@
+<!-- Purpose: Landing page for Invsona -->
+
 <!-- header -->
 <%-include ('./partials/header.ejs')%>
 
-<!-- Purpose: Landing page for Invsona -->
-<body>
+<!-- video background -->
+<video autoplay muted loop id="background">
+  <source src="./images/blue_bg.mp4" type="video/mp4" />
+</video>
 
-    <!-- video background -->
-    <video autoplay muted loop id="background">
-      <source src="./images/blue_bg.mp4" type="video/mp4" />
-    </video>
-
-    <!-- logo -->
-    <div class="container-fluid text-center align-self-center" id = "content">
-      <div id="box">
-        <img id="logo" src="./images/invsona.png" alt="invsona logo"/>
-        <h1 id="title">Invsona</h1>
-        <div class="mb-5">
-        <p id="slogan">Character Creation at Your Finger Tips</p></div>
-        <button class="btn btn-primary" onclick="window.location.href='/login'">START</button>
-      </div>
+<!-- logo -->
+<div class="container-fluid text-center align-self-center" id="content">
+  <div id="box">
+    <img id="logo" src="./images/invsona.png" alt="invsona logo" />
+    <h1 id="title">Invsona</h1>
+    <div class="mb-5">
+      <p id="slogan">Character Creation at Your Finger Tips</p>
     </div>
-    
+    <button class="btn btn-primary" onclick="window.location.href='/login'">
+      START
+    </button>
+  </div>
+</div>
 
-
-
-    <!-- footer -->
-    <%-include ('./partials/footer.ejs')%>
-
+<!-- footer -->
+<%-include ('./partials/footer.ejs')%>

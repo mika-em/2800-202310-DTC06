@@ -12,7 +12,7 @@
     <div class="p-3 mt-5">
       <img src="../images/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
     </div>
-    <h1><%- name%></h1>
+    <h1 id="display-name"><%- name%></h1>
   </div>
 
   
@@ -22,7 +22,7 @@
     <div class="row">
       <% for (var i=1; i < locals.navLinks.length; i++) { %>
         <div class="col-6 p-2">
-          <button type="button" class="btn btn-outline-dark" href="<%- locals.navLinks[i].link %>">
+          <button type="button" class="btn btn-outline-secondary-lg" href="<%- locals.navLinks[i].link %>">
               <p class="card-title" id="card-name"><%- locals.navLinks[i].upperName %></p>
               <p class="card-text"><%- locals.navLinks[i].description %></p>
           </button>

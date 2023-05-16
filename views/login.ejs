@@ -10,59 +10,61 @@
 </video>
 
 <!-- logo -->
-<div class="container-fluid text-center align-self-center" id="login">
+<div class="container-fluid" id="login">
   <div id="box">
     <img id="logo" src="./images/invsona.png" alt="invsona logo" />
-    <h1 id="title">Invsona</h1>
-    <div class="mb-5">
+    <h1 class="pt-3" id="title">Invsona</h1>
+    <div class="container mb-5">
       <p id="slogan">Character Creation at Your Finger Tips</p>
+    </div>
+  
 
-      <!-- FORM -->
-      <div class="text-start">
-        <form action="/loginUser" method="post">
-          <div class="mb-3">
-            <label for="loginName" class="form-label">Username / Email</label>
-            <input
-              type="loginName"
-              class="form-control"
-              id="loginName"
-              name="loginName"
-              aria-describedby="emailHelp"
-            />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
-            </div>
+    <!-- FORM -->
+    <div class="container text-start">
+      <form action="/loginUser" method="post">
+        <div class="mb-3">
+          <label for="loginName" class="form-label">Username / Email</label>
+          <input
+            type="loginName"
+            class="form-control"
+            id="loginName"
+            name="loginName"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-            />
-          </div>
+        </div>
 
-          <!-- FORGET PASSWORD -->
-          <div id="resetPassword" class="form-text">
-            <a href="/resetPassword">Forgot password</a>
-          </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+          />
+        </div>
 
-          <div class="p-4 text-center">
-            <button type="submit" class="btn btn-primary btn">LOGIN</button>
-          </div>
+        <!-- FORGET PASSWORD -->
+        <div id="resetPassword" class="form-text">
+          <a href="/resetPassword">Forgot password</a>
+        </div>
 
-          <!-- SIGN UP -->
-          <div>
-            <p class="text-center">
-              Don't have an account? <a href="/signup">Sign Up</a>
-            </p>
-          </div>
-        </form>
-      </div>
+        <div class="p-4 text-center">
+          <button type="submit" class="btn btn-primary">LOGIN</button>
+        </div>
+
+        <!-- SIGN UP -->
+        <div>
+          <p class="text-center">
+            Don't have an account? <a href="/signup">Sign Up</a>
+          </p>
+        </div>
+      </form>
     </div>
   </div>
-
-  <!-- footer -->
-  <%-include ('./partials/footer.ejs')%>
 </div>
+
+<!-- footer -->
+<%-include ('./partials/footer.ejs')%>

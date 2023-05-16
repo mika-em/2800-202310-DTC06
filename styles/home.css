@@ -1,8 +1,33 @@
+#invsona-bg{
+    background-image: url("../images/bg.jpg");
+    background-color: #98A6D4;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+}
+
 #userImage{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 100%;
     border: 2px solid #fff;
     box-shadow: 0 0 0 2px #fff;
+    text-align: center;
 }
+
+#display-pic{
+    padding-top:100px;
+}
+
+#card-name{
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: "Gugi", sans-serif;
+    color:#98A6D4;
+}
+

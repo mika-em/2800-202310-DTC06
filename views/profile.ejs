@@ -1,153 +1,178 @@
 <!-- Profile information -->
+<!-- Profile information -->
 <!-- header -->
 <%-include ('./partials/header.ejs')%>
 
-  <div class="container text-center align-item-center pt-5 px-5 py-3">
-    <div class="p-2">
-      <img
-        src="../images/cat_placeholder.png"
-        id="userImage"
-        alt="userImage"
-        class="p-2"
-      />
-
-      <div>
-        <a href="">
-          <img src="../images/icons/edit.png" id="editicon" alt="" />
-          <span>Edit Profile</span>
-        </a>
-      </div>
+  <div>
+    <div class="container text-center align-item-center pt-5">
+      <form
+        action="upload_file.png"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label for="file_to_upload">
+          <div
+            class="editUserImage"
+            style="background-image: url('../images/cat_placeholder.png')"
+          >
+            <span class="editicon"></span>
+            <span>Edit Profile Picture</span>
+          </div>
+          <div style="position: relative">
+            <span
+              class="editicon"
+              style="background-image: url('../images/icons/edit.png')"
+            ></span>
+          </div>
+        </label>
+        <input
+          type="file"
+          name="file_to_upload"
+          class="file_to_upload"
+          style="display: none"
+          onchange="this.form.submit()"
+        />
+      </form>
     </div>
-
   </div>
 
-  
-      <!-- Menu -->
-      <div class="container px-4 align-item-center ">
-
-        <!-- Account Settings -->
-        <div class="card p-2 bg-secondary">
-          <a href="/profile/account-settings">
-            <div class="row ">
-              <div class="col-2">
-                <img
-                  src="../images/icons/Setting.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col ">Account Settings</div>
-            </div>
+    <!-- <div class="container text-center align-item-center pt-5 ">
+      <div class="p-2 pt-5">
+        <img
+          src=""
+          id="userImage"
+          alt="userImage"
+          class="p-2"
+        />
+        <div>
+          <a href="">
+            <img src="../images/icons/edit.png" id="editicon" alt="" />
+            <span>Edit Profile</span>
           </a>
         </div>
-        <br />
-
-        <!-- Filters -->
-        <div class="card p-2 bg-secondary">
-          <a href="###">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  src="../images/icons/filter.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col">Filters</div>
-            </div>
-          </a>
-        </div>
-        <br />
-
-        <!-- Saved Persona -->
-        <div class="card p-2 bg-secondary">
-          <a href="####">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  src="../images/icons/Savedpersona.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col">Saved Persona</div>
-            </div>
-          </a>
-        </div>
-        <br />
-
-        <!-- Saved Dialogue -->
-        <div class="card p-2 bg-secondary">
-          <a href="#####">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  src="../images/icons/Saveddialogue.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col">Saved Dialogue</div>
-            </div>
-          </a>
-        </div>
-        <br />
-
-        <!-- About Us -->
-        <div class="card p-2 bg-secondary">
-          <a href="######">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  src="../images/icons/AboutUs.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col ">About Us</div>
-            </div>
-          </a>
-        </div>
-        <br />
-
-        <!-- FAQ -->
-        <div class="card p-2 bg-secondary">
-          <a href="#######">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  src="../images/icons/FAQ.png"
-                  width="20px"
-                  height="20px"
-                  alt=""
-                />
-              </div>
-              <div class="col">FAQ</div>
-            </div>
-          </a>
-        </div>
-        <br />
-        <br />
-
-        <!-- Logout -->
-        <div class="text-center ">
-          <button
-            type="button"
-            class="btn"
-            onclick="window.location.href='/logout'"
-          >
-            LOGOUT
-          </button>
-        </div>
-        <br />
       </div>
     </div>
-  
-</div>
+  </label>
+  </form>
+ -->
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Menu -->
+    <div class="container px-4 align-item-center">
+      <div class="card p-2">
+        <a href="/profile/account-setting">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/Setting.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">Account Settings</div>
+          </div>
+        </a>
+      </div>
+      <div class="card p-2">
+        <a href="###">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/filter.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">Filters</div>
+          </div>
+        </a>
+      </div>
+      <div class="card p-2">
+        <a href="####">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/Savedpersona.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">Saved Persona</div>
+          </div>
+        </a>
+      </div>
+      <div class="card p-2">
+        <a href="#####">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/Saveddialogue.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">Saved Dialogue</div>
+          </div>
+        </a>
+      </div>
+      <div class="card p-2">
+        <a href="######">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/AboutUs.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">About Us</div>
+          </div>
+        </a>
+      </div>
+      <div class="card p-2">
+        <a href="#######">
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="../images/icons/FAQ.png"
+                width="20px"
+                height="20px"
+                alt=""
+              />
+            </div>
+            <div class="col">FAQ</div>
+          </div>
+        </a>
+      </div>
+      <div class="text-center pt-4">
+        <button
+          type="button"
+          class="btn btn-primary btn"
+          onclick="window.location.href='/logout'"
+        >
+          LOGOUT
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- navbar and footer -->
   <%-include ("./partials/navbar.ejs")%> <%-include ("./partials/footer.ejs") %>

@@ -23,7 +23,6 @@
   cursor: pointer;
 }
 
-
 .editUserImage:hover {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10000;

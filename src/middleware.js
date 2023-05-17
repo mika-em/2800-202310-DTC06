@@ -12,32 +12,37 @@ module.exports = (req, res, next) => {
 const navLinks = [{
         name: 'Home',
         link: '/',
+        icon: './images/invsona.png',
         upperName: 'HOME',
         description: 'Lorem ipsum dolor'
     },
     {
         name: 'Persona',
         link: '/persona',
+        icon: './images/icons/persona.png',
         upperName: 'PERSONA',
-        description: 'Lorem ipsum dolor'
+        description: 'Create a character with unique personality traits and a backstory.'
     },
     {
         name: 'Dialogue',
         link: '/dialogue',
+        icon: './images/icons/dialogue.png',
         upperName: 'DIALOGUE',
-        description: 'Lorem ipsum dolor'
+        description: 'Create a conversation between two characters.'
     },
     {
         name: 'Saved',
         link: '/saved',
+        icon: './images/icons/saved.png',
         upperName: 'SAVED',
-        description: 'Lorem ipsum dolor'
+        description: 'Save your character prompts, dialogue scripts, and unique prompts.'
     },
     {
         name: 'Profile',
         link: '/profile',
+        icon: './images/icons/profile.png',
         upperName: 'PROFILE',
-        description: 'Lorem ipsum dolor'
+        description: 'Access your profile and account settings.'
     },
 ];
 

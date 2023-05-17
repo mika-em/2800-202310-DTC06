@@ -1,6 +1,6 @@
 <!-- Logout page -->
 <!-- header -->
-<%-include ('./partials/header.ejs')%>
+<%-include ('../partials/header.ejs')%>
 
 <!-- video background -->
 <video autoplay muted loop id="background">
@@ -15,7 +15,7 @@
     <div class="container mb-5">
       <p id="slogan">Character Creation at Your Finger Tips</p>
     </div>
-    <form action="/signout" method="post">
+    <form action="/exit" method="post">
       <div class="pb-5">
         <p class="fs-1 fw-1">You have been logged out</p>
       </div>
@@ -31,4 +31,4 @@
 </div>
 
 <!-- footer -->
-<%-include ('./partials/footer.ejs')%>
+<%-include ('../partials/footer.ejs')%>

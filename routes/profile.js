@@ -11,7 +11,7 @@ router.get("/home", (req, res) => {
 
 // Profile page
 router.get("/profile", (req, res) => {
-    res.render("profile", {
+    res.render("../views/profile/profile", {
         name: req.session.user.name,
     });
 });
@@ -27,7 +27,7 @@ router.get("/profile/account-settings", async (req, res) => {
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
     console.log(securityAnswer)
-    res.render("accountSettings", {
+    res.render("../views/profile/accountSettings", {
         name: name,
         username: username,
         email: email,
@@ -81,7 +81,7 @@ router.post("/profile/account-settings", async (req, res) => {
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountSettings", {
+        res.render("../views/profile/accountSettings", {
             name: name,
             username: username,
             email: email,

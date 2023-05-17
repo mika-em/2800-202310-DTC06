@@ -17,7 +17,7 @@ router.get("/profile", (req, res) => {
 });
 
 // Account settings page
-router.get("/profile/account-setting", async (req, res) => {
+router.get("/profile/account-settings", async (req, res) => {
     const currentUser = await User.findOne({
         username: "mika"
     });
@@ -27,7 +27,7 @@ router.get("/profile/account-setting", async (req, res) => {
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
     console.log(securityAnswer)
-    res.render("accountsetting", {
+    res.render("accountSettings", {
         name: name,
         username: username,
         email: email,
@@ -38,7 +38,7 @@ router.get("/profile/account-setting", async (req, res) => {
 });
 
 // Update account settings
-router.post("/profile/account-setting", async (req, res) => {
+router.post("/profile/account-settings", async (req, res) => {
     const usernameInput = "mika"
     if (req.body.action === "Edit") {
         console.log("edit")
@@ -51,7 +51,7 @@ router.post("/profile/account-setting", async (req, res) => {
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountsetting", {
+        res.render("accountSettings", {
             name: name,
             username: username,
             email: email,
@@ -85,7 +85,7 @@ router.post("/profile/account-setting", async (req, res) => {
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountsetting", {
+        res.render("accountSettings", {
             name: name,
             username: username,
             email: email,

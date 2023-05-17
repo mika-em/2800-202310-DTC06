@@ -249,7 +249,7 @@ app.get('/profile', (req, res) => {
   });
 });
 
-app.get('/profile/account-setting', async (req, res) => {
+app.get('/profile/account-settings', async (req, res) => {
   const currentUser = await User.findOne({
     username: "mika"
   });
@@ -259,7 +259,7 @@ app.get('/profile/account-setting', async (req, res) => {
   const securityQuestion = currentUser.securityQuestion;
   const securityAnswer = currentUser.securityAnswer;
   console.log(securityAnswer)
-  res.render("accountsetting", {
+  res.render("accountSettings", {
     name: name,
     username: username,
     email: email,
@@ -269,7 +269,7 @@ app.get('/profile/account-setting', async (req, res) => {
   });
 });
 
-app.post('/profile/account-setting', async (req, res) => {
+app.post('/profile/account-settings', async (req, res) => {
   const usernameInput = "mika"
   if (req.body.action === "Edit") {
     console.log("edit")
@@ -282,7 +282,7 @@ app.post('/profile/account-setting', async (req, res) => {
     const email = currentUser.email;
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
-    res.render("accountsetting", {
+    res.render("accountSettings", {
       name: name,
       username: username,
       email: email,
@@ -316,7 +316,7 @@ app.post('/profile/account-setting', async (req, res) => {
     const email = currentUser.email;
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
-    res.render("accountsetting", {
+    res.render("accountSettings", {
       name: name,
       username: username,
       email: email,

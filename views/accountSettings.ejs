@@ -5,13 +5,13 @@
 
 <!-- header title -->
 <div class="col text-center">
-  <h1 id="title">ACCOUNT SETTINGS</h1>
+  <h1><bold>ACCOUNT SETTINGS</bold></h1>
 </div>
 </div>
 
 <!-- content -->
-
-<div class="container pt-4 px-5 invsona-bg">
+<div class=" container-fluid ">
+<div class=" pt-4 px-3">
   <form action="/profile/account-setting" method="post">
     <fieldset id="userInfoField" <% if (disabled) { %>disabled<% } %>>
       <!-- Username  -->
@@ -50,6 +50,7 @@
     <button type="submit" class="btn btn-primary" name="action" value="Edit">Edit</button>
     <button type="submit" class="btn btn-primary" name="action" value="Save">Save</button>
   </form>
+</div>
 </div>
 
 

@@ -1,13 +1,3 @@
-.invsona-bg {
-  background-image: url("../images/bg.jpg");
-  background-color: #98a6d4;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: auto;
-  width: 100%;
-  position: relative;
-}
 
 #userImage {
   width: 250px;

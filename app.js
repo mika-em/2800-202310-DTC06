@@ -1,24 +1,25 @@
 const express = require("express"); 
 const app = express();
+const path = require('path');
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration
 const middleware = require('./src/middleware'); // Middleware Configuration
 const authRoutes = require("./routes/authorization"); // includes login, signup, logout, password reset, index, and home
 const profileRoutes = require("./routes/profile"); // includes profile, account settings, and update account settings
 const persona = require("./routes/persona"); // includes persona and saved personas
-const path = require('path');
+const infoRoutes = require("./routes/info"); // includes about us, FAQ and contact us
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(sessionConfig);
-// app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(middleware);
 app.use("/", authRoutes);
 app.use("/", profileRoutes);
 app.use("/", persona);
+app.use("/", infoRoutes);
 
 // Database & Port Connection
 database.connect();

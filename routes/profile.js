@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const User = require("../models/users");
 
 // Home page
@@ -62,7 +64,8 @@ router.post("/profile/account-settings", async (req, res) => {
         const nameInput = req.body.name
         const emailInput = req.body.email
         const securityQuestionInput = req.body.securityQuestion
-        const securityAnswerInput = req.body.securityAnswer
+        const hashedSecurityAnswer = await bcrypt.hashSync(req.body.securityAnswer, saltRounds);
+        const securityAnswerInput = hashedSecurityAnswer
         await User.updateOne({
             username: req.session.user.username
         }, {

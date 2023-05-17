@@ -1,4 +1,4 @@
-<!-- Error 400- Bad request: invalid information -->
+<!-- Error 401- Bad request: incorrect username -->
 <!-- header -->
 <%-include ('../partials/header.ejs')%>
 
@@ -17,11 +17,11 @@
     </div>
 
       <div class="pb-5">
-        <p class="fs-1 fw-1">ERROR 400: <br> INVALID EMAIL/USERNAME OR PASSWORD</p>
+        <p class="fs-1 fw-1">ERROR 401: <br> INVALID EMAIL</p>
       </div>
-      <form action="/400" method="post">
-      <button type="submit" class="btn btn-primary" onclick="window.location.href='/login'">
-      RETURN TO LOGIN
+      <form action="/401" method="post">
+      <button type="submit" class="btn btn-primary"">
+      RETURN TO HOME
     </button>
     </form>
 

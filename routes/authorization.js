@@ -53,6 +53,7 @@ router.get("/login", (req, res) => {
     res.render("../views/authorization/login");
 });
 
+
 // Login route
 router.post("/loginUser", async (req, res) => {
     const {
@@ -73,7 +74,8 @@ router.post("/loginUser", async (req, res) => {
     console.log(user);
 
     if (!user) {
-        return res.status(400).send("Invalid email/username or password.");
+        return res.status(400).render("../views/error/400")
+        // return res.status(400).send("Invalid email/username or password.");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -97,9 +99,16 @@ router.post("/loginUser", async (req, res) => {
 
         })
     } else {
-        return res.status(400).send("Invalid email/username or password.");
+        return res.status(400).render("../views/error/400")
+        // return res.status(400).send("Invalid email/username or password.");
     }
 });
+
+router.post("/400", (req, res) => {
+    res.redirect("/login")
+});
+
+
 
 // Logout route
 router.get("/logout", (req, res) => {
@@ -138,8 +147,13 @@ router.post("/resetPassword", async (req, res) => {
             disabled: true,
         })
     } catch (error) {
-        return res.status(400).send("Invalid email.");
+        // return res.status(400).send("Invalid email.");
+        return res.status(401).render("../views/error/401");
     }
+});
+
+router.post('/401', (req, res) => {
+    res.redirect('/');
 });
 
 router.post('/resetPassword/verified', async (req, res) => {
@@ -184,5 +198,6 @@ router.get("/home", (req, res) => {
         name: req.session.user.name,
     });
 });
+
 
 module.exports = router;

@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 // Signup page
 router.get("/signup", (req, res) => {
-    res.render("signup");
+    res.render("../views/authorization/signup");
 });
 
 // Signup route
@@ -51,7 +51,7 @@ router.post("/signup", async (req, res) => {
 
 // Login page
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("../views/authorization/login");
 });
 
 // Login route
@@ -105,13 +105,16 @@ router.post("/loginUser", async (req, res) => {
 // Logout route
 router.get("/logout", (req, res) => {
     req.session.destroy();
+    res.render("../views/authorization/logout");
+});
+  
+router.post("/exit", (req, res) => {
     res.redirect("/");
 });
 
-
 // Reset password page
 router.get("/resetPassword", (req, res) => {
-    res.render("resetPassword", {
+    res.render("../views/authorization/resetPassword", {
         email: "",
         securityQuestion: "",
         securityAnswer: "",

@@ -1,28 +1,28 @@
-#botnav{
+#botnav {
   font-size: 10px;
   font-family: "Gugi", sans-serif;
-  background-color:white; /*#051726*/
+  background-color: white; /*#051726*/
   font-weight: bolder;
   text-decoration: none;
   /* border: 1px solid black; */
-  filter: drop-shadow(0px 0px 20px #81FFD9);
+  filter: drop-shadow(0px 0px 20px #81ffd9);
   filter: opacity(0.8);
 }
 
-
-#home{
+#home {
   align-items: center;
 }
 
-.icon{
+.icon {
   /* border: 1px solid black; */
   color: white;
 }
 
-.icon:hover{
-  background-color: #81FFD9;
+.icon:hover {
+  background-color: #81ffd9;
+  opacity: 0.8;
 }
 
-a{
+a {
   text-decoration: none;
 }

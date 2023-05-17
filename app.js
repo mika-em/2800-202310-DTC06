@@ -1,6 +1,7 @@
 const express = require("express"); 
 const app = express();
 const path = require('path');
+const app = express();
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration
 const middleware = require('./src/middleware'); // Middleware Configuration

@@ -23,6 +23,7 @@ app.use(middleware);
 app.use("/", authRoutes);
 app.use("/", profileRoutes);
 app.use("/", persona);
+app.use("/", dialogue)
 app.use("/", infoRoutes);
 app.use("/", saved);
 app.use("/", dialogue);

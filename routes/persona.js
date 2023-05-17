@@ -66,47 +66,80 @@ router.get('/persona/chat', async (req, res) => {
     });
 });
 
-async function callOpenAIAPi(userPrompt) {
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `${userPrompt}`,
-        temperature: 0,
-        max_tokens: 1000,
-    });
-    const responseData = response.data.choices[0].text;
-    console.log(responseData);
-    return responseData;
-}
-
 router.post('/persona/chat', async (req, res) => {
-    const prompt = req.body.prompt;
-    const currentUsername = req.session.user.username;
-    console.log(prompt);
+    // placeholder for db for chatPrompt/chatHistory
+    // const message = req.body.message;
+    // chatPrompt.push("You: " + message);
+    // console.log(chatPrompt);
+    // res.render("chat");
 
-    const responseData = await callOpenAIAPi(prompt);
 
-    await User.updateOne({
-        username: currentUsername
-    }, {
-        $push: {
-            personaHistory: {
-                userPrompt: prompt,
-                botResponse: responseData
-            }
-        }
-    })
-    const currentUser = await User.findOne({
-        username: req.session.user.username
+    // try {
+    //     const {
+    //         prompt
+    //     } = req.body;
+
+    //     // Make a request to the Chat Completions API endpoint
+    //     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+    //         model: 'gpt-3.5-turbo',
+    //         messages: [{
+    //             role: 'system',
+    //             content: 'You are a persona generator.'
+    //         }, {
+    //             role: 'user',
+    //             content: prompt
+    //         }],
+    //     }, {
+    //         headers: {
+    //             'Authorization': 'Bearer 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',
+    //             'Content-Type': 'application/json',
+    //         },
+    //     });
+
+        const {
+            Configuration,
+            OpenAIApi
+        } = require("openai");
+
+        const configuration = new Configuration({
+            apiKey: "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",
+        });
+        const openai = new OpenAIApi(configuration);
+
+        const completion = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [{
+                role: 'system',
+                content: 'You are a persona generator.'
+            }, {
+                role: 'user',
+                content: req.body
+            }],
+        });
+        console.log(completion.data.choices[0].message);
     });
-    const personaHistory = currentUser.personaHistory
 
-    console.log(personaHistory)
 
-    res.render("chat", { 
-        placeholderText: "Write a prompt here...",
-        personaHistory: personaHistory
-     });
-});
 
+        // Process the response and extract the generated message
+//         const {
+//             choices
+//         } = response.data;
+//         const generatedMessage = choices[0].message.content;
+
+//         res.json({
+//             message: generatedMessage
+//         });
+//     } catch (error) {
+//         console.error('Error generating persona:', error);
+//         res.status(500).json({
+//             error: 'Failed to generate persona'
+//         });
+//     }
+// });
+
+
+var chatPrompt = ["test"];
+var savedPromptParameter = ["hello", "world", "test"];
 
 module.exports = router;

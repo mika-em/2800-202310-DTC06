@@ -154,7 +154,7 @@ router.post("/resetPassword", async (req, res) => {
 });
 
 router.post('/401', (req, res) => {
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 router.post('/resetPassword/verified', async (req, res) => {
@@ -173,8 +173,13 @@ router.post('/resetPassword/verified', async (req, res) => {
             disabled: false,
         })
     } else {
-        res.send("Incorrect answer to security question.");
+        // res.send("Incorrect answer to security question.");
+        res.render("../views/error/400-1");
     }
+});
+
+router.post('/400-1', (req, res) => {
+    res.redirect('/login');
 });
 
 router.post('/', async (req, res) => {
@@ -190,9 +195,16 @@ router.post('/', async (req, res) => {
         })
         res.render('index')
     } catch (error) {
-        res.status(500).send("An error occurred while creating your account.");
+        // res.status(500).send("An error occurred while creating your account.");
+        returnres.status(500).render("../views/error/500");
     }
 });
+
+router.post('/500', (req, res) => {
+    res.redirect('/login');
+});
+
+
 
 //home page
 router.get("/home", (req, res) => {

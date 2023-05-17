@@ -237,7 +237,7 @@ app.post('/', async (req, res) => {
   }
 });
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   res.render("home", {
     name: req.session.user.name,
   });

@@ -1,13 +1,17 @@
+<!-- Accouunt Settings -->
 <!-- header and back header title page -->
 <%-include ('./partials/header.ejs')%>
 <%-include ('./partials/emptybackbar.ejs')%>
 
-<!-- content -->
+<!-- header title -->
 <div class="col text-center">
-  <h1>ACCOUNT SETTINGS</h1>
+  <h1 id="title">ACCOUNT SETTINGS</h1>
+</div>
 </div>
 
-<div class="container pt-4 px-5">
+<!-- content -->
+
+<div class="container pt-4 px-5 invsona-bg">
   <form action="/profile/account-setting" method="post">
     <fieldset id="userInfoField" <% if (disabled) { %>disabled<% } %>>
       <!-- Username  -->
@@ -40,13 +44,14 @@
         <label for="securityAnswer" class="form-label">Answer</label>
         <input type="password" class="form-control" id="securityAnswer" name="securityAnswer" value="<%= securityAnswer %>" />
       </div>
-    </fieldset>
+      </fieldset>
 
     <!-- Save button -->
     <button type="submit" class="btn btn-primary" name="action" value="Edit">Edit</button>
     <button type="submit" class="btn btn-primary" name="action" value="Save">Save</button>
   </form>
 </div>
+
 
 
 <!-- nav bar and footer -->

@@ -31,37 +31,45 @@
   </head>
 
   <body>
-    <div>
-      <div class="container text-center align-item-center pt-5">
-        <form
-          action="upload_file.png"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <label for="file_to_upload">
-            <div
-              class="editUserImage"
-              style="background-image: url('../images/cat_placeholder.png')"
-            >
-              <span class="editicon"></span>
-              <span>Edit Profile Picture</span>
-            </div>
-            <div style="position: relative">
-              <span
-                class="editicon"
-                style="background-image: url('../images/icons/edit.png')"
-              ></span>
-            </div>
-          </label>
-          <input
-            type="file"
-            name="file_to_upload"
-            class="file_to_upload"
-            style="display: none"
-            onchange="this.form.submit()"
-          />
-        </form>
-      </div>
+    <div class="container pt-4 px-5 invsona-bg">
+      <form action="/profile/account-setting" method="post">
+        <fieldset id="userInfoField" <% if (disabled) { %>disabled<% } %>>
+          <!-- Username  -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="<%= username %>" disabled />
+          </div>
+          <!-- Name  -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= name %>" />
+          </div>
+          <!-- Email  -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= email %>" />
+          </div>
+          <!-- Password 
+          <div class="mb-3 pb-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password"/>
+          </div> -->
+          <!-- Security Question  -->
+          <div class="mb-3">
+            <label for="securityQuestion" class="form-label">Security Question</label>
+            <input type="text" class="form-control" id="securityQuestion" name="securityQuestion" value="<%= securityQuestion %>" />
+          </div>
+          <!-- Security Answer  -->
+          <div class="mb-3">
+            <label for="securityAnswer" class="form-label">Answer</label>
+            <input type="password" class="form-control" id="securityAnswer" name="securityAnswer" value="<%= securityAnswer %>" />
+          </div>
+        </fieldset>
+    
+        <!-- Save button -->
+        <button type="submit" class="btn btn-primary" name="action" value="Edit">Edit</button>
+        <button type="submit" class="btn btn-primary" name="action" value="Save">Save</button>
+      </form>
     </div>
 
   </body>

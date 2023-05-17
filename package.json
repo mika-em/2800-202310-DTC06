@@ -2,10 +2,10 @@
   "name": "2800-202310-dtc06",
   "version": "1.0.0",
   "description": "This is our read me file To run the website: 1. Download the files. 2. Open index.html in your browser",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",

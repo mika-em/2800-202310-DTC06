@@ -30,7 +30,8 @@ router.post("/signup", async (req, res) => {
     } = req.body;
 
     const hashedPassword = await bcrypt.hashSync(password, saltRounds);
-
+    const hashedSecurityAnswer = await bcrypt.hashSync(securityAnswer, saltRounds);
+    
     try {
         await User.create({
             name: name,
@@ -38,7 +39,7 @@ router.post("/signup", async (req, res) => {
             email: email,
             password: hashedPassword,
             securityQuestion: securityQuestion,
-            securityAnswer: securityAnswer,
+            securityAnswer: hashedSecurityAnswer,
         });
         console.log("User created");
         res.redirect("/");
@@ -161,8 +162,9 @@ router.post('/resetPassword/verified', async (req, res) => {
         email: req.body.email
     })
     const securityAnswer = userReset.securityAnswer
-    console.log(securityAnswer)
-    if (securityAnswer === req.body.securityAnswer) {
+    const securityAnswerMatch = await bcrypt.compare(req.body.securityAnswer, securityAnswer);
+
+    if (securityAnswerMatch) {
         res.render('resetPassword', {
             email: req.body.email,
             securityQuestion: userReset.securityQuestion,

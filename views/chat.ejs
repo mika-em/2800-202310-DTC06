@@ -3,26 +3,24 @@
 
 <h1>This is the chat.</h1>
 
-<div class="container" id="chatContainer">
+<div class="container" id="chatContainer" id="chatContainer">
   <!-- Existing chat messages -->
+  <!-- <s!-- Existing chat messages -->
   <div class="row">
-    <% for (var i=0; i<personaHistory.length; i++) { %>
-    <div class="col-12" id="userInput">
-      <%- "User:" + "&nbsp;" + personaHistory[i].userPrompt %>
-    </div>
-    <div class="col-12" id="botOutput">
-      <%- "Bot:" + "&nbsp;" + personaHistory[i].botResponse %>
-    </div>
-    <% } %>
-  </div>
-</div>
+    <div class="col-12">
+      <s%- i + "&nbsp;" + locals.chatPrompt[i] %>
+      <s% } %>
+    </div> -->
+</div><br>
 
-<form action="/persona/chat" method="post" class="text-center input-container">
+<form class="text-center input-container">
   <div class="row">
     <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
     <button class="btn col-3" type="submit">Send</button>
   </div>
 </form>
+
+<script type="module" src="../models/chat.js"></script>
 
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>

@@ -205,7 +205,6 @@ router.post('/500', (req, res) => {
 });
 
 
-
 //home page
 router.get("/home", (req, res) => {
     res.render("home", {

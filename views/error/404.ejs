@@ -4,14 +4,15 @@
 <%-include ('../partials/header.ejs')%>
 
 <!-- video background -->
-<video autoplay muted loop id="background">
+<div class="bg">
+<video autoplay muted loop id="background" >
   <source src="./images/blue_bg.mp4" type="video/mp4" />
 </video>
-
+</div>
 <!-- logo -->
-<div class="container-fluid" id="login" style="padding-top: 200px;">
-  <div id="box">
-    <img id="logo"src="./images/invsona.png" alt="invsona logo" />
+<div class="container-fluid meowpointer" id="login" style="padding-top: 180px;">
+  <div id="box" onclick="secret()">
+      <img id="logo" class="special" src="./images/invsona.png" alt="invsona logo"/>
     <h1 class="pt-3" id="title">Invsona</h1>
     <div class="container mb-5">
       <p id="slogan">Character Creation at Your Finger Tips</p>
@@ -21,12 +22,12 @@
         <p class="fs-1 fw-1">ERROR 404:<br> PAGE NOT FOUND</p>
       </div>
       <form action="/404" method="post">
-      <button type="submit" class="btn btn-primary" onclick="window.location.href='/'">
+      <button type="submit" class="btn btn-primary">
       RETURN TO HOME
     </button>
     </form>
-
    </div>
+   <div id="meow"></div>
   </div>
 </div>
 

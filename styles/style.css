@@ -135,3 +135,11 @@ h1 {
   padding: 10px;
   background-color: #f2f2f2;
 }
+
+.input-container {
+  position: fixed;
+  bottom: 100px;
+  width: 100%;
+  padding: 10px;
+  background-color: #f2f2f2;
+}

@@ -87,7 +87,8 @@ router.post("/loginUser", async (req, res) => {
             email: user.email,
             password: user.password,
             securityQuestion: user.securityQuestion,
-            securityAnswer: user.securityAnswer
+            securityAnswer: user.securityAnswer,
+            personaHistory: user.personaHistory,
         };
 
         console.log(req.session.user.name)

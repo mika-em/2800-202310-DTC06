@@ -7,6 +7,35 @@
         <div class="pt-5 pb-5">
 
           <form action="/uploadImage" method="post" enctype="multipart/form-data">
+        <div class="pt-4 pb-5">
+
+          <form action="/uploadImage" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">
+              <!-- <div class="editUserImage" style="background-image: url('../images/cats/cat_placeholder.png')">  -->
+              <div class="editUserImage" style="background-image: url('/uploads/<%=user.profilePicture.fileName%>')">
+                
+                <span>Edit Profile Picture</span>
+                <div style="position: relative">
+                  <img src="../images/icons/edit.png" class="editicon" alt="">
+                </div>
+              </div>
+            </label>
+            <input type="file" name="fileToUpload" id="fileToUpload"/> 
+          </form>
+          
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+          <form action="/uploadImage" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">
               <div
                 class="editUserImage"
@@ -19,7 +48,7 @@
               </div>
             </label>
             <input type="file" name="fileToUpload" id="fileToUpload"/> 
-          </form>
+          </form> -->
 
         </div>
       </div>
@@ -29,7 +58,7 @@
 
 
       <!-- Menu -->
-      <div class="container px-3">
+      <div class="container px-4 pb-2">
 
         <!-- Account Settings -->
         <div class="card p-3 bg-secondary btn">

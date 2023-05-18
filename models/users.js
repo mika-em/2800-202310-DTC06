@@ -10,16 +10,17 @@ const userSchema = new mongoose.Schema({
     securityAnswer: String,
     personaHistory: Array,
     dialogueHistory: Array,
-    dialogueHistory: Array,
+    profilePicture: {
+        fileName: String,
+        contentType: String,
+    },
     filter: {
         default: Boolean,
         status: Boolean,
         class: Boolean,
         drop: Boolean,
         race: Boolean,
-    },
-    securityQuestion: String,
-    securityAnswer: String,
+    }
 },
     { collection: 'users' }); //this is the name of the collection in the database
 

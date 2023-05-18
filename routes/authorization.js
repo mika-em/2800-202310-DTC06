@@ -31,7 +31,8 @@ router.post("/signup", async (req, res) => {
 
     const hashedPassword = await bcrypt.hashSync(password, saltRounds);
     const hashedSecurityAnswer = await bcrypt.hashSync(securityAnswer, saltRounds);
-    
+    const fileName = "../images/cats/cat_placeholder.png";
+
     try {
         await User.create({
             name: name,
@@ -40,6 +41,10 @@ router.post("/signup", async (req, res) => {
             password: hashedPassword,
             securityQuestion: securityQuestion,
             securityAnswer: hashedSecurityAnswer,
+            profilePicture: {
+                fileName: fileName,
+                contentType: "",
+            }
         });
         console.log("User created");
         res.redirect("/");

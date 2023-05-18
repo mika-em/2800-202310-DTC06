@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     securityQuestion: String,
     securityAnswer: String,
+    personaHistory: Array,
     filter: {
         default: Boolean,
         status: Boolean,
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
     securityQuestion: String,
     securityAnswer: String,
 },
-{collection: 'users'}); //this is the name of the collection in the database
+    { collection: 'users' }); //this is the name of the collection in the database
 
 
 const usersModel = mongoose.model('User', userSchema);

@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     res.locals.savedPromptParameter = savedPromptParameter;
     res.locals.currentURL = url.parse(req.url).pathname;
     res.locals.dialogueLinks = dialogueLinks;
-
+    res.locals.dialogueFilters = dialogueFilters;
     next();
 };
 
@@ -68,16 +68,23 @@ const dialogueLinks = [{
 {
     name: 'Saved dialogues',
     link: '/persona/saved-dialogue'
-},
-// {
-//     name: 'Create a new prompt preset',
-//     link: '/persona/new-prompt'
-// },
-// {
-//     name: 'Write my own prompt',
-//     link: '/persona/chat'
-// },
+}
 ];
+
+const dialogueFilters = [{
+    name: 'Inner Dialogue',
+    link: '/dialogue/inner-dialogue'
+},
+{
+    name: 'Conversation',
+    link: '/persona/conversation'
+},
+{
+    name: 'User-Persona Chat',
+    link: '/persona/user-persona-chat'
+}
+];
+
 
 // placeholder for db for chatPrompt/chatHistory
 var chatPrompt = ["test"];

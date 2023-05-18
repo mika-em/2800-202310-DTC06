@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema(
     securityQuestion: String,
     securityAnswer: String,
     personaHistory: Array,
+    dialogueHistory: Array,
+    profilePicture: {
+        fileName: String,
+        contentType: String,
+    },
     filter: {
       default: Boolean,
       status: Boolean,

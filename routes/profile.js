@@ -8,7 +8,13 @@ let multer = require("multer");
 const { usersModel } = require("../models/users");
 const fs = require("fs");
 const path = require("path");
+const bodyParser = require("body-parser");
+let multer = require("multer");
+const { usersModel } = require("../models/users");
+const fs = require("fs");
+const path = require("path");
 
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
@@ -29,7 +35,6 @@ router.get("/home", async (req, res) => {
     profilePicture: profilePicture,
   });
 });
-
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -80,11 +85,10 @@ router.get("/profile", async (req, res) => {
     });
     console.log(currentUser.name);
     console.log(currentUser.profilePicture.fileName);
-    res.render("../views/profile/profile", { 
+    res.render("../views/profile/profile", {
       user: currentUser,
       profilePicture: currentUser.profilePicture.fileName,
     });
-
   } catch (err) {
     console.log(err);
     return res

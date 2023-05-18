@@ -9,10 +9,6 @@ const userSchema = new mongoose.Schema({
     securityQuestion: String,
     securityAnswer: String,
     personaHistory: Array,
-    profilePicture: {
-        data: Buffer,
-        contentType: String,
-    },
     filter: {
         default: Boolean,
         status: Boolean,
@@ -24,16 +20,6 @@ const userSchema = new mongoose.Schema({
     securityAnswer: String,
 },
     { collection: 'users' }); //this is the name of the collection in the database
-
-// defines the dialouge schema
-const dialogueSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    dialogueSaved: Array,
-    },
-    { collection: 'dialogue' }); //this is the name of the collection in the database
 
 
 const usersModel = mongoose.model('User', userSchema);

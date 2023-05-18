@@ -13,6 +13,30 @@ router.get('/dialogue/new', (req, res) => {
     res.render("startNewDialogue");
 });
 
+router.get('/dialogueFilters', (req, res) => {
+    res.render("dialogueFilters", {
+        output: null
+    });
+});
+
+router.get('/dialogue/inner-dialogue', (req, res) => {
+    res.render("dialogue-chat", {placeholderText: "Start an inner dialogue."});
+});
+router.get('/dialogue/conversation', (req, res) => {
+    res.render("innerDialogue");
+});
+router.get('/dialogue/user-persona-chat', (req, res) => {
+    res.render("innerDialogue");
+});
+
+router.post("/dialogue/inner-dialogue", (req, res) => {
+});
+router.post("/dialogue/inner-dialogue", (req, res) => {
+});
+router.post("/dialogue/inner-dialogue", (req, res) => {
+});
+
+
 router.post('/dialogue/new', (req, res) => {});
 
 router.get('/dialogue/saved', (req, res) => {
@@ -21,23 +45,10 @@ router.get('/dialogue/saved', (req, res) => {
 
 router.post('/dialogue/saved', (req, res) => {});
 
-//saved persona and new persona
-
-// router.get('/dialogue/pick-a-theme', (req, res) => {
-//     const button = req.body.button;
-//     const output = generateResponse(button);
-//     res.render('dialogueTheme', {
-//         output: output
-//     });
 
 
-router.get('/dialogueFilters', (req, res) => {
-    res.render("dialogueFilters", {
-        output: null
-    });
-});
 
-router.get('/generate', async (req, res) => {
+router.post('/dialogueFilters', async (req, res) => {
     const button = req.query.button;
 
     try {
@@ -104,7 +115,7 @@ async function generateResponse(button) {
 
     // Generate AI response using OpenAI API
     const response = await openai.complete({
-        engine:  // davinci, curie, babbage, ada, or davinci-instruct-beta
+        engine: `gpt-3.5-turbo`, // davinci, curie, babbage, ada, or davinci-instruct-beta
         prompt: prompt,
         max_tokens: 50, // Adjust the desired length of the response
     });

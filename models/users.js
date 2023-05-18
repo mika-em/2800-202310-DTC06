@@ -2,29 +2,33 @@ const mongoose = require("mongoose");
 
 //defines the user schema
 const userSchema = new mongoose.Schema(
-  {
-    name: String,
-    username: String,
-    password: String,
-    email: String,
-    securityQuestion: String,
-    securityAnswer: String,
-    personaHistory: Array,
-    dialogueHistory: Array,
+    {
+        name: String,
+        username: String,
+        password: String,
+        email: String,
+        securityQuestion: String,
+        securityAnswer: String,
     profilePicture: {
-      fileName: String,
-      contentType: String,
+        data: Buffer,
+        contentType: String,
     },
-    filter: {
-      default: Boolean,
-      status: Boolean,
-      class: Boolean,
-      drop: Boolean,
-      race: Boolean,
+        personaHistory: Array,
+        dialogueHistory: Array,
+        dialogueHistory: Array,
+        filter: {
+            default: Boolean,
+            status: Boolean,
+            class: Boolean,
+            drop: Boolean,
+            race: Boolean,
+        },
     },
-  },
-  { collection: "users" }
-); //this is the name of the collection in the database
+    // this is the name of the collection in the database
+    { collection: 'users' }
+);
+
+
 
 // defines the dialouge schema
 const dialogueSchema = new mongoose.Schema(

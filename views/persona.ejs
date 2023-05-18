@@ -1,14 +1,23 @@
-<!-- navbar and footer -->
+<!-- back button and footer -->
 <%-include ("./partials/header.ejs")%>
-
-<h1>This is the persona page.</h1>
-<div class="container">
-  <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-  <div class="row">
-    <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
-  </div>
-  <br>
-  <% } %>
+<%-include ("./partials/emptybackbar.ejs")%>
+<div class="col text-center">
+  <h1>PERSONA</h1>
+</div>
 </div>
 
+<!-- content -->
+<div class="container-fluid pb-5 mb-5" style="margin-bottom: auto;">
+  <div class="container py-5">
+    <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+    <div class="row pt-4">
+      <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
+    </div>
+    <br>
+    <% } %>
+  </div>
+</div>
+
+<!-- footer and navbar -->
 <%-include ("./partials/navbar.ejs")%>
+<%-include ("./partials/footer.ejs")%>

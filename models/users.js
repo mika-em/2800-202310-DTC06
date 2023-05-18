@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     email: String,
     securityQuestion: String,
     securityAnswer: String,
+    profilePicture: {
+        data: Buffer,
+        contentType: String,
+    },
     filter: {
         default: Boolean,
         status: Boolean,

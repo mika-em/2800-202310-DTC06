@@ -3,6 +3,15 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/users");
+const bodyParser = require('body-parser');
+let multer = require('multer');
+const usersModel = require("../models/users");
+const fs = require('fs');
+const path =require('path');
+
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
+
 
 // Home page
 router.get("/home", (req, res) => {
@@ -10,6 +19,65 @@ router.get("/home", (req, res) => {
         name: req.session.user.name,
     });
 });
+
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) =>{
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+const upload = multer({storage: storage});
+
+
+
+
+// Profile picture upload
+router.post('/uploadImage', upload.single('fileToUpload'), (req, res) => {
+    if(!req.file) {
+        return res.status(400).send('Error: No file selected');
+    }
+    
+    // Read the image file
+    usersModel.findOneAndUpdate(
+        {username: req.session.user.username},
+        {$set: {profilePicture: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png' //req.file.mimetype
+        }}},
+    );
+        redirect('/profile');
+    }
+);
+
+
+// Profile page
+router.get("/profile", (req, res) => {
+    usersModel.find({}).then((data, err) => {
+        if (err){ 
+            console.log(err);
+            return res.status(500).send("An error occurred while retrieving your profile.");
+        }
+    res.render("../views/profile/profile", {data});
+    });
+});
+
+
+
+
+
+//    let data = new usersModel(obj);
+//     data.save();
+   // res.redirect('/profile');
+
+
+
+
+
 
 // Profile page
 router.get("/profile", (req, res) => {

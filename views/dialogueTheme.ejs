@@ -1,0 +1,19 @@
+<%-include ("./partials/header.ejs")%>
+
+
+  <h1>AI Filter Example</h1>
+  <form action="/dialogue/pick-a-theme" method="POST">
+    <button type="submit" name="button" value="Inner Dialogue">Generate Inner Dialogue</button>
+    <button type="submit" name="button" value="Conversation">Generate Conversation</button>
+    <button type="submit" name="button" value="User-Persona Chat">Generate User-Persona Chat</button>
+  </form>
+  <% if (output) { %>
+    <h2>Generated Output:</h2>
+    <p><%= output %></p>
+  <% } %>
+
+
+<!-- navbar and footer -->
+<%-include ("./partials/navbar.ejs")%>
+<%-include ("./partials/footer.ejs")%>
+

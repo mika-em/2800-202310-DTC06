@@ -17,9 +17,9 @@ router.get("/profile", (req, res) => {
 });
 
 // Account settings page
-router.get("/profile/account-setting", async (req, res) => {
+router.get("/profile/account-settings", async (req, res) => {
     const currentUser = await User.findOne({
-        username: "mika"
+        username: req.session.user.username
     });
     const name = currentUser.name;
     const username = currentUser.username;
@@ -27,7 +27,7 @@ router.get("/profile/account-setting", async (req, res) => {
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
     console.log(securityAnswer)
-    res.render("accountsetting", {
+    res.render("accountSettings", {
         name: name,
         username: username,
         email: email,
@@ -38,20 +38,18 @@ router.get("/profile/account-setting", async (req, res) => {
 });
 
 // Update account settings
-router.post("/profile/account-setting", async (req, res) => {
-    const usernameInput = "mika"
+router.post("/profile/account-settings", async (req, res) => {
     if (req.body.action === "Edit") {
         console.log("edit")
-        console.log(usernameInput)
         const currentUser = await User.findOne({
-            username: usernameInput
+            username: req.session.user.username
         });
         const name = currentUser.name;
         const username = currentUser.username;
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountsetting", {
+        res.render("accountSettings", {
             name: name,
             username: username,
             email: email,
@@ -65,10 +63,8 @@ router.post("/profile/account-setting", async (req, res) => {
         const emailInput = req.body.email
         const securityQuestionInput = req.body.securityQuestion
         const securityAnswerInput = req.body.securityAnswer
-        console.log(nameInput)
-        console.log(usernameInput)
         await User.updateOne({
-            username: usernameInput
+            username: req.session.user.username
         }, {
             $set: {
                 name: nameInput,
@@ -78,14 +74,14 @@ router.post("/profile/account-setting", async (req, res) => {
             }
         })
         const currentUser = await User.findOne({
-            username: usernameInput
+            username: req.session.user.username
         });
         const name = currentUser.name;
         const username = currentUser.username;
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountsetting", {
+        res.render("accountSettings", {
             name: name,
             username: username,
             email: email,

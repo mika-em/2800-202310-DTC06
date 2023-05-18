@@ -3,22 +3,24 @@
 
 <h1>This is the chat.</h1>
 
-<div class="container">
-  <% for (var i=0; i<locals.chatPrompt.length; i++) { %>
+<div class="container" id="chatContainer">
+  <!-- Existing chat messages -->
+  <!-- <s% for (var i=0; i<locals.chatPrompt.length; i++) { %>
   <div class="row">
     <div class="col-12">
-      <%- i + "&nbsp;" + locals.chatPrompt[i] %>
-      <% } %>
-    </div>
+      <s%- i + "&nbsp;" + locals.chatPrompt[i] %>
+      <s% } %>
+    </div> -->
+</div><br>
+
+<form class="text-center input-container">
+  <div class="row">
+    <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
+    <button class="btn col-3" type="submit">Send</button>
   </div>
-  <br>
-  <form action="/persona/chat" method="post" class="text-center">
-    <div class="row">
-      <input class="form-control col" type="text" name="message" placeholder="Send a message" />
-      <button class="btn col-3" type="submit">Send</button>
-    </div>
-  </form>
-</div>
+</form>
+
+<script type="module" src="../models/chat.js"></script>
 
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>

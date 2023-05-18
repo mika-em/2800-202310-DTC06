@@ -1,0 +1,19 @@
+<!-- navbar and footer -->
+<%-include ("./partials/header.ejs")%>
+
+<h1>This is the Dialogue Filters Page.</h1>
+<div class="container">
+    <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+    <div class="row">
+        <button type="submit" name="button" value="Inner Dialogue" class="py-5 btn btn-secondary">>Generate Inner
+            Dialogue</button>
+        <button type="submit" name="button" value="Conversation" class="py-5 btn btn-secondary">Generate
+            Conversation</button>
+        <button type="submit" name="button" value="User-Persona Chat" class="py-5 btn btn-secondary">Generate
+            User-Persona Chat</button>
+    </div>
+    <br>
+    <% } %>
+</div>
+
+<%-include ("./partials/navbar.ejs")%>

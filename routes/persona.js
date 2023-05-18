@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const dotenv = require("dotenv");
-const { Configuration, OpenAIApi } = require("openai");
-const rateLimit = require("express-rate-limit");
-const cors = require("cors");
+const dotenv = require('dotenv');
+const User = require("../models/users");
+const { Configuration, OpenAIApi } = require('openai');
 
 dotenv.config();
 
@@ -12,23 +11,6 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
-// const response = await openai.listEngines();
-
-router.use(express.json());
-router.use(cors());
-const dotenv = require("dotenv");
-const User = require("../models/users");
-const { Configuration, OpenAIApi } = require("openai");
-
-dotenv.config();
-
-const configuration = new Configuration({
-  organization: "org-wZOT14YD6omEzAgdgaFU5gz3",
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const promptCache = {};
 const openai = new OpenAIApi(configuration);
 
 router.get("/persona", (req, res) => {
@@ -76,84 +58,59 @@ router.post("/persona/new-prompt", (req, res) => {
   res.render("./persona/newPrompt");
 });
 
-router.get("/persona/chat", (req, res) => {
-  // placeholder for db for chatPrompt/chatHistory
-  // console.log(chatPrompt);
-  res.render("chat", { placeholderText: "Write a prompt here..." });
+router.get('/persona/chat', async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const personaHistory = currentUser.personaHistory
+
+    res.render("chat", {
+        placeholderText: "Write a prompt here...",
+        personaHistory: personaHistory
+    });
 });
 
-// Rate limiting configuration
-const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 3500, // 5 requests per minute
-});
+async function callOpenAIAPi(userPrompt) {
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `${userPrompt}`,
+        temperature: 0,
+        max_tokens: 1000,
+    });
+    const responseData = response.data.choices[0].text;
+    console.log(responseData);
+    return responseData;
+}
 
-// debounce mechanism to prevent too many API calls
-let typingTimeout;
-let tokensUsed = 0;
-const maxTokensPerRequest = 10;
-
-router.post("/persona/chat", limiter, async (req, res) => {
-  try {
+router.post('/persona/chat', async (req, res) => {
     const prompt = req.body.prompt;
+    const currentUsername = req.session.user.username;
+    console.log(prompt);
 
-    clearTimeout(typingTimeout); // clear the timeout on every request
+    const responseData = await callOpenAIAPi(prompt);
 
-    // check if the response is available in the cache
-    if (prompt in promptCache) {
-      console.log("Response from cache");
-      res.status(200).send({
-        bot: promptCache[prompt],
-      });
-    } else {
-      // Check if the remaining tokens can accommodate the request
-      const remainingTokens = 90000 - tokensUsed;
-      const tokensNeeded = prompt.length + maxTokensPerRequest;
-      if (tokensNeeded > remainingTokens) {
-        console.error("Token limit exceeded");
-        res
-          .status(429)
-          .send({ error: "Token limit exceeded. Please try again later." });
-        return;
-      }
-
-      typingTimeout = setTimeout(async () => {
-        // wait for 500ms of inactivity before making the API call
-        try {
-          const response = await openai.createCompletion({
-            model: "gpt-3.5-turbo",
-            prompt: `${prompt}`,
-            temperature: 0.5,
-            // max_tokens: 64,
-            // top_p: 1,
-            // frequency_penalty: 0.5,
-            // presence_penalty: 0.5,
-          });
-
-          const botResponse = response.data.choices[0].text;
-
-          // store the response in the cache
-          promptCache[prompt] = botResponse;
-
-          console.log("Response from API");
-          res.status(200).send({
-            bot: botResponse,
-          });
-          // Update the tokens used count
-          tokensUsed += prompt.length + botResponse.length;
-        } catch (error) {
-          console.log("Error from OpenAI API", error);
-          res.status(500).send({ error: "Failed to generate bot response" });
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            personaHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
         }
-      }, 500);
-    }
-  } catch (error) {
-    console.log("Internal Server Error", error);
-    res.status(500).send({ error });
-  }
+    })
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const personaHistory = currentUser.personaHistory
+
+    console.log(personaHistory)
+
+    res.render("chat", { 
+        placeholderText: "Write a prompt here...",
+        personaHistory: personaHistory
+     });
 });
 
-// var chatPrompt = ["test"];
-// var savedPromptParameter = ["hello", "world", "test"];
 
 module.exports = router;

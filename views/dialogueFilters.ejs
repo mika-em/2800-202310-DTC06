@@ -1,19 +1,21 @@
 <!-- navbar and footer -->
 <%-include ("./partials/header.ejs")%>
 
-<h1>This is the Dialogue Filters Page.</h1>
+<h1>This is the dialogue filters</h1>
+<form action="/dialogueFilters" method="POST"></form>
 <div class="container">
-    <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+    <% for (var i=0; i<locals.dialogueFilters.length; i++) { %>
     <div class="row">
-        <button type="submit" name="button" value="Inner Dialogue" class="py-5 btn btn-secondary">>Generate Inner
-            Dialogue</button>
-        <button type="submit" name="button" value="Conversation" class="py-5 btn btn-secondary">Generate
-            Conversation</button>
-        <button type="submit" name="button" value="User-Persona Chat" class="py-5 btn btn-secondary">Generate
-            User-Persona Chat</button>
+        <a class="py-5 btn btn-secondary"
+            href="<%- locals.dialogueFilters[i].link %>"><%- locals.dialogueFilters[i].name %></a>
     </div>
     <br>
     <% } %>
 </div>
+<% if (output) { %>
+<h2>Generated Output:</h2>
+<p><%= output %></p>
+<% } %>
 
+<%-include ("./partials/navbar.ejs")%>
 <%-include ("./partials/navbar.ejs")%>

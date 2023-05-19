@@ -1,0 +1,53 @@
+<!-- GENERAL CONTENT -->
+<!-- header and back header -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs") %>
+
+<!-- title -->
+<div class="col text-center">
+    <h1>Want to chat with a persona?</h1>
+</div>
+</div>
+</div>
+
+<!-- content -->
+<div class="container-fluid" style="padding-top: 150px;">
+    <div class="row">
+        <form action="/dialogue/chat" method="post" class="text-center">
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <label class="card-title">Persona Description</label><br />
+                        <input class="form-control" type="text" name="persona"
+                            placeholder="Enter a description of a persona" />
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="col-12">
+    <div class="card text-center">
+        <div class="card-body">
+            <label class="card-title">Situation</label><br />
+            <input class="form-control" type="text" name="situation"
+                placeholder="Enter the situation the persona facing right now?" />
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <div class="card text-center">
+        <div class="card-body">
+            <label class="card-title">Setting</label><br />
+            <input class="form-control" type="text" name="plot" placeholder="Enter setting the persona is in" />
+        </div>
+    </div>
+</div>
+<br />
+<button class="btn" type="submit">Send</button>
+</form>
+</div>
+</div>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

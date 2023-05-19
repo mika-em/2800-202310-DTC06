@@ -43,22 +43,108 @@ router.get('/dialogueFilters', (req, res) => {
     });
 });
 
-router.get('/dialogue/inner-dialogue', async (req, res) => {
-    const currentUser = await User.findOne({
-        username: req.session.user.username
-    });
-    const dialogueHistory = currentUser.dialogueHistory;
+// router.get('/dialogue/inner-dialogue', async (req, res) => {
+//     const currentUser = await User.findOne({
+//         username: req.session.user.username
+//     });
+//     const dialogueHistory = currentUser.dialogueHistory;
 
-    res.render("/dialogue/dialogueChat", {
-        placeholderText: "Write a prompt here...",
-        dialogueHistory: dialogueHistory
+//     res.render("/dialogue/dialogueChat", {
+//         placeholderText: "Write a prompt here...",
+//         dialogueHistory: dialogueHistory
+//     });
+// });
+
+// async function callOpenAIAPi(userPrompt, persona) {
+//     const response = await openai.createCompletion({
+//         model: "text-davinci-003",
+//         prompt: `${persona}\n${userPrompt}`,
+//         temperature: 0,
+//         max_tokens: 1000,
+//     });
+//     const responseData = response.data.choices[0].text;
+//     console.log(responseData);
+//     return responseData;
+// }
+
+// router.post('/dialogue/inner-dialogue', async (req, res) => {
+//     try {
+//         const prompt = req.body.prompt;
+//         const currentUsername = req.session.user.username;
+//         console.log(prompt);
+
+//         const currentUser = await User.findOne({
+//             username: currentUsername
+//         });
+
+//         const responseData = await callOpenAIAPi(prompt);
+
+//         currentUser.dialogueHistory.push({
+//             userPrompt: prompt,
+//             botResponse: responseData
+//         });
+//         await currentUser.save();
+
+//         const updatedUser = await User.findOne({
+//             username: currentUsername
+//         });
+//         const dialogueHistory = updatedUser.dialogueHistory;
+
+//         console.log(dialogueHistory);
+
+//         res.render("dialogueChat", {
+//             placeholderText: "Write a prompt here...",
+//             dialogueHistory: dialogueHistory
+//         });
+//     } catch (error) {
+//         console.error(error);
+//         // Handle the error and send an appropriate response
+//         res.status(500).send("An error occurred");
+//     }
+// });
+
+
+
+// inner dialogue
+
+router.get('/dialogue/inner-dialogue', (req, res) => {
+    // console.log(chatPrompt)
+    res.render("./dialogue/innerDialogue");
+});
+
+router.post('/dialogue/inner-dialogue', (req, res) => {
+    const persona = req.body.persona || "random";
+    const situation = req.body.situation || "random";
+    const plot = req.body.plot || "random";
+
+    const message = `Generate an inner dialogue of a character who is ${persona}, and is in a ${plot} setting where they are faced with ${situation}.`;
+    chatPrompt.push("You: " + message);
+    chatPrompt.push("hello");
+    //console.log(chatPrompt)
+
+    // placeholder for db for chatPrompt/chatHistory
+    res.redirect('/dialogue/chat', {
+        placeholderText: "Write a prompt here..."
     });
 });
 
-async function callOpenAIAPi(userPrompt, persona) {
+router.get('/dialogue/chat', async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const innerDialogueHistory = Object.values(currentUser.innerDialogueHistory);
+
+    res.render("dialogue/dialogueChat", {
+        placeholderText: "Write a prompt here...",
+        innerDialogueHistory: innerDialogueHistory
+    });
+});
+
+
+async function callOpenAIAPi(userPrompt) {
     const response = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `${persona}\n${userPrompt}`,
+        prompt: `${userPrompt}`,
         temperature: 0,
         max_tokens: 1000,
     });
@@ -67,41 +153,95 @@ async function callOpenAIAPi(userPrompt, persona) {
     return responseData;
 }
 
-router.post('/dialogue/inner-dialogue', async (req, res) => {
-    try {
-        const prompt = req.body.prompt;
-        const currentUsername = req.session.user.username;
-        console.log(prompt);
+router.post('/dialogue/chat', async (req, res) => {
+    const prompt = req.body.prompt;
+    const currentUsername = req.session.user.username;
+    console.log(prompt);
 
-        const currentUser = await User.findOne({
+    const responseData = await callOpenAIAPi(prompt);
+
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            innerDialogueHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
+        }
+    });
+
+    const currentUser = await User.findOne({
             username: currentUsername
-        });
+        })
+        .lean()
+        .exec();
+    const innerDialogueHistory = Object.values(currentUser.innerDialogueHistory);
 
-        const responseData = await callOpenAIAPi(prompt);
+    console.log(innerDialogueHistory);
 
-        currentUser.dialogueHistory.push({
-            userPrompt: prompt,
-            botResponse: responseData
-        });
-        await currentUser.save();
-
-        const updatedUser = await User.findOne({
-            username: currentUsername
-        });
-        const dialogueHistory = updatedUser.dialogueHistory;
-
-        console.log(dialogueHistory);
-
-        res.render("dialogueChat", {
-            placeholderText: "Write a prompt here...",
-            dialogueHistory: dialogueHistory
-        });
-    } catch (error) {
-        console.error(error);
-        // Handle the error and send an appropriate response
-        res.status(500).send("An error occurred");
-    }
+    res.render("dialogue/dialogueChat", {
+        placeholderText: "Write a prompt here...",
+        innerDialogueHistory: innerDialogueHistory
+    });
 });
+
+
+
+router.get('/dialogue/inner-dialogue', (req, res) => {
+    // console.log(chatPrompt)
+    res.render("./dialogue/innerDialogue");
+});
+
+router.post('/dialogue/inner-dialogue', (req, res) => {
+    const persona = req.body.persona || "random";
+    const situation = req.body.situation || "random";
+    const plot = req.body.plot || "random";
+
+    const message = `Generate an inner dialogue of a character who is ${persona}, and is in a ${plot} setting where they are faced with ${situation}.`;
+    chatPrompt.push("You: " + message);
+    chatPrompt.push("hello");
+    //console.log(chatPrompt)
+
+    // placeholder for db for chatPrompt/chatHistory
+    res.redirect('/dialogue/chat', {
+        placeholderText: "Write a prompt here..."
+    });
+});
+
+router.get('/dialogue/chat', async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const innerDialogueHistory = Object.values(currentUser.innerDialogueHistory);
+
+    res.render("dialogue/dialogueChat", {
+        placeholderText: "Write a prompt here...",
+        innerDialogueHistory: innerDialogueHistory
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 router.get('/dialogue/saved-dialogue', async (req, res) => {

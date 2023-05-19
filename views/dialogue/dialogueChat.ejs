@@ -1,40 +1,30 @@
 <!-- header -->
-<%- include("../partials/header.ejs") %>
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs") %>
 
-<h1>This is the dialogue generator.</h1>
+<h1>This is the dialogue generator</h1>
 
-<div class="container" id="chatContainer">
-    <!-- Existing chat messages -->
-    <div class="row">
-        <% for (var i = 0; i < dialogueHistory.length; i++) { %>
-        <!-- <s% if (dialogueHistory[i].sessionId === sessionId) { %> -->
-        <!-- Filter by session ID -->
-        <div class="col-12 user-input">
-            User: <%= dialogueHistory[i].userPrompt %>
-        </div>
-        <div class="col-12 bot-output">
-            Bot: <%= dialogueHistory[i].botResponse %>
-            <% if (dialogueHistory[i].isSaved) { %>
-            <span id="savedIndicator-<%= i %>" class="saved-indicator">(Saved)</span>
-            <% } else { %>
-            <button class="btn save-response-button"
-                onclick="saveBotResponse('<%= dialogueHistory[i].botResponse %>', `<%= i %>`)">Save Response</button>
-
-            <% } %>
-        </div>
-        <% } %>
+<div class="container" id="chatContainer" id="chatContainer">
+  <!-- Existing chat messages -->
+  <div class="row">
+    <% for (var i=0; i<innerDialogueHistory.length; i++) { %>
+    <div class="col-12" id="userInput">
+      <%- "User:" + "&nbsp;" + innerDialogueHistory[i].userPrompt %>
     </div>
+    <div class="col-12" id="botOutput">
+      <%- "Bot:" + "&nbsp;" + innerDialogueHistory[i].botResponse %>
+    </div>
+    <% } %>
+  </div>
 </div>
 
-
-<form action="/dialogue/inner-dialogue" method="post" class="text-center input-container">
-    <div class="row">
-        <input class="form-control col" rows="1" cols="1" type="text" name="prompt"
-            placeholder="<%= placeholderText %>" />
-        <button class="btn col-3" type="submit">Send</button>
-    </div>
+<form action="/dialogue/chat" method="post" class="text-center input-container">
+  <div class="row">
+    <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
+    <button class="btn col-3" type="submit">Send</button>
+  </div>
 </form>
 
 <!-- navbar and footer -->
-<%- include("../partials/navbar.ejs") %>
-<%- include("../partials/footer.ejs") %>
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

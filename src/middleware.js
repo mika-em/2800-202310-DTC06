@@ -68,7 +68,7 @@ const personaLinks = [{
 
 const dialogueLinks = [{
     name: 'Start a new dialogue',
-    link: '/dialogue/new'
+    link: '/dialogueFilters'
 },
 {
     name: 'Saved dialogues',

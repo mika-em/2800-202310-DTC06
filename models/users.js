@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     securityAnswer: String,
     personaHistory: Array,
     dialogueHistory: Array,
-    dialogueHistory: Array,
+    innerDialogueHistory: Array,
     filter: {
         default: Boolean,
         status: Boolean,

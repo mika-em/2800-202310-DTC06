@@ -81,47 +81,16 @@ router.get('/persona/saved-prompt', (req, res) => {
     res.render("./persona/savedPrompt");
 });
 
-// New Prompt Parameters
-router.get("/persona/new-prompt", (req, res) => {
-  res.render("./persona/newPrompt", { newParameter: newParameter });
+router.get('/persona/new-prompt', (req, res) => {
+    res.render("./persona/newPrompt");
 });
 
-router.post("/persona/new-prompt", (req, res) => {
-  const parameter = req.body.parameter;
-  newParameter.push(parameter);
-  console.log(newParameter);
-  res.render("./persona/newPrompt", { newParameter: newParameter });
-});
-
-router.post("/persona/new-prompt/delete", (req, res) => {
-  const { index } = req.body;
-  if (index >= 0 && index < newParameter.length) {
-    newParameter.splice(index, 1);
-    console.log(newParameter);
-    res.render("./persona/newPrompt", { newParameter: newParameter });
-  } else {
-    res.status(400).send("Invalid index"); // Send an error response to the client
-  }
-});
-
-router.post("/persona/new-prompt/saved", async (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  const parameterSet = newParameter;
-  const date = new Date();
-
-  const currentUser = await User.findOne({
-    username: req.session.user.username,
-  });
-
-  await Parameter.create({
-    userId: currentUser._id,
-    title: title,
-    description: description,
-    parameterSet: parameterSet,
-    date: date,
-  });
-  res.render("./persona/newPrompt", { newParameter: newParameter });
+router.post('/persona/new-prompt', (req, res) => {
+    // placeholder for db for chatPrompt/chatHistory
+    const parameter = req.body.parameter;
+    savedPromptParameter.push(parameter);
+    console.log(savedPromptParameter);
+    res.render("./persona/newPrompt");
 });
 
 router.get("/persona/chat", async (req, res) => {

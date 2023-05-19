@@ -7,17 +7,17 @@ body {
 }
 
 .invsona-bg {
-  background: url("../images/bg.jpg") no-repeat center top fixed;
+  background: url("../images/background/bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 
 .persona-bg{
-  background: url("../images/persona_bg.jpg") no-repeat center top fixed;
+  background: url("../images/background/persona_bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 
 .dialogue-bg{
-  background: url("../images/dialogue_bg.jpg") no-repeat center top fixed;
+  background: url("../images/background/dialogue_bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 

@@ -42,16 +42,16 @@ router.get('/persona/saved-prompt', (req, res) => {
     res.render("./persona/savedPrompt");
 });
 
-router.get("/persona/new-prompt", (req, res) => {
-  res.render("newPrompt");
+router.get('/persona/new-prompt', (req, res) => {
+    res.render("./persona/newPrompt");
 });
 
-router.post("/persona/new-prompt", (req, res) => {
-  // placeholder for db for chatPrompt/chatHistory
-  const parameter = req.body.parameter;
-  savedPromptParameter.push(parameter);
-  console.log(savedPromptParameter);
-  res.render("newPrompt");
+router.post('/persona/new-prompt', (req, res) => {
+    // placeholder for db for chatPrompt/chatHistory
+    const parameter = req.body.parameter;
+    savedPromptParameter.push(parameter);
+    console.log(savedPromptParameter);
+    res.render("./persona/newPrompt");
 });
 
 router.get('/persona/chat', async (req, res) => {

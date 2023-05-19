@@ -29,10 +29,10 @@ router.post("/persona/general-prompt", (req, res) => {
   const situation = req.body.plot || "random";
   const plot = req.body.plot || "random";
 
-  const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
-  chatPrompt.push("You: " + message);
-  chatPrompt.push("hello");
-  console.log(chatPrompt);
+    const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
+    chatPrompt.push("You: " + message);
+    chatPrompt.push("hello");
+    //console.log(chatPrompt)
 
   // placeholder for db for chatPrompt/chatHistory
   res.redirect("/persona/chat", { placeholderText: "Write a prompt here..." });

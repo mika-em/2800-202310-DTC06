@@ -1,9 +1,17 @@
-<!-- header -->
-<%-include ("./partials/header-internal.ejs")%>
+<!-- GENERAL CONTENT -->
+<!-- header and back header -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs") %>
+
+<!-- title -->
+<div class="col text-center">
+  <h1>GENERAL PROMPT</h1>
+</div>
+</div> 
+</div>
 
 <!-- content -->
-<h1>General prompt page</h1>
-<div class="container">
+<div class="container-fluid" style="padding-top: 150px;">
   <div class="row">
     <form action="/persona/chat" method="post" class="text-center">
       <div class="col-12">
@@ -71,12 +79,12 @@
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
       <button class="btn" type="submit">Send</button>
     </form>
   </div>
 </div>
 
 <!-- navbar and footer -->
-<%-include ("./partials/navbar.ejs")%>
-<%-include ("./partials/footer.ejs")%>
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

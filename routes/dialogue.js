@@ -3,8 +3,6 @@ const router = express.Router();
 const openai = require('openai');
 const User = require("../models/users").usersModel;
 
-
-
 openai.apiKey = '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'
 
 router.get('/dialogue', (req, res) => {

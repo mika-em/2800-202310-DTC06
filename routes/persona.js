@@ -77,27 +77,8 @@ router.post("/persona/chat/general", async (req, res) => {
   });
 });
 
-// Saved Prompt Parameters
-router.get("/persona/saved-prompt", async (req, res) => {
-  const currentUser = await User.findOne({
-    username: req.session.user.username,
-  });
-  const userID = currentUser._id;
-router.get("/persona/saved-prompt", async (req, res) => {
-  const currentUser = await User.findOne({
-    username: req.session.user.username,
-  });
-  const userID = currentUser._id;
-
-  const savedPromptParameter = await Parameter.find({
-    userId: userID,
-  });
-
-  console.log(savedPromptParameter);
-  console.log(savedPromptParameter[0].parameterSet[0]);
-  res.render("./persona/savedPrompt", {
-    savedPromptParameter: savedPromptParameter,
-  });
+router.get('/persona/saved-prompt', (req, res) => {
+    res.render("./persona/savedPrompt");
 });
 
 // New Prompt Parameters

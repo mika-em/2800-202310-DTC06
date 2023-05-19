@@ -1,0 +1,38 @@
+<!-- header -->
+<%- include("./partials/header.ejs") %>
+
+<h1>This is the dialogue generator.</h1>
+
+<div class="container" id="chatContainer">
+    <!-- Existing chat messages -->
+    <div class="row">
+        <% for (var i = 0; i < dialogueHistory.length; i++) { %>
+        <% if (dialogueHistory[i].sessionId === sessionId) { %>
+        <!-- Filter by session ID -->
+        <div class="col-12" id="userInput">
+            <%= "User:" + "&nbsp;" + dialogueHistory[i].userPrompt %>
+        </div>
+        <div class="col-12" id="botOutput">
+            <%= "Bot:" + "&nbsp;" + dialogueHistory[i].botResponse %>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+</div>
+
+<form action="/dialogue/inner-dialogue" method="post" class="text-center input-container">
+    <div class="row">
+        <input class="form-control col" rows="1" cols="1" type="text" name="prompt"
+            placeholder="<%= placeholderText %>" />
+
+        <!-- Add a field for persona description -->
+        <input class="form-control col" rows="1" cols="1" type="text" name="persona"
+            placeholder="Enter persona description" />
+
+        <button class="btn col-3" type="submit">Send</button>
+    </div>
+</form>
+
+<!-- navbar and footer -->
+<%- include("./partials/navbar.ejs") %>
+<%- include("./partials/footer.ejs") %>

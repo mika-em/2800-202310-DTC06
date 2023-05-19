@@ -31,12 +31,17 @@ const dialogueSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    dialogue: {
-        type: String,
-        required: true
+    dialogueSaved: Array,
     },
-    });
+    { collection: 'dialogue' }); //this is the name of the collection in the database
+
 
 const usersModel = mongoose.model('User', userSchema);
 
-module.exports = usersModel;
+const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
+
+module.exports = {
+    usersModel,
+    dialogueModel
+};
+

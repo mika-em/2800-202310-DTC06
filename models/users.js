@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema(
         securityAnswer: String,
         personaHistory: Array,
         dialogueHistory: Array,
-        dialogueHistory: Array,
+        innerDialogueHistory: Array,
+    userPersonaChatHistory: Array,
         filter: {
             default: Boolean,
             status: Boolean,
@@ -32,9 +33,14 @@ const dialogueSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    dialogueSaved: Array,
-},
-    { collection: 'dialogue' }); //this is the name of the collection in the database
+    dialogueSaved: [
+        {
+            userPrompt: String,
+            botResponse: String
+        }
+    ]
+}, { collection: 'dialogue' });
+//this is the name of the collection in the database
 
 
 const usersModel = mongoose.model('User', userSchema);

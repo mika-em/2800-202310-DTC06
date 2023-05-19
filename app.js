@@ -1,5 +1,6 @@
 const express = require("express"); 
 const app = express();
+const $ = require('jquery');
 const path = require('path');
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration
@@ -9,6 +10,7 @@ const profileRoutes = require("./routes/profile"); // includes profile, account 
 const persona = require("./routes/persona"); // includes persona and saved personas
 const infoRoutes = require("./routes/info"); // includes about us, FAQ and contact us
 const saved = require("./routes/saved"); // includes saved personas, dialogues, and filters
+// const persona = require("./routes/persona"); // includes persona and saved persona
 const dialogue = require("./routes/dialogue"); // includes dialogue and saved dialogue
 
 
@@ -16,6 +18,8 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(sessionConfig);
+app.use(express.static('public'));
+
 
 // Routes
 app.use(middleware);
@@ -35,7 +39,7 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 // Serve CSS files from the "public/css" directory
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
+
 
 // Serve JS files from the "public/js" directory
 app.use(express.static(__dirname + "/"));

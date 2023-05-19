@@ -215,11 +215,20 @@ router.post('/500', (req, res) => {
 
 
 //home page
-router.get("/home", (req, res) => {
-    res.render("home", {
-        name: req.session.user.name,
-    });
-});
+router.get("/home", async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username,
+      });
+      console.log(currentUser);
+      console.log('helloworld')
+      console.log(currentUser.name)
+      console.log(currentUser.profilePicture.fileName)
 
+      res.render("home", { 
+        name: currentUser.name,
+        profilePicture: currentUser.profilePicture.fileName,
+      });
+  });
+  
 
 module.exports = router;

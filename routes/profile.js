@@ -13,11 +13,23 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // Home page
-router.get("/home", (req, res) => {
+router.get("/home", async (req, res) => {
+  const currentUser = await usersModel.findOne({
+    username: req.session.user.username,
+  });
+  console.log(currentUser);
+  console.log(currentUser.name);
+  console.log(currentUser.profilePicture.fileName);
+
+  const name = currentUser.name;
+  const profilePicture = currentUser.profilePicture.fileName;
+
   res.render("home", {
-    name: req.session.user.name,
+    name: name,
+    profilePicture: profilePicture,
   });
 });
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -66,7 +78,13 @@ router.get("/profile", async (req, res) => {
     const currentUser = await usersModel.findOne({
       username: req.session.user.username,
     });
-    res.render("../views/profile/profile", { user: currentUser });
+    console.log(currentUser.name);
+    console.log(currentUser.profilePicture.fileName);
+    res.render("../views/profile/profile", { 
+      user: currentUser,
+      profilePicture: currentUser.profilePicture.fileName,
+    });
+
   } catch (err) {
     console.log(err);
     return res
@@ -78,7 +96,7 @@ router.get("/profile", async (req, res) => {
 // Account settings page
 router.get("/profile/account-settings", async (req, res) => {
   try {
-    const currentUser = await User.findOne({
+    const currentUser = await usersModel.findOne({
       username: req.session.user.username,
     });
     const name = currentUser.name;
@@ -107,7 +125,7 @@ router.get("/profile/account-settings", async (req, res) => {
 router.post("/profile/account-settings", async (req, res) => {
   if (req.body.action === "Edit") {
     console.log("edit");
-    const currentUser = await User.findOne({
+    const currentUser = await usersModel.findOne({
       username: req.session.user.username,
     });
     const name = currentUser.name;
@@ -133,7 +151,7 @@ router.post("/profile/account-settings", async (req, res) => {
       saltRounds
     );
     const securityAnswerInput = hashedSecurityAnswer;
-    await User.updateOne(
+    await usersModel.updateOne(
       {
         username: req.session.user.username,
       },
@@ -146,7 +164,7 @@ router.post("/profile/account-settings", async (req, res) => {
         },
       }
     );
-    const currentUser = await User.findOne({
+    const currentUser = await usersModel.findOne({
       username: req.session.user.username,
     });
     const name = currentUser.name;

@@ -2,17 +2,13 @@
 <!-- header -->
 <%-include ('../partials/header-internal.ejs')%>
 
-<div class="container-fluid">
-      <div class="container text-center align-item-center pt-5" id="decor_user">
-        <div class="pt-5 pb-5">
-
-          <form action="/uploadImage" method="post" enctype="multipart/form-data">
+<div class="container-fluid pt-5">
+      <div class="container text-center align-item-center " id="decor_user">
         <div class="pt-4 pb-5">
-
           <form action="/uploadImage" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">
               <!-- <div class="editUserImage" style="background-image: url('../images/cats/cat_placeholder.png')">  -->
-              <div class="editUserImage" style="background-image: url('/uploads/<%=user.profilePicture.fileName%>')">
+              <div class="editUserImage" style="background-image: url('../uploads/<%-profilePicture%>')">
                 
                 <span>Edit Profile Picture</span>
                 <div style="position: relative">

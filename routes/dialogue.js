@@ -6,7 +6,7 @@ const User = require("../models/users").usersModel;
 openai.apiKey = process.env.OPEN_AI_API_KEY
 
 router.get('/dialogue', (req, res) => {
-    res.render("/dialogue/dialogueHome");
+    res.render("./dialogue/dialogueHome");
 });
 
 // router.get('/dialogue/new', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/dialogue', (req, res) => {
 // });
 
 router.get('/dialogueFilters', (req, res) => {
-    res.render("/dialogue/dialogueFilters", {
+    res.render("./dialogue/dialogueFilters", {
         output: null
     });
 });

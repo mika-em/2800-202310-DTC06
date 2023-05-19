@@ -1,22 +1,19 @@
 <!-- back button and footer -->
 <%-include ("./partials/header-persona.ejs")%>
-<%-include ("./partials/emptybackbar.ejs")%>
-<div class="col text-center">
-  <h1>PERSONA</h1>
-</div>
-</div>
 
 <!-- content -->
-<div class="container-fluid pb-5 mb-5" style="margin-bottom: auto;">
-  <div class="container py-5">
+
+  <div class="container align-item-center p-5 mt-2">
     <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-    <div class="row pt-4">
-      <a class="py-5 btn btn-secondary" href="<%- locals.personaLinks[i].link %>"><%- locals.personaLinks[i].name %></a>
+    <div class="row">
+      <a class=" btn btn-secondary" style="width: 400px; height:180px;"
+      href="<%- locals.personaLinks[i].link %>">
+        <h2 class="pt-5"><b><%- locals.personaLinks[i].name %></b></h2></a>
     </div>
     <br>
     <% } %>
   </div>
-</div>
+
 
 <!-- footer and navbar -->
 <%-include ("./partials/navbar.ejs")%>

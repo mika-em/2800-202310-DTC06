@@ -3,15 +3,16 @@
 
 <!-- content -->
 
-  <div class="container align-item-center p-5 mt-2">
+  <div class="container p-5 mt-2">
+    <div class="row text-center">
     <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-    <div class="row">
+      <div class="col-12 mb-3">
       <a class=" btn btn-secondary" style="width: 400px; height:180px;"
       href="<%- locals.personaLinks[i].link %>">
         <h2 class="pt-5"><b><%- locals.personaLinks[i].name %></b></h2></a>
-    </div>
-    <br>
-    <% } %>
+      </div>
+        <% } %>
+      </div>
   </div>
 
 

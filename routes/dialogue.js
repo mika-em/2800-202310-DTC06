@@ -51,60 +51,15 @@ router.get('/dialogue/inner-dialogue', (req, res) => {
 
 router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     const persona = req.body.persona || "random";
-    const situation = req.body.plot || "random";
+    const situation = req.body.situation || "random";
     const plot = req.body.plot || "random";
 
-    const message = `Generate an inner dialogue of a character described as ${persona} whose is in a ${plot} setting where they are faced with ${situation}.`;
+    const prompt = `Generate an inner dialogue of a character described as ${persona} whose is in a ${plot} setting where they are faced with ${situation}.`;
 
     const responseData = await callOpenAIAPi(prompt);
 
     const currentUsername = req.session.user.username;
     console.log(currentUsername)
-
-    await User.updateOne({
-        username: currentUsername
-    }, {
-        $push: {
-            personaHistory: {
-                userPrompt: prompt,
-                botResponse: responseData
-            }
-        }
-    })
-
-    const currentUser = await User.findOne({
-        username: currentUsername
-    });
-
-    const personaHistory = currentUser.personaHistory
-    console.log(personaHistory)
-
-    res.render("dialogue/dialogueChat", {
-        placeholderText: "Write a prompt here...",
-        personaHistory: personaHistory
-    });
-});
-
-//Inner Dialogue Chat
-router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
-    const currentUser = await User.findOne({
-        username: req.session.user.username
-    });
-    const innerDialogueHistory = currentUser.innerDialogueHistory
-
-    res.render("dialogue/dialogueChat", {
-        placeholderText: "Write a prompt here...",
-        innerDialogueHistory: innerDialogueHistory
-    });
-});
-
-
-router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
-    const prompt = req.body.prompt;
-    const currentUsername = req.session.user.username;
-    console.log(prompt);
-
-    const responseData = await callOpenAIAPi(prompt);
 
     await User.updateOne({
         username: currentUsername
@@ -116,11 +71,27 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
             }
         }
     })
+
+    const currentUser = await User.findOne({
+        username: currentUsername
+    });
+
+    const innerDialogueHistory = currentUser.innerDialogueHistory
+    console.log(innerDialogueHistory)
+
+    res.render("dialogue/dialogueChat", {
+        placeholderText: "Write a prompt here...",
+        innerDialogueHistory: innerDialogueHistory
+    });
+});
+
+//Inner Dialogue Chat
+router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
     const innerDialogueHistory = currentUser.innerDialogueHistory
-
+    console.log(currentUser)
     console.log(innerDialogueHistory)
 
     res.render("dialogue/dialogueChat", {
@@ -131,17 +102,17 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
 
 
 
-
 //User Persona Chat
 router.get('/dialogue/user-persona-chat', async (req, res) => {
-    res.render("./dialogue/userPersonaChat");
+    res.render("./dialogue/userPersona");
 });
 
 router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
     const name = req.body.name || "random";
     const chat = req.body.chat || "random";
 
-    const message = `Generate a response from a character described as ${name} after it is told ${chat}.`;
+    // const prompt = `Generate a response from a character described as ${name} after it is told ${chat}.`;
+    const prompt = `Pretend you're a character described as ${name} after it is told ${chat}.`;
 
     const responseData = await callOpenAIAPi(prompt);
 
@@ -153,7 +124,7 @@ router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
     }, {
         $push: {
             userPersonaChatHistory: {
-                userPrompt: message,
+                userPrompt: prompt,
                 botResponse: responseData
             }
         }
@@ -166,7 +137,7 @@ router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
     const userPersonaChatHistory = currentUser.userPersonaChatHistory
     console.log(userPersonaChatHistory)
 
-    res.render("/dialogue/dialogueChat", {
+    res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
         userPersonaChatHistory: userPersonaChatHistory
     });
@@ -179,7 +150,7 @@ router.get('/dialogue/chat/user-persona', async (req, res) => {
     });
     const userPersonaChatHistory = currentUser.userPersonaChatHistory
 
-    res.render("/dialogue/userPersonaChat", {
+    res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
         userPersonaChatHistory: userPersonaChatHistory
     });
@@ -209,7 +180,7 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 
     console.log(innerDialogueHistory)
 
-    res.render("chat", {
+    res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
         userPersonaChatHistory: userPersonaChatHistory
     });

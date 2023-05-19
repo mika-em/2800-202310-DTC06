@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const User = require("../models/users").usersModel;
+const User = require("../models/users");
 // Home page
 router.get("/home", (req, res) => {
     res.render("home", {

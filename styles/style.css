@@ -16,6 +16,11 @@ body {
   background-size: cover;
 }
 
+.dialogue-bg{
+  background: url("../images/dialogue_bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
 
 h1 {
   text-align: center;
@@ -58,7 +63,7 @@ h1 {
 }
 
 .meowpointer{
-  cursor: url('./images/nyancat.png'), auto;
+  cursor: url('../images/cats/nyancat.png'), auto;
 }
 
 .special:hover{
@@ -112,7 +117,7 @@ h1 {
 
 @keyframes flash {
   from {
-    background-image: url('../images/nyancat.png');
+    background-image: url('../images/cats/nyancat.png');
     background-color: #81FFD9;
     background-size: cover;
     background-repeat: no-repeat;

@@ -3,14 +3,15 @@
 
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users");
+// const User = require("../models/users");
+const User = require("../models/users").usersModel;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const expireTime = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 // Index page
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index");``
 });
 
 // Signup page
@@ -89,7 +90,11 @@ router.post("/loginUser", async (req, res) => {
             securityQuestion: user.securityQuestion,
             securityAnswer: user.securityAnswer,
             personaHistory: user.personaHistory,
+            dialogueHistory: user.dialogueHistory
         };
+        const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
+        user.currentSessionId = currentSessionId;
+        await user.save();
 
         console.log(req.session.user.name)
 

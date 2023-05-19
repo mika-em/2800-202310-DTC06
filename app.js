@@ -1,5 +1,4 @@
 const express = require("express"); 
-const express = require("express"); 
 const app = express();
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration

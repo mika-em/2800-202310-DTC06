@@ -143,3 +143,12 @@ h1 {
   padding: 10px;
   background-color: #f2f2f2;
 }
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #485785;
+  height: 1px;
+}

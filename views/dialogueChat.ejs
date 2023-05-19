@@ -7,27 +7,30 @@
     <!-- Existing chat messages -->
     <div class="row">
         <% for (var i = 0; i < dialogueHistory.length; i++) { %>
-        <!-- <.% if (dialogueHistory[i].sessionId === sessionId) { %> -->
+        <!-- <s% if (dialogueHistory[i].sessionId === sessionId) { %> -->
         <!-- Filter by session ID -->
-        <div class="col-12" id="userInput">
-            <%= "User: " + dialogueHistory[i].userPrompt %>
+        <div class="col-12 user-input">
+            User: <%= dialogueHistory[i].userPrompt %>
         </div>
-        <div class="col-12" id="botOutput">
-            <%= "Bot: " + dialogueHistory[i].botResponse %>
+        <div class="col-12 bot-output">
+            Bot: <%= dialogueHistory[i].botResponse %>
+            <% if (dialogueHistory[i].isSaved) { %>
+            <span id="savedIndicator-<%= i %>" class="saved-indicator">(Saved)</span>
+            <% } else { %>
+            <button class="btn save-response-button"
+                onclick="saveBotResponse('<%= dialogueHistory[i].botResponse %>', `<%= i %>`)">Save Response</button>
+
+            <% } %>
         </div>
         <% } %>
     </div>
 </div>
 
+
 <form action="/dialogue/inner-dialogue" method="post" class="text-center input-container">
     <div class="row">
         <input class="form-control col" rows="1" cols="1" type="text" name="prompt"
             placeholder="<%= placeholderText %>" />
-
-        <!-- Add a field for persona description -->
-        <input class="form-control col" rows="1" cols="1" type="text" name="persona"
-            placeholder="Enter persona description" />
-
         <button class="btn col-3" type="submit">Send</button>
     </div>
 </form>

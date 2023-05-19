@@ -5,13 +5,15 @@ const express = require("express");
 const router = express.Router();
 // const User = require("../models/users");
 const User = require("../models/users").usersModel;
+const Dialogue = require("../models/users").dialogueModel;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const expireTime = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 // Index page
 router.get("/", (req, res) => {
-    res.render("index");``
+    res.render("index");
+    ``
 });
 
 // Signup page
@@ -32,7 +34,7 @@ router.post("/signup", async (req, res) => {
 
     const hashedPassword = await bcrypt.hashSync(password, saltRounds);
     const hashedSecurityAnswer = await bcrypt.hashSync(securityAnswer, saltRounds);
-    
+
     try {
         await User.create({
             name: name,
@@ -99,6 +101,18 @@ router.post("/loginUser", async (req, res) => {
         user.currentSessionId = currentSessionId;
         await user.save();
 
+
+        const dialogue = new Dialogue({
+            userId: user._id, // Assuming user._id is the ObjectId of the current user
+            dialogueSaved: [{
+                userPrompt: "",
+                botResponse: ""
+
+            }]
+        });
+
+        await dialogue.save();
+
         console.log(req.session.user.name)
 
         return res.render("home", {
@@ -118,11 +132,43 @@ router.post("/400", (req, res) => {
 
 
 // Logout route
-router.get("/logout", (req, res) => {
-    req.session.destroy();
-    res.render("../views/authorization/logout");
+// router.get("/logout", (req, res) => {
+//     req.session.destroy();
+//     res.render("../views/authorization/logout");
+// });
+
+router.get('/logout', async (req, res) => {
+    // Retrieve the current username from the session
+    const currentUsername = req.session.user.username;
+
+    try {
+        // Find the user based on the username
+        const currentUser = await User.findOne({
+            username: currentUsername
+        });
+
+        // Update the dialogueHistory field to an empty array
+        currentUser.dialogueHistory = [];
+
+        // Save the updated user
+        await currentUser.save();
+
+        // Clear the session and redirect to the login page
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send("An error occurred during logout");
+            } else {
+                res.render("../views/authorization/logout");
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred during logout");
+    }
 });
-  
+
+
 router.post("/exit", (req, res) => {
     res.redirect("/");
 });

@@ -1,5 +1,6 @@
 const express = require("express"); 
 const app = express();
+const $ = require('jquery');
 const path = require('path');
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration
@@ -17,6 +18,8 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(sessionConfig);
+app.use(express.static('public'));
+
 
 // Routes
 app.use(middleware);
@@ -35,7 +38,7 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 // Serve CSS files from the "public/css" directory
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
+
 
 // Serve JS files from the "public/js" directory
 app.use(express.static(__dirname + "/"));

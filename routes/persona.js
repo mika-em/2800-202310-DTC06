@@ -14,12 +14,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 router.get('/persona', (req, res) => {
-    res.render("persona");
+    res.render("./persona/persona");
 });
 
 router.get('/persona/general-prompt', (req, res) => {
     console.log(chatPrompt)
-    res.render("generalPrompt");
+    res.render("./persona/generalPrompt");
 });
 
 router.post('/persona/general-prompt', (req, res) => {

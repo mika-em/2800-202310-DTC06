@@ -3,10 +3,10 @@ const router = express.Router();
 const openai = require('openai');
 const User = require("../models/users").usersModel;
 
-openai.apiKey = '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'
+openai.apiKey = process.env.OPEN_AI_API_KEY
 
 router.get('/dialogue', (req, res) => {
-    res.render("dialogueHome");
+    res.render("/dialogue/dialogueHome");
 });
 
 // router.get('/dialogue/new', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/dialogue', (req, res) => {
 // });
 
 router.get('/dialogueFilters', (req, res) => {
-    res.render("dialogueFilters", {
+    res.render("/dialogue/dialogueFilters", {
         output: null
     });
 });
@@ -25,7 +25,7 @@ router.get('/dialogue/inner-dialogue', async (req, res) => {
     });
     const dialogueHistory = currentUser.dialogueHistory
 
-    res.render("dialogueChat", {
+    res.render("/dialogue/dialogueChat", {
         placeholderText: "Write a prompt here...",
         dialogueHistory: dialogueHistory
     });

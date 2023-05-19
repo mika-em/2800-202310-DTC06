@@ -1,0 +1,41 @@
+<!-- SAVED PROMPT PRESET PAGE -->
+<!-- header and backbar -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs")%>
+<div class="col text-center">
+  <h1>SAVED PROMPT</h1>
+</div>
+</div>
+</div>
+
+<div class="container-fluid" style="padding-top: 200px;">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <% for (var i=0; i<savedPromptParameter.length; i++) { %>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false" aria-controls="flush-collapse<%- [i] %>">
+          <%- savedPromptParameter[i].title %>
+        </button>
+      </h2>
+      <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p><%- savedPromptParameter[i].description %></p>
+          <p><%- savedPromptParameter[i].date %></p>
+          <form action="/persona/chat" method="post"></form>
+          <% for (var j=0; j<savedPromptParameter[i].parameterSet.length; j++) { %>
+          <div class="mb-3">
+            <label class="card-title"><%- savedPromptParameter[i].parameterSet[j] %></label><br>
+            <input class="form-control" type="text" name="<%- savedPromptParameter[i].parameterSet[j] %>" placeholder="Enter <%- savedPromptParameter[i].parameterSet[j] %>" />
+          </div>
+          <% } %>
+          <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

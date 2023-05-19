@@ -1,0 +1,44 @@
+<!-- SAVED PAGE -->
+<!-- header -->
+<%-include ('../partials/header-internal.ejs')%>
+
+<!-- back title bar -->
+<%-include ('../partials/emptybackbar.ejs')%>
+<div class="col text-center">
+  <h1>SAVED PERSONA</h1>
+</div>
+</div>
+</div>
+
+<div class="container pt-5" style="padding-bottom: 100px;">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <% for (var i=0; i<savedPersona.length; i++) { %>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false" aria-controls="flush-collapse<%- [i] %>">
+          <%- savedPersona[i].date %>
+        </button>
+      </h2>
+      <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <p class="card-text"><%- savedPersona[i].persona %></p>
+          <!-- <form action="/persona/chat" method="post"></form>
+          <e% for (var j=0; j<savedPersona[i].parameterSet.length; j++) { %>
+          <div class="mb-3">
+            <label class="card-title"><e%- savedPromptParameter[i].parameterSet[j] %></label><br>
+            <input class="form-control" type="text" name="<e%- savedPromptParameter[i].parameterSet[j] %>" placeholder="Enter <e%- savedPersona[i].parameterSet[j] %>" />
+          </div>
+          <e% } %>
+          <button class="btn" type="submit">Send</button>
+          </form> -->
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+
+<!-- navbar and footer -->
+<%-include ('../partials/navbar') %>
+<%-include ('../partials/footer') %>

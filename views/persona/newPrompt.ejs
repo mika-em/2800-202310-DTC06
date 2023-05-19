@@ -1,0 +1,92 @@
+<!-- NEW PROMPT PAGE -->
+<!-- header and back bar -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs")%>
+
+<div class="col text-center">
+  <h1>NEW PROMPT</h1>
+</div>
+</div>
+</div>
+
+<!-- content -->
+
+<div class="container-fluid" style="padding-top: 200px;">
+  <form action="/persona/new-prompt" method="post">
+    <div class="row">
+      <input class="form-control col mx-3" type="text" name="parameter" placeholder="Add a parameter" />
+      <button class="btn col-3 mx-3" type="submit">Add</button>
+    </div>
+  </form>
+  <br>
+
+  <form id="deleteForm" action="/persona/new-prompt/delete" method="post">
+    <input id="deleteIndex" type="hidden" name="index" value="" />
+  </form>
+
+  <form action="/persona/chat" method="post" class="text-center">
+    <div class="row">
+      <% for (var i=0; i<newParameter.length; i++) { %>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body">
+            <label class="card-title"><%- newParameter[i] %></label><br>
+            <i class="material-icons position-absolute top-0 end-0 m-3 clickable delete-icon" data-index="<%- i %>">delete_outlined</i>
+            <input class="form-control" type="text" name="<%- newParameter[i] %>" placeholder="Enter <%- newParameter[i] %>" />
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <br>
+    <button class="btn" type="submit" name="action" value="Edit">Send</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveParameterModal">
+      Save Parameter Set
+    </button>
+
+  </form>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="saveParameterModal" tabindex="-1" aria-labelledby="saveParameterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="saveParameterModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/persona/new-prompt/saved" method="post">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input class="form-control" type="text" name="title" />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <input class="form-control" type="text" name="description" id="description" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<script>
+  $(document).ready(function() {
+    $('.delete-icon').on('click', function() {
+      var index = $(this).data('index');
+      $('#deleteIndex').val(index);
+      $('#deleteForm').submit();
+    });
+  });
+</script>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

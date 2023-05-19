@@ -1,0 +1,22 @@
+<!-- navbar and footer -->
+<%-include ("../partials/header-dialogue.ejs")%>
+<%- include ("../partials/emptybackbar.ejs") %>
+
+<h1>This is the dialogue filters</h1>
+<form action="/dialogueFilters" method="POST"></form>
+<div class="container">
+    <% for (var i=0; i<locals.dialogueFilters.length; i++) { %>
+    <div class="row">
+        <a class="py-5 btn btn-secondary"
+            href="<%- locals.dialogueFilters[i].link %>"><%- locals.dialogueFilters[i].name %></a>
+    </div>
+    <br>
+    <% } %>
+</div>
+<% if (output) { %>
+<h2>Generated Output:</h2>
+<p><%= output %></p>
+<% } %>
+
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/navbar.ejs")%>

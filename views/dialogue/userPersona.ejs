@@ -1,0 +1,42 @@
+<!-- GENERAL CONTENT -->
+<!-- header and back header -->
+<%-include ("../partials/header-dialogue.ejs")%>
+<%- include ("../partials/emptybackbar.ejs") %>
+
+<!-- title -->
+<div class="col text-center">
+    <h3>Chat with a persona.</h3>
+    <p>Have you ever wanted to talk to a character?</p>
+</div>
+</div>
+</div>
+
+<!-- content -->
+<div class="container-fluid" style="padding-top: 150px;">
+    <div class="row">
+        <form action="/dialogue/chat/user-persona-chat" method="post" class="text-center">
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <label class="card-title">Persona</label><br />
+                        <input class="form-control" type="text" name="name" placeholder="Enter a persona you want to talk to!" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <label class="card-title">Start your chat!</label><br />
+                        <input class="form-control" type="text" name="chat" placeholder="Enter what you want to say to the persona" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button class="btn" type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

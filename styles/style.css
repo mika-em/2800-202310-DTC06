@@ -7,12 +7,17 @@ body {
 }
 
 .invsona-bg {
-  background: url("../images/bg.jpg") no-repeat center top fixed;
+  background: url("../images/background/bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 
 .persona-bg{
-  background: url("../images/persona_bg.jpg") no-repeat center top fixed;
+  background: url("../images/background/persona_bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
+.dialogue-bg{
+  background: url("../images/background/dialogue_bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 
@@ -58,7 +63,7 @@ h1 {
 }
 
 .meowpointer{
-  cursor: url('./images/nyancat.png'), auto;
+  cursor: url('../images/cats/nyancat.png'), auto;
 }
 
 .special:hover{
@@ -112,7 +117,7 @@ h1 {
 
 @keyframes flash {
   from {
-    background-image: url('../images/nyancat.png');
+    background-image: url('../images/cats/nyancat.png');
     background-color: #81FFD9;
     background-size: cover;
     background-repeat: no-repeat;

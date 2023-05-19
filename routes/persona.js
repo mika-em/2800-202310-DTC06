@@ -14,12 +14,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 router.get('/persona', (req, res) => {
-    res.render("persona");
+    res.render("./persona/persona");
 });
 
 router.get('/persona/general-prompt', (req, res) => {
     console.log(chatPrompt)
-    res.render("generalPrompt");
+    res.render("./persona/generalPrompt");
 });
 
 router.post('/persona/general-prompt', (req, res) => {
@@ -32,18 +32,18 @@ router.post('/persona/general-prompt', (req, res) => {
     const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
     chatPrompt.push("You: " + message);
     chatPrompt.push("hello");
-    console.log(chatPrompt)
+    //console.log(chatPrompt)
 
     // placeholder for db for chatPrompt/chatHistory
     res.redirect('/persona/chat', { placeholderText: "Write a prompt here..." });
 });
 
 router.get('/persona/saved-prompt', (req, res) => {
-    res.render("savedPrompt");
+    res.render("./persona/savedPrompt");
 });
 
 router.get('/persona/new-prompt', (req, res) => {
-    res.render("newPrompt");
+    res.render("./persona/newPrompt");
 });
 
 router.post('/persona/new-prompt', (req, res) => {
@@ -51,7 +51,7 @@ router.post('/persona/new-prompt', (req, res) => {
     const parameter = req.body.parameter;
     savedPromptParameter.push(parameter);
     console.log(savedPromptParameter);
-    res.render("newPrompt");
+    res.render("./persona/newPrompt");
 });
 
 router.get('/persona/chat', async (req, res) => {

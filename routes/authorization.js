@@ -1,6 +1,5 @@
 //this page contains the routes for 
-// index, home, signup, login, logout, and password rest
-
+// index, home, signup, login, logout, and password reset
 const express = require("express");
 const router = express.Router();
 // const User = require("../models/users");
@@ -56,7 +55,6 @@ router.post("/signup", async (req, res) => {
 router.get("/login", (req, res) => {
     res.render("../views/authorization/login");
 });
-
 
 // Login route
 router.post("/loginUser", async (req, res) => {

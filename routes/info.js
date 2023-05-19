@@ -11,10 +11,4 @@ router.get("/faq", (req, res) => {
     res.render("../views/profile/faq");
 });
 
-
-
-
-
-
-
 module.exports = router

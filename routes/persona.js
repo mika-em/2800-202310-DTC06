@@ -39,7 +39,7 @@ router.post('/persona/general-prompt', (req, res) => {
 });
 
 router.get('/persona/saved-prompt', (req, res) => {
-    res.render("savedPrompt");
+    res.render("./persona/savedPrompt");
 });
 
 router.get('/persona/new-prompt', (req, res) => {

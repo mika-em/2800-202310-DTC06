@@ -27,7 +27,9 @@ const userSchema = new mongoose.Schema(
 
 const usersModel = mongoose.model('User', userSchema);
 
-module.exports = {
-    usersModel,
-};
+// const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
+
+module.exports = usersModel
+//     dialogueModel
+// };
 

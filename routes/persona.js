@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const dotenv = require('dotenv');
-const User = require("../models/users").usersModel;
+const User = require("../models/users");
 const Parameter = require("../models/parameters");
 const Persona = require("../models/personaList");
 const session = require('express-session');
@@ -12,7 +12,7 @@ const { send } = require("process");
 dotenv.config();
 
 const configuration = new Configuration({
-    organization: "org-wZOT14YD6omEzAgdgaFU5gz3",
+    organization: process.env.OPENAI_ORGANIZATION_KEY,
     apiKey: process.env.OPENAI_API_KEY,
 });
 

@@ -2,7 +2,7 @@
 // index, home, signup, login, logout, and password reset
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users").usersModel;
+const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const expireTime = 1000 * 60 * 60 * 24 * 7; // 1 week
@@ -100,16 +100,16 @@ router.post("/loginUser", async (req, res) => {
         await user.save();
 
 
-        const dialogue = new Dialogue({
-            userId: user._id, // Assuming user._id is the ObjectId of the current user
-            dialogueSaved: [{
-                userPrompt: "",
-                botResponse: ""
+        // const dialogue = new Dialogue({
+        //     userId: user._id, // Assuming user._id is the ObjectId of the current user
+        //     dialogueSaved: [{
+        //         userPrompt: "",
+        //         botResponse: ""
 
-            }]
-        });
+        //     }]
+        // });
 
-        await dialogue.save();
+        // await dialogue.save();
 
         console.log(req.session.user.name)
 

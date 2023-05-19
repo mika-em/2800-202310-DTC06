@@ -4,7 +4,7 @@ dotenv.config();
 
 const mongodb_user = process.env.MONGODB_USER;
 const mongodb_password = process.env.MONGODB_PASSWORD;
-const mongodb_url = `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.jzcviee.mongodb.net/?retryWrites=true&w=majority`;
+const mongodb_url = `mongodb+srv://${mongodb_user}:${mongodb_password}@${process.env.MONGODB_HOST}/?retryWrites=true&w=majority`;
 
 async function connect() {
     try {

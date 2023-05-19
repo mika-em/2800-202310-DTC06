@@ -12,7 +12,7 @@ body {
 }
 
 .persona-bg{
-  background: url("../images/bg.jpg") no-repeat center top fixed;
+  background: url("../images/persona_bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 

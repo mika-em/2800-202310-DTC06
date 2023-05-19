@@ -13,13 +13,13 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-router.get("/persona", (req, res) => {
-  res.render("persona");
+router.get('/persona', (req, res) => {
+    res.render("./persona/persona");
 });
 
-router.get("/persona/general-prompt", (req, res) => {
-  console.log(chatPrompt);
-  res.render("generalPrompt");
+router.get('/persona/general-prompt', (req, res) => {
+    console.log(chatPrompt)
+    res.render("./persona/generalPrompt");
 });
 
 router.post("/persona/general-prompt", (req, res) => {

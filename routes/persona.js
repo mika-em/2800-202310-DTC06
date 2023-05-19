@@ -38,8 +38,8 @@ router.post("/persona/general-prompt", (req, res) => {
   res.redirect("/persona/chat", { placeholderText: "Write a prompt here..." });
 });
 
-router.get("/persona/saved-prompt", (req, res) => {
-  res.render("savedPrompt");
+router.get('/persona/saved-prompt', (req, res) => {
+    res.render("./persona/savedPrompt");
 });
 
 router.get("/persona/new-prompt", (req, res) => {

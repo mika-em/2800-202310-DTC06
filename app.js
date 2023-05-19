@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authorization"); // includes login, signup,
 const profileRoutes = require("./routes/profile"); // includes profile, account settings, and update account settings
 const persona = require("./routes/persona"); // includes persona and saved personas
 const infoRoutes = require("./routes/info"); // includes about us, FAQ and contact us
+const saved = require("./routes/saved"); // includes saved personas, dialogues, and filters
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use("/", authRoutes);
 app.use("/", profileRoutes);
 app.use("/", persona);
 app.use("/", infoRoutes);
+app.use("/", saved);
 
 // Database & Port Connection
 database.connect();
@@ -30,6 +32,7 @@ app.listen(process.env.PORT || 3000, () => {
 
 // Serve CSS files from the "public/css" directory
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
+
 // Serve JS files from the "public/js" directory
 app.use(express.static(__dirname + "/"));
 

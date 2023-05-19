@@ -16,16 +16,21 @@
         </div>
       </div>
     </div>
-    <div class="col-12" id="botOutput">
-      <div class="card">
-        <i class="material-icons position-absolute top-0 end-0 my-3 clickable save-icon" data-index="<%- i %>">star_outlined</i>
-        <div class="card-body m-3">
-          <div class="card-title">Bot:</div>
-          <div class="card-text"><%- personaHistory[i].botResponse %>
+    <form action="/persona/chat/save-persona" method="post">
+      <div class="col-12" id="botOutput">
+        <div class="card">
+          <!-- save persona button -->
+          <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%- i %>">
+            star_border
+          </button>
+          <div class="card-body m-3">
+            <div class="card-title">Bot:</div>
+            <div class="card-text" name="data"><%- personaHistory[i].botResponse %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
     <hr>
     <% } %>
   </div>

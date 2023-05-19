@@ -3,6 +3,7 @@ const router = express.Router();
 const dotenv = require('dotenv');
 const User = require("../models/users").usersModel;
 const Parameter = require("../models/parameters");
+const Persona = require("../models/personaList");
 const session = require('express-session');
 const { Configuration, OpenAIApi } = require('openai');
 const { appendFile } = require("fs");
@@ -193,5 +194,29 @@ router.post('/persona/chat', async (req, res) => {
     });
 });
 
+router.post('/persona/chat/save-persona', async (req, res) => {
+    const index = req.body.save;
+    console.log(index);
+    const date = new Date();
+
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const personaHistory = currentUser.personaHistory
+
+    const persona = personaHistory[index].botResponse;
+    console.log(persona)
+
+    await Persona.create({
+        userId: currentUser._id,
+        persona: persona,
+        date: date
+    });
+
+    res.render("chat", {
+        placeholderText: "Write a prompt here...",
+        personaHistory: personaHistory
+    });
+});
 
 module.exports = router;

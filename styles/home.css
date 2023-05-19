@@ -16,7 +16,10 @@
 
 #display-name {
   padding-top: 10px;
-  font-size: 30pt;
+  font-size: 45pt;
+  display: inline-block;
+  color: #051726;
+
 }
 
 #card-name {

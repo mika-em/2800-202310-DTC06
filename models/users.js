@@ -25,24 +25,6 @@ const userSchema = new mongoose.Schema(
     { collection: 'users' }
 );
 
-
-
-// defines the dialouge schema
-const dialogueSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    dialogueSaved: [
-        {
-            userPrompt: String,
-            botResponse: String
-        }
-    ]
-}, { collection: 'dialogue' });
-//this is the name of the collection in the database
-
-
 const usersModel = mongoose.model('User', userSchema);
 
 const dialogueModel = mongoose.model('Dialogue', dialogueSchema);

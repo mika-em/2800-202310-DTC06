@@ -3,15 +3,28 @@
 
 <h1>This is the chat.</h1>
 
-<div class="container mb-5 pb-5" id="chatContainer">
+<div class="container-fluid mb-5 pb-5" id="chatContainer">
   <!-- Existing chat messages -->
-  <div class="row">
+  <div class="row-fluid">
     <% for (var i=0; i<personaHistory.length; i++) { %>
-    <div class="col-12" id="userInput">
-      <%- "User:" + "&nbsp;" + personaHistory[i].userPrompt %>
+    <div class="col-12 my-2" id="userInput">
+      <div class="card bg-primary text-bg-light">
+        <div class="card-body m-3">
+          <div class="card-title">User:</div>
+          <div class="card-text"><%- personaHistory[i].userPrompt %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-12" id="botOutput">
-      <%- "Bot:" + "&nbsp;" + personaHistory[i].botResponse %>
+      <div class="card">
+        <i class="material-icons position-absolute top-0 end-0 my-3 clickable save-icon" data-index="<%- i %>">star_outlined</i>
+        <div class="card-body m-3">
+          <div class="card-title">Bot:</div>
+          <div class="card-text"><%- personaHistory[i].botResponse %>
+          </div>
+        </div>
+      </div>
     </div>
     <hr>
     <% } %>

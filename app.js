@@ -9,7 +9,7 @@ const profileRoutes = require("./routes/profile"); // includes profile, account 
 const persona = require("./routes/persona"); // includes persona and saved personas
 const infoRoutes = require("./routes/info"); // includes about us, FAQ and contact us
 const saved = require("./routes/saved"); // includes saved personas, dialogues, and filters
-const persona = require("./routes/persona"); // includes persona and saved persona
+// const persona = require("./routes/persona"); // includes persona and saved persona
 const dialogue = require("./routes/dialogue"); // includes dialogue and saved dialogue
 
 
@@ -25,6 +25,7 @@ app.use("/", profileRoutes);
 app.use("/", persona);
 app.use("/", infoRoutes);
 app.use("/", saved);
+app.use("/", dialogue);
 
 // Database & Port Connection
 database.connect();

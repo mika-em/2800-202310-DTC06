@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const dotenv = require('dotenv');
-const User = require("../models/users");
+const User = require("../models/users").usersModel;
 const { Configuration, OpenAIApi } = require('openai');
 
 dotenv.config();

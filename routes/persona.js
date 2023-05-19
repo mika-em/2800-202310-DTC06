@@ -15,11 +15,16 @@ const openai = new OpenAIApi(configuration);
 
 router.get("/persona", (req, res) => {
   res.render("./persona/persona");
+router.get('/persona', (req, res) => {
+    res.render("./persona/persona");
 });
 
 // General Prompt
 router.get("/persona/general-prompt", (req, res) => {
   res.render("./persona/generalPrompt");
+router.get('/persona/general-prompt', (req, res) => {
+    console.log(chatPrompt)
+    res.render("./persona/generalPrompt");
 });
 
 router.post("/persona/chat/general", async (req, res) => {

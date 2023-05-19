@@ -32,7 +32,7 @@ router.get('/persona/saved-prompt', (req, res) => {
 });
 
 router.get('/persona/new-prompt', (req, res) => {
-    res.render("newPrompt");
+    res.render("./persona/newPrompt");
 });
 
 router.post('/persona/new-prompt', (req, res) => {
@@ -40,7 +40,7 @@ router.post('/persona/new-prompt', (req, res) => {
     const parameter = req.body.parameter;
     savedPromptParameter.push(parameter);
     console.log(savedPromptParameter);
-    res.render("newPrompt");
+    res.render("./persona/newPrompt");
 });
 
 router.get('/persona/chat', (req, res) => {

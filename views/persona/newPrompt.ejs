@@ -1,9 +1,17 @@
-<!-- header -->
-<%-include ("./partials/header-internal.ejs")%>
+<!-- NEW PROMPT PAGE -->
+<!-- header and back bar -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs")%>
 
-<h1>This is the new prompt preset page.</h1>
+<div class="col text-center">
+  <h1>NEW PROMPT</h1>
+</div>
+</div> 
+</div>
 
-<div class="container">
+<!-- content -->
+
+<div class="container-fluid" style="padding-top: 200px;">
   <form action="/persona/new-prompt" method="post">
     <div class="row">
       <input class="form-control col mx-3" type="text" name="parameter" placeholder="Add a parameter" />
@@ -32,5 +40,5 @@
 <br>
 
 <!-- navbar and footer -->
-<%-include ("./partials/navbar.ejs")%>
-<%-include ("./partials/footer.ejs")%>
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

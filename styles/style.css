@@ -144,3 +144,11 @@ hr {
   background-color: #485785;
   height: 1px;
 }
+
+button.save-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}

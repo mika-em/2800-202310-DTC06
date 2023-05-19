@@ -11,6 +11,11 @@ body {
   background-size: cover;
 }
 
+.persona-bg{
+  background: url("../images/bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
 
 h1 {
   text-align: center;

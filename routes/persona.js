@@ -38,38 +38,10 @@ router.post("/persona/chat/general", async (req, res) => {
   const age = req.body.age || "random";
   const plot = req.body.plot || "random";
 
-  console.log("gender", gender);
-  console.log("name", name);
-  console.log("age", age);
-  console.log("plot", plot);
-  const prompt = `Generate a random ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting.`;
-  console.log(prompt);
-
-  const responseData = await callOpenAIAPi(prompt);
-
-  const currentUsername = req.session.user.username;
-  console.log(currentUsername);
-
-  await User.updateOne(
-    {
-      username: currentUsername,
-    },
-    {
-      $push: {
-        personaHistory: {
-          userPrompt: prompt,
-          botResponse: responseData,
-        },
-      },
-    }
-  );
-
-  const currentUser = await User.findOne({
-    username: currentUsername,
-  });
-
-  const personaHistory = currentUser.personaHistory;
-  console.log(personaHistory);
+    const message = `Generate a ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting where they are faced with ${situation}.`;
+    chatPrompt.push("You: " + message);
+    chatPrompt.push("hello");
+    //console.log(chatPrompt)
 
   res.render("chat", {
     placeholderText: "Write a prompt here...",

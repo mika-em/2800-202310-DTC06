@@ -9,9 +9,9 @@ router.get('/dialogue', (req, res) => {
     res.render("dialogueHome");
 });
 
-router.get('/dialogue/new', (req, res) => {
-    res.render("startNewDialogue");
-});
+// router.get('/dialogue/new', (req, res) => {
+//     res.render("startNewDialogue");
+// });
 
 router.post('/dialogue/new', (req, res) => {
 });

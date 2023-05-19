@@ -43,6 +43,10 @@ const dialogueSchema = new mongoose.Schema(
 
 const usersModel = mongoose.model("User", userSchema);
 const usersModel = mongoose.model("User", userSchema);
+    dialogueSaved: Array,
+    },
+    { collection: 'dialogue' }); //this is the name of the collection in the database
+
 
 const dialogueModel = mongoose.model("Dialogue", dialogueSchema);
 const dialogueModel = mongoose.model("Dialogue", dialogueSchema);

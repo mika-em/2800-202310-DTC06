@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const dotenv = require('dotenv');
-const User = require("../models/users");
+const User = require("../models/users").usersModel;
 const Parameter = require("../models/parameters");
 const session = require('express-session');
 const { Configuration, OpenAIApi } = require('openai');
@@ -37,12 +37,12 @@ router.use('/persona', async (req, res, next) => {
 });
 
 router.get('/persona', (req, res) => {
-    res.render("persona");
+    res.render("./persona/persona");
 });
 
 // General Prompt
 router.get('/persona/general-prompt', (req, res) => {
-    res.render("generalPrompt");
+    res.render("./persona/generalPrompt");
 });
 
 router.post('/persona/chat/general', async (req, res) => {
@@ -58,7 +58,7 @@ router.post('/persona/chat/general', async (req, res) => {
     const prompt = `Generate a random ${gender} character whose name is ${name} and age is ${age}, and is in a ${plot} setting.`;
     console.log(prompt);
 
-    // const responseData = await callOpenAIAPi(prompt);
+    const responseData = await callOpenAIAPi(prompt);
 
     const currentUsername = req.session.user.username;
     console.log(currentUsername)
@@ -69,7 +69,7 @@ router.post('/persona/chat/general', async (req, res) => {
         $push: {
             personaHistory: {
                 userPrompt: prompt,
-                botResponse: "test"
+                botResponse: responseData
             }
         }
     })
@@ -100,19 +100,19 @@ router.get('/persona/saved-prompt', async (req, res) => {
 
     console.log(savedPromptParameter)
     console.log(savedPromptParameter[0].parameterSet[0])
-    res.render("savedPrompt", { savedPromptParameter: savedPromptParameter });
+    res.render("./persona/savedPrompt", { savedPromptParameter: savedPromptParameter });
 });
 
 // New Prompt Parameters
 router.get('/persona/new-prompt', (req, res) => {
-    res.render("newPrompt", { newParameter: newParameter });
+    res.render("./persona/newPrompt", { newParameter: newParameter });
 });
 
 router.post('/persona/new-prompt', (req, res) => {
     const parameter = req.body.parameter;
     newParameter.push(parameter);
     console.log(newParameter);
-    res.render("newPrompt", { newParameter: newParameter });
+    res.render("./persona/newPrompt", { newParameter: newParameter });
 });
 
 router.post('/persona/new-prompt/delete', (req, res) => {
@@ -120,7 +120,7 @@ router.post('/persona/new-prompt/delete', (req, res) => {
     if (index >= 0 && index < newParameter.length) {
         newParameter.splice(index, 1);
         console.log(newParameter);
-        res.render("newPrompt", { newParameter: newParameter });
+        res.render("./persona/newPrompt", { newParameter: newParameter });
     } else {
         res.status(400).send('Invalid index'); // Send an error response to the client
     }
@@ -145,7 +145,7 @@ router.post('/persona/new-prompt/saved', async (req, res) => {
         parameterSet: parameterSet,
         date: date
     });
-    res.render("newPrompt", { newParameter: newParameter })
+    res.render("./persona/newPrompt", { newParameter: newParameter })
 });
 
 // Chat

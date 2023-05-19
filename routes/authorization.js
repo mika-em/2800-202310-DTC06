@@ -1,21 +1,21 @@
 //this page contains the routes for 
-// index, home, signup, login, logout, and password rest
-
+// index, home, signup, login, logout, and password reset
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users");
+// const User = require("../models/users");
+const User = require("../models/users").usersModel;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const expireTime = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 // Index page
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index");``
 });
 
 // Signup page
 router.get("/signup", (req, res) => {
-    res.render("signup");
+    res.render("../views/authorization/signup");
 });
 
 // Signup route
@@ -30,7 +30,8 @@ router.post("/signup", async (req, res) => {
     } = req.body;
 
     const hashedPassword = await bcrypt.hashSync(password, saltRounds);
-
+    const hashedSecurityAnswer = await bcrypt.hashSync(securityAnswer, saltRounds);
+    
     try {
         await User.create({
             name: name,
@@ -38,7 +39,7 @@ router.post("/signup", async (req, res) => {
             email: email,
             password: hashedPassword,
             securityQuestion: securityQuestion,
-            securityAnswer: securityAnswer,
+            securityAnswer: hashedSecurityAnswer,
         });
         console.log("User created");
         res.redirect("/");
@@ -50,7 +51,7 @@ router.post("/signup", async (req, res) => {
 
 // Login page
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("../views/authorization/login");
 });
 
 // Login route
@@ -73,7 +74,8 @@ router.post("/loginUser", async (req, res) => {
     console.log(user);
 
     if (!user) {
-        return res.status(400).send("Invalid email/username or password.");
+        return res.status(400).render("../views/error/400")
+        // return res.status(400).send("Invalid email/username or password.");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -89,7 +91,11 @@ router.post("/loginUser", async (req, res) => {
             securityQuestion: user.securityQuestion,
             securityAnswer: user.securityAnswer,
             personaHistory: user.personaHistory,
+            dialogueHistory: user.dialogueHistory
         };
+        const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
+        user.currentSessionId = currentSessionId;
+        await user.save();
 
         console.log(req.session.user.name)
 
@@ -98,20 +104,30 @@ router.post("/loginUser", async (req, res) => {
 
         })
     } else {
-        return res.status(400).send("Invalid email/username or password.");
+        return res.status(400).render("../views/error/400")
+        // return res.status(400).send("Invalid email/username or password.");
     }
 });
+
+router.post("/400", (req, res) => {
+    res.redirect("/login")
+});
+
+
 
 // Logout route
 router.get("/logout", (req, res) => {
     req.session.destroy();
+    res.render("../views/authorization/logout");
+});
+  
+router.post("/exit", (req, res) => {
     res.redirect("/");
 });
 
-
 // Reset password page
 router.get("/resetPassword", (req, res) => {
-    res.render("resetPassword", {
+    res.render("../views/authorization/resetPassword", {
         email: "",
         securityQuestion: "",
         securityAnswer: "",
@@ -136,8 +152,13 @@ router.post("/resetPassword", async (req, res) => {
             disabled: true,
         })
     } catch (error) {
-        return res.status(400).send("Invalid email.");
+        // return res.status(400).send("Invalid email.");
+        return res.status(401).render("../views/error/401");
     }
+});
+
+router.post('/401', (req, res) => {
+    res.redirect('/login');
 });
 
 router.post('/resetPassword/verified', async (req, res) => {
@@ -145,8 +166,9 @@ router.post('/resetPassword/verified', async (req, res) => {
         email: req.body.email
     })
     const securityAnswer = userReset.securityAnswer
-    console.log(securityAnswer)
-    if (securityAnswer === req.body.securityAnswer) {
+    const securityAnswerMatch = await bcrypt.compare(req.body.securityAnswer, securityAnswer);
+
+    if (securityAnswerMatch) {
         res.render('resetPassword', {
             email: req.body.email,
             securityQuestion: userReset.securityQuestion,
@@ -155,8 +177,13 @@ router.post('/resetPassword/verified', async (req, res) => {
             disabled: false,
         })
     } else {
-        res.send("Incorrect answer to security question.");
+        // res.send("Incorrect answer to security question.");
+        res.render("../views/error/400-1");
     }
+});
+
+router.post('/400-1', (req, res) => {
+    res.redirect('/login');
 });
 
 router.post('/', async (req, res) => {
@@ -172,9 +199,15 @@ router.post('/', async (req, res) => {
         })
         res.render('index')
     } catch (error) {
-        res.status(500).send("An error occurred while creating your account.");
+        // res.status(500).send("An error occurred while creating your account.");
+        returnres.status(500).render("../views/error/500");
     }
 });
+
+router.post('/500', (req, res) => {
+    res.redirect('/login');
+});
+
 
 //home page
 router.get("/home", (req, res) => {
@@ -182,5 +215,6 @@ router.get("/home", (req, res) => {
         name: req.session.user.name,
     });
 });
+
 
 module.exports = router;

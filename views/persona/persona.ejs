@@ -1,0 +1,20 @@
+<!-- back button and footer -->
+<%-include ("../partials/header-persona.ejs")%>
+
+<!-- content -->
+
+  <div class="container align-item-center p-5 mt-2">
+    <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+    <div class="row">
+      <a class=" btn btn-secondary" style="width: 400px; height:180px;"
+      href="<%- locals.personaLinks[i].link %>">
+        <h2 class="pt-5"><b><%- locals.personaLinks[i].name %></b></h2></a>
+    </div>
+    <br>
+    <% } %>
+  </div>
+
+
+<!-- footer and navbar -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

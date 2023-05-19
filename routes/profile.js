@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const User = require("../models/users");
 
 // Home page
@@ -11,7 +13,7 @@ router.get("/home", (req, res) => {
 
 // Profile page
 router.get("/profile", (req, res) => {
-    res.render("profile", {
+    res.render("../views/profile/profile", {
         name: req.session.user.name,
     });
 });
@@ -27,7 +29,7 @@ router.get("/profile/account-settings", async (req, res) => {
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
     console.log(securityAnswer)
-    res.render("accountSettings", {
+    res.render("../views/profile/accountSettings", {
         name: name,
         username: username,
         email: email,
@@ -62,7 +64,8 @@ router.post("/profile/account-settings", async (req, res) => {
         const nameInput = req.body.name
         const emailInput = req.body.email
         const securityQuestionInput = req.body.securityQuestion
-        const securityAnswerInput = req.body.securityAnswer
+        const hashedSecurityAnswer = await bcrypt.hashSync(req.body.securityAnswer, saltRounds);
+        const securityAnswerInput = hashedSecurityAnswer
         await User.updateOne({
             username: req.session.user.username
         }, {
@@ -81,7 +84,7 @@ router.post("/profile/account-settings", async (req, res) => {
         const email = currentUser.email;
         const securityQuestion = currentUser.securityQuestion;
         const securityAnswer = currentUser.securityAnswer;
-        res.render("accountSettings", {
+        res.render("../views/profile/accountSettings", {
             name: name,
             username: username,
             email: email,

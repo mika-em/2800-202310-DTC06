@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// users collection schema
+// defines the user schema
 const userSchema = new mongoose.Schema(
     {
         name: String,
@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
         securityQuestion: String,
         securityAnswer: String,
         personaHistory: Array,
-        promptParameters: Array,
+        dialogueHistory: Array,
+        dialogueHistory: Array,
         filter: {
             default: Boolean,
             status: Boolean,
@@ -18,16 +19,30 @@ const userSchema = new mongoose.Schema(
             drop: Boolean,
             race: Boolean,
         },
-        securityQuestion: String,
-        securityAnswer: String,
     },
-    //this is the name of the collection in the database
+    // this is the name of the collection in the database
     { collection: 'users' }
 );
 
 
 
+// defines the dialouge schema
+const dialogueSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    dialogueSaved: Array,
+},
+    { collection: 'dialogue' }); //this is the name of the collection in the database
+
 
 const usersModel = mongoose.model('User', userSchema);
 
-module.exports = usersModel;
+const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
+
+module.exports = {
+    usersModel,
+    dialogueModel
+};
+

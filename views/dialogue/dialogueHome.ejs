@@ -1,0 +1,29 @@
+<!-- DIALOGUE  -->
+<!-- header and empty bar-->
+<%-include ("../partials/header-dialogue.ejs")%>
+<%- include ("../partials/emptybackbar.ejs") %>
+<div class="col text-center">
+    <h1>DIALOGUE</h1>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- content -->
+<div class="container-fluid" style="padding-top: 200px;">
+    <div>
+        <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
+        <div class="row">
+            <a class="py-5 btn btn-secondary"
+                href="<%- locals.dialogueLinks[i].link %>"><%- locals.dialogueLinks[i].name %></a>
+        </div>
+        <br>
+        <% } %>
+    </div>
+</div>
+
+
+
+<!-- nav bar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

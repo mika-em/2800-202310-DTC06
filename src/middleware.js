@@ -3,40 +3,46 @@ const url = require('url');
 module.exports = (req, res, next) => {
     res.locals.navLinks = navLinks;
     res.locals.personaLinks = personaLinks;
-    res.locals.chatPrompt = chatPrompt;
     res.locals.currentURL = url.parse(req.url).pathname;
+    res.locals.dialogueLinks = dialogueLinks;
+    res.locals.dialogueFilters = dialogueFilters;
     next();
 };
 
 const navLinks = [{
     name: 'Home',
     link: '/',
+    icon: './images/invsona.png',
     upperName: 'HOME',
     description: 'Lorem ipsum dolor'
 },
 {
     name: 'Persona',
     link: '/persona',
+    icon: './images/icons/persona.png',
     upperName: 'PERSONA',
-    description: 'Lorem ipsum dolor'
+    description: 'Create a character with unique personality traits and a backstory.'
 },
 {
     name: 'Dialogue',
     link: '/dialogue',
+    icon: './images/icons/dialogue.png',
     upperName: 'DIALOGUE',
-    description: 'Lorem ipsum dolor'
+    description: 'Create a conversation between two characters.'
 },
 {
     name: 'Saved',
     link: '/saved',
+    icon: './images/icons/saved.png',
     upperName: 'SAVED',
-    description: 'Lorem ipsum dolor'
+    description: 'Save your character prompts, dialogue scripts, and unique prompts.'
 },
 {
     name: 'Profile',
     link: '/profile',
+    icon: './images/icons/profile.png',
     upperName: 'PROFILE',
-    description: 'Lorem ipsum dolor'
+    description: 'Access your profile and account settings.'
 },
 ];
 
@@ -58,6 +64,28 @@ const personaLinks = [{
 },
 ];
 
-var chatPrompt = ["test"];
+const dialogueLinks = [{
+    name: 'Start a new dialogue',
+    link: '/dialogue/new'
+},
+{
+    name: 'Saved dialogues',
+    link: '/persona/saved-dialogue'
+}
+];
+
+const dialogueFilters = [{
+    name: 'Inner Dialogue',
+    link: '/dialogue/inner-dialogue'
+},
+{
+    name: 'Conversation',
+    link: '/persona/conversation'
+},
+{
+    name: 'User-Persona Chat',
+    link: '/persona/user-persona-chat'
+}
+];
 
 

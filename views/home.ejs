@@ -1,36 +1,36 @@
 <!-- Home page for logged in users -->
 
 <!-- navbar -->
-<%-include ("./partials/header.ejs")%>
+<%-include ("./partials/header-internal.ejs")%>
+
+
 
 <!-- content -->
 <!-- display picture and name  -->
 <div class="invsona-bg">
-  <div class="container text-center align-item-center p-5">
+  <div class="container text-center align-item-center p-2 pt-1">
     <div class="p-3 mt-5">
-      <img src="../images/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
+      <img src="../images/cats/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
     </div>
-    <h1 id="display-name"><%- name%></h1>
+    <h1 id="display-name"><%-name%></h1>
   </div>
 
   
   <!-- cards -->
   
-  <div class="container align-item-center text-center">
+  <div class="container-lg align-item-center text-center">
     <div class="row">
       <% for (var i=1; i < locals.navLinks.length; i++) { %>
-        <div class="col-6 p-2">
-          <a type="button" role="button" class="btn btn-outline-secondary-lg" href="<%- locals.navLinks[i].link %>">
+        <div class="col-6 px-2 py-2">
+          <a class="btn btn-outline-secondary-lg" href="<%- locals.navLinks[i].link %>">
+            <img src="<%-locals.navLinks[i].icon%>" style="opacity: 70%;" class="pt-2 pb-1" alt="">
               <p class="card-title" id="card-name"><%- locals.navLinks[i].upperName %></p>
-              <p class="card-text"><%- locals.navLinks[i].description %></p>
-          </a>
+              <p class="card-text" style="font-size: 9pt; width:150px; height: 80px;"><%- locals.navLinks[i].description %></p>
+          </a><br><br>
         </div>
         <% } %>
       </div>
       </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- nav bar and footer -->

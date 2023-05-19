@@ -1,0 +1,59 @@
+<!-- Purpose: Login Screen for Invsona -->
+
+<!-- header -->
+<%-include ('../partials/header.ejs')%>
+<%-include ('../partials/animated-bg-logo.ejs')%>
+
+<!-- content -->
+
+  
+
+    <!-- FORM -->
+    <div class="container text-start">
+      <form action="/loginUser" method="post">
+        <div class="mb-3">
+          <label for="loginName" class="form-label">Username / Email</label>
+          <input
+            type="loginName"
+            class="form-control"
+            id="loginName"
+            name="loginName"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+          />
+        </div>
+
+        <!-- FORGET PASSWORD -->
+        <div id="resetPassword" class="form-text">
+          <a href="/resetPassword">Forgot password</a>
+        </div>
+
+        <div class="p-4 text-center">
+          <button type="submit" class="btn btn-primary">LOGIN</button>
+        </div>
+
+        <!-- SIGN UP -->
+        <div>
+          <p class="text-center">
+            Don't have an account? <a href="/signup">SIGN UP</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<%-include ('../partials/footer.ejs')%>

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "connect-mongo": "^5.0.0",
     "connect-mongodb-session": "^3.1.1",
@@ -23,6 +24,7 @@
     "mongoose": "^7.1.1",
     "node": "^20.1.0",
     "nodemon": "^2.0.22",
+    "path": "^0.12.7",
     "openai": "^3.2.1"
   }
 }

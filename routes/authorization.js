@@ -95,6 +95,7 @@ router.post("/loginUser", async (req, res) => {
             personaHistory: user.personaHistory,
             innerDialogueHistory: user.innerDialogueHistory,
             personaDialogueHistory: user.personaDialogueHistory,
+            userPersonaChatHistory: user.userPersonaChatHistory,
         };
         const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
         user.currentSessionId = currentSessionId;

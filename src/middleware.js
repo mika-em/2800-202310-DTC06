@@ -81,12 +81,8 @@ const dialogueFilters = [{
     link: '/dialogue/inner-dialogue'
 },
 {
-    name: 'Conversation',
-    link: '/persona/conversation'
-},
-{
     name: 'User-Persona Chat',
-    link: '/persona/user-persona-chat'
+    link: '/dialogue/user-persona-chat'
 }
 ];
 

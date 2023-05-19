@@ -7,15 +7,14 @@
     <!-- Existing chat messages -->
     <div class="row">
         <% for (var i = 0; i < dialogueHistory.length; i++) { %>
-        <% if (dialogueHistory[i].sessionId === sessionId) { %>
+        <!-- <.% if (dialogueHistory[i].sessionId === sessionId) { %> -->
         <!-- Filter by session ID -->
         <div class="col-12" id="userInput">
-            <%= "User:" + "&nbsp;" + dialogueHistory[i].userPrompt %>
+            <%= "User: " + dialogueHistory[i].userPrompt %>
         </div>
         <div class="col-12" id="botOutput">
-            <%= "Bot:" + "&nbsp;" + dialogueHistory[i].botResponse %>
+            <%= "Bot: " + dialogueHistory[i].botResponse %>
         </div>
-        <% } %>
         <% } %>
     </div>
 </div>

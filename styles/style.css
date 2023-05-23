@@ -145,7 +145,8 @@ hr {
   height: 1px;
 }
 
-button.save-icon {
+button.save-icon,
+button.dialogue-icon {
   background: none;
   border: none;
   cursor: pointer;

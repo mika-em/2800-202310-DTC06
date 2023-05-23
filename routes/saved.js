@@ -32,5 +32,19 @@ router.get('/saved/persona', async (req, res) => {
     res.render("../views/saved/saved-persona", { savedPersona: savedPersona });
 });
 
+let personaList = [];
+
+router.use('/persona', async (req, res, next) => {
+    req.session.personaList = personaList;
+    next();
+});
+
+router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
+    const persona = req.body.persona
+    console.log(persona);
+    personaList.push(persona);
+
+    res.render("../views/saved/saved-dialogue-filters");
+});
 
 module.exports = router;

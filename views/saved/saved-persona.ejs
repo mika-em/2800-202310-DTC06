@@ -10,9 +10,10 @@
 </div>
 </div>
 
-<div class="container pt-5" style="padding-bottom: 100px;">
+<div class="container mt-5" style="padding-bottom: 100px; padding-top: 100px;">
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <% for (var i=0; i<savedPersona.length; i++) { %>
+    <input class="form-check-input position-absolute start-0 mx-5 p-3" type="checkbox" value="<%- savedPersona[i].persona %>" id="flexCheckDefault" name="persona">
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false" aria-controls="flush-collapse<%- [i] %>">
@@ -20,8 +21,12 @@
         </button>
       </h2>
       <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <form action="/persona/saved-persona/dialogue-filters" method="post">
+          <input type="hidden" name="persona" value="<%- savedPersona[i].persona %>" />
+          <button class="btn position-absolute top-1 end-0 m-3" type="submit"><img src="../images/icons/dialogue.png"></button>
+        </form>
         <div class="accordion-body">
-            <p class="card-text"><%- savedPersona[i].persona %></p>
+          <p class="card-text"><%- savedPersona[i].persona %></p>
           <!-- <form action="/persona/chat" method="post"></form>
           <e% for (var j=0; j<savedPersona[i].parameterSet.length; j++) { %>
           <div class="mb-3">

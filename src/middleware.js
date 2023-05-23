@@ -19,28 +19,28 @@ const navLinks = [{
 {
     name: 'Persona',
     link: '/persona',
-    icon: './images/icons/persona.png',
+    icon: 'border_color',
     upperName: 'PERSONA',
     description: 'Create a character with unique personality traits and a backstory.'
 },
 {
     name: 'Dialogue',
     link: '/dialogue',
-    icon: './images/icons/dialogue.png',
+    icon: 'forum',
     upperName: 'DIALOGUE',
     description: 'Create a conversation between two characters.'
 },
 {
     name: 'Saved',
     link: '/saved',
-    icon: './images/icons/saved.png',
+    icon: 'collections_bookmark',
     upperName: 'SAVED',
     description: 'Save your character prompts, dialogue scripts, and unique prompts.'
 },
 {
     name: 'Profile',
     link: '/profile',
-    icon: './images/icons/profile.png',
+    icon: 'account_circle',
     upperName: 'PROFILE',
     description: 'Access your profile and account settings.'
 },

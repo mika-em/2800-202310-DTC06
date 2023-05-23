@@ -12,10 +12,10 @@
   align-items: center;
 }
 
-.icon {
-  /* border: 1px solid black; */
+.icon {  
   color: white;
 }
+
 
 .icon:hover {
   background-color: #81ffd9;

@@ -1,9 +1,6 @@
 <!-- Home page for logged in users -->
-
 <!-- navbar -->
 <%-include ("./partials/header-internal.ejs")%>
-
-
 
 <!-- content -->
 <!-- display picture and name  -->
@@ -15,9 +12,7 @@
     <h1 id="display-name"><%-name%></h1>
   </div>
 
-  
-  <!-- cards -->
-  
+  <!-- cards -->  
   <div class="container-lg align-item-center text-center">
     <div class="row">
       <% for (var i=1; i < locals.navLinks.length; i++) { %>

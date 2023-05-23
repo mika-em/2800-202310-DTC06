@@ -4,12 +4,12 @@
 
 .editicon {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  background-color: whitesmoke;
   padding: 10px;
+  right: 100px;
+  bottom: 50px;
+  background-color: whitesmoke;
   border-style: solid 10px black;
-  border-radius: 100%;
+  border-radius: 100%
 }
 
 .editUserImage {
@@ -37,9 +37,8 @@
 
 .editUserImage span {
   display: inline-block;
-  background-image: url("../images/edit.png");
-  padding-top: 5.5em;
-  padding-bottom: 5.5em;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
 }
 
 form input[type="file"] {

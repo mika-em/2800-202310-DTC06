@@ -23,6 +23,20 @@ router.post('/upload', upload.single('fileToUpload'), (req, res) => {
     res.send('File uploaded successfully.');
 });
 
+router.post('/upload', upload.single('fileToUpload'), (req, res) => {
+    const newUser = new usersModel({
+        profileImage: {
+            data: req.file.buffer,
+            contentType: req.file.mimetype,
+        }
+    });
+    newUser.save().then(() => {
+        res.send('File uploaded successfully.');
+    }).catch((e) => {
+        console.log('Error saving user profile', error);
+        res.status(400).send('Error saving user profile');
+    });
+});
 
 
 

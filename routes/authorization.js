@@ -97,10 +97,6 @@ router.post("/loginUser", async (req, res) => {
             PersonaPersonaChatHistory: user.PersonaPersonaChatHistory,
         };
         //push an empty array to the user's persona persona chat history
-        user.PersonaPersonaChatHistory.push({
-            userPrompt: "",
-            personaPrompt: ""
-        });
 
         const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
         user.currentSessionId = currentSessionId;

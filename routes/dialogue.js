@@ -50,7 +50,10 @@ router.get('/dialogue/inner-dialogue', (req, res) => {
 });
 
 router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
-    const persona = req.body.persona || "random";
+    const currentUsername = req.session.user.username;
+    const savedPersona = req.session.persona
+
+    const persona = savedPersona || req.body.persona || "random";
     const situation = req.body.situation || "random";
     const plot = req.body.plot || "random";
 
@@ -58,8 +61,6 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
 
     const responseData = await callOpenAIAPi(prompt);
 
-    const currentUsername = req.session.user.username;
-    console.log(currentUsername)
 
     await User.updateOne({
         username: currentUsername
@@ -108,7 +109,7 @@ router.get('/dialogue/user-persona-chat', async (req, res) => {
 });
 
 router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
-    const name = req.body.name || "random";
+    const persona = req.body.persona || "random";
     const chat = req.body.chat || "random";
 
     const prompt = `Pretend you're a character described as ${name} after it is told ${chat}.`;
@@ -189,7 +190,7 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 //Persona to Persona stuff
 
 
-//User Persona Chat
+//Persona Persona Page
 router.get('/dialogue/persona-to-persona-chat', async (req, res) => {
     res.render("./dialogue/personaToPersona");
 });
@@ -230,7 +231,7 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     });
 });
 
-//Chat for User Persona Chat
+//Chat for Persona to Persona 
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username

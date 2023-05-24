@@ -44,9 +44,15 @@ router.use('/persona', async (req, res, next) => {
 });
 
 router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
-    const persona = req.body.persona
-    console.log(persona);
-    personaList.push(persona);
+    const savedPersona = req.body.persona // persona is an array
+    console.log("this is the saved persona" + savedPersona); 
+    personaList.push(savedPersona);
+    console.log("this is the persona list" + personaList);
+
+    req.session.persona = savedPersona;
+    console.log("this is the saved persona" + savedPersona);
+
+
 
     res.render("./dialogue/dialogueFilters", {
         output: null
@@ -90,6 +96,8 @@ router.post('/saved/persona/save-as-pdf', (req, res) => {
     // res.render("../views/saved/saved-persona");
     res.send("PDF saved")
 });
+
+//Saved Dialogue
 
 
 module.exports = router;

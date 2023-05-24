@@ -28,10 +28,7 @@ router.get('/saved/persona', async (req, res) => {
         userId: userID
     });
 
-    console.log(savedPersona)
-    console.log(savedPersona[0].persona)
-
-    res.render("../views/saved/saved-persona", { savedPersona: savedPersona });
+    res.render("./saved/saved-persona", { savedPersona: savedPersona });
 });
 
 let personaList = [];

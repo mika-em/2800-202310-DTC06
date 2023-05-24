@@ -94,22 +94,17 @@ router.post("/loginUser", async (req, res) => {
             innerDialogueHistory: user.innerDialogueHistory,
             personaDialogueHistory: user.personaDialogueHistory,
             userPersonaChatHistory: user.userPersonaChatHistory,
+            PersonaPersonaChatHistory: user.PersonaPersonaChatHistory,
         };
+        //push an empty array to the user's persona persona chat history
+        user.PersonaPersonaChatHistory.push({
+            userPrompt: "",
+            personaPrompt: ""
+        });
+
         const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
         user.currentSessionId = currentSessionId;
         await user.save();
-
-
-        // const dialogue = new Dialogue({
-        //     userId: user._id, // Assuming user._id is the ObjectId of the current user
-        //     dialogueSaved: [{
-        //         userPrompt: "",
-        //         botResponse: ""
-
-        //     }]
-        // });
-
-        // await dialogue.save();
 
         console.log(req.session.user.name)
 
@@ -119,7 +114,6 @@ router.post("/loginUser", async (req, res) => {
         })
     } else {
         return res.status(400).render("../views/error/400")
-        // return res.status(400).send("Invalid email/username or password.");
     }
 });
 

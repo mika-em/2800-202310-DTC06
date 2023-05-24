@@ -31,7 +31,9 @@ router.get('/saved/persona', async (req, res) => {
     console.log(savedPersona)
     console.log(savedPersona[0].persona)
 
-    res.render("../views/saved/saved-persona", { savedPersona: savedPersona });
+    res.render("../views/saved/saved-persona", {
+        savedPersona: savedPersona
+    });
 });
 
 let personaList = [];
@@ -46,7 +48,9 @@ router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
     console.log(persona);
     personaList.push(persona);
 
-    res.render("../dialogue/dialogueFilters");
+    res.render("./dialogue/dialogueFilters", {
+        output: null
+    });
 });
 
 router.post('/saved/persona/save-as-pdf', (req, res) => {
@@ -58,25 +62,27 @@ router.post('/saved/persona/save-as-pdf', (req, res) => {
 
     // set font style
     doc.font('Courier');
-    
+
     // pipe to a writable stream which would save the result into the same directory
     doc.pipe(fs.createWriteStream('your_personas.pdf'));
 
-    doc.image('./images/invsona/invsona.png', { 
+    doc.image('./images/invsona/invsona.png', {
         fit: [100, 100],
         align: 'center',
     });
 
-    doc.text('Your Personas by Invsona', { 
-        bold: true, 
+    doc.text('Your Personas by Invsona', {
+        bold: true,
         underline: true,
-        align: 'center' 
+        align: 'center'
     });
 
     // Encode the personaList to handle special characters
     // const encodedPersonaList = personaList.replaceAll('/n', '<br>');
 
-    doc.text(personaList, { align: 'center' });
+    doc.text(personaList, {
+        align: 'center'
+    });
 
     // write out file
     doc.end();

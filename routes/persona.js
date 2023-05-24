@@ -99,8 +99,8 @@ router.get('/persona/saved-prompt', async (req, res) => {
         userId: userID
     });
 
-    console.log(savedPromptParameter)
-    console.log(savedPromptParameter[0].parameterSet[0])
+    // console.log(savedPromptParameter)
+    // console.log(savedPromptParameter[0].parameterSet[0])
     res.render("./persona/savedPrompt", { savedPromptParameter: savedPromptParameter });
 });
 

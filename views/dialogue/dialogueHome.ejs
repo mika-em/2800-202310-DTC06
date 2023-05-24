@@ -2,28 +2,44 @@
 <!-- header and empty bar-->
 <%-include ("../partials/header-dialogue.ejs")%>
 <%- include ("../partials/emptybackbar.ejs") %>
-<div class="col text-center">
-    <h1>DIALOGUE</h1>
-  </div>
-</div>
-</div>
-</div>
 
-<!-- content -->
-<div class="container-fluid" style="padding-top: 200px;">
-    <div>
-        <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
-        <div class="row">
-            <a class="py-5 btn btn-secondary"
-                href="<%- locals.dialogueLinks[i].link %>"><%- locals.dialogueLinks[i].name %></a>
-        </div>
-        <br>
-        <% } %>
+
+    <div class="col text-center mx-5">
+        <h1>DIALOGUE</h1>
     </div>
-</div>
+    <br>
+    <br>
+    <br>
 
-
-
-<!-- nav bar and footer -->
-<%-include ("../partials/navbar.ejs")%>
-<%-include ("../partials/footer.ejs")%>
+    
+    <!-- <section class="container"> -->
+        <div class="card">
+            <div class="card content text-center" style="padding-top: 80px; padding-bottom: 50px;">
+                <h1>Create a Dialogue</h1>
+                <p>Use a persona you created to develop a dialogue ....</p>
+            </div>
+        </div>
+        <!-- </section> -->
+        
+        <!-- content -->
+        <div class="container-fluid" style="padding-top: 100px;">
+            <div>
+                <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
+                    <div class="row">
+                        <a class="py-5 btn btn-secondary"
+                        href="<%- locals.dialogueLinks[i].link %>">
+                        <%- locals.dialogueLinks[i].name %>
+                        <br>
+                        <%- locals.dialogueLinks[i].description %></a>
+                    </div>
+                    <br>
+                    <% } %>
+                </div>
+            </div>
+            
+            
+            
+        </body>
+            <!-- nav bar and footer -->
+            <%-include ("../partials/navbar.ejs")%>
+            <%-include ("../partials/footer.ejs")%>

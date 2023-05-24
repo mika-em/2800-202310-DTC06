@@ -3,6 +3,29 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/users");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "./public/uploads/");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({storage: storage});
+
+router.use(express.static("public"));
+
+router.post('/upload', upload.single('fileToUpload'), (req, res) => {
+    const file = req.file;
+    res.send('File uploaded successfully.');
+});
+
+
+
+
 // Home page
 router.get("/home", (req, res) => {
     res.render("home", {

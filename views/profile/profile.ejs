@@ -5,17 +5,17 @@
 <div class="container-fluid">
       <div class="container text-center align-item-center pt-4" id="decor_user">
         <div class="pb-4 pt-5">
-          <form action="upload.png" method="post" enctype="multipart/form-data">
+          <form action="/upload" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">
               <div class="editUserImage"
-                style="background-image: url('../images/cats/cat_placeholder.png')"
-              >
+                style="background-image: url('../images/cats/cat_placeholder.png')">
                 <span> 
                   <span class="material-symbols-rounded">edit</span>
                   Edit Profile Picture</span>
               </div>
             </label>
-            <input type="File" name="fileToUpload" id="fileToUpload">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload" name="submit" hidden>
           </form>
           <span class="material-symbols-rounded editicon">edit</span>
         </div>

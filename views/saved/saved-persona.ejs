@@ -8,7 +8,11 @@
   <h1 class="align-middle">SAVED PERSONA</h1>
   <form id="savePDF" action="/saved/persona/save-as-pdf" method="post">
     <input id=savePDFInput type="hidden" name="personaList" value="" />
-    <button class="btn btn-sm position-absolute top-50 end-0 translate-middle material-icons" id="savePDFButton">picture_as_pdf</button>
+    <button class="btn btn-sm position-absolute top-50 end-0 translate-middle material-icons" id="savePDFButton" disabled>picture_as_pdf</button>
+  </form>
+  <form id="savePDF" action="/persona/saved-persona/dialogue-filters" method="post">
+    <input id=gotoDialogueInput type="hidden" name="personaList" value="" />
+    <button class="btn btn-sm material-icons text-center" id="gotoDialogueButton" disabled>chat</button>
   </form>
 </div>
 </div>
@@ -28,11 +32,7 @@
       </h2>
       <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          <form action="/persona/saved-persona/dialogue-filters" method="post">
-            <input type="hidden" name="persona" value="<%- savedPersona[i].persona %>" />
-            <button class="btn btn-sm position-absolute top-1 end-0 mx-3" type="submit"><img src="../images/icons/dialogue.png"></button>
-          </form>
-          <p class="card-text my-5"><%- savedPersona[i].persona %></p>
+          <p class="card-text my-3"><%- savedPersona[i].persona %></p>
         </div>
       </div>
     </div>
@@ -55,10 +55,19 @@
       console.log(personaList)
       if (personaList.length === 0) {
         $('#savePDFButton').attr('disabled', true)
+        $('#gotoDialogueButton').attr('disabled', true)
+      } else if (personaList.length > 2){
+        $('#gotoDialogueButton').attr('disabled', true)
       } else {
+        // Enable the buttons
         $('#savePDFButton').attr('disabled', false)
-        $('#savePDFInput').val(personaList) // Set the value of the hidden input to the personaList array
+        $('#gotoDialogueButton').attr('disabled', false)
+
+        // Set the value of the hidden input to the personaList array
+        $('#savePDFInput').val(JSON.stringify(personaList))
+        $('#gotoDialogueInput').val(JSON.stringify(personaList))
         console.log("test", $('#savePDFInput').val())
+        console.log("test2", $('#gotoDialogueInput').val())
       }
     })
   })

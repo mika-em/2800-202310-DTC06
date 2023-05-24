@@ -55,7 +55,7 @@ router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
 router.post('/saved/persona/save-as-pdf', async (req, res) => {
     // Encode the personaList to handle special characters
     const personaList = req.body.personaList;
-    const convertedPersonaList = JSON.parse(personaList.replaceAll('/n', '<br>'));
+    const convertedPersonaList = JSON.parse(personaList);
     console.log(convertedPersonaList);
 
     // instantiate the library

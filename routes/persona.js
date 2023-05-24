@@ -60,7 +60,6 @@ router.post('/persona/chat/general', async (req, res) => {
     console.log(prompt);
 
     const responseData = await callOpenAIAPi(prompt);
-    const convertedResponseData = responseData.replaceAll("\n", "<br>");
 
     const currentUsername = req.session.user.username;
     console.log(currentUsername)
@@ -71,7 +70,7 @@ router.post('/persona/chat/general', async (req, res) => {
         $push: {
             personaHistory: {
                 userPrompt: prompt,
-                botResponse: convertedResponseData
+                botResponse: responseData
             }
         }
     })
@@ -169,15 +168,14 @@ router.post('/persona/chat', async (req, res) => {
     console.log(prompt);
 
     const responseData = await callOpenAIAPi(prompt);
-    const convertedResponseData = responseData.replaceAll("\n", "<br>");
-
+    
     await User.updateOne({
         username: currentUsername
     }, {
         $push: {
             personaHistory: {
                 userPrompt: prompt,
-                botResponse: convertedResponseData
+                botResponse: responseData
             }
         }
     })

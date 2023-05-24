@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
 const Persona = require("../models/personaList");
+const pdfkit = require("pdfkit");
+const fs = require("fs");
 
 router.get('/saved', (req, res) => {
     res.render("../views/saved/saved");
@@ -44,7 +46,44 @@ router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
     console.log(persona);
     personaList.push(persona);
 
-    res.render("../views/saved/saved-dialogue-filters");
+    res.render("../dialogue/dialogueFilters");
 });
+
+router.post('/saved/persona/save-as-pdf', (req, res) => {
+    const personaList = req.body.personaList;
+    console.log(personaList);
+
+    // instantiate the library
+    let doc = new pdfkit();
+
+    // set font style
+    doc.font('Courier');
+    
+    // pipe to a writable stream which would save the result into the same directory
+    doc.pipe(fs.createWriteStream('your_personas.pdf'));
+
+    doc.image('./images/invsona/invsona.png', { 
+        fit: [100, 100],
+        align: 'center',
+    });
+
+    doc.text('Your Personas by Invsona', { 
+        bold: true, 
+        underline: true,
+        align: 'center' 
+    });
+
+    // Encode the personaList to handle special characters
+    // const encodedPersonaList = personaList.replaceAll('/n', '<br>');
+
+    doc.text(personaList, { align: 'center' });
+
+    // write out file
+    doc.end();
+
+    // res.render("../views/saved/saved-persona");
+    res.send("PDF saved")
+});
+
 
 module.exports = router;

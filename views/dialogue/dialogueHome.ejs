@@ -14,7 +14,8 @@
         <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
         <div class="row">
             <a class="py-5 card btn btn-light"
-                href="<%- locals.dialogueLinks[i].link %>"><%- locals.dialogueLinks[i].name %></a>
+                href="<%- locals.dialogueLinks[i].link %>">
+                <h5><%- locals.dialogueLinks[i].name %></h5></a>
         </div>
         <br>
         <% } %>

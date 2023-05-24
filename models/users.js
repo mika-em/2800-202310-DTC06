@@ -20,16 +20,11 @@ const userSchema = new mongoose.Schema(
             drop: Boolean,
             race: Boolean,
         },
-        profileImage:{
-            data:{
-                type: Buffer,
-                required: true,
-            },
-            contentType:{
-                type: String,
-                required: true,
-            }
-        }
+        profileImage: {
+            data: Buffer,
+            fileName: String,
+            contentType: String,
+        },
     },
     // this is the name of the collection in the database
     { collection: 'users' }

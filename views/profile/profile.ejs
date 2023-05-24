@@ -3,25 +3,31 @@
 <%-include ('../partials/header-internal.ejs')%>
 
 <div class="container-fluid">
-      <div class="container text-center align-item-center pt-4" id="decor_user">
-        <div class="pb-4 pt-5">
-          <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="fileToUpload">
-              <div class="editUserImage"
-                style="background-image: url('../images/cats/cat_placeholder.png')">
-                <span> 
-                  <span class="material-symbols-rounded">edit</span>
-                  Edit Profile Picture</span>
-              </div>
-            </label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload" name="submit" hidden>
-          </form>
-          <span class="material-symbols-rounded editicon">edit</span>
-        </div>
-      </div>
-
+  <div class="container text-center align-item-center pt-4" id="decor_user">
+    <div class="pb-4 pt-5">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileToUpload">
+          <div class="editUserImage" 
+            <% if (profileImage) { %>
+              style="background-image: url(data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>)"
+            <% } else { %>
+              style="background-image: url(../images/cats/cat_placeholder.png)"
+            <% } %>
+            id="userImage">
+    
+            <span> 
+              <span class="material-symbols-rounded">edit</span>
+              Edit Profile Picture
+            </span>
+          </div>
+        </label>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input class="material-symbols-rounded editicon" type="submit" value="Upload" name="submit">
+      </form>
+    </div>
+  </div>
   
+
       <!-- Menu -->
       <div class="container px-3">
 

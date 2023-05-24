@@ -14,23 +14,25 @@ router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
       const user = await User.findOne({ user: req.session.username });
   
       if (user) {
-        user.profileImage = {
+        const profileImage = {
           data: req.file.buffer,
           fileName: req.file.originalname,
           contentType: req.file.mimetype
         };
   
+        user.profileImage = profileImage;
+
         const result = await user.save();
+
   
         console.log(result.profileImage.fileName);
-  
-        req.session.user.profileImage = result.profileImage; // Update the profileImage in the session
+
   
         res.render("../views/profile/profile", {
             name: req.session.user.name,
-            profileImage: req.session.user.profileImage,
+            profileImage: profileImage,
             });
-            
+
       } else {
         // Handle case where user is not found
         res.status(404).send("User not found.");
@@ -41,27 +43,51 @@ router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
       res.status(500).send("Error occurred while updating the profile image.");
     }
   });
-  
-
 
 // Home page
-router.get("/home", (req, res) => {
-    
-    res.render("home", {
-      name: req.session.user.name,
-      profileImage: req.session.user.profileImage,
-    });
+router.get("/home", async (req, res) => {
+    try {
+      const user = await User.findOne({ user: req.session.username });
+  
+      if (user) {
+        res.render("home", {
+          name: req.session.user.name,
+          profileImage: user.profileImage,
+        });
+      } else {
+        // Handle case where user is not found
+        res.status(404).send("User not found.");
+      }
+    } catch (error) {
+      // Handle error if database query fails
+      console.error(error);
+      res.status(500).send("Error occurred while fetching user data.");
+    }
   });
+  
 
 // Profile page
-router.get("/profile", (req, res) => {
+router.get("/profile", async (req, res) => {
+    try {
+      const user = await User.findOne({ user: req.session.username });
+  
+      if (user) {
+        res.render("../views/profile/profile", {
+          name: user.name,
+          profileImage: user.profileImage,
+        });
+      } else {
+        // Handle case where user is not found
+        res.status(404).send("User not found.");
+      }
+    } catch (error) {
+      // Handle error if database query fails
+      console.error(error);
+      res.status(500).send("Error occurred while fetching user data.");
+    }
+  });
 
-    res.render("../views/profile/profile", {
-        name: req.session.user.name,
-        profileImage: req.session.user.profileImage,
-    });
-});
-
+  
 // Account settings page
 router.get("/profile/account-settings", async (req, res) => {
     const currentUser = await User.findOne({

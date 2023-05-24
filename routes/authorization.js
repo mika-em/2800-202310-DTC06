@@ -30,8 +30,6 @@ router.post("/signup", async (req, res) => {
     saltRounds
   );
 
-  
-    
   try {
     await User.create({
       name: name,
@@ -43,8 +41,8 @@ router.post("/signup", async (req, res) => {
       profileImage: {
         data: null,
         fileName: "",
-        contentType:"",
-    },
+        contentType: "",
+      },
     });
     console.log("User created");
     res.redirect("/");
@@ -98,7 +96,7 @@ router.post("/loginUser", async (req, res) => {
       innerDialogueHistory: user.innerDialogueHistory,
       personaDialogueHistory: user.personaDialogueHistory,
       userPersonaChatHistory: user.userPersonaChatHistory,
-    profileImage: user.profileImage,
+      profileImage: user.profileImage,
     };
     const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
     user.currentSessionId = currentSessionId;
@@ -117,10 +115,25 @@ router.post("/loginUser", async (req, res) => {
 
     console.log(req.session.user.name);
 
-    return res.render("home", {
-      name: req.session.user.name,
-      profileImage: req.session.user.profileImage,
-    });
+    try {
+        const user = await User.findOne({ user: req.session.username });
+    
+        if (user) {
+          res.render("home", {
+            name: req.session.user.name,
+            profileImage: user.profileImage,
+          });
+        } else {
+          // Handle case where user is not found
+          res.status(404).send("User not found.");
+        }
+      } catch (error) {
+        // Handle error if database query fails
+        console.error(error);
+        res.status(500).send("Error occurred while fetching user data.");
+      }
+
+
   } else {
     return res.status(400).render("../views/error/400");
     // return res.status(400).send("Invalid email/username or password.");
@@ -259,13 +272,24 @@ router.post("/500", (req, res) => {
 });
 
 //home page
-router.get("/home", (req, res) => {
+router.get("/home", async (req, res) => {
+  try {
+    const user = await User.findOne({ user: req.session.username });
 
-    res.render("home", {
-      name: req.session.user.name,
-      profileImage: req.session.user.profileImage,
-    });
-  });
-  
+    if (user) {
+      res.render("home", {
+        name: req.session.user.name,
+        profileImage: user.profileImage,
+      });
+    } else {
+      // Handle case where user is not found
+      res.status(404).send("User not found.");
+    }
+  } catch (error) {
+    // Handle error if database query fails
+    console.error(error);
+    res.status(500).send("Error occurred while fetching user data.");
+  }
+});
 
 module.exports = router;

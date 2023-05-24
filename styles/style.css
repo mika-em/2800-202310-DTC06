@@ -11,13 +11,28 @@ body {
   background-size: cover;
 }
 
+.invsona-bg-dark{
+  background: url("../images/background/bg-dark.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
 .persona-bg{
   background: url("../images/background/persona_bg.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 
+.persona-bg-dark{
+  background: url("../images/background/persona_bg_dark.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
 .dialogue-bg{
   background: url("../images/background/dialogue_bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+}
+
+.dialogue-bg-dark{
+  background: url("../images/background/dialogue_bg_dark.jpg") no-repeat center top fixed;
   background-size: cover;
 }
 

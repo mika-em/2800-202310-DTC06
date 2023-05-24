@@ -47,19 +47,19 @@ const navLinks = [{
 ];
 
 const personaLinks = [{
-    name: 'General prompt presets',
+    name: 'General presets',
     link: '/persona/general-prompt'
 },
 {
-    name: 'Saved prompt presets',
+    name: 'Saved presets',
     link: '/persona/saved-prompt'
 },
 {
-    name: 'Create a new prompt preset',
+    name: 'Create a new preset',
     link: '/persona/new-prompt'
 },
 {
-    name: 'Write my own prompt',
+    name: 'Write my own preset',
     link: '/persona/chat'
 },
 ];

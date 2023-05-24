@@ -4,6 +4,17 @@ function enableDarkMode() {
   $("#home").attr("src", "../images/invsona/invsona.png");
   $(".backnav").removeClass("text-bg-light").addClass("text-bg-dark");
   $(".navbar").removeClass("bg-light").addClass("bg-dark");
+  $(".card").removeClass("bg-light").addClass("bg-dark");
+  $(".card").removeClass("text-dark").addClass("text-light");
+  $(".card").removeClass("border-light").addClass("border-dark");
+  $(".invsona-bg").addClass("invsona-bg-dark");
+  $(".invsona-bg").removeClass("invsona-bg");
+  $(".persona-bg").addClass("persona-bg-dark");
+  $(".persona-bg").removeClass("persona-bg");
+  $(".dialogue-bg").addClass("dialogue-bg-dark");
+  $(".dialogue-bg").removeClass("dialogue-bg");
+  $("#display-name").addClass("text-light");
+
 }
 
 // Function to disable dark mode
@@ -11,6 +22,17 @@ function disableDarkMode() {
   $("#home").attr("src", "../images/invsona/home.png");
   $(".backnav").removeClass("text-bg-dark").addClass("text-bg-light");
   $(".navbar").removeClass("bg-dark").addClass("bg-light");
+  $(".card").removeClass("bg-dark").addClass("bg-light");
+  $(".card").removeClass("text-light").addClass("text-dark");
+  $(".card").removeClass("border-dark").addClass("border-light");
+  $(".invsona-bg-dark").addClass("invsona-bg");
+  $(".invsona-bg-dark").removeClass("invsona-bg-dark");
+  $(".persona-bg-dark").addClass("persona-bg");
+  $(".persona-bg-dark").removeClass("persona-bg-dark");
+  $(".dialogue-bg-dark").addClass("dialogue-bg");
+  $(".dialogue-bg-dark").removeClass("dialogue-bg-dark");
+  $("#display-name").removeClass("text-light");
+
 }
 
 // Check if dark mode is enabled in local storage

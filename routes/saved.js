@@ -32,19 +32,24 @@ router.get('/saved/persona', async (req, res) => {
     res.render("./saved/saved-persona", { savedPersona: savedPersona });
 });
 
-let personaList = [];
+let personaServerList = [];
 
 router.use('/persona', async (req, res, next) => {
-    req.session.personaList = personaList;
+    req.session.personaServerList = personaServerList;
     next();
 });
 
 router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
-    const persona = req.body.persona
-    console.log(persona);
-    personaList.push(persona);
+    const personaList = req.body.personaList;
+    const parsedPersonaList = JSON.parse(personaList);
+    console.log(parsedPersonaList);
 
-    res.render("./dialogue/dialogueFilters");
+    for (let i = 0; i < parsedPersonaList.length; i++) {
+        personaServerList.push(parsedPersonaList[i]);
+    }
+
+    console.log(personaServerList)
+    res.render("./dialogue/dialogueHome");
 });
 
 router.post('/saved/persona/save-as-pdf', async (req, res) => {

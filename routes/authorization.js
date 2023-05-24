@@ -119,7 +119,7 @@ router.post("/loginUser", async (req, res) => {
 
     return res.render("home", {
       name: req.session.user.name,
-        profileImage: req.session.user.profileImage,
+      profileImage: req.session.user.profileImage,
     });
   } else {
     return res.status(400).render("../views/error/400");
@@ -260,9 +260,6 @@ router.post("/500", (req, res) => {
 
 //home page
 router.get("/home", (req, res) => {
-
-    console.log(req.session.user.name);
-    console.log(req.session.user.profileImage);
 
     res.render("home", {
       name: req.session.user.name,

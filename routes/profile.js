@@ -10,32 +10,43 @@ const upload = multer({storage: multer.memoryStorage()})
 
 
 router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
-
-    const result = await User.create({
-        profileImage:
-        {
-            data: req.file.buffer,
-            fileName: req.file.originalname,
-            contentType: req.file.mimetype
-        }
-    });
-
-    console.log(req.session.user.name);
-    console.log(req.session.user.profileImage);
-
-    res.render("../views/profile/profile", {
-        name: req.session.user.name,
-        profileImage: result.profileImage
-    });
-    
-    // res.send(`<img src="data:${result.profileImage.contentType};base64,${result.profileImage.data.toString('base64')}">`)
-})
-
+    try {
+      const user = await User.findOne({ user: req.session.username });
+  
+      if (user) {
+        user.profileImage = {
+          data: req.file.buffer,
+          fileName: req.file.originalname,
+          contentType: req.file.mimetype
+        };
+  
+        const result = await user.save();
+  
+        console.log(result.profileImage.fileName);
+  
+        req.session.user.profileImage = result.profileImage; // Update the profileImage in the session
+  
+        res.render("../views/profile/profile", {
+            name: req.session.user.name,
+            profileImage: req.session.user.profileImage,
+            });
+            
+      } else {
+        // Handle case where user is not found
+        res.status(404).send("User not found.");
+      }
+    } catch (error) {
+      // Handle error if database update fails
+      console.error(error);
+      res.status(500).send("Error occurred while updating the profile image.");
+    }
+  });
+  
 
 
 // Home page
 router.get("/home", (req, res) => {
-
+    
     res.render("home", {
       name: req.session.user.name,
       profileImage: req.session.user.profileImage,
@@ -44,6 +55,7 @@ router.get("/home", (req, res) => {
 
 // Profile page
 router.get("/profile", (req, res) => {
+
     res.render("../views/profile/profile", {
         name: req.session.user.name,
         profileImage: req.session.user.profileImage,

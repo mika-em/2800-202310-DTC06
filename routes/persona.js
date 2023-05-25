@@ -99,9 +99,9 @@ router.get('/persona/saved-prompt', async (req, res) => {
         userId: userID
     });
 
-    console.log(savedPromptParameter)
-    console.log(savedPromptParameter[0].parameterSet[0])
-    res.render("./persona/savedPrompt", { savedPromptParameter: savedPromptParameter });
+    res.render("./persona/savedPrompt", { 
+        savedPromptParameter: savedPromptParameter 
+    });
 });
 
 router.post('/persona/chat/preset-prompt', async (req, res) => {
@@ -191,7 +191,9 @@ router.post('/persona/new-prompt/saved', async (req, res) => {
         parameterSet: parameterSet,
         date: date
     });
-    res.render("./persona/newPrompt", { newParameter: newParameter })
+    res.render("./persona/newPrompt", { 
+        newParameter: newParameter 
+    })
 });
 
 

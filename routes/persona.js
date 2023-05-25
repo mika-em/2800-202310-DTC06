@@ -99,9 +99,35 @@ router.get('/persona/saved-prompt', async (req, res) => {
         userId: userID
     });
 
-    console.log(savedPromptParameter)
-    console.log(savedPromptParameter[0].parameterSet[0])
-    res.render("./persona/savedPrompt", { savedPromptParameter: savedPromptParameter });
+    res.render("./persona/savedPrompt", { 
+        savedPromptParameter: savedPromptParameter 
+    });
+});
+
+router.post('/persona/saved-prompt/delete', async (req, res) => {
+    const promptIDList = req.body.promptIDList;
+    console.log(promptIDList);
+    const parsedPromptIDList = JSON.parse(promptIDList);
+    console.log(parsedPromptIDList);
+
+    for (let i = 0; i < parsedPromptIDList.length; i++) {
+        await Parameter.deleteOne({
+            _id: parsedPromptIDList[i]
+        });
+    }
+
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const userID = currentUser._id;
+
+    const savedPromptParameter = await Parameter.find({
+        userId: userID
+    });
+
+    res.render("./persona/savedPrompt", {
+        savedPromptParameter: savedPromptParameter
+    });
 });
 
 router.post('/persona/chat/preset-prompt', async (req, res) => {
@@ -116,7 +142,7 @@ router.post('/persona/chat/preset-prompt', async (req, res) => {
         parameterList.push(`${name}: ${value}`);
     }
 
-    parameterInputs = parameterList.join(", ");
+    const parameterInputs = parameterList.join(", ");
     console.log(parameterInputs);
 
     const prompt = `Generate a random character with these attributes: ${parameterInputs}.`;
@@ -191,7 +217,9 @@ router.post('/persona/new-prompt/saved', async (req, res) => {
         parameterSet: parameterSet,
         date: date
     });
-    res.render("./persona/newPrompt", { newParameter: newParameter })
+    res.render("./persona/newPrompt", { 
+        newParameter: newParameter 
+    })
 });
 
 

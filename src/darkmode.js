@@ -16,6 +16,14 @@ function enableDarkMode() {
   $("#display-name").addClass("text-light");
   $(".main").addClass("btn-outline-dark");
   $(".main").removeClass("btn-outline-light");
+  $(".btn").addClass("bg-dark text-light");
+  $(".btn").removeClass("bg-light");
+  $("a").addClass("text-light");
+  $("h1").addClass("text-light");
+  $(".modal-content").removeClass("bg-dark").addClass("bg-light");
+  $("label").addClass("text-light");
+  $(".form-control").removeClass("bg-light").addClass("bg-dark");
+
 }
 
 // Function to disable dark mode
@@ -35,6 +43,13 @@ function disableDarkMode() {
   $("#display-name").removeClass("text-light");
   $(".main").addClass("btn-outline-light");
   $(".main").removeClass("btn-outline-dark");
+  $(".btn").addClass("bg-light text-dark");
+  $(".btn").removeClass("bg-dark");
+  $("a").removeClass("text-light");
+  $("h1").removeClass("text-light");
+  $(".modal-content").removeClass("bg-light").addClass("bg-dark");
+  $("label").removeClass("text-light");
+  $(".form-control").removeClass("bg-dark").addClass("bg-light");
 
 }
 

@@ -22,7 +22,7 @@
       <% for (var i=1; i < locals.navLinks.length; i++) { %>
         <div class="col-6 px-2">
           <a class="main btn btn-outline-light" href="<%- locals.navLinks[i].link %>">
-            <span class= "material-symbols-rounded pt-2 pb-1" style="opacity: 70%;"> <%-locals.navLinks[i].icon%></span>
+            <i class= "<%-locals.navLinks[i].icon%>" style="opacity: 100%;"></i>
               <p class="card-title" id="card-name"><%- locals.navLinks[i].upperName %></p>
               <p class="card-text" style="font-size: 8pt; width:140px; height: 50px;"><%- locals.navLinks[i].description %></p>
           </a><br><br>

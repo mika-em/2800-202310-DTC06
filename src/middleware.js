@@ -20,28 +20,28 @@ const navLinks = [{
 {
     name: 'Persona',
     link: '/persona',
-    icon: 'border_color',
+    icon: 'fa-solid fa-person-dots-from-line fa-lg',
     upperName: 'PERSONA',
     description: 'Create a character with unique personality traits and a backstory.'
 },
 {
     name: 'Dialogue',
     link: '/dialogue',
-    icon: 'forum',
+    icon: 'fa-solid fa-comment-dots fa-lg',
     upperName: 'DIALOGUE',
     description: 'Create a conversation between two characters.'
 },
 {
     name: 'Saved',
     link: '/saved',
-    icon: 'collections_bookmark',
+    icon: 'fa-solid fa-book-bookmark fa-lg',
     upperName: 'SAVED',
     description: 'Save your character prompts, dialogue scripts, and unique prompts.'
 },
 {
     name: 'Profile',
     link: '/profile',
-    icon: 'account_circle',
+    icon: 'fa-solid fa-circle-user fa-lg',
     upperName: 'PROFILE',
     description: 'Access your profile and account settings.'
 },
@@ -49,29 +49,35 @@ const navLinks = [{
 
 const personaLinks = [{
     name: 'General presets',
+    icon: 'fa-solid fa-user-astronaut fa-2xl',
     link: '/persona/general-prompt'
 },
 {
     name: 'Saved presets',
+    icon: 'fa-solid fa-floppy-disk fa-2xl',
     link: '/persona/saved-prompt'
 },
 {
     name: 'Create a new preset',
+    icon: 'fa-solid fa-circle-plus fa-2xl',
     link: '/persona/new-prompt'
 },
 {
     name: 'Write my own preset',
+    icon: 'fa-solid fa-pen-to-square fa-2xl',
     link: '/persona/chat'
 },
 ];
 
 const dialogueLinks = [{
     name: 'Start a new dialogue',
+    icon: 'fa-solid fa-comment-medical fa-2xl',
     link: '/dialogueFilters'
 },
 {
     name: 'Saved dialogues',
-    link: '/saved/dialogue'
+    icon: 'fa-solid fa-heart fa-2xl"',
+    link: '/persona/saved-dialogue'
 }
 ];
 
@@ -100,5 +106,4 @@ const savedPersonaDialogueFilters = [{
     name: 'Persona to Persona Conversation',
     link: '/saved/persona/dialogue/persona-to-persona-chat'
 }];
-
 

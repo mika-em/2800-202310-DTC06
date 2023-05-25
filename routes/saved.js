@@ -26,7 +26,9 @@ router.get('/saved/persona', async (req, res) => {
         userId: userID
     });
 
-    res.render("./saved/saved-persona", { savedPersona: savedPersona });
+    res.render("./saved/saved-persona", { 
+        savedPersona: savedPersona 
+    });
 });
 
 let personaServerList = [];
@@ -36,11 +38,36 @@ router.use('/persona', async (req, res, next) => {
     next();
 });
 
-router.post('/saved/persona/dialogueFilters', (req, res) => {
+router.post('/persona/saved-persona/delete-persona', async (req, res) => {
+    const personaIDList = req.body.personaIDList;
+    const parsedPersonaIDList = JSON.parse(personaIDList);
+    console.log(parsedPersonaIDList);
+
+    for (let i = 0; i < parsedPersonaIDList.length; i++) {
+        await Persona.deleteOne({
+            _id: parsedPersonaIDList[i]
+        });
+    }
+
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const userID = currentUser._id;
+
+    const savedPersona = await Persona.find({
+        userId: userID
+    });
+
+    res.render("./saved/saved-persona", {
+        savedPersona: savedPersona
+    });
+});
+
+router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
     const personaList = req.body.personaList;
     const parsedPersonaList = JSON.parse(personaList);
     console.log(parsedPersonaList);
-    
+
     for (let i = 0; i < parsedPersonaList.length; i++) {
         personaServerList.push(parsedPersonaList[i]);
     }

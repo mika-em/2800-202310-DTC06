@@ -4,6 +4,10 @@
 <%-include ("../partials/emptybackbar.ejs")%>
 <div class="col text-center">
   <h1>SAVED PROMPT</h1>
+  <form action="/persona/saved-prompt/delete" method="post">
+    <input id=deleteInput type="hidden" name="promptIDList" value="" />
+    <button class="btn btn-sm position-absolute top-50 end-0 translate-middle material-symbols-rounded text-center" id="deleteButton" disabled>delete</button>
+  </form>
 </div>
 </div>
 </div>
@@ -14,7 +18,10 @@
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false" aria-controls="flush-collapse<%- [i] %>">
-          <%- savedPromptParameter[i].title %>
+          <div class="form-check form-switch text-center">
+            <input class="form-check-input promptCheckbox" type="checkbox" id="<%- savedPromptParameter[i]._id %>">
+            <p class="card-title"><%- savedPromptParameter[i].title %></p>
+          </div>
         </button>
       </h2>
       <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -47,6 +54,29 @@
       // show card with loading indicator
       $("#loadingCard").removeClass("d-none");
       $("#accordionFlushExample").addClass("d-none");
+    });
+
+    let promptIDList = []
+
+    // Add event listener to the checkboxes
+    $('.promptCheckbox').on('click', async (event) => {
+      console.log("checked")
+      if (event.target.checked) {
+        promptIDList.push(event.target.id)
+      } else {
+        promptIDList.pop(event.target.id)
+      }
+      console.log(promptIDList)
+      if (promptIDList.length === 0) {
+        // disable delete button if there are no checkboxes checked
+        $('#deleteButton').attr('disabled', true)
+      } else {
+        // enable delete button if there are any checkboxes checked
+        $('#deleteButton').attr('disabled', false)
+      }
+      // Set the value of the hidden input to the personaList array
+      $('#deleteInput').val(JSON.stringify(promptIDList))
+      console.log("testy", $('#deleteInput').val())
     });
   });
 </script>

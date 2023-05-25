@@ -83,8 +83,8 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
         $push: {
             innerDialogueHistory: {
                 userPrompt: prompt,
-                botResponse: `${persona}: ${responseData}`,
-                response: responseData
+                botResponse: responseData,
+                
             }
         }
 
@@ -96,12 +96,14 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
 
     const innerDialogueHistory = currentUser.innerDialogueHistory
     console.log(innerDialogueHistory)
-
     res.render("dialogue/dialogueChat", {
-        placeholderText: "Write a prompt here...",
-        innerDialogueHistory: innerDialogueHistory
+        placeholderText: "Write a response here...",
+        innerDialogueHistory: currentUser.innerDialogueHistory,
+        personaServerList: persona || req.session.personaServerList
     });
+
 });
+
 
 //Inner Dialogue Chat
 router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
@@ -119,24 +121,26 @@ router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
 });
 
 router.post('/dialogue/chat/inner-dialogue/save', async (req, res) => {
-    const index = req.body.save;
-    const date = new Date();
-    const currentUser = await User.findOne({
-        username: req.session.user.username
-    });
-    const dialogue = currentUser.innerDialogueHistory[index].botResponse;
-
-    await Dialogue.create({
-        userId: currentUser._id,
-        dialogue: dialogue,
-        date: date
-    });
-
-    res.render("dialogue/dialogueChat", {
-        placeholderText: "Write a response here...",
-        innerDialogueHistory: currentUser.innerDialogueHistory
-    })
+const index = req.body.save;
+const date = new Date();
+const currentUser = await User.findOne({
+    username: req.session.user.username
 });
+const dialogue = currentUser.innerDialogueHistory[index].response;
+
+await Dialogue.create({
+    userId: currentUser._id,
+    dialogue: dialogue,
+    date: date
+});
+
+res.render("dialogue/dialogueChat", {
+    placeholderText: "Write a response here...",
+    innerDialogueHistory: currentUser.innerDialogueHistory,
+    personaServerList: persona || req.session.personaServerList
+});
+
+})
 
 
 //User Persona Chat
@@ -178,7 +182,8 @@ router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
 
     res.render("./dialogue/personaChat", {
         placeholderText: "What is your response?",
-        userPersonaChatHistory: userPersonaChatHistory
+        userPersonaChatHistory: userPersonaChatHistory,
+        personaServerList: req.session.personaServerList
     });
 });
 
@@ -195,7 +200,8 @@ router.get('/dialogue/chat/user-persona', async (req, res) => {
     res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
         userPersonaChatHistory: userPersonaChatHistory,
-        persona: persona // Pass persona to the template
+        persona: persona,
+        personaServerList: req.session.personaServerList
     });
 });
 
@@ -225,7 +231,8 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 
     res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
-        userPersonaChatHistory: userPersonaChatHistory
+        userPersonaChatHistory: userPersonaChatHistory,
+        personaServerList: req.session.personaServerList
     });
 });
 
@@ -248,7 +255,8 @@ router.post('/dialogue/chat/user-persona/save', async (req, res) => {
 
     res.render("dialogue/personaChat", {
         placeholderText: "Write a response here...",
-        userPersonaChatHistory: currentUser.userPersonaChatHistory
+        userPersonaChatHistory: currentUser.userPersonaChatHistory,
+        personaServerList: req.session.personaServerList
     })
 });
 

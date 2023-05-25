@@ -19,7 +19,7 @@
                 <div class="card text-center">
                     <div class="card-body">
                         <label class="card-title">Persona</label><br />
-                        <input class="form-control" type="text" name="persona" placeholder="Enter a persona you want to talk to!" />
+                        <input class="form-control" type="text" name="persona" placeholder="<% if (personaServerList && personaServerList.length > 0) { %><%= personaServerList %><% } else { %>Enter a persona description<% } %>" />
                     </div>
                 </div>
             </div>

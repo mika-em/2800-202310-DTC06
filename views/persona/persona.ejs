@@ -3,12 +3,13 @@
 
 <!-- content -->
 
-  <div class="container-fluid  px-5 mt-4" style="padding-top: 80px;">
+  <div class="container-fluid  px-5" style="padding-top: 50px;">
     <div>
       <% for (var i=0; i<locals.personaLinks.length; i++) { %>
       <div class="row">
-      <a class="card btn btn-light"
+      <a class="card btn btn-light pt-5"
       href="<%- locals.personaLinks[i].link %>">
+        <i class="<%-locals.personaLinks[i].icon%>"></i>
         <h5 class="p-4"><%- locals.personaLinks[i].name %></h5></a>
       </div>
       <br>

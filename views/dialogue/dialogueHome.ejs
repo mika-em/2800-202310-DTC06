@@ -9,13 +9,14 @@
 </div>
 
 <!-- content -->
-<div class="container-fluid px-5" style="padding-top: 180px;">
+<div class="container-fluid px-5" style="padding-top: 120px;">
     <div>
         <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
         <div class="row">
-            <a class="py-5 card btn btn-light"
+            <a class=" py-5 card btn btn-light"
                 href="<%- locals.dialogueLinks[i].link %>">
-                <h5><%- locals.dialogueLinks[i].name %></h5></a>
+                <i class="<%- locals.dialogueLinks[i].icon %>"></i>
+                <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5></a>
         </div>
         <br>
         <% } %>

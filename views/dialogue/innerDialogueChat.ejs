@@ -1,41 +1,36 @@
 <!-- header -->
-<%-include ("../partials/header-dialogue.ejs")%>
-<%- include ("../partials/emptybackbar.ejs") %>
+<%-include ("../partials/header-internal.ejs")%>
 
 <div class="container-fluid mb-5 pb-5" id="chatContainer">
   <!-- Existing chat messages -->
   <div class="row-fluid">
     <% for (var i=0; i<innerDialogueHistory.length; i++) { %>
-      <form action="/dialogue/chat/inner-dialogue/save" method="post">
-        <div class="col-12" id="botOutput">
-          <div class="card">
-            <!-- save button -->
-            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%- i %>">
-              star_border
-            </button>
-            <div class="card-body m-3">
-              <% if (innerDialogueHistory[i].response) { %>
-                <% var dialogueLines = innerDialogueHistory[i].botResponse.split('\n'); %>
-                <% dialogueLines.forEach(function(line) { %>
-                  <div class="card-text">
-                    <% if (line.startsWith('Persona:')) { %>
-                      <strong><%- line %></strong>
-                    <% } else { %>
-                      <%= line %>
-                    <% } %>
-                  </div>
-                <% }); %>
-              <% } %>
-            </div>
+    <div class="col-12 my-2" id="userInput">
+      <div class="card text-bg-light">
+      </div>
+    </div>
+    <!-- <form action="/dialogue/chat/inner-dialogue" method="post"> -->
+    <div class="col-12" id="botOutput">
+      <div class="card">
+
+        <div class="card-body m-3">
+           <div class="card-text" name="data"><%- innerDialogueHistory[i].botResponse %>
           </div>
         </div>
-      </form>
-      <hr>
+      </div>
+    </div>
+    <!-- </form> -->
+    <hr>
     <% } %>
   </div>
 </div>
 
-
+<form action="/dialogue/chat/inner-dialogue" method="post" class="text-center input-container">
+  <div class="row">
+    <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
+    <button class="btn col-3" type="submit">Send</button>
+  </div>
+</form>
 
 <!-- navbar and footer -->
 <%-include ("../partials/navbar.ejs")%>

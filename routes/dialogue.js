@@ -74,7 +74,7 @@ router.get('/dialogue/inner-dialogue', (req, res) => {
 //Route for Inner Dialogue Chat
 router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUsername = req.session.user.username;
-    persona = req.body.persona || "random";
+    const persona = req.body.persona || "random";
     const situation = req.body.situation || "random";
     const plot = req.body.plot || "random";
 
@@ -104,7 +104,7 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     res.render("dialogue/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
-        personaServerList: persona || req.session.personaServerList
+        // persona : req.body.persona,
     });
 
 });
@@ -143,7 +143,6 @@ router.post('/dialogue/chat/inner-dialogue/save', async (req, res) => {
     res.render("dialogue/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
-        personaServerList: persona || req.session.personaServerList
     });
 
 })

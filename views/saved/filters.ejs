@@ -5,18 +5,20 @@
 <!-- back title bar -->
 <%-include ('../partials/emptybackbar.ejs')%>
 <div class="col text-center">
-    <h1>FILTERS</h1>
+    <h1>FILTERS
+        <a href="/faq"><i class="fa-solid fa-circle-question"></i></a>
+    </h1>
     </div>
 </div>
 
-<div class="container-fluid  px-5" style="padding-top: 50px;">
+<div class="container-fluid  px-3" style="padding-top: 50px;">
     <div>
       <% for (var i=1; i<locals.filters.length; i++) { %>
       <div class="row">
-      <a class="card btn btn-light pt-5"
+      <a class="card btn btn-light pt-3"
       href="#">
-        <i class="<%-locals.filters[i].icon%>"></i>
-        <h5 class="p-4"><%- locals.filters[i].name %></h5></a>
+        <i class="pt-3 <%-locals.filters[i].icon%>"></i>
+        <h5 class="p-3"><%- locals.filters[i].name %></h5></a>
       </div>
       <br>
         <% } %>

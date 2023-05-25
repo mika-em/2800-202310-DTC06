@@ -3,7 +3,7 @@
 <%- include ("../partials/emptybackbar.ejs") %>
 <div class="col text-center">
     <h1>DIALOGUE</h1>
-  </div>
+</div>
 </div>
 </div>
 </div>
@@ -13,16 +13,31 @@
     <div>
         <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
         <div class="row">
-            <a class=" py-5 card btn btn-light"
-                href="<%- locals.dialogueLinks[i].link %>">
+            <a class=" py-5 card btn btn-light" href="<%- locals.dialogueLinks[i].link %>">
                 <i class="<%- locals.dialogueLinks[i].icon %>"></i>
-                <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5></a>
+                <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5>
+            </a>
         </div>
         <br>
         <% } %>
     </div>
 </div>
 
+<div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+    <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+    <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#send').click(function () {
+            // show card with loading indicator
+            $("#loadingCard").removeClass("d-none");
+            $("#generalContainer").addClass("d-none");
+        });
+    });
+</script>
 
 
 <!-- nav bar and footer -->

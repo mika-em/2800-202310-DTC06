@@ -4,16 +4,16 @@
 
 <div class="col text-center">
     <h1>DIALOGUE FILTERS</h1>
-  </div>
+</div>
 </div>
 
 <form action="/dialogueFilters" method="POST"></form>
 <div class="container" style="padding-top: 150px">
     <% for (var i=0; i<locals.dialogueFilters.length; i++) { %>
     <div class="row">
-        <a class="py-5  card btn btn-light"
-            href="<%- locals.dialogueFilters[i].link %>">
-            <h5><%- locals.dialogueFilters[i].name %></h5></a>
+        <a class="py-5  card btn btn-light" href="<%- locals.dialogueFilters[i].link %>">
+            <h5><%- locals.dialogueFilters[i].name %></h5>
+        </a>
     </div>
     <br>
     <% } %>
@@ -22,6 +22,22 @@
 <h2>Generated Output:</h2>
 <p><%= output %></p>
 <% } %>
+
+<div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+    <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+    <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#send').click(function () {
+            // show card with loading indicator
+            $("#loadingCard").removeClass("d-none");
+            $("#generalContainer").addClass("d-none");
+        });
+    });
+</script>
 
 <!-- footer and navbar -->
 <%-include ("../partials/navbar.ejs")%>

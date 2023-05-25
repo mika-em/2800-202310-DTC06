@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/users");
 const dotenv = require('dotenv');
 const Dialogue = require("../models/dialogueList");
+const Dialogue = require("../models/dialogueList");
 
 
 const {
@@ -321,7 +322,6 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
 });
 
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-    const currentUser = await User.findOne({
         username: req.session.user.username
     });
     // const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory

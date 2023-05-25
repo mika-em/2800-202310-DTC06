@@ -123,47 +123,6 @@ router.post('/saved/persona/save-as-pdf', async (req, res) => {
     res.render("./saved/saved-persona", { savedPersona: savedPersona });
 });
 
-//Saved Dialogue
-// router.get('/dialogue/saved-dialogue', (req, res) => {
-//     res.render("../views/saved/saved-dialogue");
-// });
-
-
-router.get('/saved/dialogue', async (req, res) => {
-    const currentUser = await User.findOne({
-        username: req.session.user.username
-    });
-    const userID = currentUser._id;
-
-    const savedDialogue = await Dialogue.find({
-        userId: userID
-    });
-
-    res.render("./saved/saved-dialogue", { savedDialogue: savedDialogue });
-});
-
-// let personaServerList = [];
-
-// router.use('/persona', async (req, res, next) => {
-//     req.session.personaServerList = personaServerList;
-//     next();
-// });
-
-// router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
-//     const personaList = req.body.personaList;
-//     const parsedPersonaList = JSON.parse(personaList);
-//     console.log(parsedPersonaList);
-    
-//     for (let i = 0; i < parsedPersonaList.length; i++) {
-//         personaServerList.push(parsedPersonaList[i]);
-//     }
-//     console.log("This is the Persona Server List" + personaServerList)
-
-//     res.render("./dialogue/dialogueFilters", {
-//         output: null
-//     });
-// });
-
 router.post('/saved/dialogue/save-as-pdf', async (req, res) => {
     // Encode the personaList to handle special characters
     const dialogueList = req.body.dialogueList;

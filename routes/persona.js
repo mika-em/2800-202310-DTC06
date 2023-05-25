@@ -12,7 +12,7 @@ const { send } = require("process");
 dotenv.config();
 
 const configuration = new Configuration({
-    organization: "org-wZOT14YD6omEzAgdgaFU5gz3",
+    organization: process.env.OPENAI_ORGANIZATION_KEY,
     apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -104,6 +104,53 @@ router.get('/persona/saved-prompt', async (req, res) => {
     res.render("./persona/savedPrompt", { savedPromptParameter: savedPromptParameter });
 });
 
+router.post('/persona/chat/preset-prompt', async (req, res) => {
+    const inputEntries = Object.entries(req.body);
+
+    let parameterList = [];
+    for (const [name, value] of inputEntries) {
+        if (value.length === 0) {
+            value = "random";
+        }
+        console.log(`${name}: ${value}`);
+        parameterList.push(`${name}: ${value}`);
+    }
+
+    parameterInputs = parameterList.join(", ");
+    console.log(parameterInputs);
+
+    const prompt = `Generate a random character with these attributes: ${parameterInputs}.`;
+    console.log(prompt);
+
+    const responseData = await callOpenAIAPi(prompt);
+
+    const currentUsername = req.session.user.username;
+    console.log(currentUsername)
+
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            personaHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
+        }
+    })
+
+    const currentUser = await User.findOne({
+        username: currentUsername
+    });
+
+    const personaHistory = currentUser.personaHistory
+    console.log(personaHistory)
+
+    res.render("chat", {
+        placeholderText: "Write a prompt here...",
+        personaHistory: personaHistory
+    });
+});
+
 // New Prompt Parameters
 router.get('/persona/new-prompt', (req, res) => {
     res.render("./persona/newPrompt", { newParameter: newParameter });
@@ -127,8 +174,6 @@ router.post('/persona/new-prompt/delete', (req, res) => {
     }
 });
 
-
-
 router.post('/persona/new-prompt/saved', async (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
@@ -149,6 +194,8 @@ router.post('/persona/new-prompt/saved', async (req, res) => {
     res.render("./persona/newPrompt", { newParameter: newParameter })
 });
 
+
+
 // Chat
 router.get('/persona/chat', async (req, res) => {
     const currentUser = await User.findOne({
@@ -168,7 +215,7 @@ router.post('/persona/chat', async (req, res) => {
     console.log(prompt);
 
     const responseData = await callOpenAIAPi(prompt);
-    
+
     await User.updateOne({
         username: currentUsername
     }, {

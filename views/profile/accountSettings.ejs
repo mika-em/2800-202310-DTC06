@@ -10,7 +10,6 @@
 </div>
 
 <!-- content -->
-
 <div class="container p-4" style="margin-bottom: 100%;">
   <form action="/profile/account-settings" method="post">
     <fieldset id="userInfoField" <% if (disabled) { %>disabled<% } %>>
@@ -51,7 +50,23 @@
     <button type="submit" class="btn btn-primary" name="action" value="Save">Save</button>
   </form>
 
+  <!-- darkmode -->
+<div class="container pt-5">
+  <div class="card text-bg-dark fs-4 mb-3 rounded-5" style="max-width: 25rem;">
+    <div class="card-body">
+        <div class="form-check form-switch align-items-start ">
+          <input class="form-check-input" type="checkbox" role="switch" id="dark">
+          <span class="material-symbols-rounded">dark_mode</span>
+          <label class="form-check-label" for="dark"> Dark mode</label>
+        </div> 
+      </div>
+    </div>
+  </div>
+
 </div>
+</div>
+
+
 
 <!-- navbar and footer-->
 <%-include ('../partials/navbar.ejs')%>

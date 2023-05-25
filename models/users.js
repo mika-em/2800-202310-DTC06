@@ -22,12 +22,19 @@ const userSchema = new mongoose.Schema(
             drop: Boolean,
             race: Boolean,
         },
+        profileImage: {
+            data: Buffer,
+            fileName: String,
+            contentType: String,
+        },
     },
     // this is the name of the collection in the database
     { collection: 'users' }
 );
 
 const usersModel = mongoose.model('User', userSchema);
+
+
 
 // const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
 

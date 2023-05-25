@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
     res.locals.currentURL = url.parse(req.url).pathname;
     res.locals.dialogueLinks = dialogueLinks;
     res.locals.dialogueFilters = dialogueFilters;
+    res.locals.filters = filters;
     next();
 };
 
@@ -90,4 +91,23 @@ const dialogueFilters = [{
 }
 ];
 
-
+const filters = [{
+    name: 'Default',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Status',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Class',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Drop',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Race',
+    icon: 'fa-solid fa-circle fa-2xl',
+}];

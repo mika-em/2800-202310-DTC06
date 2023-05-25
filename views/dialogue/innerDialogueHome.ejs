@@ -4,7 +4,9 @@
 <%- include ("../partials/emptybackbar.ejs") %>
 
 <!-- title -->
-<div class="col text-center">
+<br>
+<br>
+<div class="col text-center mx-5 mb-5">
     <h3>Create an inner dialogue.</h3>
     <p>Have you ever wondered what a persona could be thinking?</p>
 </div>
@@ -12,37 +14,40 @@
 </div>
 
 <!-- content -->
-<div class="container-fluid" style="padding-top: 30px;">
+<div class="container-fluid" style="padding-top: 30px; padding-left: 10px; padding-right: 10px;">
     <div class="row">
         <form action="/dialogue/chat/inner-dialogue" method="post" class="text-center">
             <div class="col-12">
                 <div class="card text-center">
-                    <div class="card-body">
+                    <div class="card-body mx-1">
                         <label class="card-title">Enter a persona</label><br />
-                        <input class="form-control" type="text" name="persona" placeholder="Enter a persona description" />
+                        <input class="form-control" type="text" name="persona"
+                            placeholder="Enter a persona description" />
                     </div>
                 </div>
             </div>
-        
+            <br>
             <div class="col-12">
                 <div class="card text-center">
-                    <div class="card-body">
+                    <div class="card-body mx-1">
                         <label class="card-title">What situation is the persona faced with?</label><br />
                         <input class="form-control" type="text" name="situation"
                             placeholder="Enter the situation your persona is in" />
                     </div>
                 </div>
             </div>
+            <br>
             <div class="col-12">
                 <div class="card text-center">
-                    <div class="card-body">
+                    <div class="card-body mx-1">
                         <label class="card-title">What kind of setting are they in?</label><br />
-                        <input class="form-control" type="text" name="plot"
-                            placeholder="Enter the plot/setting your persona is in" />
+                        <input class="form-control" type="text" name="setting"
+                            placeholder="Enter the setting your persona is in" />
                     </div>
                 </div>
             </div>
-            <br />
+            <br>
+            <br>
             <button class="btn" type="submit">Send</button>
         </form>
     </div>

@@ -76,9 +76,9 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUsername = req.session.user.username;
     const persona = req.body.persona || "random";
     const situation = req.body.situation || "random";
-    const plot = req.body.plot || "random";
+    const setting = req.body.setting || "random";
 
-    const prompt = `Generate an inner dialogue of a character described as ${persona} whose is in a ${plot} setting where they are faced with ${situation}.`;
+    const prompt = `Generate an inner dialogue of a character described as ${persona} whose is in a ${setting} setting where they are faced with ${situation}.`;
     const responseData = await callOpenAIAPi(prompt);
 
 

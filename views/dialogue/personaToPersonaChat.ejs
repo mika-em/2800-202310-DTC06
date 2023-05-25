@@ -1,47 +1,59 @@
 <!-- header -->
 <%-include ("../partials/header-internal.ejs")%>
-
 <div class="container-fluid mb-5 pb-5" id="chatContainer">
     <!-- Existing chat messages -->
-<div class="row-fluid">
-    <% for (var i = 0; i < PersonaPersonaChatHistory.length; i++) { %>
-    <!-- Display persona's input and bot output -->
-    <div class="col-12 my-2" id="userInput">
-        <div class="card bg-primary text-bg-light">
-            <div class="card-body m-3">
-                <div class="card-title"></div>
-                <div class="card-text">
-                    <%= PersonaPersonaChatHistory[i].persona %>: <%= PersonaPersonaChatHistory[i].userPrompt %>
+    <% PersonaPersonaChatHistory.forEach((entry, index) => { %>
+    <div class="row">
+        <!-- Display Persona 1's input -->
+        <div class="col-12 my-2" id="userInput">
+            <div class="card bg-primary text-bg-light">
+                <div class="card-body m-3">
+                    <div class="card-text">
+                        <strong>Persona 1:</strong> <%= entry.userPrompt.split('\n')[0] %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-12" id="botOutput">
-        <div class="card">
-            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
-                name="save" value="<%- i %>">
-                star_border
-            </button>
-            <div class="card-body m-3">
-                <div class="card-title">Persona:</div>
-                <div class="card-text" name="data">
-                    <%= PersonaPersonaChatHistory[i].persona %>: <%= PersonaPersonaChatHistory[i].botResponse %>
+        <!-- Display Persona 2's input -->
+        <div class="col-12 my-2" id="userInput">
+            <div class="card bg-primary text-bg-light">
+                <div class="card-body m-3">
+                    <div class="card-text">
+                        <strong>Persona 2:</strong> <%= entry.userPrompt.split('\n')[1] %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Display bot's output -->
+        <div class="col-12 my-2" id="botOutput">
+            <div class="card">
+                <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
+                    name="save" value="<%= index %>">
+                    star_border
+                </button>
+                <div class="card-body m-3">
+                    <div class="card-title">Dialogue:</div>
+                    <div class="card-text">
+                        <strong>Persona 1:</strong> <%= entry.botResponse.split('\n')[0] %><br>
+                        <strong>Persona 2:</strong> <%= entry.botResponse.split('\n')[1] %>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <% } %>
+    <% }) %>
 </div>
 
-
-<form action="/dialogue/chat/persona-to-persona-chat" method="post" class="text-center input-container">
+<form action="/dialogue/chat/persona-to-persona/save" method="post" class="text-center input-container">
     <div class="row">
-        <input class="form-control col" rows="1" cols="1" type="text" name="prompt"
+        <input class="form-control col" rows="1" cols="1" type="text" name="response"
             placeholder="<%= placeholderText %>" />
         <button class="btn col-3" type="submit">Send</button>
     </div>
 </form>
+
+
 
 <!-- navbar and footer -->
 <%-include ("../partials/navbar.ejs")%>

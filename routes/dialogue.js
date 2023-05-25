@@ -20,16 +20,28 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function callOpenAIAPi(userPrompt) {
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `${userPrompt}`,
-        temperature: 0,
-        max_tokens: 1000,
-    });
-    const responseData = response.data.choices[0].text;
-    console.log(responseData);
-    return responseData;
+    console.log("User Prompt:", userPrompt);
+
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: `${userPrompt}`,
+            temperature: 0,
+            max_tokens: 1000,
+        });
+
+        
+        const responseData = response.data.choices[0].text;
+        console.log("Response Data:", responseData.replace(/\n/g, "\\n"));
+        console.log("Response Data:", responseData);
+
+        return responseData;
+    } catch (error) {
+        console.error("Error calling OpenAI API:", error);
+        throw error;
+    }
 }
+
 
 router.get('/dialogue', (req, res) => {
     res.render("./dialogue/dialogueHome");
@@ -72,7 +84,8 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
         $push: {
             innerDialogueHistory: {
                 userPrompt: prompt,
-                botResponse: `${persona}: ${responseData}`
+                botResponse: `${persona}: ${responseData}`,
+                response: responseData
             }
         }
 
@@ -107,23 +120,22 @@ router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
 });
 
 router.post('/dialogue/chat/inner-dialogue/save', async (req, res) => {
-    const index = req.body.index;
+    const index = req.body.save;
     const date = new Date();
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
-    const dialogueHistory = currentUser.innerDialogueHistory;
-    const dialogue = dialogueHistory[index].botResponse
+    const dialogue = currentUser.innerDialogueHistory[index].botResponse;
 
     await Dialogue.create({
-        userId: currentUser_id,
+        userId: currentUser._id,
         dialogue: dialogue,
         date: date
     });
 
     res.render("dialogue/dialogueChat", {
         placeholderText: "Write a response here...",
-        innerDialogueHistory: innerDialogueHistory
+        innerDialogueHistory: currentUser.innerDialogueHistory
     })
 });
 
@@ -218,23 +230,23 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 
 //Saved Chat for User Persona Chat
 router.post('/dialogue/chat/user-persona/save', async (req, res) => {
-    const index = req.body.index;
+    const index = req.body.save;
     const date = new Date();
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
-    const dialogueHistory = currentUser.userPersonaChatHistory;
-    const dialogue = dialogueHistory[index].botResponse
+    // const dialogueHistory = currentUser.userPersonaChatHistory;
+    const dialogue = currentUser.userPersonaChatHistory[index].botResponse
 
     await Dialogue.create({
-        userId: currentUser_id,
+        userId: currentUser._id,
         dialogue: dialogue,
         date: date
     });
 
     res.render("dialogue/personaChat", {
         placeholderText: "Write a response here...",
-        userPersonaChatHistory: userPersonaChatHistory
+        userPersonaChatHistory: currentUser.userPersonaChatHistory
     })
 });
 
@@ -247,119 +259,50 @@ router.get('/dialogue/persona-to-persona-chat', async (req, res) => {
     res.render("./dialogue/personaToPersona");
 });
 
-// router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-//     try {let firstPersona;
-//     let secondPersona;
-//     if (req.session.personaServerList && req.session.personaServerList.length === 2) {
-//         firstPersona = req.session.personaServerList[0];
-//         secondPersona = req.session.personaServerList[1];
-//     } else {
-//         firstPersona = req.body.firstPersona || "random";
-//         secondPersona = req.body.secondPersona || "random";
-//     }
-
-//     const setting = req.body.setting || "random";
-
-//     const conversationLength = 10;
-//     const PersonaPersonaChatHistory = [];
-
-//     for (let i = 0; i < conversationLength; i++) {
-//         const currentPersona = i % 2 === 0 ? firstPersona : secondPersona;
-//         const currentPrompt = `Create a dialogue for ${currentPersona} in a ${setting} setting.`;
-//         const currentResponse = await callOpenAIAPi(currentPrompt);
-
-//         PersonaPersonaChatHistory.push({
-//             persona: currentPersona,
-//             userPrompt: currentPrompt,
-//             botResponse: currentResponse,
-//         });
-//     }
-
-//     const currentUsername = req.session.user.username;
-
-//     await User.updateOne({
-//         username: currentUsername
-//     }, {
-//         $push: {
-//             PersonaPersonaChatHistory: PersonaPersonaChatHistory,
-//         },
-//     });
-
-//     const currentUser = await User.findOne({
-//         username: currentUsername
-//     });
-//     const personaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
-
-//     res.render("./dialogue/personaToPersonaChat", {
-//         placeholderText: "Write a prompt here...",
-//         PersonaPersonaChatHistory: personaPersonaChatHistory,
-//     });
-// } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//         message: "Something went wrong",
-//     });
-// }
-// });
-
-
-//Attempt at optimizing the API Calls: 
-// Route for initiating the persona-to-persona chat
+// Route for generating the persona-to-persona chat
 router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-    try {let firstPersona;
-    let secondPersona;
-    if (req.session.personaServerList && req.session.personaServerList.length === 2) {
-        firstPersona = req.session.personaServerList[0];
-        secondPersona = req.session.personaServerList[1];
+    const currentUsername = req.session.user.username;
+    let persona1;
+    let persona2;
+
+    if (req.session.personaServerList && req.session.personaServerList.length > 1) {
+        // If at least two personas are available in the session, use the first two
+        persona1 = req.session.personaServerList[0];
+        persona2 = req.session.personaServerList[1];
     } else {
-        firstPersona = req.body.firstPersona || "random";
-        secondPersona = req.body.secondPersona || "random";
+        // If not enough personas are available in the session, use random personas
+        persona1 = req.body.firstPersona || "random1";
+        persona2 = req.body.secondPersona || "random2";
     }
 
-    const setting = req.body.setting || "random";
-    const conversationLength = 10; // Define the desired length of the conversation
-
-    const conversationPrompts = Array.from({
-        length: conversationLength
-    }, (_, i) => {
-        const currentPersona = i % 2 === 0 ? firstPersona : secondPersona;
-        const currentPrompt = `Create a dialogue for ${currentPersona} in a ${setting} setting.`;
-        return currentPrompt;
-    });
-
-    const conversationResponses = await Promise.all(conversationPrompts.map(prompt => callOpenAIAPi(prompt)));
-
-    const currentUsername = req.session.user.username;
-
-    const PersonaPersonaChatHistory = conversationPrompts.map((prompt, index) => ({
-        persona: index % 2 === 0 ? firstPersona : secondPersona,
-        userPrompt: prompt,
-        botResponse: conversationResponses[index],
-    }));
+    const situation = req.body.situation || "random";
+    const prompt = `Generate an inner dialogue between ${persona1} and ${persona2} in a ${plot} setting where they are faced with ${situation}.`;
+    console.log(prompt);
+    const responseData = await callOpenAIAPi(prompt);
 
     await User.updateOne({
         username: currentUsername
     }, {
         $push: {
-            PersonaPersonaChatHistory: PersonaPersonaChatHistory,
-        },
+            PersonaPersonaChatHistory: {
+                userPrompt: prompt,
+                botResponse: `${persona1}: ${responseData.split('\n')[0]}\n${persona2}: ${responseData.split('\n')[1]}`
+            }
+        }
     });
 
     const currentUser = await User.findOne({
         username: currentUsername
     });
-    const personaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
-    
+
+    const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
 
     res.render("./dialogue/personaToPersonaChat", {
         placeholderText: "Write a prompt here...",
-        PersonaPersonaChatHistory: personaPersonaChatHistory,
+        PersonaPersonaChatHistory: PersonaPersonaChatHistory,
     });
-}
-catch (err) {
-    console.log(err);
-    res.redirect('/dialogue/persona-to-persona-chat');
-}});
+});
+
 
 
 // Route for displaying the persona-to-persona chat page
@@ -404,98 +347,6 @@ router.post('/dialogue/chat/persona-to-persona', async (req, res) => {
         PersonaPersonaChatHistory: personaPersonaChatHistory,
     });
 });
-
-//Previous Version of Persona To Persona Chat
-// router.get('/dialogue/persona-to-persona-chat', async (req, res) => {
-//     res.render("./dialogue/personaToPersona");
-// });
-
-// router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-//     let persona;
-//     if (req.session.personaServerList && req.session.personaServerList.length == 2) {
-//         firstPersona = req.session.personaServerList[0];
-//         secondPersona = req.session.personaServerList[1];
-//     } else {
-//         firstPersona = req.body.firstPersona || "random";
-//         secondPersona = req.body.secondPersona || "random";
-//     }
-
-
-//     const setting = req.body.setting || "random";
-
-//     const prompt = `Create a dialogue between two characters described as ${firstPersona} and ${secondPersona} in a ${setting} setting.`;
-
-//     const responseData = await callOpenAIAPi(prompt);
-
-//     const currentUsername = req.session.user.username;
-//     console.log(currentUsername)
-
-//     await User.updateOne({
-//         username: currentUsername
-//     }, {
-//         $push: {
-//             PersonaPersonaChatHistory: {
-//                 userPrompt: prompt,
-//                 botResponse: responseData
-//             }
-//         }
-//     })
-
-//     const currentUser = await User.findOne({
-//         username: currentUsername
-//     });
-
-//     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-//     console.log(userPersonaChatHistory)
-
-//     res.render("./dialogue/personaToPersonaChat", {
-//         placeholderText: "Write a prompt here...",
-//         PersonaPersonaChatHistory: PersonaPersonaChatHistory
-//     });
-// });
-
-// //Chat for Persona to Persona 
-// router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-//     const currentUser = await User.findOne({
-//         username: req.session.user.username
-//     });
-//     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-
-//     res.render("./dialogue/personaToPersonaChat", {
-//         placeholderText: "Write a prompt here...",
-//         PersonaPersonaChatHistory: PersonaPersonaChatHistory
-//     });
-// });
-
-// router.post('/dialogue/chat/persona-to-persona', async (req, res) => {
-//     const prompt = req.body.prompt;
-//     const currentUsername = req.session.user.username;
-//     console.log(prompt);
-
-//     const responseData = await callOpenAIAPi(prompt);
-
-//     await User.updateOne({
-//         username: currentUsername
-//     }, {
-//         $push: {
-//             PersonaPersonaChatHistory: {
-//                 userPrompt: prompt,
-//                 botResponse: responseData
-//             }
-//         }
-//     })
-//     const currentUser = await User.findOne({
-//         username: req.session.user.username
-//     });
-//     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-
-//     console.log(PersonaPersonaChatHistory)
-
-//     res.render("./dialogue/personaToPersonaChat", {
-//         placeholderText: "Write a prompt here...",
-//         PersonaPersonaChatHistory: PersonaPersonaChatHistory
-//     });
-// });
 
 //Saved Chat for Persona to Persona
 router.post('/dialogue/chat/persona-to-persona/save', async (req, res) => {

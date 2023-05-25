@@ -99,19 +99,6 @@ router.post("/loginUser", async (req, res) => {
         const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
         user.currentSessionId = currentSessionId;
         await user.save();
-
-
-        // const dialogue = new Dialogue({
-        //     userId: user._id, // Assuming user._id is the ObjectId of the current user
-        //     dialogueSaved: [{
-        //         userPrompt: "",
-        //         botResponse: ""
-
-        //     }]
-        // });
-
-        // await dialogue.save();
-
         console.log(req.session.user.name)
 
         return res.render("home", {
@@ -129,39 +116,26 @@ router.post("/400", (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-    // Retrieve the current username from the session
-    const currentUsername = req.session.user.username;
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
 
-    try {
-        // Find the user based on the username
-        const currentUser = await User.findOne({
-            username: currentUsername
-        });
+    currentUser.personaDialogueHistory = [];
+    currentUser.userPersonaChatHistory = [];
+    currentUser.PersonaPersonaChatHistory = [];
 
-        // Update the dialogueHistory field to an empty array
-        currentUser.dialogueHistory = [];
-        currentUser.innerDialogueHistory = [];
-        currentUser.personaDialogueHistory = [];
-        currentUser.userPersonaChatHistory = [];
-        currentUser.PersonaPersonaChatHistory = [];
+    await currentUser.save();
 
-        // Save the updated user
-        await currentUser.save();
-
-        // Clear the session and redirect to the login page
-        req.session.destroy((err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send("An error occurred during logout");
-            } else {
-                res.render("../views/authorization/logout");
-            }
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("An error occurred during logout");
-    }
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("An error occurred during logout");
+        } else {
+            res.render("../views/authorization/logout");
+        }
+    });
 });
+
 
 
 router.post("/exit", (req, res) => {
@@ -220,7 +194,6 @@ router.post('/resetPassword/verified', async (req, res) => {
             disabled: false,
         })
     } else {
-        // res.send("Incorrect answer to security question.");
         res.render("../views/error/400-1");
     }
 });
@@ -242,7 +215,6 @@ router.post('/', async (req, res) => {
         })
         res.render('index')
     } catch (error) {
-        // res.status(500).send("An error occurred while creating your account.");
         returnres.status(500).render("../views/error/500");
     }
 });

@@ -22,20 +22,35 @@
           <p><%- savedPromptParameter[i].description %></p>
           <p><%- savedPromptParameter[i].date %></p>
           <form action="/persona/chat/preset-prompt" method="post">
-          <% for (var j=0; j<savedPromptParameter[i].parameterSet.length; j++) { %>
-          <div class="mb-3">
-            <label class="card-title"><%- savedPromptParameter[i].parameterSet[j] %></label><br>
-            <input class="form-control" type="text" name="<%- savedPromptParameter[i].parameterSet[j] %>" placeholder="Enter <%- savedPromptParameter[i].parameterSet[j] %>" />
-          </div>
-          <% } %>
-          <button class="btn" type="submit">Send</button>
+            <% for (var j=0; j<savedPromptParameter[i].parameterSet.length; j++) { %>
+            <div class="mb-3">
+              <label class="card-title"><%- savedPromptParameter[i].parameterSet[j] %></label><br>
+              <input class="form-control" type="text" name="<%- savedPromptParameter[i].parameterSet[j] %>" placeholder="Enter <%- savedPromptParameter[i].parameterSet[j] %>" />
+            </div>
+            <% } %>
+            <button class="btn send" type="submit">Send</button>
           </form>
         </div>
       </div>
     </div>
     <% } %>
   </div>
+  <div class="p-5 text-center d-none" id="loadingCard">
+    <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+    <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('button.send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+      $("#accordionFlushExample").addClass("d-none");
+    });
+  });
+</script>
+
 <!-- navbar and footer -->
 <%-include ("../partials/navbar.ejs")%>
 <%-include ("../partials/footer.ejs")%>

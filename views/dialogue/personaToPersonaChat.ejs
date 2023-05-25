@@ -4,26 +4,6 @@
     <!-- Existing chat messages -->
     <% PersonaPersonaChatHistory.forEach((entry, index) => { %>
     <div class="row">
-        <!-- Display Persona 1's input -->
-        <div class="col-12 my-2" id="userInput">
-            <div class="card bg-primary text-bg-light">
-                <div class="card-body m-3">
-                    <div class="card-text">
-                        <strong>Persona 1:</strong> <%= entry.userPrompt.split('\n')[0] %>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Display Persona 2's input -->
-        <div class="col-12 my-2" id="userInput">
-            <div class="card bg-primary text-bg-light">
-                <div class="card-body m-3">
-                    <div class="card-text">
-                        <strong>Persona 2:</strong> <%= entry.userPrompt.split('\n')[1] %>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Display bot's output -->
         <div class="col-12 my-2" id="botOutput">
             <div class="card">
@@ -33,10 +13,16 @@
                 </button>
                 <div class="card-body m-3">
                     <div class="card-title">Dialogue:</div>
+                    <% const conversationLines = entry.botResponse.split('\n'); %>
+                    <% for (let j = 0; j < conversationLines.length; j++) { %>
+                    <% const line = conversationLines[j]; %>
+                    <% const lineSplit = line.split(':'); %>
+                    <% const currentPersona = lineSplit[0].trim(); %>
+                    <% const message = lineSplit.slice(1).join(':').trim(); %>
                     <div class="card-text">
-                        <strong>Persona 1:</strong> <%= entry.botResponse.split('\n')[0] %><br>
-                        <strong>Persona 2:</strong> <%= entry.botResponse.split('\n')[1] %>
+                        <strong><%= currentPersona %>:</strong> <%= message %>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -45,14 +31,13 @@
     <% }) %>
 </div>
 
-<form action="/dialogue/chat/persona-to-persona/save" method="post" class="text-center input-container">
+<form action="/dialogue/chat/persona-to-persona-chat/save" method="post" class="text-center input-container">
     <div class="row">
         <input class="form-control col" rows="1" cols="1" type="text" name="response"
             placeholder="<%= placeholderText %>" />
         <button class="btn col-3" type="submit">Send</button>
     </div>
 </form>
-
 
 
 <!-- navbar and footer -->

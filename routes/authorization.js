@@ -282,7 +282,7 @@ router.get("/home", async (req, res) => {
 
     if (user) {
       res.render("home", {
-        name: req.session.user.name,
+        name: user.name,
         profileImage: user.profileImage,
       });
     } else {

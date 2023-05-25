@@ -22,6 +22,7 @@ function enableDarkMode() {
   $("h1").addClass("text-light");
   $(".modal-content").removeClass("bg-dark").addClass("bg-light");
   $("label").addClass("text-light");
+  $(".form-control").removeClass("bg-light").addClass("bg-dark");
 
 }
 
@@ -48,6 +49,8 @@ function disableDarkMode() {
   $("h1").removeClass("text-light");
   $(".modal-content").removeClass("bg-light").addClass("bg-dark");
   $("label").removeClass("text-light");
+  $(".form-control").removeClass("bg-dark").addClass("bg-light");
+
 }
 
 // Check if dark mode is enabled in local storage

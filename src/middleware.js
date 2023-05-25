@@ -48,18 +48,22 @@ const navLinks = [{
 
 const personaLinks = [{
     name: 'General presets',
+    icon: 'fa-solid fa-user-astronaut fa-2xl',
     link: '/persona/general-prompt'
 },
 {
     name: 'Saved presets',
+    icon: 'fa-solid fa-floppy-disk fa-2xl',
     link: '/persona/saved-prompt'
 },
 {
     name: 'Create a new preset',
+    icon: 'fa-solid fa-circle-plus fa-2xl',
     link: '/persona/new-prompt'
 },
 {
     name: 'Write my own preset',
+    icon: 'fa-solid fa-pen-to-square fa-2xl',
     link: '/persona/chat'
 },
 ];

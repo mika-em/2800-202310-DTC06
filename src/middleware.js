@@ -19,28 +19,28 @@ const navLinks = [{
 {
     name: 'Persona',
     link: '/persona',
-    icon: 'border_color',
+    icon: 'fa-solid fa-person-dots-from-line fa-lg',
     upperName: 'PERSONA',
     description: 'Create a character with unique personality traits and a backstory.'
 },
 {
     name: 'Dialogue',
     link: '/dialogue',
-    icon: 'forum',
+    icon: 'fa-solid fa-comment-dots fa-lg',
     upperName: 'DIALOGUE',
     description: 'Create a conversation between two characters.'
 },
 {
     name: 'Saved',
     link: '/saved',
-    icon: 'collections_bookmark',
+    icon: 'fa-solid fa-book-bookmark fa-lg',
     upperName: 'SAVED',
     description: 'Save your character prompts, dialogue scripts, and unique prompts.'
 },
 {
     name: 'Profile',
     link: '/profile',
-    icon: 'account_circle',
+    icon: 'fa-solid fa-circle-user fa-lg',
     upperName: 'PROFILE',
     description: 'Access your profile and account settings.'
 },
@@ -70,10 +70,12 @@ const personaLinks = [{
 
 const dialogueLinks = [{
     name: 'Start a new dialogue',
+    icon: 'fa-solid fa-comment-medical fa-2xl',
     link: '/dialogueFilters'
 },
 {
     name: 'Saved dialogues',
+    icon: 'fa-solid fa-heart fa-2xl"',
     link: '/persona/saved-dialogue'
 }
 ];

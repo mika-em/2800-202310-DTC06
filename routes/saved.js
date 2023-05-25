@@ -238,7 +238,7 @@ router.get('/persona/saved-dialogue', async (req, res) => {
         userId: userID
     });
     res.render("./saved/saved-dialogue", {
-        savedDialogue: null
+        savedDialogue: savedDialogue
     });
 });
 

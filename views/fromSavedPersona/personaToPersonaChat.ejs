@@ -44,7 +44,24 @@
             </div>
         </form>
 
+        <div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+            <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl"
+                    style="color: #ffffff;"></i></i></span>
+            <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+        </div>
+    </div>
 
-        <!-- navbar and footer -->
-        <%-include ("../partials/navbar.ejs")%>
-        <%-include ("../partials/footer.ejs")%>
+    <script>
+        $(document).ready(function () {
+            $('#send').click(function () {
+                // show card with loading indicator
+                $("#loadingCard").removeClass("d-none");
+                $("#generalContainer").addClass("d-none");
+            });
+        });
+    </script>
+
+
+    <!-- navbar and footer -->
+    <%-include ("../partials/navbar.ejs")%>
+    <%-include ("../partials/footer.ejs")%>

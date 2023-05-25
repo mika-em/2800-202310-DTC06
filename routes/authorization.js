@@ -38,6 +38,10 @@ router.post("/signup", async (req, res) => {
       password: hashedPassword,
       securityQuestion: securityQuestion,
       securityAnswer: hashedSecurityAnswer,
+      personaHistory: [],
+      dialogueHistory: [],
+      innerDialogueHistory: [],
+      userPersonaChatHistory: [],
       profileImage: {
         data: null,
         fileName: "",

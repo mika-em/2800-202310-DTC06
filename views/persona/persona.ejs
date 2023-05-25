@@ -3,18 +3,18 @@
 
 <!-- content -->
 
-  <div class="container p-5 mt-2">
-    <div class="row text-center">
-    <% for (var i=0; i<locals.personaLinks.length; i++) { %>
-      <div class="col-12 mb-3">
-      <a class=" btn btn-secondary" style="width: 400px; height:180px;"
+  <div class="container-fluid  px-5 mt-4" style="padding-top: 80px;">
+    <div>
+      <% for (var i=0; i<locals.personaLinks.length; i++) { %>
+      <div class="row">
+      <a class="card btn btn-light"
       href="<%- locals.personaLinks[i].link %>">
-        <h2 class="pt-5"><b><%- locals.personaLinks[i].name %></b></h2></a>
+        <h5 class="p-4"><%- locals.personaLinks[i].name %></h5></a>
       </div>
+      <br>
         <% } %>
       </div>
   </div>
-
 
 <!-- footer and navbar -->
 <%-include ("../partials/navbar.ejs")%>

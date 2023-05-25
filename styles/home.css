@@ -10,13 +10,13 @@
 }
 
 #display-pic {
-  padding-top: 100px;
+  padding-top: 40px;
   font-size: x-large;
 }
 
 #display-name {
   padding-top: 10px;
-  font-size: 45pt;
+  font-size: 30pt;
   display: inline-block;
   color: #051726;
 

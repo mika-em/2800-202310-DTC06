@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
 const dotenv = require('dotenv');
+const Dialogue = require("../models/dialogueList");
 
 
 const {
@@ -156,33 +157,30 @@ router.get('/dialogue/chat/user-persona', async (req, res) => {
     });
 });
 
-router.post('/dialogue/chat/user-persona', async (req, res) => {
-    const prompt = req.body.prompt;
-    const currentUsername = req.session.user.username;
-    console.log(prompt);
 
-    const responseData = await callOpenAIAPi(prompt);
 
-    await User.updateOne({
-        username: currentUsername
-    }, {
-        $push: {
-            userPersonaChatHistory: {
-                userPrompt: prompt,
-                botResponse: responseData
-            }
-        }
-    })
+//Saved Dialogue
+
+router.post('/dialogue/chat/saved-persona-chat', async (req, res) => {
+    const index = req.body.save;
+    console.log(index);
+    const date = new Date();
+
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
     const userPersonaChatHistory = currentUser.userPersonaChatHistory
 
-    console.log(innerDialogueHistory)
+    const dialogue = userPersonaChatHistory[index].botResponse;
 
+    await Dialogue.create({
+        userId: currentUser._id,
+        dialogue: dialogue,
+        date: date
+    });
     res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
-        userPersonaChatHistory: userPersonaChatHistory
+        innerDialogueHistory: userPersonaChatHistory
     });
 });
 

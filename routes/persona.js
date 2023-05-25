@@ -12,7 +12,7 @@ const { send } = require("process");
 dotenv.config();
 
 const configuration = new Configuration({
-    organization: "org-wZOT14YD6omEzAgdgaFU5gz3",
+    organization: process.env.OPENAI_ORGANIZATION_KEY,
     apiKey: process.env.OPENAI_API_KEY,
 });
 

@@ -97,17 +97,17 @@ const filters = [{
 },
 {
     name: 'Status',
-    icon: 'fa-solid fa-circle fa-2xl',
+    icon: 'fa-solid fa-shield-heart fa-lg',
 },
 {
     name: 'Class',
-    icon: 'fa-solid fa-circle fa-2xl',
+    icon: 'fa-solid fa-wand-magic-sparkles fa-lg',
 },
 {
     name: 'Drop',
-    icon: 'fa-solid fa-circle fa-2xl',
+    icon: 'fa-solid fa-hand-sparkles fa-lg',
 },
 {
     name: 'Race',
-    icon: 'fa-solid fa-circle fa-2xl',
+    icon: 'fa-solid fa-ghost fa-lg',
 }];

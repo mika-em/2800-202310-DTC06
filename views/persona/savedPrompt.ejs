@@ -3,10 +3,11 @@
 <%-include ("../partials/header-persona.ejs")%>
 <%-include ("../partials/emptybackbar.ejs")%>
 <div class="col text-center">
-  <h1>SAVED PROMPT</h1>
+  <h1>Characteristics</h1></div>
+<div class="col-2 px-2 text-center">
   <form action="/persona/saved-prompt/delete" method="post">
     <input id=deleteInput type="hidden" name="promptIDList" value="" />
-    <button class="btn btn-sm position-absolute top-50 end-0 translate-middle material-symbols-rounded text-center" id="deleteButton" disabled>delete</button>
+    <a class="btn btn-sm material-symbols-rounded p-1" id="deleteButton" disabled>delete</a>
   </form>
 </div>
 </div>

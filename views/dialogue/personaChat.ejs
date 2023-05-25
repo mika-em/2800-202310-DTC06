@@ -11,21 +11,26 @@
                     <div class="card-title">You:</div>
                     <div class="card-text"><.%- userPersonaChatHistory[i].userPrompt %>
                     </div> -->
-                </div>
             </div>
         </div>
-        <div class="col-12" id="botOutput">
-            <div class="card">
-                <div class="card-body m-3">
-                    <div class="card-title">Persona:</div>
-                    <div class="card-text" name="data"><%- userPersonaChatHistory[i].botResponse %>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <% } %>
     </div>
+    <div class="col-12" id="botOutput">
+        <div class="card">
+            <!-- save button -->
+            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
+                name="save" value="<%- i %>">
+                star_border
+            </button>
+            <div class="card-body m-3">
+                <div class="card-title">Persona:</div>
+                <div class="card-text" name="data"><%- userPersonaChatHistory[i].botResponse %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <% } %>
+</div>
 </div>
 
 <form action="/dialogue/chat/user-persona-chat" method="post" class="text-center input-container">

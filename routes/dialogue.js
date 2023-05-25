@@ -51,8 +51,6 @@ router.get('/dialogue/inner-dialogue', (req, res) => {
 
 router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUsername = req.session.user.username;
-
-
     let persona;
     if (req.session.personaServerList && req.session.personaServerList.length > 0) {
         persona = req.session.personaServerList;
@@ -193,6 +191,7 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 
 
 //Persona to Persona stuff
+
 
 //Persona Persona Page
 router.get('/dialogue/persona-to-persona-chat', async (req, res) => {

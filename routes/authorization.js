@@ -142,6 +142,8 @@ router.get('/logout', async (req, res) => {
         currentUser.dialogueHistory = [];
         currentUser.innerDialogueHistory = [];
         currentUser.personaDialogueHistory = [];
+        currentUser.userPersonaChatHistory = [];
+        currentUser.PersonaPersonaChatHistory = [];
 
         // Save the updated user
         await currentUser.save();

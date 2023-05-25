@@ -70,7 +70,7 @@ const dialogueLinks = [{
 },
 {
     name: 'Saved dialogues',
-    link: '/persona/saved-dialogue'
+    link: '/saved/dialogue'
 }
 ];
 
@@ -84,7 +84,7 @@ const dialogueFilters = [{
 },
 {
     name: 'Persona-Persona Chat',
-    link: '/dialogue/persona-persona-chat'
+    link: '/dialogue/persona-to-persona-chat'
 }];
 
 

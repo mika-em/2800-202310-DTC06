@@ -46,6 +46,8 @@ router.post('/saved/persona/dialogueFilters', (req, res) => {
     }
     console.log("This is the Persona Server List" + personaServerList)
 
+    req.session.personaServerList = personaServerList;
+
     res.render("./fromSavedPersona/savedPersonaDialogueFilters", {
         output: null
     });

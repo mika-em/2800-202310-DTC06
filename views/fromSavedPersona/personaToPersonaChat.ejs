@@ -15,13 +15,13 @@
                     <div class="card-title">Dialogue:</div>
                     <% const conversationLines = entry.botResponse.split('\n'); %>
                     <% for (let j = 0; j < conversationLines.length; j++) { %>
-                    <% const line = conversationLines[j]; %>
-                    <% const lineSplit = line.split(':'); %>
-                    <% const currentPersona = lineSplit[0].trim(); %>
-                    <% const message = lineSplit.slice(1).join(':').trim(); %>
+                    <% const line = conversationLines[j].trim(); %>
+                    <% if (line) { %>
                     <div class="card-text">
-                        <strong><%= currentPersona %>:</strong> <%= message %>
+                        <%= line %>
                     </div>
+                    <br>
+                    <% } %>
                     <% } %>
                 </div>
             </div>
@@ -31,7 +31,8 @@
     <% }) %>
 </div>
 
-<form action="saved/persona/dialogue/chat/persona-to-persona-chat/save" method="post" class="text-center input-container">
+<form action="/saved/persona/dialogue/chat/persona-to-persona-chat/save" method="post"
+    class="text-center input-container">
     <div class="row">
         <input class="form-control col" rows="1" cols="1" type="text" name="response"
             placeholder="<%= placeholderText %>" />

@@ -1,0 +1,63 @@
+<!-- GENERAL CONTENT -->
+<!-- header and back header -->
+<%-include ("../partials/header-persona.ejs")%>
+<%-include ("../partials/emptybackbar.ejs") %>
+
+<!-- title -->
+
+<br>
+<br>
+<div class="col text-center mx-4">
+    <h3>Persona to Persona Chat</h3>
+    <p>How would these two personas chat with each other?</p>
+</div>
+</div>
+</div>
+
+<!-- content -->
+<div class="container-fluid" style="padding-top: 30px;">
+    <div class="row">
+        <form action="/saved/persona/dialogue/chat/persona-to-persona-chat" method="post" class="text-center">
+
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body mx-1">
+                        <label class="card-title">Persona 1:</label><br />
+                        <textarea class="form-control text-center" readonly><%= firstPersona %></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body mx-1">
+                        <label class="card-title">Persona 2:</label><br />
+                        <% if (personaServerList.length > 1) { %>
+                        <textarea class="form-control text-center" readonly><%= secondPersona %></textarea>
+                        <% } else { %>
+                        <input class="form-control text-center" type="text" name="secondPersona"
+                            placeholder="Enter the second persona" />
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body mx-1">
+                        <label class="card-title">What kind of situation are they in?</label><br>
+                        <input class="form-control" type="text" name="situation"
+                            placeholder="Enter the situation the personas are in" />
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button class="btn" type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

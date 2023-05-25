@@ -1,0 +1,42 @@
+<!-- header -->
+<%-include ("../partials/header-dialogue.ejs")%>
+<%- include ("../partials/emptybackbar.ejs") %>
+
+<div class="container-fluid mb-5 pb-5" id="chatContainer">
+  <!-- Existing chat messages -->
+  <div class="row-fluid">
+    <% for (var i=0; i<innerDialogueHistory.length; i++) { %>
+      <form action="/dialogue/chat/inner-dialogue/save" method="post">
+        <div class="col-12" id="botOutput">
+          <div class="card">
+            <!-- save button -->
+            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%- i %>">
+              star_border
+            </button>
+            <div class="card-body m-3">
+              <% if (innerDialogueHistory[i].response) { %>
+                <% var dialogueLines = innerDialogueHistory[i].botResponse.split('\n'); %>
+                <% dialogueLines.forEach(function(line) { %>
+                  <div class="card-text">
+                    <% if (line.startsWith('Persona:')) { %>
+                      <strong><%- line %></strong>
+                    <% } else { %>
+                      <%= line %>
+                    <% } %>
+                  </div>
+                <% }); %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </form>
+      <hr>
+    <% } %>
+  </div>
+</div>
+
+
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

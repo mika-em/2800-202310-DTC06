@@ -100,22 +100,12 @@ router.post("/loginUser", async (req, res) => {
       innerDialogueHistory: user.innerDialogueHistory,
       personaDialogueHistory: user.personaDialogueHistory,
       userPersonaChatHistory: user.userPersonaChatHistory,
+      PersonaPersonaChatHistory: user.PersonaPersonaChatHistory,
       profileImage: user.profileImage,
     };
     const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
     user.currentSessionId = currentSessionId;
     await user.save();
-
-    // const dialogue = new Dialogue({
-    //     userId: user._id, // Assuming user._id is the ObjectId of the current user
-    //     dialogueSaved: [{
-    //         userPrompt: "",
-    //         botResponse: ""
-
-    //     }]
-    // });
-
-    // await dialogue.save();
 
     console.log(req.session.user.name);
 
@@ -148,39 +138,30 @@ router.post("/400", (req, res) => {
   res.redirect("/login");
 });
 
-// Logout route
-router.get("/logout", async (req, res) => {
-  // Retrieve the current username from the session
-  const currentUsername = req.session.user.username;
-
-  try {
-    // Find the user based on the username
+router.get('/logout', async (req, res) => {
     const currentUser = await User.findOne({
-      username: currentUsername,
+        username: req.session.user.username
     });
 
-    // Update the dialogueHistory field to an empty array
-    currentUser.dialogueHistory = [];
-    currentUser.innerDialogueHistory = [];
     currentUser.personaDialogueHistory = [];
+    currentUser.userPersonaChatHistory = [];
+    currentUser.PersonaPersonaChatHistory = [];
 
     // Save the updated user
     await currentUser.save();
 
-    // Clear the session and redirect to the login page
     req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("An error occurred during logout");
-      } else {
-        res.render("../views/authorization/logout");
-      }
+        if (err) {
+            console.error(err);
+            res.status(500).send("An error occurred during logout");
+        } else {
+            res.render("../views/authorization/logout");
+        }
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred during logout");
-  }
 });
+
+
+
 
 router.post("/exit", (req, res) => {
   res.redirect("/");

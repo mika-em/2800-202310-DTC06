@@ -1,0 +1,45 @@
+<!-- header -->
+<%-include ("../partials/header-internal.ejs")%>
+<div class="container-fluid mb-5 pb-5" id="chatContainer">
+    <!-- Existing chat messages -->
+    <% PersonaPersonaChatHistory.forEach((entry, index) => { %>
+    <div class="row">
+        <!-- Display bot's output -->
+        <div class="col-12 my-2" id="botOutput">
+            <div class="card">
+                <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
+                    name="save" value="<%= index %>">
+                    star_border
+                </button>
+                <div class="card-body m-3">
+                    <div class="card-title">Dialogue:</div>
+                    <% const conversationLines = entry.botResponse.split('\n'); %>
+                    <% for (let j = 0; j < conversationLines.length; j++) { %>
+                    <% const line = conversationLines[j]; %>
+                    <% const lineSplit = line.split(':'); %>
+                    <% const currentPersona = lineSplit[0].trim(); %>
+                    <% const message = lineSplit.slice(1).join(':').trim(); %>
+                    <div class="card-text">
+                        <strong><%= currentPersona %>:</strong> <%= message %>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <% }) %>
+</div>
+
+<form action="/dialogue/chat/persona-to-persona-chat/save" method="post" class="text-center input-container">
+    <div class="row">
+        <input class="form-control col" rows="1" cols="1" type="text" name="response"
+            placeholder="<%= placeholderText %>" />
+        <button class="btn col-3" type="submit">Send</button>
+    </div>
+</form>
+
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

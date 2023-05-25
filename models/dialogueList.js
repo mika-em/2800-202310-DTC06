@@ -8,7 +8,7 @@ const dialogueSchema = new mongoose.Schema(
             ref: 'User'
         },
         date: Date,
-        persona: String,
+        dialogue: String,
     },
     // name of the collection in database
     { collection: 'dialogue' }

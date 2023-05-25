@@ -12,7 +12,9 @@ const userSchema = new mongoose.Schema(
         personaHistory: Array,
         dialogueHistory: Array,
         innerDialogueHistory: Array,
-        userPersonaChatHistory: Array,
+    userPersonaChatHistory: Array,
+    PersonaPersonaChatHistory: Array,
+
         filter: {
             default: Boolean,
             status: Boolean,

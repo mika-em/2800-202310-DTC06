@@ -6,165 +6,141 @@ const User = require("../models/users");
 const multer = require("multer");
 const { profile } = require("console");
 
-const upload = multer({storage: multer.memoryStorage()})
+const upload = multer({ storage: multer.memoryStorage() })
 
 
 router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
-    try {
-      const user = await User.findOne({ user: req.session.username });
-  
-      if (user) {
-        const profileImage = {
-          data: req.file.buffer,
-          fileName: req.file.originalname,
-          contentType: req.file.mimetype
-        };
-  
-        user.profileImage = profileImage;
+  try {
+    const user = await User.findOne({ user: req.session.username });
 
-        const result = await user.save();
+    if (user) {
+      const profileImage = {
+        data: req.file.buffer,
+        fileName: req.file.originalname,
+        contentType: req.file.mimetype
+      };
 
-  
-        console.log(result.profileImage.fileName);
+      user.profileImage = profileImage;
 
-  
-        res.render("../views/profile/profile", {
-            name: req.session.user.name,
-            profileImage: profileImage,
-            });
+      const result = await user.save();
 
-      } else {
-        // Handle case where user is not found
-        res.status(404).send("User not found.");
-      }
-    } catch (error) {
-      // Handle error if database update fails
-      console.error(error);
-      res.status(500).send("Error occurred while updating the profile image.");
+
+      console.log(result.profileImage.fileName);
+
+
+      res.render("../views/profile/profile", {
+        name: req.session.user.name,
+        profileImage: profileImage,
+      });
+
+    } else {
+      // Handle case where user is not found
+      res.status(404).send("User not found.");
     }
-  });
-
-// Home page
-router.get("/home", async (req, res) => {
-    try {
-      const user = await User.findOne({ user: req.session.username });
-  
-      if (user) {
-        res.render("home", {
-          name: req.session.user.name,
-          profileImage: user.profileImage,
-        });
-      } else {
-        // Handle case where user is not found
-        res.status(404).send("User not found.");
-      }
-    } catch (error) {
-      // Handle error if database query fails
-      console.error(error);
-      res.status(500).send("Error occurred while fetching user data.");
-    }
-  });
-  
+  } catch (error) {
+    // Handle error if database update fails
+    console.error(error);
+    res.status(500).send("Error occurred while updating the profile image.");
+  }
+});
 
 // Profile page
 router.get("/profile", async (req, res) => {
-    try {
-      const user = await User.findOne({ user: req.session.username });
-  
-      if (user) {
-        res.render("../views/profile/profile", {
-          name: user.name,
-          profileImage: user.profileImage,
-        });
-      } else {
-        // Handle case where user is not found
-        res.status(404).send("User not found.");
-      }
-    } catch (error) {
-      // Handle error if database query fails
-      console.error(error);
-      res.status(500).send("Error occurred while fetching user data.");
-    }
-  });
+  try {
+    const user = await User.findOne({ user: req.session.username });
 
-  
+    if (user) {
+      res.render("../views/profile/profile", {
+        name: user.name,
+        profileImage: user.profileImage,
+      });
+    } else {
+      // Handle case where user is not found
+      res.status(404).send("User not found.");
+    }
+  } catch (error) {
+    // Handle error if database query fails
+    console.error(error);
+    res.status(500).send("Error occurred while fetching user data.");
+  }
+});
+
+
 // Account settings page
 router.get("/profile/account-settings", async (req, res) => {
+  const currentUser = await User.findOne({
+    username: req.session.user.username
+  });
+  const name = currentUser.name;
+  const username = currentUser.username;
+  const email = currentUser.email;
+  const securityQuestion = currentUser.securityQuestion;
+  const securityAnswer = currentUser.securityAnswer;
+  console.log(securityAnswer)
+  res.render("./profile/accountSettings", {
+    name: name,
+    username: username,
+    email: email,
+    securityQuestion: securityQuestion,
+    securityAnswer: securityAnswer,
+    disabled: true
+  });
+});
+
+// Update account settings
+router.post("/profile/account-settings", async (req, res) => {
+  if (req.body.action === "Edit") {
+    console.log("edit")
     const currentUser = await User.findOne({
-        username: req.session.user.username
+      username: req.session.user.username
     });
     const name = currentUser.name;
     const username = currentUser.username;
     const email = currentUser.email;
     const securityQuestion = currentUser.securityQuestion;
     const securityAnswer = currentUser.securityAnswer;
-    console.log(securityAnswer)
-    res.render("../views/profile/accountSettings", {
-        name: name,
-        username: username,
-        email: email,
-        securityQuestion: securityQuestion,
-        securityAnswer: securityAnswer,
-        disabled: true
+    res.render("./profile/accountSettings", {
+      name: name,
+      username: username,
+      email: email,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
+      disabled: false
     });
+  } else if (req.body.action === "Save") {
+    console.log("save")
+    const nameInput = req.body.name
+    const emailInput = req.body.email
+    const securityQuestionInput = req.body.securityQuestion
+    const hashedSecurityAnswer = await bcrypt.hashSync(req.body.securityAnswer, saltRounds);
+    const securityAnswerInput = hashedSecurityAnswer
+    await User.updateOne({
+      username: req.session.user.username
+    }, {
+      $set: {
+        name: nameInput,
+        email: emailInput,
+        securityQuestion: securityQuestionInput,
+        securityAnswer: securityAnswerInput
+      }
+    })
+    const currentUser = await User.findOne({
+      username: req.session.user.username
+    });
+    const name = currentUser.name;
+    const username = currentUser.username;
+    const email = currentUser.email;
+    const securityQuestion = currentUser.securityQuestion;
+    const securityAnswer = currentUser.securityAnswer;
+    res.render("./profile/accountSettings", {
+      name: name,
+      username: username,
+      email: email,
+      securityQuestion: securityQuestion,
+      securityAnswer: securityAnswer,
+      disabled: true
+    });
+  }
 });
-
-// Update account settings
-router.post("/profile/account-settings", async (req, res) => {
-    if (req.body.action === "Edit") {
-        console.log("edit")
-        const currentUser = await User.findOne({
-            username: req.session.user.username
-        });
-        const name = currentUser.name;
-        const username = currentUser.username;
-        const email = currentUser.email;
-        const securityQuestion = currentUser.securityQuestion;
-        const securityAnswer = currentUser.securityAnswer;
-        res.render("accountSettings", {
-            name: name,
-            username: username,
-            email: email,
-            securityQuestion: securityQuestion,
-            securityAnswer: securityAnswer,
-            disabled: false
-        });
-    } else if (req.body.action === "Save") {
-        console.log("save")
-        const nameInput = req.body.name
-        const emailInput = req.body.email
-        const securityQuestionInput = req.body.securityQuestion
-        const hashedSecurityAnswer = await bcrypt.hashSync(req.body.securityAnswer, saltRounds);
-        const securityAnswerInput = hashedSecurityAnswer
-        await User.updateOne({
-            username: req.session.user.username
-        }, {
-            $set: {
-                name: nameInput,
-                email: emailInput,
-                securityQuestion: securityQuestionInput,
-                securityAnswer: securityAnswerInput
-            }
-        })
-        const currentUser = await User.findOne({
-            username: req.session.user.username
-        });
-        const name = currentUser.name;
-        const username = currentUser.username;
-        const email = currentUser.email;
-        const securityQuestion = currentUser.securityQuestion;
-        const securityAnswer = currentUser.securityAnswer;
-        res.render("../views/profile/accountSettings", {
-            name: name,
-            username: username,
-            email: email,
-            securityQuestion: securityQuestion,
-            securityAnswer: securityAnswer,
-            disabled: true
-        });
-    }
-});
-
-// Other profile-related routes...
 
 module.exports = router;

@@ -96,22 +96,12 @@ router.post("/loginUser", async (req, res) => {
       innerDialogueHistory: user.innerDialogueHistory,
       personaDialogueHistory: user.personaDialogueHistory,
       userPersonaChatHistory: user.userPersonaChatHistory,
+      PersonaPersonaChatHistory: user.PersonaPersonaChatHistory,
       profileImage: user.profileImage,
     };
     const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
     user.currentSessionId = currentSessionId;
     await user.save();
-
-    // const dialogue = new Dialogue({
-    //     userId: user._id, // Assuming user._id is the ObjectId of the current user
-    //     dialogueSaved: [{
-    //         userPrompt: "",
-    //         botResponse: ""
-
-    //     }]
-    // });
-
-    // await dialogue.save();
 
     console.log(req.session.user.name);
 
@@ -164,20 +154,8 @@ router.get('/logout', async (req, res) => {
             res.render("../views/authorization/logout");
         }
     });
-    // Clear the session and redirect to the login page
-    req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("An error occurred during logout");
-      } else {
-        res.render("../views/authorization/logout");
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred during logout");
-  }
 });
+
 
 
 

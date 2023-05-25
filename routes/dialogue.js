@@ -324,9 +324,6 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
         username: req.session.user.username
     });
-    // const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-    // console.log(currentUser)
-    // console.log(PersonaPersonaChatHistory)
     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory.map(entry => {
         return {
             userPrompt: entry.userPrompt.split('\n').map(line => `${line.split(':')[0].trim()}:`).join('\n'),
@@ -338,7 +335,7 @@ router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
         placeholderText: "Write a response here...",
         PersonaPersonaChatHistory: PersonaPersonaChatHistory
     });
-});
+
 
 router.post('/dialogue/chat/persona-to-persona-chat/save', async (req, res) => {
     const index = req.body.save;

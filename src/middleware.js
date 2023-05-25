@@ -7,6 +7,7 @@ module.exports = (req, res, next) => {
     res.locals.dialogueLinks = dialogueLinks;
     res.locals.dialogueFilters = dialogueFilters;
     res.locals.savedPersonaDialogueFilters = savedPersonaDialogueFilters;
+    res.locals.filters = filters;
     next();
 };
 
@@ -106,4 +107,23 @@ const savedPersonaDialogueFilters = [{
     name: 'Persona to Persona Conversation',
     link: '/saved/persona/dialogue/persona-to-persona-chat'
 }];
-
+const filters = [{
+    name: 'Default',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Status',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Class',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Drop',
+    icon: 'fa-solid fa-circle fa-2xl',
+},
+{
+    name: 'Race',
+    icon: 'fa-solid fa-circle fa-2xl',
+}];

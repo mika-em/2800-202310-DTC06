@@ -9,10 +9,19 @@
     </div>
 </div>
 
-<div class="container pt-5" style="padding-bottom: 100px;">
-<p>this is a filter page</p>
-</div><br>
-</div>
+<div class="container-fluid  px-5" style="padding-top: 50px;">
+    <div>
+      <% for (var i=1; i<locals.filters.length; i++) { %>
+      <div class="row">
+      <a class="card btn btn-light pt-5"
+      href="#">
+        <i class="<%-locals.filters[i].icon%>"></i>
+        <h5 class="p-4"><%- locals.filters[i].name %></h5></a>
+      </div>
+      <br>
+        <% } %>
+      </div>
+  </div>
 
 
 <!-- navbar and footer -->

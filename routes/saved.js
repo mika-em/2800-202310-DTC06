@@ -43,13 +43,15 @@ router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
     const personaList = req.body.personaList;
     const parsedPersonaList = JSON.parse(personaList);
     console.log(parsedPersonaList);
-
+    
     for (let i = 0; i < parsedPersonaList.length; i++) {
         personaServerList.push(parsedPersonaList[i]);
     }
+    console.log("This is the Persona Server List" + personaServerList)
 
-    console.log(personaServerList)
-    res.render("./dialogue/dialogueHome");
+    res.render("./dialogue/dialogueFilters", {
+        output: null
+    });
 });
 
 router.post('/saved/persona/save-as-pdf', async (req, res) => {

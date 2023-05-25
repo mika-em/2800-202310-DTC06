@@ -111,7 +111,7 @@ router.post('/persona/saved-persona/dialogue/chat/user-persona-chat', async (req
             }
         }
     });
-    
+
     const userPersonaChatHistory = currentUser.userPersonaChatHistory
 
     res.render("dialogue/personaChat", {
@@ -126,13 +126,128 @@ router.get('/persona/saved-persona/dialogue/chat/user-persona', async (req, res)
         username: req.session.user.username
     });
     const userPersonaChatHistory = currentUser.userPersonaChatHistory
-    
+
     res.render("./dialogue/personaChat", {
         placeholderText: "What is your response?",
         userPersonaChatHistory: userPersonaChatHistory
-        });
+    });
 });
 
 router.post('/persona/saved-persona/dialogue/chat/user-persona', async (req, res) => {
+    const prompt = req.body.prompt;
+    const currentUsername = req.session.user.username;
+    const responseData = await callOpenAIAPi(prompt);
+
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            userPersonaChatHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
+        }
+    })
+    const currentUser = await User.findOne({
+        username: currentUsername
+    });
+    const userPersonaChatHistory = currentUser.userPersonaChatHistory
+
+    res.render("./dialogue/personaChat", {
+        placeholderText: "What is your response?",
+        userPersonaChatHistory: userPersonaChatHistory
+    });
 });
+
+//Persona to Persona Page with Saved Persona
+router.get('/persona/saved-persona/dialogue/chat/persona-to-persona', async (req, res) => {
+    res.render("./dialogue/personaToPersona");
+}
+);
+
+router.post('/persona/saved-persona/dialogue/chat/persona-to-persona', async (req, res) => {
+    const personaList = req.session.personaServerList;
+    //if there is two personas in the list, then it will generate a chat between the two personas
+    //if only one persona, it will generate a chat between the persona and the user input
+    if (personaList.length === 2) {
+        firstPersona = personaList[0];
+        secondPersona = personaList[1];
+        setting = req.body.setting || "random";
+        prompt = `Generate a chat between two characters. The first character is described as ${firstPersona}. The second character is described as ${secondPersona} and they are in a ${setting} setting.`;
+    }
+    else
+    //if personaList is length == 1, fill in the first persona with the persona in the list and the second persona with the user input
+    {
+        firstPersona = personaList[0];
+        secondPersona = req.body.secondPersona;
+        setting = req.body.setting || "random";
+        prompt = `Generate a chat between two characters. The first character is described as ${firstPersona}. The second character is described as ${secondPersona} and they are in a ${setting} setting.`;
+    }
+    const responseData = await callOpenAIAPi(prompt);
+
+    const currentUsername = req.session.user.username;
+
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            personaToPersonaChatHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
+        }
+    });
+
+    const currentUser = await User.findOne({
+        username: currentUsername
+    });
+    const personaToPersonaChatHistory = currentUser.personaToPersonaChatHistory
+
+    res.render("./dialogue/personaToPersonaChat", {
+        placeholderText: "What is your response?",
+        personaToPersonaChatHistory: personaToPersonaChatHistory
+    });
+});
+
+// Chat for Persona to Persona with Saved Persona
+router.get('/persona/saved-persona/dialogue/chat/persona-to-persona-chat', async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const personaToPersonaChatHistory = currentUser.personaToPersonaChatHistory
+
+    res.render("./dialogue/personaToPersonaChat", {
+        placeholderText: "What is your response?",
+        personaToPersonaChatHistory: personaToPersonaChatHistory
+    });
+});
+
+router.post('/persona/saved-persona/dialogue/chat/persona-to-persona-chat', async (req, res) => {
+    const prompt = req.body.prompt;
+    const currentUsername = req.session.user.username;
+    const responseData = await callOpenAIAPi(prompt);
+
+    await User.updateOne({
+        username: currentUsername
+    }, {
+        $push: {
+            personaToPersonaChatHistory: {
+                userPrompt: prompt,
+                botResponse: responseData
+            }
+        }
+    })
+    const currentUser = await User.findOne({
+        username: currentUsername
+    });
+    const personaToPersonaChatHistory = currentUser.personaToPersonaChatHistory
+
+    res.render("./dialogue/personaToPersonaChat", {
+        placeholderText: "What is your response?",
+        personaToPersonaChatHistory: personaToPersonaChatHistory
+    });
+});
+
+module.exports = router;
+
 

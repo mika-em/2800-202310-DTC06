@@ -52,7 +52,13 @@ router.get('/dialogue/inner-dialogue', (req, res) => {
 router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUsername = req.session.user.username;
 
-    const persona = req.body.persona || "random";
+
+    let persona;
+    if (req.session.personaServerList && req.session.personaServerList.length > 0) {
+        persona = req.session.personaServerList;
+    } else {
+        persona = req.body.persona || "random";
+    }
     const situation = req.body.situation || "random";
     const plot = req.body.plot || "random";
 
@@ -188,7 +194,6 @@ router.post('/dialogue/chat/user-persona', async (req, res) => {
 
 //Persona to Persona stuff
 
-
 //Persona Persona Page
 router.get('/dialogue/persona-to-persona-chat', async (req, res) => {
     res.render("./dialogue/personaToPersona");
@@ -199,7 +204,7 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     const secondPersona = req.body.secondPersona || "random";
     const setting = req.body.setting || "random";
 
-    const prompt = `Create a dialogue between two characters described as ${firstPersona} and ${secondPersona}`;
+    const prompt = `Create a dialogue between two characters described as ${firstPersona} and ${secondPersona} in a ${setting} setting.`;
 
     const responseData = await callOpenAIAPi(prompt);
 

@@ -14,7 +14,7 @@ dotenv.config();
 router.use(express.static('public'));
 
 const configuration = new Configuration({
-    organization: "org-wZOT14YD6omEzAgdgaFU5gz3",
+    organization: process.env.OPENAI_ORGANIZATION_KEY,
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);

@@ -26,8 +26,8 @@ router.get('/saved/persona', async (req, res) => {
         userId: userID
     });
 
-    res.render("./saved/saved-persona", { 
-        savedPersona: savedPersona 
+    res.render("./saved/saved-persona", {
+        savedPersona: savedPersona
     });
 });
 
@@ -149,7 +149,9 @@ router.post('/saved/persona/save-as-pdf', async (req, res) => {
         userId: userID
     });
 
-    res.render("./saved/saved-persona", { savedPersona: savedPersona });
+    res.render("./saved/saved-persona", {
+        savedPersona: savedPersona
+    });
 });
 
 router.post('/saved/dialogue/save-as-pdf', async (req, res) => {
@@ -221,9 +223,23 @@ router.post('/saved/dialogue/save-as-pdf', async (req, res) => {
         userId: userID
     });
 
-    res.render("./saved/saved-dialogue", { savedDialogue: savedDialogue });
+    res.render("./saved/saved-dialogue", {
+        savedDialogue: savedDialogue
+    });
 });
 
-
+//saved dialogue
+router.get('/persona/saved-dialogue', async (req, res) => {
+    const currentUser = await User.findOne({
+        username: req.session.user.username
+    });
+    const userID = currentUser._id;
+    const savedDialogue = await Dialogue.find({
+        userId: userID
+    });
+    res.render("./saved/saved-dialogue", {
+        savedDialogue: null
+    });
+});
 
 module.exports = router;

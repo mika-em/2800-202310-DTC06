@@ -247,8 +247,66 @@ router.get('/dialogue/persona-to-persona-chat', async (req, res) => {
     res.render("./dialogue/personaToPersona");
 });
 
+// router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
+//     try {let firstPersona;
+//     let secondPersona;
+//     if (req.session.personaServerList && req.session.personaServerList.length === 2) {
+//         firstPersona = req.session.personaServerList[0];
+//         secondPersona = req.session.personaServerList[1];
+//     } else {
+//         firstPersona = req.body.firstPersona || "random";
+//         secondPersona = req.body.secondPersona || "random";
+//     }
+
+//     const setting = req.body.setting || "random";
+
+//     const conversationLength = 10;
+//     const PersonaPersonaChatHistory = [];
+
+//     for (let i = 0; i < conversationLength; i++) {
+//         const currentPersona = i % 2 === 0 ? firstPersona : secondPersona;
+//         const currentPrompt = `Create a dialogue for ${currentPersona} in a ${setting} setting.`;
+//         const currentResponse = await callOpenAIAPi(currentPrompt);
+
+//         PersonaPersonaChatHistory.push({
+//             persona: currentPersona,
+//             userPrompt: currentPrompt,
+//             botResponse: currentResponse,
+//         });
+//     }
+
+//     const currentUsername = req.session.user.username;
+
+//     await User.updateOne({
+//         username: currentUsername
+//     }, {
+//         $push: {
+//             PersonaPersonaChatHistory: PersonaPersonaChatHistory,
+//         },
+//     });
+
+//     const currentUser = await User.findOne({
+//         username: currentUsername
+//     });
+//     const personaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
+
+//     res.render("./dialogue/personaToPersonaChat", {
+//         placeholderText: "Write a prompt here...",
+//         PersonaPersonaChatHistory: personaPersonaChatHistory,
+//     });
+// } catch (err) {
+//     console.log(err);
+//     res.status(500).json({
+//         message: "Something went wrong",
+//     });
+// }
+// });
+
+
+//Attempt at optimizing the API Calls: 
+// Route for initiating the persona-to-persona chat
 router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-    let firstPersona;
+    try {let firstPersona;
     let secondPersona;
     if (req.session.personaServerList && req.session.personaServerList.length === 2) {
         firstPersona = req.session.personaServerList[0];
@@ -259,23 +317,25 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     }
 
     const setting = req.body.setting || "random";
+    const conversationLength = 10; // Define the desired length of the conversation
 
-    const conversationLength = 10;
-    const PersonaPersonaChatHistory = [];
-
-    for (let i = 0; i < conversationLength; i++) {
+    const conversationPrompts = Array.from({
+        length: conversationLength
+    }, (_, i) => {
         const currentPersona = i % 2 === 0 ? firstPersona : secondPersona;
         const currentPrompt = `Create a dialogue for ${currentPersona} in a ${setting} setting.`;
-        const currentResponse = await callOpenAIAPi(currentPrompt);
+        return currentPrompt;
+    });
 
-        PersonaPersonaChatHistory.push({
-            persona: currentPersona,
-            userPrompt: currentPrompt,
-            botResponse: currentResponse,
-        });
-    }
+    const conversationResponses = await Promise.all(conversationPrompts.map(prompt => callOpenAIAPi(prompt)));
 
     const currentUsername = req.session.user.username;
+
+    const PersonaPersonaChatHistory = conversationPrompts.map((prompt, index) => ({
+        persona: index % 2 === 0 ? firstPersona : secondPersona,
+        userPrompt: prompt,
+        botResponse: conversationResponses[index],
+    }));
 
     await User.updateOne({
         username: currentUsername
@@ -289,12 +349,18 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
         username: currentUsername
     });
     const personaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
+    
 
     res.render("./dialogue/personaToPersonaChat", {
         placeholderText: "Write a prompt here...",
         PersonaPersonaChatHistory: personaPersonaChatHistory,
     });
-});
+}
+catch (err) {
+    console.log(err);
+    res.redirect('/dialogue/persona-to-persona-chat');
+}});
+
 
 // Route for displaying the persona-to-persona chat page
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {

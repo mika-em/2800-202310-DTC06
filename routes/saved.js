@@ -36,7 +36,7 @@ router.use('/persona', async (req, res, next) => {
     next();
 });
 
-router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
+router.post('/saved/persona/dialogueFilters', (req, res) => {
     const personaList = req.body.personaList;
     const parsedPersonaList = JSON.parse(personaList);
     console.log(parsedPersonaList);
@@ -46,7 +46,7 @@ router.post('/persona/saved-persona/dialogue-filters', (req, res) => {
     }
     console.log("This is the Persona Server List" + personaServerList)
 
-    res.render("./dialogue/dialogueFilters", {
+    res.render("./fromSavedPersona/savedPersonaDialogueFilters", {
         output: null
     });
 });

@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
     res.locals.currentURL = url.parse(req.url).pathname;
     res.locals.dialogueLinks = dialogueLinks;
     res.locals.dialogueFilters = dialogueFilters;
+    res.locals.savedPersonaDialogueFilters = savedPersonaDialogueFilters;
     next();
 };
 
@@ -79,12 +80,25 @@ const dialogueFilters = [{
     link: '/dialogue/inner-dialogue' 
 },
 {
-    name: 'User-Persona Chat',
+    name: 'User & Persona Conversation',
     link: '/dialogue/user-persona-chat' 
 },
 {
-    name: 'Persona-Persona Chat',
+    name: 'Persona to Persona Conversation',
     link: '/dialogue/persona-to-persona-chat'
+}];
+
+const savedPersonaDialogueFilters = [{
+    name: 'Inner Dialogue',
+    link: '/saved/persona/dialogue/inner-dialogue' 
+},
+{
+    name: 'User & Persona Conversation',
+    link: '/saved/persona/dialogue/user-persona-chat' 
+},
+{
+    name: 'Persona to Persona Conversation',
+    link: '/saved/persona/dialogue/persona-to-persona-chat'
 }];
 
 

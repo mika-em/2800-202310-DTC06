@@ -31,13 +31,21 @@
     </form>
     <hr>
     <% } %>
+    <div class="card col-2 d-none" id="loadingCard">
+      <div class="card-body m-3 p-0 text-center">
+        <div class="card-text">
+          <span id="loadingContainer"></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 <form action="/persona/chat" method="post" class="text-center input-container">
   <div class="row">
     <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
-    <button class="btn col-3" type="submit">Send</button>
+    <button class="btn col-3" type="submit" id="send">Send</button>
   </div>
 </form>
 
@@ -46,10 +54,30 @@
     const container = document.getElementById('chatContainer');
 
     // Scroll to the bottom of the container
+    // container.scrollTop = container.scrollHeight
     // container.scrollIntoView(false);
     container.scrollIntoView({
       behavior: 'smooth',
       block: 'end'
+    });
+
+    $('#send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+
+      // Show the loading indicator when the user clicks send
+      const element = document.getElementById('loadingContainer');
+      element.textContent = ''
+
+      loadInterval = setInterval(() => {
+        // Update the text content of the loading indicator
+        element.textContent += '.';
+
+        // If the loading indicator has reached three dots, reset it
+        if (element.textContent === '....') {
+          element.textContent = '.';
+        }
+      }, 300);
     });
   });
 </script>

@@ -1,8 +1,6 @@
 <!-- header -->
 <%-include ("./partials/header-internal.ejs")%>
 
-<h1>This is the chat.</h1>
-
 <div class="container-fluid mb-5 pb-5" id="chatContainer">
   <!-- Existing chat messages -->
   <div class="row-fluid">
@@ -42,6 +40,19 @@
     <button class="btn col-3" type="submit">Send</button>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+    const container = document.getElementById('chatContainer');
+
+    // Scroll to the bottom of the container
+    // container.scrollIntoView(false);
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+  });
+</script>
 
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>

@@ -3,36 +3,37 @@
 
 <div class="container-fluid mb-5 pb-5" id="chatContainer">
     <!-- Existing chat messages -->
-    <div class="row-fluid">
-        <% for (var i=0; i<PersonaPersonaChatHistory.length; i++) { %>
-        <div class="col-12 my-2" id="userInput">
-            <div class="card bg-primary text-bg-light">
-                <div class="card-body m-3">
-                    <div class="card-title"></div>
-                    <div class="card-text">
-                        <.%- PersonaPersonaChatHistory[i].userPrompt %>
-                    </div>
+<div class="row-fluid">
+    <% for (var i = 0; i < PersonaPersonaChatHistory.length; i++) { %>
+    <!-- Display persona's input and bot output -->
+    <div class="col-12 my-2" id="userInput">
+        <div class="card bg-primary text-bg-light">
+            <div class="card-body m-3">
+                <div class="card-title"></div>
+                <div class="card-text">
+                    <%= PersonaPersonaChatHistory[i].persona %>: <%= PersonaPersonaChatHistory[i].userPrompt %>
                 </div>
             </div>
         </div>
-        <div class="col-12" id="botOutput">
-            <div class="card">
-                <!-- save button -->
-                <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
-                    name="save" value="<%- i %>">
-                    star_border
-                </button>
-                <div class="card-body m-3">
-                    <div class="card-title">Persona:</div>
-                    <div class="card-text" name="data"><%- PersonaPersonaChatHistory[i].botResponse %>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <% } %>
     </div>
+    <div class="col-12" id="botOutput">
+        <div class="card">
+            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
+                name="save" value="<%- i %>">
+                star_border
+            </button>
+            <div class="card-body m-3">
+                <div class="card-title">Persona:</div>
+                <div class="card-text" name="data">
+                    <%= PersonaPersonaChatHistory[i].persona %>: <%= PersonaPersonaChatHistory[i].botResponse %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <% } %>
 </div>
+
 
 <form action="/dialogue/chat/persona-to-persona-chat" method="post" class="text-center input-container">
     <div class="row">

@@ -16,7 +16,8 @@
           <div class="col-12" id="botOutput">
             <div class="card">
               <!-- save button -->
-              <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%- i %>">
+              <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
+                name="save" value="<%- i %>">
                 star_border
               </button>
               <div class="card-body m-3">
@@ -31,13 +32,6 @@
       </div>
     </div>
 
-    <form action="/dialogue/chat/inner-dialogue" method="post" class="text-center input-container">
-      <div class="row">
-        <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
-        <button class="btn col-3" type="submit" id="send">Send</button>
-      </div>
-    </form>
-
     <div class="p-5 text-center d-none" id="loadingCard">
       <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
       <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
@@ -46,8 +40,16 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-    $('#send').click(function() {
+  $(document).ready(function () {
+    const container = document.getElementById('chatContainer');
+
+    // Scroll to the bottom of the container
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+
+    $('#send').click(function () {
       // show card with loading indicator
       $("#loadingCard").removeClass("d-none");
     });

@@ -18,7 +18,8 @@
     <div class="col-12" id="botOutput">
       <div class="card">
         <!-- save button -->
-        <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%- i %>">
+        <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save"
+          value="<%- i %>">
           star_border
         </button>
         <div class="card-body m-3">
@@ -43,8 +44,16 @@
 </form>
 
 <script>
-  $(document).ready(function() {
-    $('#send').click(function() {
+  $(document).ready(function () {
+    const container = document.getElementById('chatContainer');
+
+    // Scroll to the bottom of the container
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+
+    $('#send').click(function () {
       // show card with loading indicator
       $("#loadingCard").removeClass("d-none");
     });

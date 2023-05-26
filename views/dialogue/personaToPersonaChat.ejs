@@ -7,7 +7,8 @@
     <!-- Display bot's output -->
     <div class="col-12 my-2" id="botOutput">
       <div class="card">
-        <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save" value="<%= index %>">
+        <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save"
+          value="<%= index %>">
           star_border
         </button>
         <div class="card-body m-3">
@@ -34,16 +35,17 @@
   </div>
 </div>
 
-<form action="/dialogue/chat/persona-to-persona-chat/save" method="post" class="text-center input-container">
-  <div class="row">
-    <input class="form-control col" rows="1" cols="1" type="text" name="response" placeholder="<%= placeholderText %>" />
-    <button class="btn col-3" type="submit" id="send">Send</button>
-  </div>
-</form>
-
 <script>
-  $(document).ready(function() {
-    $('#send').click(function() {
+  $(document).ready(function () {
+    const container = document.getElementById('chatContainer');
+
+    // Scroll to the bottom of the container
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+
+    $('#send').click(function () {
       // show card with loading indicator
       $("#loadingCard").removeClass("d-none");
     });

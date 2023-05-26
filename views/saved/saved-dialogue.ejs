@@ -7,26 +7,26 @@
 
 <div class="col text-center">
     <h1 class="align-middle">SAVED DIALOGUE</h1>
-    </div>
-    <div class="row text-center mx-3" >
-        <div class="col">
-    <form id="savePDF" action="/saved/dialogue/save-as-pdf" method="post">
-        <input id=savePDFInput type="hidden" name="dialogueList" value="" />
-        <button class="btn btn-sm material-symbols-rounded" id="savePDFButton"
-            disabled>picture_as_pdf</button>
-    </form>
+</div>
+<div class="row text-center mx-3">
+    <div class="col">
+        <form id="savePDF" action="/saved/dialogue/save-as-pdf" method="post">
+            <input id=savePDFInput type="hidden" name="dialogueList" value="" />
+            <button class="btn btn-sm material-symbols-rounded" id="savePDFButton" disabled>picture_as_pdf</button>
+        </form>
     </div>
     <div class="col">
         <!-- <form action="/persona/saved-dialogue/delete-dialogue" method="post"> -->
-            <input id="deleteDialogueInput" type="hidden" name="dialogueIDList" value="" />
-            <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton" disabled>delete</button>
-        </form>        
+        <input id="deleteDialogueInput" type="hidden" name="dialogueIDList" value="" />
+        <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton"
+            disabled>delete</button>
+        </form>
     </div>
 </div>
 </div>
 
-<div class="container card mt-2">
-    <div class="accordion-bg-dark accordion-flush p-3" id="accordionFlushExample">
+<div class="container mt-5" style="padding-bottom: 100px; padding-top: 100px;">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
         <% for (var i=0; i<savedDialogue.length; i++) { %>
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -35,7 +35,7 @@
                     aria-controls="flush-collapse<%- [i] %>">
                     <div class="form-check form-switch text-center">
                         <input class="form-check-input dialogueCheckbox" type="checkbox"
-                            id="<%- savedDialogue[i].dialogue %>" value="<%- savedDialogue[i]._id %>>
+                            id="<%- savedDialogue[i].dialogue %>">
                         <p class="card-title"><%- savedDialogue[i].date %></p>
                     </div>
                 </button>

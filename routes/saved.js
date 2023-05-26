@@ -107,11 +107,13 @@ router.post("/saved/persona/save-as-pdf", async (req, res) => {
   const imageWidth = 450;
   const imageHeight = (imageWidth * 300) / 2000;
 
-  doc.image("./images/invsona/invsona-banner-white.png", {
+  doc.image("./public/images/invsona/invsona-banner-white.png", {
     fit: [imageWidth, imageHeight],
     align: "center",
     valign: "top",
   });
+  doc.moveDown();
+  doc.moveDown();
 
   doc.text("Your Personas by Invsona", {
     underline: true,
@@ -185,12 +187,14 @@ router.post("/saved/dialogue/save-as-pdf", async (req, res) => {
   const imageWidth = 450;
   const imageHeight = (imageWidth * 300) / 2000;
 
-  doc.image("./images/invsona/invsona-banner-white.png", {
+  doc.image("./public/images/invsona/invsona-banner-white.png", {
     fit: [imageWidth, imageHeight],
     align: "center",
     valign: "top",
   });
 
+  doc.moveDown();
+  doc.moveDown();
 
   doc.text("Your Dialogues by Invsona", {
     underline: true,

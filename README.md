@@ -1,6 +1,6 @@
 ## 1. DTC GROUP 6 - INVSONA
 
-## 2. Project Description
+## 1. Project Description
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
 
 ## 3. Technologies and Resources Used
@@ -20,8 +20,6 @@ Invsona is an AI-powered persona creation web application, to help artists, deve
 
 ## 4. Contents of Folder
 Content of the project folder:
-
-```
 Top level of project folder: 
 ├── .gitignore               # Git ignore file
 ├── app.js                   # Main file of the application
@@ -141,7 +139,61 @@ Within images subfolder there is another subfolder
         └── invsona.png             # Logo for all other pages - designed by Fiona
     └── blue_bg.mp4                 # Background video for light theme
 
-```
+## 5. How to run the project:
+Here are the steps ...
+* Open terminal and enter "npm install" to install all necessary dependencies
+* Enter necessary inputs into own env file
+* Run the application by entering "nodemon app.js". app.js is the entry point.
+
+##6: How to use the product:
+* To use the persona feature: Open the Persona page from Home and view the various persona generator options. Enter the necessary input, press send and watch as the AI generates you a persona!
+
+* To use the dialogue feature: Open the Dialogue page from Home and select "Create a new dialogue", which will lead to the Dialogue Filters page. The dialogue filters page displays the various types of dialogue you can choose from -- inner dialogue, user persona conversation and persona to persona converation. Select one, input the necessary values and watch as the AI creates you your own custom dialogue!
+
+##7: Credits:
+We would like to credit OpenAI for providing easy to read documentation so that we could implement AI in the core features of our application
+
+##8: How did you use AI?
+**We used AI to help create our app by testing out various inputs to produce our desired outputs. We used Chat-GPT to create our personas and dialogues so we could get an idea of what kind of outcome we could produce.
+
+**We did not use any data sets, as the AI model we are using does not enable fine-tuning. It does, however, contain a vast amount of data that dates to June 2021
+
+**We used the OpenAI API to create a Persona and Dialogue Generator. We used the OpenAI API - GPT-3.5 (text-davinci-003) model for chat completions. We prompted the AI by creating our own optimized prompts.
+
+**We encountered limitations in how much text we can prompt into the API, so we had to create optimized prompts within a limited character count.
+
+## 9. Known Bugs and Limitations
+Here are some known bugs:
+* Some logo images may not load correctly
+* Filter function is currently not active
+* Profile picture upload may produce errors
+
+
+## 10. Features for Future
+What we'd like to build in the future:
+* Character Image Generator - using AI to create illustrations of the generated personas
+* Filters - to filter out certain traits
+* Clear chatlog button - to clear the chatlog
+* Alert messages to notify users of errors, successful actions, confirmations, etc.
+
+
+## 11. Contact Information
+Fiona
+school email : fwong98@my.bcit.ca
+personal email : fwwong01@gmail.com
+github: fwwong
+
+
+Maddy
+school email : mmaddelin@my.bcit.ca
+personal email : maddelintan@gmail.com
+github: maddelin
+
+
+Mika
+school email : mmanaligod3@mybcit.ca
+personal email : mkmanaligod@gmail.com
+github: mika-em
 
 ## 5. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?

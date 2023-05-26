@@ -75,8 +75,6 @@ router.post("/loginUser", async (req, res) => {
   })
     .select("name username email password _id")
     .exec();
-  console.log(user);
-
   if (!user) {
     return res.status(400).render("../views/error/400");
   }
@@ -103,9 +101,6 @@ router.post("/loginUser", async (req, res) => {
     const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
     user.currentSessionId = currentSessionId;
     await user.save();
-
-    console.log(req.session.user.name);
-
     try {
         const user = await User.findOne({ user: req.session.username });
     
@@ -178,11 +173,9 @@ router.get("/resetPassword", (req, res) => {
 // Reset password route
 router.post("/resetPassword", async (req, res) => {
   try {
-    console.log(req.body.email);
     const userReset = await User.findOne({
       email: req.body.email,
     });
-    console.log(userReset);
     res.render("./authorization/resetPassword", {
       email: req.body.email,
       securityQuestion: userReset.securityQuestion,

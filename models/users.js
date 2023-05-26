@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// defines the user schema
 const userSchema = new mongoose.Schema(
     {
         name: String,
@@ -28,11 +26,9 @@ const userSchema = new mongoose.Schema(
             contentType: String,
         },
     },
-    // this is the name of the collection in the database
     { collection: 'users' }
 );
 
 const usersModel = mongoose.model('User', userSchema);
 
 module.exports = usersModel;
-

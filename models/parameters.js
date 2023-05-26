@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// parameter collection schema
 const parameterSchema = new mongoose.Schema(
     {
         userId: {
@@ -12,7 +10,6 @@ const parameterSchema = new mongoose.Schema(
         date: Date,
         parameterSet: Array,
     },
-    // name of the collection in database
     { collection: 'parameters' }
 );
 

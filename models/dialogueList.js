@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// parameter collection schema
 const dialogueSchema = new mongoose.Schema(
     {
         userId: {
@@ -10,11 +8,8 @@ const dialogueSchema = new mongoose.Schema(
         date: Date,
         dialogue: String,
     },
-    // name of the collection in database
     { collection: 'dialogue' }
 );
 
-
 const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
-
 module.exports = dialogueModel;

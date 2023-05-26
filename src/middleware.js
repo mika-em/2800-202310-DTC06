@@ -84,14 +84,17 @@ const dialogueLinks = [{
 
 const dialogueFilters = [{
     name: 'Inner Dialogue',
+    icon: 'fa-solid fa-head-side-virus fa-2xl',
     link: '/dialogue/inner-dialogue' 
 },
 {
     name: 'User & Persona Conversation',
+    icon: 'fa-solid fa-chalkboard-user fa-2xl',
     link: '/dialogue/user-persona-chat' 
 },
 {
     name: 'Persona to Persona Conversation',
+    icon: 'fa-solid fa-people-arrows fa-2xl',
     link: '/dialogue/persona-to-persona-chat'
 }];
 

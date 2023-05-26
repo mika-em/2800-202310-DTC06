@@ -84,18 +84,15 @@ router.post('/dialogue/chat/inner-dialogue', async (req, res) => {
             }
         }
 
-    })
+    });
 
     const currentUser = await User.findOne({
         username: currentUsername
     });
 
-    const innerDialogueHistory = currentUser.innerDialogueHistory
-    console.log(innerDialogueHistory)
     res.render("dialogue/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
-        // persona : req.body.persona,
     });
 
 });
@@ -106,8 +103,7 @@ router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
-    const innerDialogueHistory = currentUser.innerDialogueHistory
-    console.log(innerDialogueHistory)
+    const innerDialogueHistory = currentUser.innerDialogueHistory;
 
     res.render("dialogue/innerDialogueChat", {
         placeholderText: "Write a response here...",
@@ -135,7 +131,7 @@ router.post('/dialogue/chat/inner-dialogue/save', async (req, res) => {
         innerDialogueHistory: currentUser.innerDialogueHistory,
     });
 
-})
+});
 
 
 // ======= User Persona Conversation Stuff =======
@@ -147,7 +143,7 @@ router.get('/dialogue/user-persona-chat', async (req, res) => {
 
 //Route for User Persona Chat
 router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
-  	let persona;
+    let persona;
     persona = req.body.persona || "random";
     req.session.personaServerList = persona; //persona in the session
 
@@ -234,7 +230,6 @@ router.post('/dialogue/chat/user-persona/save', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
-    // const dialogueHistory = currentUser.userPersonaChatHistory;
     const dialogue = currentUser.userPersonaChatHistory[index].botResponse;
 
     await Dialogue.create({
@@ -283,7 +278,6 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     });
 
     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
-    console.log(PersonaPersonaChatHistory);
 
     res.render("dialogue/personaToPersonaChat", {
         placeholderText: "Write a prompt here...",
@@ -293,7 +287,7 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
 
 //Route for Persona to Persona Chat
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
- 		let currentUser;
+    let currentUser;
     currentUser = await User.findOne({
         username: req.session.user.username
     });
@@ -373,14 +367,12 @@ router.post('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
             }
         }
 
-    })
+    });
 
     const currentUser = await User.findOne({
         username: currentUsername
     });
 
-    const innerDialogueHistory = currentUser.innerDialogueHistory;
-    console.log(innerDialogueHistory);
     res.render("./fromSavedPersona/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
@@ -394,14 +386,13 @@ router.post('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
 router.get('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username
-  	
+
     });
 
     res.render("./fromSavedPersona/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
-        personaServerList: persona || req.session.personaServerList,
-        // persona: persona
+        personaServerList: req.session.personaServerList,
     });
 });
 
@@ -424,10 +415,9 @@ router.post('/saved/persona/dialogue/chat/inner-dialogue/save', async (req, res)
     res.render("./fromSavedPersona/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
-        // personaServerList: persona || req.session.personaServerList
     });
 
-})
+});
 
 
 // ======= User Persona Conversation =======
@@ -488,9 +478,6 @@ router.get('/saved/persona/dialogue/chat/user-persona', async (req, res) => {
     });
     const userPersonaChatHistory = currentUser.userPersonaChatHistory;
 
-    // Retrieve persona from the session
-    const persona = req.session.personaServerList;
-
     res.render("fromSavedPersona/userPersonaChat", {
         placeholderText: "Write a prompt here...",
         userPersonaChatHistory: userPersonaChatHistory,
@@ -535,7 +522,6 @@ router.post('/saved/persona/dialogue/chat/user-persona/save', async (req, res) =
     const currentUser = await User.findOne({
         username: req.session.user.username
     });
-    // const dialogueHistory = currentUser.userPersonaChatHistory;
     const dialogue = currentUser.userPersonaChatHistory[index].botResponse;
 
     await Dialogue.create({
@@ -555,7 +541,6 @@ router.post('/saved/persona/dialogue/chat/user-persona/save', async (req, res) =
 
 //Route for the persona to persona chat home page
 router.get('/saved/persona/dialogue/persona-to-persona-chat', (req, res) => {
-    const currentUsername = req.session.user.username;
     const firstPersona = req.session.personaServerList[0];
     let secondPersona;
 
@@ -612,7 +597,7 @@ router.post('/saved/persona/dialogue/chat/persona-to-persona-chat', async (req, 
 
 // Route for the persona to persona chat page
 router.get('/saved/persona/dialogue/chat/persona-to-persona-chat', async (req, res) => {
-    currentUser = await User.findOne({
+    const currentUser = await User.findOne({
         username: req.session.user.username
     });
     const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory.map(entry => {
@@ -646,6 +631,6 @@ router.post('/saved/persona/dialogue/chat/persona-to-persona-chat/save', async (
     res.render("fromSavedPersona/personaToPersonaChat", {
         placeholderText: "Write a response here...",
         PersonaPersonaChatHistory: currentUser.PersonaPersonaChatHistory,
-    })
+    });
 });
 module.exports = router;

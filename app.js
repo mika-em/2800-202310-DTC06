@@ -1,7 +1,5 @@
 const express = require("express"); 
 const app = express();
-const $ = require('jquery');
-const path = require('path');
 const database = require("./src/database"); // Database Connection
 const sessionConfig = require("./src/session"); // Session Configuration
 const middleware = require('./src/middleware'); // Middleware Configuration
@@ -11,7 +9,6 @@ const persona = require("./routes/persona"); // includes persona and saved perso
 const infoRoutes = require("./routes/info"); // includes about us, FAQ and contact us
 const saved = require("./routes/saved"); // includes saved personas, dialogues, and filters
 const dialogue = require("./routes/dialogue"); // includes dialogue and saved dialogue
-const personaToDialogue = require("./routes/personaToDialogue"); // includes routes from saved persona to dialogue
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -29,7 +26,6 @@ app.use("/", dialogue)
 app.use("/", infoRoutes);
 app.use("/", saved);
 app.use("/", dialogue);
-app.use("/", personaToDialogue);
 
 // Database & Port Connection
 database.connect();

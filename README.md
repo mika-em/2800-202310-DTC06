@@ -4,10 +4,9 @@
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
 
 ## 2. Names of Contributors
-* Fiona Wong
+* Fiona Wong 
 * Maddelin Maddelin
 * Mika Manaligod
-
 
 ## 3. Technologies and Resources Used
 * CSS 3
@@ -170,6 +169,20 @@ Within images subfolder there is another subfolder
         └── invsona.png             # Logo for all other pages - designed by Fiona
     └── blue_bg.mp4             # Background video for light theme
 
-```
+## 8. Contact Information
+Fiona
+school email : fwong98@my.bcit.ca
+personal email : fwwong01@gmail.com
+github: fwwong
 
 
+Maddy
+school email : mmaddelin@my.bcit.ca
+personal email : maddelintan@gmail.com
+github: maddelin
+
+
+Mika
+school email : mmanaligod3@mybcit.ca
+personal email : mkmanaligod@gmail.com
+github: mika-em

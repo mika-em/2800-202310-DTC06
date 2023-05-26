@@ -34,7 +34,7 @@ What we'd like to build in the future:
 Content of the project folder:
 
 ```
- Top level of project folder: 
+Top level of project folder: 
 ├── .gitignore               # Git ignore file
 ├── models                   # contains the database schemas
 └── public                   # contains all images and icons
@@ -44,7 +44,30 @@ Content of the project folder:
 
 It has the following subfolders and files:
 ├── public                   # Folder for images, styles and theme scripts
-├── views                    # Folder for authorization, dialogue,      error, partials, persona, profile and saved ejs files
+├── views                    # Folder for authorization, dialogue, error, partials, persona,
+                             # profile and saved ejs files
+
+Within subfolders, there is more subfolders
+├── public                   # Folder for images, styles and theme scripts
+└── images                   # Folder for images
+└── src                      # Folder for scripts
+└── styles                   # Folder for styles
+├── views                    # Folder for authorization, dialogue, error, partials, persona,
+|                            # profile and saved ejs files
+└── authorization            # Folder for authorization contains templates for authorization
+└── dialogue                 # Folder for dialogue
+└── error                    # Folder for error
+└── fromSavedPersona         # Folder for Persona to Dialogue templates 
+└── partials                 # Folder for Basic standard starter for creating web pages
+└── persona                  # Folder for Persona related templates
+└── saved                    # Folder for Saved
+
+With images subfolder there is another subfolder
+├── images                   # Folder for images 
+└── background               # Folder for background images used
+└── cats                     # Folder for cat related images used as placeholders and secrets
+└── invsona                  # Folder for invsona related logo and header
+
 
 ```
 

@@ -255,7 +255,7 @@ router.post('/dialogue/chat/user-persona/save', async (req, res) => {
         date: date
     });
 
-    res.render("dialogue/userPersonaChat", {
+    res.render("./dialogue/userPersonaChat", {
         placeholderText: "Write a response here...",
         userPersonaChatHistory: currentUser.userPersonaChatHistory,
     })

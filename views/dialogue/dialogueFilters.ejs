@@ -8,11 +8,12 @@
 </div>
 
 <form action="/dialogueFilters" method="POST"></form>
-<div class="container" style="padding-top: 150px">
+<div class="container p-4 mt-4">
     <% for (var i=0; i<locals.dialogueFilters.length; i++) { %>
     <div class="row">
-        <a class="py-5  card btn btn-light" href="<%- locals.dialogueFilters[i].link %>">
-            <h5><%- locals.dialogueFilters[i].name %></h5>
+        <a class="py-5 card btn btn-light" href="<%- locals.dialogueFilters[i].link %>">
+            <i class="<%- locals.dialogueFilters[i].icon %>"></i>
+            <h5 class="pt-4"><%- locals.dialogueFilters[i].name %></h5>
         </a>
     </div>
     <br>

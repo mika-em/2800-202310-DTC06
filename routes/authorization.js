@@ -187,7 +187,7 @@ router.post("/resetPassword", async (req, res) => {
       email: req.body.email,
     });
     console.log(userReset);
-    res.render("resetPassword", {
+    res.render("./authorization/resetPassword", {
       email: req.body.email,
       securityQuestion: userReset.securityQuestion,
       securityAnswer: "",
@@ -215,7 +215,7 @@ router.post("/resetPassword/verified", async (req, res) => {
   );
 
   if (securityAnswerMatch) {
-    res.render("resetPassword", {
+    res.render("./authorization/resetPassword", {
       email: req.body.email,
       securityQuestion: userReset.securityQuestion,
       securityAnswer: userReset.securityAnswer,

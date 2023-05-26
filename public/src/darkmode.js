@@ -1,7 +1,7 @@
 
 // Function to enable dark mode
 function enableDarkMode() {
-  $("#home").attr("src", "../images/invsona/invsona.png");
+  $("#home").attr("src", "/images/invsona/invsona.png");
   $(".backnav").removeClass("text-bg-light").addClass("text-bg-dark");
   $(".navbar").removeClass("bg-light").addClass("bg-dark");
   $(".card").removeClass("bg-light").addClass("bg-dark");
@@ -28,7 +28,7 @@ function enableDarkMode() {
 
 // Function to disable dark mode
 function disableDarkMode() {
-  $("#home").attr("src", "../images/invsona/home.png");
+  $("#home").attr("src", "/images/invsona/home.png");
   $(".backnav").removeClass("text-bg-dark").addClass("text-bg-light");
   $(".navbar").removeClass("bg-dark").addClass("bg-light");
   $(".card").removeClass("bg-dark").addClass("bg-light");

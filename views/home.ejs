@@ -10,7 +10,7 @@
       <% if (profileImage && profileImage.contentType && profileImage.data) { %>
         <img src="data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>" id="userImage" alt="userImage" class="p-2" />
       <% } else { %>
-        <img src="../images/cats/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
+        <img src="/images/cats/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
       <% } %>
     </div>
     <h1 id="display-name"><%- name %></h1>

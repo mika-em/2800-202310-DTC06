@@ -104,7 +104,7 @@ router.post('/saved/persona/save-as-pdf', async (req, res) => {
     // Pipe the PDF stream directly to the response
     doc.pipe(res);
 
-    doc.image('./images/invsona/invsona.png', {
+    doc.image('/images/invsona/invsona.png', {
         fit: [100, 100],
         align: 'center',
     });
@@ -178,7 +178,7 @@ router.post('/saved/dialogue/save-as-pdf', async (req, res) => {
     // Pipe the PDF stream directly to the response
     doc.pipe(res);
 
-    doc.image('./images/invsona/invsona.png', {
+    doc.image('/images/invsona/invsona.png', {
         fit: [100, 100],
         align: 'center',
     });

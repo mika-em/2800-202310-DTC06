@@ -1,6 +1,6 @@
 ## 1. Project Title: DTC GROUP 6 - INVSONA
 
-## 1. Project Description
+## 2. Project Description
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
 
 ## 3. Technologies and Resources Used
@@ -192,11 +192,8 @@ We would like to credit OpenAI for providing easy to read documentation so that 
 
 ## 8: How did you use AI?
 * We used AI to help create our app by testing out various inputs to produce our desired outputs. We used Chat-GPT to create our personas and dialogues so we could get an idea of what kind of outcome we could produce.
-
 * We did not use any data sets, as the AI model we are using does not enable fine-tuning. It does, however, contain a vast amount of data that dates to June 2021
-
 * We used the OpenAI API to create a Persona and Dialogue Generator. We used the OpenAI API - GPT-3.5 (text-davinci-003) model for chat completions. We prompted the AI by creating our own optimized prompts.
-
 * We encountered limitations in how much text we can prompt into the API, so we had to create optimized prompts within a limited character count.
 
 ## 9. Known Bugs and Limitations
@@ -229,56 +226,3 @@ What we'd like to build in the future:
 * school email : mmanaligod3@mybcit.ca
 * personal email : mkmanaligod@gmail.com
 * github: mika-em
-
-## 5. Complete setup/installion/usage
-State what a user needs to do when they come to your project.  How do others start using your code or application?
-Here are the steps ...
-* Open terminal and enter "npm install" to install all necessary dependencies
-* Enter necessary inputs into own env file: OpenAI API key, Monogo
-* Enter necessary inputs into own env file: OpenAI API key, MonogoB account
-* Run the application by entering "nodemon app.js". app.js is the entry point.
-
-
-## 5.1 Known Bugs and Limitations
-Here are some known bugs:
-* Some logo images may not load correctly
-* Filter function is currently not active
-* Profile picture upload may produce errors
-
-
-## 5.2. Features for Future
-What we'd like to build in the future:
-* Character Image Generator - using AI to create illustrations of the generated personas
-* Filters - to filter out certain traits
-* Clear chatlog button - to clear the chatlog
-* Alert messages to notify users of errors, successful actions, confirmations, etc.
-
-
-
-## 7. Credits, References, Licenses
-We would like to credit OpenAI for providing easy to read documentation so that we could implement AI in the core features of our application
-
-## 8. Usage of AI
-We used AI to help create our app by testing out various inputs to produce our desired outputs. We used Chat-GPT to create our personas and dialogues so we could get an idea of what kind of outcome we could produce.
-
-We did not use any data sets, as the AI model we are using does not enable fine-tuning. It does, however, contain a vast amount of data that dates to June 2021
-
-We used the OpenAI API to create a Persona and Dialogue Generator. We used the OpenAI API - GPT-3.5 (text-davinci-003) model for chat completions. We prompted the AI by creating our own optimized prompts.
-
-We encountered limitations in how much text we can prompt into the API, so we had to create optimized prompts within a limited character count.
-
-## 9. Contact Information
-* Fiona Wong
-* School email: fwong98@my.bcit.ca
-* Personal email:  fwwong01@gmail.com
-* githu: fwwong
-
-* Maddelin Maddelin
-* School email : mmaddelin@my.bcit.ca
-* Personal email : maddelintan@gmail.com
-* Github: maddelin
-
-* Mika Manaligod
-* School email : mmanaligod3@mybcit.ca
-* Personal email : mkmanaligod@gmail.com
-* Github: mika-em

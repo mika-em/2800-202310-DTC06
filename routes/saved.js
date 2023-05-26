@@ -63,6 +63,33 @@ router.post("/persona/saved-persona/delete-persona", async (req, res) => {
   });
 });
 
+
+router.post("/persona/saved-dialogue/delete-dialogue", async (req, res) => {
+  const dialogueIDList = req.body.dialogueIDList;
+  const parsedDialogueIDList = JSON.parse(dialogueIDList);
+  // console.log(parsedPersonaIDList);
+
+  for (let i = 0; i < parsedDialogueIDList.length; i++) {
+    await Persona.deleteOne({
+      _id: parsedDialogueIDList[i],
+    });
+  }
+
+  const currentUser = await User.findOne({
+    username: req.session.user.username,
+  });
+  const userID = currentUser._id;
+
+  const savedPersona = await Dialogue.find({
+    userId: userID,
+  });
+
+  res.render("./saved/saved-persona", {
+    savedPersona: savedPersona,
+  });
+});
+
+
 router.post("/persona/saved-persona/dialogue-filters", (req, res) => {
   const personaList = req.body.personaList;
   const parsedPersonaList = JSON.parse(personaList);

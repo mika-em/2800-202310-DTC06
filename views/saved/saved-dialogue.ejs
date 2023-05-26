@@ -4,6 +4,7 @@
 
 <!-- back title bar -->
 <%-include ('../partials/emptybackbar.ejs')%>
+
 <div class="col text-center">
     <h1 class="align-middle">SAVED DIALOGUE</h1>
     <form id="savePDF" action="/saved/dialogue/save-as-pdf" method="post">
@@ -15,6 +16,13 @@
     </form>
 </div>
 </div>
+</div>
+<div class="col">
+    <form action="/persona/saved-persona/delete-persona" method="post">
+        <input id=deleteDialogueInput type="hidden" name=dialogueIDList" value="" />
+        <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton"
+            disabled>delete</button>
+    </form>
 </div>
 
 <div class="container card mt-2">
@@ -46,23 +54,30 @@
 <script>
     $(document).ready(function () {
         let dialogueList = []
+        let dialogueIDList = []
 
         // Add event listener to the checkboxes
         $('.dialogueCheckbox').on('click', async (event) => {
             console.log("checked")
             if (event.target.checked) {
                 dialogueList.push(event.target.id)
+                dialogueIDList.push(event.target.id)
             } else {
                 dialogueList.pop(event.target.id)
+                dialogueIDList.pop(event.target.id)
             }
             console.log(dialogueList)
+            console.log(dialogueIDList)
             if (dialogueList.length === 0) {
                 $('#savePDFButton').attr('disabled', true)
-            } else {
+                $('#deleteDialogueButton').attr('disabled', true)
+            } else { 
                 // Enable the buttons
                 $('#savePDFButton').attr('disabled', false)
+                $('#deleteDialogueButton').attr('disabled', false)
                 // Set the value of the hidden input to the dialogueList array
                 $('#savePDFInput').val(JSON.stringify(dialogueList))
+                $('#deleteDialogueInput').val(JSON.stringify(dialogueIDList))
                 console.log("test", $('#savePDFInput').val())
             }
         })

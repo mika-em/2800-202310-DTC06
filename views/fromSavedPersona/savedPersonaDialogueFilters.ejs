@@ -6,8 +6,8 @@
 </div>
 </div>
 
-<form action="saved/persona/dialogueFilters" method="POST"></form>
-<div class="container" style="padding-top: 150px">
+<form action="saved/persona/dialogueFilters" id="send" method="POST"></form>
+<div class="container" style="padding-top: 150px" id="generalContainer">
     <% for (var i=0; i<locals.savedPersonaDialogueFilters.length; i++) { %>
     <div class="row">
         <a class="py-5  card btn btn-light" href="<%- locals.savedPersonaDialogueFilters[i].link %>">

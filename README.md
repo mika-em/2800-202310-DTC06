@@ -142,18 +142,18 @@ Within images subfolder there is another subfolder
 ```
 
 ## 5. For developers:
-# How to run the project
+### How to run the project
 * Open terminal and enter "npm install" to install all necessary dependencies
 * Enter necessary inputs into own env file
 * Run the application by entering "nodemon app.js". app.js is the entry point.
 
-# Known Bugs and Limitations
+### Known Bugs and Limitations
 Here are some known bugs:
 * Some logo images may not load correctly
 * Filter function is currently not active
 * Profile picture upload may produce errors
 
-# Features for Future
+### Features for Future
 What we'd like to build in the future:
 * Character Image Generator - using AI to create illustrations of the generated personas
 * Filters - to filter out certain traits
@@ -161,11 +161,11 @@ What we'd like to build in the future:
 * Alert messages to notify users of errors, successful actions, confirmations, etc.
 
 ## 6. For users: How to use the product (Features)
-# Sign up and Login
+### Sign up and Login
 * Create an account with a name, username, email, password, and security question and answer
 * Login with username and password
 
-# Persona generator
+### Persona generator
 To use the persona feature: Open the Persona page from Home and view the various persona generator options. Enter the necessary input, press send and watch as the AI generates you a persona!
 * Click on the "Persona" button on the home page to get redirected to the persona generator page
 * Click on "General Presets" if you would like to use the general presets for the persona generator
@@ -175,7 +175,7 @@ To use the persona feature: Open the Persona page from Home and view the various
 * If you would like to write your own prompt without any presets, click on "Write your own prompt" and fill in your desired prompt then click send to generate a persona
 * Click on the star icon to save your favorite personas
 
-# Dialogue generator
+### Dialogue generator
 To use the dialogue feature: Open the Dialogue page from Home and select "Create a new dialogue", which will lead to the Dialogue Filters page. The dialogue filters page displays the various types of dialogue you can choose from -- inner dialogue, user persona conversation and persona to persona converation. Select one, input the necessary values and watch as the AI creates you your own custom dialogue!
 * Click on the "Dialogue" button on the home page to get redirected to the dialogue generator page
 * Click on "Saved dialogues" to view your saved dialogues
@@ -212,17 +212,17 @@ What we'd like to build in the future:
 
 
 ## 11. Contact Information
-# Fiona
+### Fiona
 * school email : fwong98@my.bcit.ca
 * personal email : fwwong01@gmail.com
 * github: fwwong
 
-# Maddy
+### Maddy
 * school email : mmaddelin@my.bcit.ca
 * personal email : maddelintan@gmail.com
 * github: maddelin
 
-# Mika
+### Mika
 * school email : mmanaligod3@mybcit.ca
 * personal email : mkmanaligod@gmail.com
 * github: mika-em

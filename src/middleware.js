@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
 const navLinks = [{
     name: 'Home',
     link: '/',
-    icon: './images/invsona.png',
+    icon: '/images/invsona/home.png',
     upperName: 'HOME',
     description: 'Lorem ipsum dolor'
 },

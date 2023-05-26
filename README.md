@@ -4,10 +4,9 @@
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
 
 ## 2. Names of Contributors
-* Fiona Wong
+* Fiona Wong 
 * Maddelin Maddelin
 * Mika Manaligod
-
 
 ## 3. Technologies and Resources Used
 * CSS 3
@@ -31,6 +30,7 @@ Here are the steps ...
 * Enter necessary inputs into own env file
 * Run the application by entering "nodemon app.js". app.js is the entry point.
 
+
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
 * Some logo images may not load correctly
@@ -45,6 +45,33 @@ What we'd like to build in the future:
 * Clear chatlog button - to clear the chatlog
 * Alert messages to notify users of errors, successful actions, confirmations, etc.
 
+## 6. How to use the product (Features)
+
+# Sign up and Login
+* Create an account with a name, username, email, password, and security question and answer
+* Login with username and password
+
+# Persona generator
+To use the persona feature: Open the Persona page from Home and view the various persona generator options. Enter the necessary input, press send and watch as the AI generates you a persona!
+* Click on the "Persona" button on the home page to get redirected to the persona generator page
+* Click on "General Presets" if you would like to use the general presets for the persona generator
+* Click on "Saved Presets" if you would like to use your own saved custom presets for the persona generator
+* Click on "Create New Preset" if you would like to create and/or save your own custom presets for the persona generator
+* For any of those options above, fill in your desired values for those presets/attributes then click send to generate a persona
+* If you would like to write your own prompt without any presets, click on "Write your own prompt" and fill in your desired prompt then click send to generate a persona
+* Click on the star icon to save your favorite personas
+
+# Dialogue generator
+To use the dialogue feature: Open the Dialogue page from Home and select "Create a new dialogue", which will lead to the Dialogue Filters page. The dialogue filters page displays the various types of dialogue you can choose from -- inner dialogue, user persona conversation and persona to persona converation. Select one, input the necessary values and watch as the AI creates you your own custom dialogue!
+* Click on the "Dialogue" button on the home page to get redirected to the dialogue generator page
+* Click on "Saved dialogues" to view your saved dialogues
+* Click on "Start a new dialogue" to start a new dialogue
+* Click on "Inner Dialogue" to generate an inner dialogue a persona would have when faced with a certain situation
+* Click on "User to persona Conversation" to start a dialogue between yourself as a user and a persona
+* Click on "Persona to persona Conversation" to start a dialogue between two personas
+* For any of those options above, fill in your desired values for persona and other presets/attributes, then click send to generate a your dialogue of choice
+* If you would like to use your saved personas, go to "Saved" then "Saved Personas" and select the persona you would like to use. You have to select at least one and at most two personas (persona to persona) to generate a dialogue
+* Click on the heart icon to save your favorite dialogues
 
 ## 7. Contents of Folder
 Content of the project folder:
@@ -169,7 +196,24 @@ Within images subfolder there is another subfolder
         ├── invsona-banner.png      # Logo banner - designed by Fiona
         └── invsona.png             # Logo for all other pages - designed by Fiona
     └── blue_bg.mp4             # Background video for light theme
-
 ```
+
+## 8. Contact Information
+Fiona
+school email : fwong98@my.bcit.ca
+personal email : fwwong01@gmail.com
+github: fwwong
+
+
+Maddy
+school email : mmaddelin@my.bcit.ca
+personal email : maddelintan@gmail.com
+github: maddelin
+
+
+Mika
+school email : mmanaligod3@mybcit.ca
+personal email : mkmanaligod@gmail.com
+github: mika-em
 
 

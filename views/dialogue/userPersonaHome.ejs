@@ -1,0 +1,59 @@
+<!-- GENERAL CONTENT -->
+<!-- header and back header -->
+<%-include ("../partials/header-dialogue.ejs")%>
+<%- include ("../partials/emptybackbar.ejs") %>
+
+<!-- title -->
+<div class="col text-center">
+    <h1>Chat with a persona.</h1>
+    <p style="font-size: 12px;">Have you ever wanted to talk to a character?</p>
+</div>
+</div>
+
+<!-- content -->
+<div class="container-fluid" id="inputContainer" style="padding-top: 50px;">
+  <div class="row">
+    <form action="/dialogue/chat/user-persona-chat" method="post" class="text-center">
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">Persona</label><br />
+            <input class="form-control" type="text" name="persona" placeholder="Enter a persona description" />
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">Start your chat!</label><br />
+            <input class="form-control" type="text" name="chat" placeholder="Enter what you want to say to the persona" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <button class="btn" type="submit" id="send">Send</button>
+    </form>
+  </div>
+</div>
+
+<div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+  <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+  <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+      $("#inputContainer").addClass("d-none");
+    });
+  });
+</script>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

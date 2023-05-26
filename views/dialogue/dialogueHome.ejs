@@ -3,25 +3,25 @@
 <%- include ("../partials/emptybackbar.ejs") %>
 <div class="col text-center">
     <h1>DIALOGUE</h1>
-  </div>
+</div>
 </div>
 </div>
 </div>
 
 <!-- content -->
-<div class="container-fluid" style="padding-top: 200px;">
+<div class="container-fluid px-5" style="padding-top: 120px;">
     <div>
         <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
         <div class="row">
-            <a class="py-5 btn btn-secondary"
-                href="<%- locals.dialogueLinks[i].link %>"><%- locals.dialogueLinks[i].name %></a>
+            <a class=" py-5 card btn btn-light" href="<%- locals.dialogueLinks[i].link %>">
+                <i class="<%- locals.dialogueLinks[i].icon %>"></i>
+                <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5>
+            </a>
         </div>
         <br>
         <% } %>
     </div>
 </div>
-
-
 
 <!-- nav bar and footer -->
 <%-include ("../partials/navbar.ejs")%>

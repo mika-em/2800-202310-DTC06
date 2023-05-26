@@ -1,0 +1,55 @@
+#decor_user {
+  filter: drop-shadow(10px -10px 8px #051726);
+}
+
+.editicon {
+  position: absolute;
+  padding: 10px;
+  right: 100px;
+  bottom: 50px;
+  background-color: whitesmoke;
+  border-style: solid 10px black;
+  border-radius: 100%
+}
+
+.editUserImage {
+  border-radius: 50%;
+  height: 220px;
+  width: 220px;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  color: transparent;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.editUserImage:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.editUserImage span {
+  display: inline-block;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+}
+
+form input[type="file"] {
+  display: none;
+  cursor: pointer;
+}
+
+#menubtn{
+  text-align: start;
+}
+
+.card{
+  filter: drop-shadow(0px 0px 2px #FFFF);
+}

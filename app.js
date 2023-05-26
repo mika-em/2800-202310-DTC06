@@ -12,7 +12,7 @@ const infoRoutes = require("./routes/info"); // includes about us, FAQ and conta
 const saved = require("./routes/saved"); // includes saved personas, dialogues, and filters
 // const persona = require("./routes/persona"); // includes persona and saved persona
 const dialogue = require("./routes/dialogue"); // includes dialogue and saved dialogue
-
+const personaToDialogue = require("./routes/personaToDialogue"); // includes routes from saved persona to dialogue
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -30,6 +30,7 @@ app.use("/", dialogue)
 app.use("/", infoRoutes);
 app.use("/", saved);
 app.use("/", dialogue);
+app.use("/", personaToDialogue);
 
 // Database & Port Connection
 database.connect();
@@ -37,8 +38,6 @@ database.connect();
 app.listen(process.env.PORT || 3000, () => {
     console.log('Server is running on port 3000');
 });
-
-// Serve CSS files from the "public/css" directory
 
 
 // Serve JS files from the "public/js" directory

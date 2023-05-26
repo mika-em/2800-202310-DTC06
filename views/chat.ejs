@@ -6,7 +6,7 @@
   <div class="row-fluid">
     <% for (var i=0; i<personaHistory.length; i++) { %>
     <div class="col-12 my-2" id="userInput">
-      <div class="card bg-primary text-bg-light">
+      <div class="card bg-primary text-light">
         <div class="card-body m-3">
           <div class="card-title">User:</div>
           <div class="card-text"><%- personaHistory[i].userPrompt %>
@@ -31,15 +31,37 @@
     </form>
     <hr>
     <% } %>
+    <div class="p-2 text-center d-none" id="loadingCard">
+      <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+      <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+    </div>
   </div>
 </div>
 
+
 <form action="/persona/chat" method="post" class="text-center input-container">
-  <div class="row">
+  <div class="row p-3">
     <input class="form-control col" rows="1" cols="1" type="text" name="prompt" placeholder="<%= placeholderText %>" />
-    <button class="btn col-3" type="submit">Send</button>
+    <button class="btn col-3" type="submit" id="send">Send</button>
   </div>
 </form>
+
+<script>
+  $(document).ready(function() {
+    const container = document.getElementById('chatContainer');
+
+    // Scroll to the bottom of the container
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    });
+
+    $('#send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+    });
+  });
+</script>
 
 <!-- navbar and footer -->
 <%-include ("./partials/navbar.ejs")%>

@@ -11,7 +11,7 @@
 
 <!-- content -->
 
-<div class="container-fluid" style="padding-top: 200px;">
+<div class="container-fluid text-center" id="paramContainer" style="padding-top: 200px;">
   <form action="/persona/new-prompt" method="post">
     <div class="row">
       <input class="form-control col mx-3" type="text" name="parameter" placeholder="Add a parameter" />
@@ -24,9 +24,9 @@
     <input id="deleteIndex" type="hidden" name="index" value="" />
   </form>
 
-  <form action="/persona/chat" method="post" class="text-center">
+  <form action="/persona/chat/preset-prompt" method="post" class="text-center">
     <div class="row">
-      <% for (var i=0; i<newParameter.length; i++) { %>
+      <% for (var i=0; i < newParameter.length; i++) { %>
       <div class="col-12">
         <div class="card text-center">
           <div class="card-body">
@@ -39,13 +39,17 @@
       <% } %>
     </div>
     <br>
-    <button class="btn" type="submit" name="action" value="Edit">Send</button>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveParameterModal">
-      Save Parameter Set
-    </button>
-
+    <button class="btn" type="submit" id="send">Send</button>
   </form>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#saveParameterModal">
+    Save Parameter Set
+  </button>
+</div>
+
+<div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+  <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+  <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
 </div>
 
 
@@ -84,6 +88,12 @@
       $('#deleteIndex').val(index);
       $('#deleteForm').submit();
     });
+  });
+
+  $('button#send').click(function() {
+    // show card with loading indicator
+    $("#loadingCard").removeClass("d-none");
+    $("#paramContainer").addClass("d-none");
   });
 </script>
 

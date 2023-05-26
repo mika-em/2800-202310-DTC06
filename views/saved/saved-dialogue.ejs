@@ -1,45 +1,90 @@
-<!-- SAVED PROMPT PRESET PAGE -->
-<!-- header and backbar -->
-<%-include ("../partials/header-persona.ejs")%>
-<%-include ("../partials/emptybackbar.ejs")%>
+<!-- SAVED PAGE -->
+<!-- header -->
+<%-include ('../partials/header-internal.ejs')%>
+
+<!-- back title bar -->
+<%-include ('../partials/emptybackbar.ejs')%>
+
 <div class="col text-center">
-    <h1>SAVED DIALOGUE</h1>
+    <h1 class="align-middle">SAVED DIALOGUE</h1>
 </div>
+<div class="row text-center mx-3">
+    <div class="col">
+        <form id="savePDF" action="/saved/dialogue/save-as-pdf" method="post">
+            <input id=savePDFInput type="hidden" name="dialogueList" value="" />
+            <button class="btn btn-sm material-symbols-rounded" id="savePDFButton" disabled>picture_as_pdf</button>
+        </form>
+    </div>
+    <div class="col">
+        <!-- <form action="/persona/saved-dialogue/delete-dialogue" method="post"> -->
+        <input id="deleteDialogueInput" type="hidden" name="dialogueIDList" value="" />
+        <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton"
+            disabled>delete</button>
+        </form>
+    </div>
 </div>
 </div>
 
-<div class="container-fluid" style="padding-top: 200px;">
+<div class="container mt-5" style="padding-bottom: 100px; padding-top: 100px;">
     <div class="accordion accordion-flush" id="accordionFlushExample">
-        <% for (var i=0; i<savedDialogueParameter.length; i++) { %>
+        <% for (var i=0; i<savedDialogue.length; i++) { %>
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false"
                     aria-controls="flush-collapse<%- [i] %>">
-                    <%- savedDialogueParameter[i].title %>
+                    <div class="form-check form-switch text-center">
+                        <input class="form-check-input dialogueCheckbox" type="checkbox"
+                            id="<%- savedDialogue[i].dialogue %>">
+                        <p class="card-title"><%- savedDialogue[i].date %></p>
+                    </div>
                 </button>
             </h2>
             <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <p><%- savedDialogueParameter[i].description %></p>
-                    <p><%- savedPromptParameter[i].date %></p>
-                    <form action="/persona/chat" method="post"></form>
-                    <% for (var j=0; j<savedPromptParameter[i].parameterSet.length; j++) { %>
-                    <div class="mb-3">
-                        <label class="card-title"><%- savedPromptParameter[i].parameterSet[j] %></label><br>
-                        <input class="form-control" type="text" name="<%- savedDialogueParameter[i].parameterSet[j] %>"
-                            placeholder="Enter <%- savedDialogueParameter[i].parameterSet[j] %>" />
-                    </div>
-                    <% } %>
-                    <button class="btn" type="submit">Send</button>
-                    </form>
+                    <p class="card-text my-3"><%- savedDialogue[i].dialogue %></p>
                 </div>
             </div>
         </div>
         <% } %>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        let dialogueList = []
+        let dialogueIDList = []
+
+        // Add event listener to the checkboxes
+        $('.dialogueCheckbox').on('click', async (event) => {
+            console.log("checked")
+            if (event.target.checked) {
+                dialogueList.push(event.target.id)
+                dialogueIDList.push(event.target.value)
+            } else {
+                dialogueList.pop(event.target.id)
+                dialogueIDList.pop(event.target.value)
+            }
+            console.log(dialogueList)
+            console.log(dialogueIDList)
+            if (dialogueList.length === 0) {
+                $('#savePDFButton').attr('disabled', true)
+                $('#deleteDialogueButton').attr('disabled', true)
+            } else {
+                // Enable the buttons
+                $('#savePDFButton').attr('disabled', false)
+                $('#deleteDialogueButton').attr('disabled', false)
+                // Set the value of the hidden input to the dialogueList array
+                $('#savePDFInput').val(JSON.stringify(dialogueList))
+                $('#deleteDialogueInput').val(JSON.stringify(dialogueIDList))
+                console.log("test", $('#savePDFInput').val())
+            }
+        })
+    })
+</script>
+
+
 <!-- navbar and footer -->
-<%-include ("../partials/navbar.ejs")%>
-<%-include ("../partials/footer.ejs")%>
+<%-include ('../partials/navbar') %>
+<%-include ('../partials/footer') %>

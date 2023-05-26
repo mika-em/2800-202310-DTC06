@@ -1,42 +1,99 @@
 <!-- SAVED PAGE -->
 <!-- header -->
-<%-include ('../partials/header-internal.ejs')%>
+<%-include ('../partials/header-persona.ejs')%>
 
 <!-- back title bar -->
 <%-include ('../partials/emptybackbar.ejs')%>
+
+<!-- content -->
 <div class="col text-center">
-  <h1>SAVED PERSONA</h1>
+  <h1 class="align-middle">SAVED PERSONA</h1>
 </div>
+<div class="row text-center mx-3" >
+  <div class="col">
+    <form action="/saved/persona/save-as-pdf" method="post">
+      <input id=savePDFInput type="hidden" name="personaList" value="" />
+      <button class="btn btn-sm material-symbols-rounded" id="savePDFButton" disabled>picture_as_pdf</button>
+    </form>
+  </div>
+  <div class="col">
+    <form action="/persona/saved-persona/dialogue-filters" method="post">
+      <input id=gotoDialogueInput type="hidden" name="personaList" value="" />
+      <button class="btn btn-sm material-symbols-rounded text-center" id="gotoDialogueButton" disabled>forum</button>
+    </form>
+  </div>
+  <div class="col">
+    <form action="/persona/saved-persona/delete-persona" method="post">
+      <input id=deletePersonaInput type="hidden" name="personaIDList" value="" />
+      <button class="btn btn-sm material-symbols-rounded text-center" id="deletePersonaButton" disabled>delete</button>
+    </form>
+  </div>
 </div>
 </div>
 
-<div class="container pt-5" style="padding-bottom: 100px;">
-  <div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="container card mt-2">
+  <div class="accordion-bg-dark accordion-flush p-3" id="accordionFlushExample">
     <% for (var i=0; i<savedPersona.length; i++) { %>
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%- [i] %>" aria-expanded="false" aria-controls="flush-collapse<%- [i] %>">
-          <%- savedPersona[i].date %>
+          <div class="form-check form-switch text-center">
+            <input class="form-check-input personaCheckbox" type="checkbox" id="<%- savedPersona[i].persona %>" value="<%- savedPersona[i]._id %>">
+            <p class="card-title"><%- savedPersona[i].date %></p>
+          </div>
         </button>
       </h2>
       <div id="flush-collapse<%- [i] %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-            <p class="card-text"><%- savedPersona[i].persona %></p>
-          <!-- <form action="/persona/chat" method="post"></form>
-          <e% for (var j=0; j<savedPersona[i].parameterSet.length; j++) { %>
-          <div class="mb-3">
-            <label class="card-title"><e%- savedPromptParameter[i].parameterSet[j] %></label><br>
-            <input class="form-control" type="text" name="<e%- savedPromptParameter[i].parameterSet[j] %>" placeholder="Enter <e%- savedPersona[i].parameterSet[j] %>" />
-          </div>
-          <e% } %>
-          <button class="btn" type="submit">Send</button>
-          </form> -->
+          <p class="card-text my-3"><%- savedPersona[i].persona %></p>
         </div>
       </div>
     </div>
     <% } %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    let personaList = []
+    let personaIDList = []
+
+    // Add event listener to the checkboxes
+    $('.personaCheckbox').on('click', async (event) => {
+      console.log("checked")
+      if (event.target.checked) {
+        personaList.push(event.target.id)
+        personaIDList.push(event.target.value)
+      } else {
+        personaList.pop(event.target.id)
+        personaIDList.pop(event.target.value)
+      }
+      console.log(personaList)
+      console.log(personaIDList)
+      if (personaList.length === 0) {
+        $('#savePDFButton').attr('disabled', true)
+        $('#gotoDialogueButton').attr('disabled', true)
+        $('#deletePersonaButton').attr('disabled', true)
+      } else if (personaList.length > 2){
+        $('#gotoDialogueButton').attr('disabled', true)
+      } else {
+        // Enable the buttons
+        $('#savePDFButton').attr('disabled', false)
+        $('#gotoDialogueButton').attr('disabled', false)
+        $('#deletePersonaButton').attr('disabled', false)
+
+        // Set the value of the hidden input to the personaList array
+        $('#savePDFInput').val(JSON.stringify(personaList))
+        $('#gotoDialogueInput').val(JSON.stringify(personaList))
+        $('#deletePersonaInput').val(JSON.stringify(personaIDList))
+        console.log("test", $('#savePDFInput').val())
+        console.log("test2", $('#gotoDialogueInput').val())
+        console.log("test3", $('#deletePersonaInput').val())
+
+      }
+    })
+  })
+</script>
 
 
 <!-- navbar and footer -->

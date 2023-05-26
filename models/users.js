@@ -34,11 +34,5 @@ const userSchema = new mongoose.Schema(
 
 const usersModel = mongoose.model('User', userSchema);
 
-
-
-// const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
-
-module.exports = usersModel
-//     dialogueModel
-// };
+module.exports = usersModel;
 

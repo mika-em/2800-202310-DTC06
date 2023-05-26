@@ -4,9 +4,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/users");
 const multer = require("multer");
-const { profile } = require("console");
 
-const upload = multer({ storage: multer.memoryStorage() })
+const upload = multer({ storage: multer.memoryStorage() });
 
 
 router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
@@ -21,12 +20,6 @@ router.post("/upload", upload.single('fileToUpload'), async (req, res) => {
       };
 
       user.profileImage = profileImage;
-
-      const result = await user.save();
-
-
-      console.log(result.profileImage.fileName);
-
 
       res.render("../views/profile/profile", {
         name: req.session.user.name,
@@ -76,7 +69,6 @@ router.get("/profile/account-settings", async (req, res) => {
   const email = currentUser.email;
   const securityQuestion = currentUser.securityQuestion;
   const securityAnswer = currentUser.securityAnswer;
-  console.log(securityAnswer)
   res.render("./profile/accountSettings", {
     name: name,
     username: username,
@@ -90,7 +82,6 @@ router.get("/profile/account-settings", async (req, res) => {
 // Update account settings
 router.post("/profile/account-settings", async (req, res) => {
   if (req.body.action === "Edit") {
-    console.log("edit")
     const currentUser = await User.findOne({
       username: req.session.user.username
     });
@@ -108,12 +99,11 @@ router.post("/profile/account-settings", async (req, res) => {
       disabled: false
     });
   } else if (req.body.action === "Save") {
-    console.log("save")
-    const nameInput = req.body.name
-    const emailInput = req.body.email
-    const securityQuestionInput = req.body.securityQuestion
+    const nameInput = req.body.name;
+    const emailInput = req.body.email;
+    const securityQuestionInput = req.body.securityQuestion;
     const hashedSecurityAnswer = await bcrypt.hashSync(req.body.securityAnswer, saltRounds);
-    const securityAnswerInput = hashedSecurityAnswer
+    const securityAnswerInput = hashedSecurityAnswer;
     await User.updateOne({
       username: req.session.user.username
     }, {
@@ -123,7 +113,7 @@ router.post("/profile/account-settings", async (req, res) => {
         securityQuestion: securityQuestionInput,
         securityAnswer: securityAnswerInput
       }
-    })
+    });
     const currentUser = await User.findOne({
       username: req.session.user.username
     });

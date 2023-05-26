@@ -15,6 +15,6 @@ const dialogueSchema = new mongoose.Schema(
 );
 
 
-const dialogueModel = mongoose.model('Dialogue', dialogueSchema)
+const dialogueModel = mongoose.model('Dialogue', dialogueSchema);
 
 module.exports = dialogueModel;

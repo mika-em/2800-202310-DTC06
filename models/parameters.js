@@ -17,6 +17,6 @@ const parameterSchema = new mongoose.Schema(
 );
 
 
-const parameterModel = mongoose.model('Parameter', parameterSchema)
+const parameterModel = mongoose.model('Parameter', parameterSchema);
 
 module.exports = parameterModel;

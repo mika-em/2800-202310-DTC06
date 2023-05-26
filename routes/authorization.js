@@ -6,12 +6,10 @@ const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const expireTime = 1000 * 60 * 60 * 24 * 7; // 1 week
-const { profile } = require("console");
 
 // Index page
 router.get("/", (req, res) => {
   res.render("index");
-  ``;
 });
 
 // Signup page
@@ -81,7 +79,6 @@ router.post("/loginUser", async (req, res) => {
 
   if (!user) {
     return res.status(400).render("../views/error/400");
-    // return res.status(400).send("Invalid email/username or password.");
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
@@ -130,7 +127,6 @@ router.post("/loginUser", async (req, res) => {
 
   } else {
     return res.status(400).render("../views/error/400");
-    // return res.status(400).send("Invalid email/username or password.");
   }
 });
 
@@ -183,7 +179,7 @@ router.get("/resetPassword", (req, res) => {
 router.post("/resetPassword", async (req, res) => {
   try {
     console.log(req.body.email);
-    userReset = await User.findOne({
+    const userReset = await User.findOne({
       email: req.body.email,
     });
     console.log(userReset);
@@ -195,7 +191,6 @@ router.post("/resetPassword", async (req, res) => {
       disabled: true,
     });
   } catch (error) {
-    // return res.status(400).send("Invalid email.");
     return res.status(401).render("../views/error/401");
   }
 });
@@ -205,7 +200,7 @@ router.post("/401", (req, res) => {
 });
 
 router.post("/resetPassword/verified", async (req, res) => {
-  userReset = await User.findOne({
+  const userReset = await User.findOne({
     email: req.body.email,
   });
   const securityAnswer = userReset.securityAnswer;
@@ -223,7 +218,6 @@ router.post("/resetPassword/verified", async (req, res) => {
       disabled: false,
     });
   } else {
-    // res.send("Incorrect answer to security question.");
     res.render("../views/error/400-1");
   }
 });
@@ -248,8 +242,7 @@ router.post("/", async (req, res) => {
     );
     res.render("index");
   } catch (error) {
-    // res.status(500).send("An error occurred while creating your account.");
-    returnres.status(500).render("../views/error/500");
+    return res.status(500).render("../views/error/500");
   }
 });
 

@@ -11,7 +11,6 @@ const { profile } = require("console");
 // Index page
 router.get("/", (req, res) => {
   res.render("index");
-  ``;
 });
 
 // Signup page
@@ -77,11 +76,8 @@ router.post("/loginUser", async (req, res) => {
   })
     .select("name username email password _id")
     .exec();
-  console.log(user);
-
   if (!user) {
     return res.status(400).render("../views/error/400");
-    // return res.status(400).send("Invalid email/username or password.");
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
@@ -106,9 +102,6 @@ router.post("/loginUser", async (req, res) => {
     const currentSessionId = req.session.id; // Retrieve the current session ID from req.session.id
     user.currentSessionId = currentSessionId;
     await user.save();
-
-    console.log(req.session.user.name);
-
     try {
         const user = await User.findOne({ user: req.session.username });
     
@@ -130,7 +123,6 @@ router.post("/loginUser", async (req, res) => {
 
   } else {
     return res.status(400).render("../views/error/400");
-    // return res.status(400).send("Invalid email/username or password.");
   }
 });
 
@@ -181,12 +173,11 @@ router.get("/resetPassword", (req, res) => {
 
 // Reset password route
 router.post("/resetPassword", async (req, res) => {
+  let userReset;
   try {
-    console.log(req.body.email);
     userReset = await User.findOne({
       email: req.body.email,
     });
-    console.log(userReset);
     res.render("./authorization/resetPassword", {
       email: req.body.email,
       securityQuestion: userReset.securityQuestion,
@@ -195,7 +186,6 @@ router.post("/resetPassword", async (req, res) => {
       disabled: true,
     });
   } catch (error) {
-    // return res.status(400).send("Invalid email.");
     return res.status(401).render("../views/error/401");
   }
 });
@@ -205,6 +195,7 @@ router.post("/401", (req, res) => {
 });
 
 router.post("/resetPassword/verified", async (req, res) => {
+  let userReset;
   userReset = await User.findOne({
     email: req.body.email,
   });
@@ -223,7 +214,6 @@ router.post("/resetPassword/verified", async (req, res) => {
       disabled: false,
     });
   } else {
-    // res.send("Incorrect answer to security question.");
     res.render("../views/error/400-1");
   }
 });
@@ -248,7 +238,6 @@ router.post("/", async (req, res) => {
     );
     res.render("index");
   } catch (error) {
-    // res.status(500).send("An error occurred while creating your account.");
     returnres.status(500).render("../views/error/500");
   }
 });

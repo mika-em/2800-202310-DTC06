@@ -21,8 +21,6 @@ const openai = new OpenAIApi(configuration);
 
 // function to call OpenAI API
 async function callOpenAIAPi(userPrompt) {
-    console.log("User Prompt:", userPrompt);
-
     try {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -30,20 +28,13 @@ async function callOpenAIAPi(userPrompt) {
             temperature: 0,
             max_tokens: 1000,
         });
-
-
         const responseData = response.data.choices[0].text;
-        console.log("Response Data:", responseData.replace(/\n/g, "\\n"));
-        console.log("Response Data:", responseData);
-
         return responseData;
     } catch (error) {
         console.error("Error calling OpenAI API:", error);
         throw error;
     }
 }
-
-// ======= END AI API STUFF =======
 
 // ======= DIALOGUE ROUTES =======
 
@@ -116,7 +107,6 @@ router.get('/dialogue/chat/inner-dialogue', async (req, res) => {
         username: req.session.user.username
     });
     const innerDialogueHistory = currentUser.innerDialogueHistory
-    console.log(currentUser)
     console.log(innerDialogueHistory)
 
     res.render("dialogue/innerDialogueChat", {
@@ -157,6 +147,7 @@ router.get('/dialogue/user-persona-chat', async (req, res) => {
 
 //Route for User Persona Chat
 router.post('/dialogue/chat/user-persona-chat', async (req, res) => {
+  	let persona;
     persona = req.body.persona || "random";
     req.session.personaServerList = persona; //persona in the session
 
@@ -197,9 +188,6 @@ router.get('/dialogue/chat/user-persona', async (req, res) => {
         username: req.session.user.username
     });
     const userPersonaChatHistory = currentUser.userPersonaChatHistory;
-
-    // Retrieve persona from the session
-    const persona = req.session.personaServerList;
 
     res.render("./dialogue/personaChat", {
         placeholderText: "Write a prompt here...",
@@ -247,7 +235,7 @@ router.post('/dialogue/chat/user-persona/save', async (req, res) => {
         username: req.session.user.username
     });
     // const dialogueHistory = currentUser.userPersonaChatHistory;
-    const dialogue = currentUser.userPersonaChatHistory[index].botResponse
+    const dialogue = currentUser.userPersonaChatHistory[index].botResponse;
 
     await Dialogue.create({
         userId: currentUser._id,
@@ -258,7 +246,7 @@ router.post('/dialogue/chat/user-persona/save', async (req, res) => {
     res.render("./dialogue/userPersonaChat", {
         placeholderText: "Write a response here...",
         userPersonaChatHistory: currentUser.userPersonaChatHistory,
-    })
+    });
 });
 
 
@@ -294,8 +282,8 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
         username: currentUsername
     });
 
-    const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-    console.log(PersonaPersonaChatHistory)
+    const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
+    console.log(PersonaPersonaChatHistory);
 
     res.render("dialogue/personaToPersonaChat", {
         placeholderText: "Write a prompt here...",
@@ -305,6 +293,7 @@ router.post('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
 
 //Route for Persona to Persona Chat
 router.get('/dialogue/chat/persona-to-persona-chat', async (req, res) => {
+ 		let currentUser;
     currentUser = await User.findOne({
         username: req.session.user.username
     });
@@ -339,7 +328,7 @@ router.post('/dialogue/chat/persona-to-persona-chat/save', async (req, res) => {
     res.render("dialogue/personaToPersonaChat", {
         placeholderText: "Write a response here...",
         PersonaPersonaChatHistory: currentUser.PersonaPersonaChatHistory
-    })
+    });
 });
 
 
@@ -390,8 +379,8 @@ router.post('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
         username: currentUsername
     });
 
-    const innerDialogueHistory = currentUser.innerDialogueHistory
-    console.log(innerDialogueHistory)
+    const innerDialogueHistory = currentUser.innerDialogueHistory;
+    console.log(innerDialogueHistory);
     res.render("./fromSavedPersona/innerDialogueChat", {
         placeholderText: "Write a response here...",
         innerDialogueHistory: currentUser.innerDialogueHistory,
@@ -405,10 +394,8 @@ router.post('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
 router.get('/saved/persona/dialogue/chat/inner-dialogue', async (req, res) => {
     const currentUser = await User.findOne({
         username: req.session.user.username
+  	
     });
-    const innerDialogueHistory = currentUser.innerDialogueHistory
-    console.log(currentUser)
-    console.log(innerDialogueHistory)
 
     res.render("./fromSavedPersona/innerDialogueChat", {
         placeholderText: "Write a response here...",
@@ -549,7 +536,7 @@ router.post('/saved/persona/dialogue/chat/user-persona/save', async (req, res) =
         username: req.session.user.username
     });
     // const dialogueHistory = currentUser.userPersonaChatHistory;
-    const dialogue = currentUser.userPersonaChatHistory[index].botResponse
+    const dialogue = currentUser.userPersonaChatHistory[index].botResponse;
 
     await Dialogue.create({
         userId: currentUser._id,
@@ -560,7 +547,7 @@ router.post('/saved/persona/dialogue/chat/user-persona/save', async (req, res) =
     res.render("fromSavedPersona/userPersonaChat", {
         placeholderText: "Write a response here...",
         userPersonaChatHistory: currentUser.userPersonaChatHistory,
-    })
+    });
 });
 
 
@@ -570,7 +557,7 @@ router.post('/saved/persona/dialogue/chat/user-persona/save', async (req, res) =
 router.get('/saved/persona/dialogue/persona-to-persona-chat', (req, res) => {
     const currentUsername = req.session.user.username;
     const firstPersona = req.session.personaServerList[0];
-    let secondPersona
+    let secondPersona;
 
     if (req.session.personaServerList.length > 1) {
         secondPersona = req.session.personaServerList[1];
@@ -588,7 +575,7 @@ router.get('/saved/persona/dialogue/persona-to-persona-chat', (req, res) => {
 router.post('/saved/persona/dialogue/chat/persona-to-persona-chat', async (req, res) => {
     const currentUsername = req.session.user.username;
     const firstPersona = req.session.personaServerList[0];
-    let secondPersona
+    let secondPersona;
 
     if (req.session.personaServerList.length > 1) {
         secondPersona = req.session.personaServerList[1];
@@ -615,9 +602,7 @@ router.post('/saved/persona/dialogue/chat/persona-to-persona-chat', async (req, 
         username: currentUsername
     });
 
-    const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory
-    console.log(PersonaPersonaChatHistory)
-
+    const PersonaPersonaChatHistory = currentUser.PersonaPersonaChatHistory;
     res.render("fromSavedPersona/personaToPersonaChat", {
         placeholderText: "Write a prompt here...",
         PersonaPersonaChatHistory: PersonaPersonaChatHistory,
@@ -660,7 +645,7 @@ router.post('/saved/persona/dialogue/chat/persona-to-persona-chat/save', async (
 
     res.render("fromSavedPersona/personaToPersonaChat", {
         placeholderText: "Write a response here...",
-        PersonaPersonaChatHistory: currentUser.PersonaPersonaChatHistory
+        PersonaPersonaChatHistory: currentUser.PersonaPersonaChatHistory,
     })
 });
 module.exports = router;

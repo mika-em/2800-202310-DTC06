@@ -4,9 +4,9 @@
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
 
 ## 2. Names of Contributors
-Fiona Wong
-Maddelin Maddelin
-Mika Manaligod
+* Fiona Wong
+* Maddelin Maddelin
+* Mika Manaligod
 
 
 ## 3. Technologies and Resources Used

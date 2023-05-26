@@ -3,73 +3,70 @@
 <%-include ("../partials/header-dialogue.ejs")%>
 <%- include ("../partials/emptybackbar.ejs") %>
 
-    <!-- title -->
-    <br>
-    <br>
-    <div class="col text-center mx-5 mb-5">
-        <h3>Create an inner dialogue.</h3>
-        <p>Have you ever wondered what a persona could be thinking?</p>
-    </div>
-    </div>
-    </div>
+<!-- title -->
+<br>
+<br>
+<div class="col text-center mx-5 mb-5">
+  <h3>Create an inner dialogue.</h3>
+  <p>Have you ever wondered what a persona could be thinking?</p>
+</div>
+</div>
+</div>
 
-    <!-- content -->
-    <div class="container-fluid" style="padding-top: 30px;">
-        <div class="row">
-            <form action="/saved/persona/dialogue/chat/inner-dialogue" method="post" class="text-center">
-                <div class="col-12">
-                    <div class="card text-center">
-                        <div class="card-body mx-1">
-                            <label class="card-title">Persona:</label><br />
-                            <textarea class="form-control text-center" readonly><%= persona %></textarea>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="col-12">
-                    <div class="card text-center">
-                        <div class="card-body mx-1">
-                            <label class="card-title">What situation is the persona faced with?</label><br>
-                            <input class="form-control" type="text" name="plot"
-                                placeholder="Enter the plot/setting your persona is in" />
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="col-12">
-                    <div class="card text-center">
-                        <div class="card-body mx-1">
-                            <label class="card-title">What kind of setting are they in?</label><br />
-                            <input class="form-control" type="text" name="plot"
-                                placeholder="Enter the plot/setting your persona is in" />
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <button class="btn" type="submit">Send</button>
-            </form>
+<!-- content -->
+<div class="container-fluid" id="inputContainer" style="padding-top: 30px;">
+  <div class="row">
+    <form action="/saved/persona/dialogue/chat/inner-dialogue" method="post" class="text-center">
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">Persona:</label><br />
+            <textarea class="form-control text-center" readonly><%= persona %></textarea>
+          </div>
         </div>
-    </div>
+      </div>
+      <br>
+      <br>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">What situation is the persona faced with?</label><br>
+            <input class="form-control" type="text" name="plot" placeholder="Enter the plot/setting your persona is in" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">What kind of setting are they in?</label><br />
+            <input class="form-control" type="text" name="plot" placeholder="Enter the plot/setting your persona is in" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <button class="btn" type="submit" id="send">Send</button>
+    </form>
+  </div>
+</div>
 
-    <div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
-        <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
-        <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
-    </div>
-    </div>
+<div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
+  <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+  <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            $('#send').click(function () {
-                // show card with loading indicator
-                $("#loadingCard").removeClass("d-none");
-                $("#generalContainer").addClass("d-none");
-            });
-        });
-    </script>
+<script>
+  $(document).ready(function() {
+    $('#send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+      $("#inputContainer").addClass("d-none");
+    });
+  });
+</script>
 
-    <!-- navbar and footer -->
-    <%-include ("../partials/navbar.ejs")%>
-    <%-include ("../partials/footer.ejs")%>
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

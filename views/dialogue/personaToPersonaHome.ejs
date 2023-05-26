@@ -7,66 +7,62 @@
 <br>
 <br>
 <div class="col text-center  mx-4">
-    <h3>Persona to Persona Chat</h3>
-    <p>How would these two personas chat with each other?</p>
+  <h3>Persona to Persona Chat</h3>
+  <p>How would these two personas chat with each other?</p>
 </div>
 </div>
 </div>
 
 <!-- content -->
-<div class="container-fluid" style="padding-top: 30px;">
-    <div class="row">
-        <form action="/dialogue/chat/persona-to-persona-chat" method="post" class="text-center">
-            <div class="col-12">
-                <div class="card text-center">
-                    <div class="card-body mx-1">
-                        <label class="card-title">Describe the first persona</label><br />
-                        <input class="form-control" type="text" name="firstPersona"
-                            placeholder="Enter a persona description" />
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="col-12">
-                <div class="card text-center">
-                    <div class="card-body mx-1">
-                        <label class="card-title">Describe the second persona</label><br />
-                        <input class="form-control" type="text" name="secondPersona"
-                            placeholder="Enter the situation your persona is in" />
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="col-12">
-                <div class="card text-center">
-                    <div class="card-body mx-1">
-                        <label class="card-title">What kind of situation are they in?</label><br />
-                        <input class="form-control" type="text" name="situation"
-                            placeholder="Enter the setting the personas are in" />
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <button class="btn" type="submit">Send</button>
-        </form>
-    </div>
+<div class="container-fluid" id="inputContainer" style="padding-top: 30px;">
+  <div class="row">
+    <form action="/dialogue/chat/persona-to-persona-chat" method="post" class="text-center">
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">Describe the first persona</label><br />
+            <input class="form-control" type="text" name="firstPersona" placeholder="Enter a persona description" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">Describe the second persona</label><br />
+            <input class="form-control" type="text" name="secondPersona" placeholder="Enter the situation your persona is in" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body mx-1">
+            <label class="card-title">What kind of situation are they in?</label><br />
+            <input class="form-control" type="text" name="situation" placeholder="Enter the setting the personas are in" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <button class="btn" type="submit" id="send">Send</button>
+    </form>
+  </div>
 </div>
 
 <div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
-    <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
-    <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
-</div>
+  <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+  <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('#send').click(function () {
-            // show card with loading indicator
-            $("#loadingCard").removeClass("d-none");
-            $("#generalContainer").addClass("d-none");
-        });
+  $(document).ready(function() {
+    $('#send').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+      $("#inputContainer").addClass("d-none");
     });
+  });
 </script>
 
 <!-- navbar and footer -->

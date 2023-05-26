@@ -2,56 +2,55 @@
 <%-include ("../partials/header-internal.ejs")%>
 
 <div class="container-fluid mb-5 pb-5" id="chatContainer">
-    <!-- Existing chat messages -->
-    <div class="row-fluid">
-        <% for (var i=0; i<innerDialogueHistory.length; i++) { %>
-        <div class="col-12 my-2" id="userInput">
-            <div class="card text-bg-light">
-            </div>
-        </div>
-        <div class="col-12" id="botOutput">
-            <div class="card">
-
-                <form action="saved/persona/dialogue/chat/inner-dialogue/save" method="post">
-                    <div class="col-12" id="botOutput">
-                        <div class="card">
-                            <!-- save button -->
-                            <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon"
-                                type="submit" name="save" value="<%- i %>">
-                                star_border
-                            </button>
-
-                            <div class="card-body m-3">
-                                <div class="card-title">Persona:</div>
-                                <div class="card-text" name="data"><%- personaServerList[0] %>
-                                    <div class="card-text" name="data"><%- innerDialogueHistory[i].botResponse %>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- </form> -->
-                        <hr>
-                        <% } %>
-                    </div>
-            </div>
-        </div>
-
-        <div class="px-5 text-center d-none" id="loadingCard" style="padding-top: 200px;">
-            <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl"
-                    style="color: #ffffff;"></i></i></span>
-            <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
-        </div>
+  <!-- Existing chat messages -->
+  <div class="row-fluid">
+    <% for (var i=0; i<innerDialogueHistory.length; i++) { %>
+    <div class="col-12 my-2" id="userInput">
+      <div class="card text-bg-light">
+      </div>
     </div>
+    <div class="col-12" id="botOutput">
+      <div class="card">
 
-    <script>
-        $(document).ready(function () {
-            $('#send').click(function () {
-                // show card with loading indicator
-                $("#loadingCard").removeClass("d-none");
-                $("#generalContainer").addClass("d-none");
-            });
-        });
-    </script>
-    <!-- navbar and footer -->
-    <%-include ("../partials/navbar.ejs")%>
-    <%-include ("../partials/footer.ejs")%>
+        <form action="saved/persona/dialogue/chat/inner-dialogue/save" method="post">
+          <div class="col-12" id="botOutput">
+            <div class="card">
+              <!-- save button -->
+              <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" id="save" type="submit" name="save" value="<%- i %>">
+                star_border
+              </button>
+
+              <div class="card-body m-3">
+                <div class="card-title">Persona:</div>
+                <div class="card-text" name="data"><%- personaServerList[0] %>
+                  <div class="card-text" name="data"><%- innerDialogueHistory[i].botResponse %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        <hr>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-5 text-center d-none" id="loadingCard">
+    <span id="loadingContainer"><i class="fa-solid fa-cat fa-bounce fa-2xl" style="color: #ffffff;"></i></i></span>
+    <p style="color: #ffffff;">Please watch this cat while we finish generating!</p>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('button#save').click(function() {
+      // show card with loading indicator
+      $("#loadingCard").removeClass("d-none");
+    });
+  });
+</script>
+
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs")%>

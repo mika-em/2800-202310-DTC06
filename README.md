@@ -1,13 +1,7 @@
-# DTC GROUP 6 - INVSONA
+## 1. DTC GROUP 6 - INVSONA
 
-## 1. Project Description
+## 2. Project Description
 Invsona is an AI-powered persona creation web application, to help artists, developers, and other creative individuals overcome creative blocks by generating customized personas tailored to individual user's needs and preferences through user input.
-
-## 2. Names of Contributors
-* Fiona Wong
-* Maddelin Maddelin
-* Mika Manaligod
-
 
 ## 3. Technologies and Resources Used
 * CSS 3
@@ -24,29 +18,7 @@ Invsona is an AI-powered persona creation web application, to help artists, deve
 * Font Awesome 6.0.0
 * OpenAI API - GPT-3.5 (text-davinci-003)
 
-## 4. Complete setup/installion/usage
-State what a user needs to do when they come to your project.  How do others start using your code or application?
-Here are the steps ...
-* Open terminal and enter "npm install" to install all necessary dependencies
-* Enter necessary inputs into own env file
-* Run the application by entering "nodemon app.js". app.js is the entry point.
-
-## 5. Known Bugs and Limitations
-Here are some known bugs:
-* Some logo images may not load correctly
-* Filter function is currently not active
-* Profile picture upload may produce errors
-
-
-## 6. Features for Future
-What we'd like to build in the future:
-* Character Image Generator - using AI to create illustrations of the generated personas
-* Filters - to filter out certain traits
-* Clear chatlog button - to clear the chatlog
-* Alert messages to notify users of errors, successful actions, confirmations, etc.
-
-
-## 7. Contents of Folder
+## 4. Contents of Folder
 Content of the project folder:
 
 ```
@@ -161,15 +133,65 @@ Within images subfolder there is another subfolder
         ├── cat_placeholder.png     # Placeholder image for cat
         ├── meow.mp3                # Secret sound
         ├── meow.mp4                # Secret video
-        ├── nyancat.png             # Secret image
         └── nyancat.png             # Secret image
-    ├── invsona                  # Folder for invsona related logo and header
+    ├── invsona                     # Folder for invsona related logo and header
         ├── home.png                # Logo for home page - designed by Fiona
         ├── invsona-banner-white.png # Logo banner for dark theme - designed by Fiona
         ├── invsona-banner.png      # Logo banner - designed by Fiona
         └── invsona.png             # Logo for all other pages - designed by Fiona
-    └── blue_bg.mp4             # Background video for light theme
+    └── blue_bg.mp4                 # Background video for light theme
 
 ```
 
+## 5. Complete setup/installion/usage
+State what a user needs to do when they come to your project.  How do others start using your code or application?
+Here are the steps ...
+* Open terminal and enter "npm install" to install all necessary dependencies
+* Enter necessary inputs into own env file: OpenAI API key, Monogo
+* Enter necessary inputs into own env file: OpenAI API key, MonogoB account
+* Run the application by entering "nodemon app.js". app.js is the entry point.
 
+
+## 5.1 Known Bugs and Limitations
+Here are some known bugs:
+* Some logo images may not load correctly
+* Filter function is currently not active
+* Profile picture upload may produce errors
+
+
+## 5.2. Features for Future
+What we'd like to build in the future:
+* Character Image Generator - using AI to create illustrations of the generated personas
+* Filters - to filter out certain traits
+* Clear chatlog button - to clear the chatlog
+* Alert messages to notify users of errors, successful actions, confirmations, etc.
+
+
+
+## 7. Credits, References, Licenses
+We would like to credit OpenAI for providing easy to read documentation so that we could implement AI in the core features of our application
+
+## 8. Usage of AI
+We used AI to help create our app by testing out various inputs to produce our desired outputs. We used Chat-GPT to create our personas and dialogues so we could get an idea of what kind of outcome we could produce.
+
+We did not use any data sets, as the AI model we are using does not enable fine-tuning. It does, however, contain a vast amount of data that dates to June 2021
+
+We used the OpenAI API to create a Persona and Dialogue Generator. We used the OpenAI API - GPT-3.5 (text-davinci-003) model for chat completions. We prompted the AI by creating our own optimized prompts.
+
+We encountered limitations in how much text we can prompt into the API, so we had to create optimized prompts within a limited character count.
+
+## 9. Contact Information
+* Fiona Wong
+* School email: fwong98@my.bcit.ca
+* Personal email:  fwwong01@gmail.com
+* githu: fwwong
+
+* Maddelin Maddelin
+* School email : mmaddelin@my.bcit.ca
+* Personal email : maddelintan@gmail.com
+* Github: maddelin
+
+* Mika Manaligod
+* School email : mmanaligod3@mybcit.ca
+* Personal email : mkmanaligod@gmail.com
+* Github: mika-em

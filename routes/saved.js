@@ -182,10 +182,15 @@ router.post("/saved/dialogue/save-as-pdf", async (req, res) => {
   // Pipe the PDF stream directly to the response
   doc.pipe(res);
 
-  doc.image("./images/invsona/bw-banner.png", {
-    fit: [100, 100],
+  const imageWidth = 450;
+  const imageHeight = (imageWidth * 300) / 2000;
+
+  doc.image("./images/invsona/invsona-banner-white.png", {
+    fit: [imageWidth, imageHeight],
     align: "center",
+    valign: "top",
   });
+
 
   doc.text("Your Dialogues by Invsona", {
     underline: true,

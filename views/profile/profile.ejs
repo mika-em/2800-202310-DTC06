@@ -7,15 +7,12 @@
     <div class="pb-4 pt-4">
       <form action="/upload" method="post" enctype="multipart/form-data">
         <label for="fileToUpload">
-          <div class="editUserImage" 
-            <% if (profileImage) { %>
-              style="background-image: url(data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>)"
-            <% } else { %>
-              style="background-image: url(/images/cats/cat_placeholder.png)"
-            <% } %>
-            id="userImage">
-    
-            <span> 
+          <div class="editUserImage" <% if (profileImage) { %> 
+              style="background-image: url(data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>)" 
+            <% } else { %> 
+              style="background-image: url(/images/cats/cat_placeholder.png)" <% } %> id="userImage">
+
+            <span>
               <span class="material-symbols-rounded">edit</span>
               Edit Profile Picture
             </span>
@@ -26,112 +23,108 @@
       </form>
     </div>
   </div>
-  
 
-      <!-- Menu -->
-      <div class="container px-3">
 
-        <!-- Account Settings -->
-        <div class="card p-3 bg-light btn">
-          <a href="/profile/account-settings">
-            <div class="row ">
-              <div class="col-2">
-                <span class="material-symbols-rounded">
-                  settings
-                  </span>
-              </div>
-              <div class="col" id="menubtn">Account Settings</div>
-            </div>
-          </a>
+  <!-- Menu -->
+  <div class="container px-3">
+
+    <!-- Account Settings -->
+    <div class="card p-3 bg-light btn">
+      <a href="/profile/account-settings">
+        <div class="row ">
+          <div class="col-2">
+            <span class="material-symbols-rounded">
+              settings
+            </span>
+          </div>
+          <div class="col" id="menubtn">Account Settings</div>
         </div>
-        
-
-        <!-- Filters -->
-        <div class="card p-3 bg-light btn">
-          <a href="/filters">
-            <div class="row">
-              <div class="col-2">
-                <span class="material-symbols-rounded">
-                  tune
-                  </span>
-              </div>
-              <div class="col" id="menubtn">Filters</div>
-            </div>
-          </a>
-        </div>
- 
-
-        <!-- Saved Persona -->
-        <div class="card p-3 bg-light btn" >
-          <a href="/saved/persona">
-            <div class="row">
-              <div class="col-2">
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <div class="col"id="menubtn">Saved Persona</div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Saved Dialogue -->
-        <div class="card p-3 bg-light btn" >
-          <a href="/saved/saved-dialogue">
-            <div class="row">
-              <div class="col-2">
-                <i class="fa-solid fa-heart"></i>
-              </div>
-              <div class="col"id="menubtn">Saved Dialogue</div>
-            </div>
-          </a>
-        </div>
-   
-
-        <!-- About Us -->
-        <div class="card p-3 bg-light btn" >
-          <a href="/about-us">
-            <div class="row">
-              <div class="col-2">
-                <span class="material-symbols-rounded">
-                  info
-                  </span>
-              </div>
-              <div class="col" id="menubtn">About Us</div>
-            </div>
-          </a>
-        </div>
-   
-
-        <!-- FAQ -->
-        <div class="card p-3 bg-light btn" >
-          <a href="/faq">
-            <div class="row">
-              <div class="col-2">
-                <span class="material-symbols-rounded">
-                  help
-                  </span>
-              </div>
-              <div class="col" id="menubtn">FAQ</div>
-            </div>
-          </a>
-        </div>
-     
-   
-
-        <!-- Logout -->
-        <div class="text-center mt-2 ">
-          <button
-            type="button"
-            class="btn bg-light "
-            onclick="window.location.href='/logout'"
-          >
-            LOGOUT
-          </button>
-        </div>
-        <br />
-      </div>
+      </a>
     </div>
-  
+
+
+    <!-- Filters -->
+    <div class="card p-3 bg-light btn">
+      <a href="/filters">
+        <div class="row">
+          <div class="col-2">
+            <span class="material-symbols-rounded">
+              tune
+            </span>
+          </div>
+          <div class="col" id="menubtn">Filters</div>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- Saved Persona -->
+    <div class="card p-3 bg-light btn">
+      <a href="/saved/persona">
+        <div class="row">
+          <div class="col-2">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="col" id="menubtn">Saved Persona</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Saved Dialogue -->
+    <div class="card p-3 bg-light btn">
+      <a href="/saved/saved-dialogue">
+        <div class="row">
+          <div class="col-2">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div class="col" id="menubtn">Saved Dialogue</div>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- About Us -->
+    <div class="card p-3 bg-light btn">
+      <a href="/about-us">
+        <div class="row">
+          <div class="col-2">
+            <span class="material-symbols-rounded">
+              info
+            </span>
+          </div>
+          <div class="col" id="menubtn">About Us</div>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- FAQ -->
+    <div class="card p-3 bg-light btn">
+      <a href="/faq">
+        <div class="row">
+          <div class="col-2">
+            <span class="material-symbols-rounded">
+              help
+            </span>
+          </div>
+          <div class="col" id="menubtn">FAQ</div>
+        </div>
+      </a>
+    </div>
+
+
+
+    <!-- Logout -->
+    <div class="text-center mt-2 ">
+      <button type="button" class="btn bg-light " onclick="window.location.href='/logout'">
+        LOGOUT
+      </button>
+    </div>
+    <br />
+  </div>
 </div>
-  <!-- navbar and footer -->
-  <%-include ("../partials/navbar.ejs")%> 
-  <%-include ("../partials/footer.ejs") %>
+
+</div>
+<!-- navbar and footer -->
+<%-include ("../partials/navbar.ejs")%>
+<%-include ("../partials/footer.ejs") %>

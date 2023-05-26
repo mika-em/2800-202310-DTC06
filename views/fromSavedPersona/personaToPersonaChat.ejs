@@ -4,15 +4,16 @@
   <!-- Existing chat messages -->
   <% PersonaPersonaChatHistory.forEach((entry, index) => { %>
   <div class="row">
+
     <!-- Display bot's output -->
     <div class="col-12 my-2" id="botOutput">
       <div class="card">
         <form action="saved/persona/dialogue/chat/persona-to-persona/save" method="post">
           <div class="col-12" id="botOutput">
             <div class="card">
+
               <!-- save button -->
-              <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit"
-                name="save">
+              <button class="material-icons position-absolute top-0 end-0 m-3 clickable save-icon" type="submit" name="save">
                 favorite_border
               </button>
               <div class="card-body m-3">
@@ -43,7 +44,7 @@
 </div>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     const container = document.getElementById('chatContainer');
 
     // Scroll to the bottom of the container
@@ -52,7 +53,7 @@
       block: 'end'
     });
 
-    $('#send').click(function () {
+    $('#send').click(function() {
       // show card with loading indicator
       $("#loadingCard").removeClass("d-none");
     });

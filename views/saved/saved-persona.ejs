@@ -9,7 +9,7 @@
 <div class="col text-center">
   <h1 class="align-middle">SAVED PERSONA</h1>
 </div>
-<div class="row text-center mx-3" >
+<div class="row text-center mx-3">
   <div class="col">
     <form action="/saved/persona/save-as-pdf" method="post">
       <input id=savePDFInput type="hidden" name="personaList" value="" />
@@ -74,7 +74,7 @@
         $('#savePDFButton').attr('disabled', true)
         $('#gotoDialogueButton').attr('disabled', true)
         $('#deletePersonaButton').attr('disabled', true)
-      } else if (personaList.length > 2){
+      } else if (personaList.length > 2) {
         $('#gotoDialogueButton').attr('disabled', true)
       } else {
         // Enable the buttons

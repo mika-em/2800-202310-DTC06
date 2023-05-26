@@ -2,25 +2,24 @@
 <%-include ("../partials/header-dialogue.ejs")%>
 <%- include ("../partials/emptybackbar.ejs") %>
 <div class="col text-center">
-    <h1>DIALOGUE</h1>
-</div>
+  <h1>DIALOGUE</h1>
 </div>
 </div>
 </div>
 
 <!-- content -->
 <div class="container-fluid px-5" style="padding-top: 120px;">
-    <div>
-        <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
-        <div class="row">
-            <a class=" py-5 card btn btn-light" href="<%- locals.dialogueLinks[i].link %>">
-                <i class="<%- locals.dialogueLinks[i].icon %>"></i>
-                <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5>
-            </a>
-        </div>
-        <br>
-        <% } %>
+  <div>
+    <% for (var i=0; i<locals.dialogueLinks.length; i++) { %>
+    <div class="row">
+      <a class=" py-5 card btn btn-light" href="<%- locals.dialogueLinks[i].link %>">
+        <i class="<%- locals.dialogueLinks[i].icon %>"></i>
+        <h5 class="pt-4"><%- locals.dialogueLinks[i].name %></h5>
+      </a>
     </div>
+    <br>
+    <% } %>
+  </div>
 </div>
 
 <!-- nav bar and footer -->

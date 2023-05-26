@@ -3,8 +3,6 @@ const router = express.Router();
 const User = require("../models/users");
 const Persona = require("../models/personaList");
 const pdfkit = require("pdfkit");
-const fs = require("fs");
-const path = require("path");
 const Dialogue = require("../models/dialogueList");
 
 router.get("/saved", (req, res) => {
@@ -41,7 +39,6 @@ router.use("/persona", async (req, res, next) => {
 router.post("/persona/saved-persona/delete-persona", async (req, res) => {
   const personaIDList = req.body.personaIDList;
   const parsedPersonaIDList = JSON.parse(personaIDList);
-  console.log(parsedPersonaIDList);
 
   for (let i = 0; i < parsedPersonaIDList.length; i++) {
     await Persona.deleteOne({
@@ -67,7 +64,6 @@ router.post("/persona/saved-persona/delete-persona", async (req, res) => {
 router.post("/persona/saved-dialogue/delete-dialogue", async (req, res) => {
   const dialogueIDList = req.body.dialogueIDList;
   const parsedDialogueIDList = JSON.parse(dialogueIDList);
-  console.log(parsedDialogueIDList);
 
   for (let i = 0; i < parsedDialogueIDList.length; i++) {
     await Dialogue.deleteOne({
@@ -93,12 +89,10 @@ router.post("/persona/saved-dialogue/delete-dialogue", async (req, res) => {
 router.post("/persona/saved-persona/dialogue-filters", (req, res) => {
   const personaList = req.body.personaList;
   const parsedPersonaList = JSON.parse(personaList);
-  console.log(parsedPersonaList);
 
   for (let i = 0; i < parsedPersonaList.length; i++) {
     personaServerList.push(parsedPersonaList[i]);
   }
-  console.log("This is the Persona Server List" + personaServerList);
 
   req.session.personaServerList = personaServerList;
 
@@ -111,7 +105,6 @@ router.post("/saved/persona/save-as-pdf", async (req, res) => {
   // Encode the personaList to handle special characters
   const personaList = req.body.personaList;
   const convertedPersonaList = JSON.parse(personaList);
-  console.log(convertedPersonaList);
 
   // instantiate the library
   let doc = new pdfkit();
@@ -191,7 +184,6 @@ router.post("/saved/dialogue/save-as-pdf", async (req, res) => {
   // Encode the personaList to handle special characters
   const dialogueList = req.body.dialogueList;
   const convertedDialogueList = JSON.parse(dialogueList);
-  console.log(convertedDialogueList);
 
   // instantiate the library
   let doc = new pdfkit();

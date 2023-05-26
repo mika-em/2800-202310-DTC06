@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// parameter collection schema
 const personaSchema = new mongoose.Schema(
     {
         userId: {
@@ -10,11 +8,10 @@ const personaSchema = new mongoose.Schema(
         date: Date,
         persona: String,
     },
-    // name of the collection in database
     { collection: 'personas' }
 );
 
 
-const personaModel = mongoose.model('Persona', personaSchema)
+const personaModel = mongoose.model('Persona', personaSchema);
 
 module.exports = personaModel;

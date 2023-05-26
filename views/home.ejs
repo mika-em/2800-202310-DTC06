@@ -8,30 +8,30 @@
   <div class="container text-center align-item-center p-2 pt-1">
     <div class="p-3 mt-4">
       <% if (profileImage && profileImage.contentType && profileImage.data) { %>
-        <img src="data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>" id="userImage" alt="userImage" class="p-2" />
+      <img src="data:<%= profileImage.contentType %>;base64,<%= profileImage.data.toString('base64') %>" id="userImage" alt="userImage" class="p-2" />
       <% } else { %>
-        <img src="/images/cats/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
+      <img src="/images/cats/cat_placeholder.png" id="userImage" alt="userImage" class="p-2" />
       <% } %>
     </div>
     <h1 id="display-name"><%- name %></h1>
   </div>
 
-  <!-- cards -->  
+  <!-- cards -->
   <div class="container-lg align-item-center text-center">
     <div class="row">
       <% for (var i=1; i < locals.navLinks.length; i++) { %>
-        <div class="col-6 px-2">
-          <a class="main btn btn-outline-light" href="<%- locals.navLinks[i].link %>">
-            <i class= "<%-locals.navLinks[i].icon%>" style="opacity: 100%;"></i>
-              <p class="card-title" id="card-name"><%- locals.navLinks[i].upperName %></p>
-              <p class="card-text" style="font-size: 8pt; width:140px; height: 50px;"><%- locals.navLinks[i].description %></p>
-          </a><br><br>
-        </div>
-        <% } %>
+      <div class="col-6 px-2">
+        <a class="main btn btn-outline-light" href="<%- locals.navLinks[i].link %>">
+          <i class="<%-locals.navLinks[i].icon%>" style="opacity: 100%;"></i>
+          <p class="card-title" id="card-name"><%- locals.navLinks[i].upperName %></p>
+          <p class="card-text" style="font-size: 8pt; width:140px; height: 50px;"><%- locals.navLinks[i].description %></p>
+        </a><br><br>
       </div>
-      </div>
+      <% } %>
+    </div>
+  </div>
 
 
-<!-- nav bar and footer -->
-<%-include ('./partials/navbar.ejs')%> 
-<%-include ('./partials/footer.ejs')%>
+  <!-- nav bar and footer -->
+  <%-include ('./partials/navbar.ejs')%>
+  <%-include ('./partials/footer.ejs')%>

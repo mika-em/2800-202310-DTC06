@@ -78,7 +78,7 @@ const dialogueLinks = [{
 {
     name: 'Saved dialogues',
     icon: 'fa-solid fa-heart fa-2xl"',
-    link: '/persona/saved-dialogue'
+    link: '/saved/saved-dialogue'
 }
 ];
 

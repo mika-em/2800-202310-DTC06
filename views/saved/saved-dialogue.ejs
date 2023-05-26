@@ -7,22 +7,22 @@
 
 <div class="col text-center">
     <h1 class="align-middle">SAVED DIALOGUE</h1>
+    </div>
+    <div class="row text-center mx-3" >
+        <div class="col">
     <form id="savePDF" action="/saved/dialogue/save-as-pdf" method="post">
         <input id=savePDFInput type="hidden" name="dialogueList" value="" />
-        <button class="btn btn-sm position-absolute top-50 end-0 translate-middle material-icons" id="savePDFButton"
+        <button class="btn btn-sm material-symbols-rounded" id="savePDFButton"
             disabled>picture_as_pdf</button>
     </form>
-    <form id="savePDF" action="/saved/persona/dialogueFilters" method="post">
-    </form>
+    </div>
+    <div class="col">
+        <!-- <form action="/persona/saved-dialogue/delete-dialogue" method="post"> -->
+            <input id="deleteDialogueInput" type="hidden" name="dialogueIDList" value="" />
+            <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton" disabled>delete</button>
+        </form>        
+    </div>
 </div>
-</div>
-</div>
-<div class="col">
-    <form action="/persona/saved-persona/delete-persona" method="post">
-        <input id=deleteDialogueInput type="hidden" name=dialogueIDList" value="" />
-        <button class="btn btn-sm material-symbols-rounded text-center" id="deleteDialogueButton"
-            disabled>delete</button>
-    </form>
 </div>
 
 <div class="container card mt-2">
@@ -35,7 +35,7 @@
                     aria-controls="flush-collapse<%- [i] %>">
                     <div class="form-check form-switch text-center">
                         <input class="form-check-input dialogueCheckbox" type="checkbox"
-                            id="<%- savedDialogue[i].dialogue %>">
+                            id="<%- savedDialogue[i].dialogue %>" value="<%- savedDialogue[i]._id %>>
                         <p class="card-title"><%- savedDialogue[i].date %></p>
                     </div>
                 </button>
@@ -61,17 +61,17 @@
             console.log("checked")
             if (event.target.checked) {
                 dialogueList.push(event.target.id)
-                dialogueIDList.push(event.target.id)
+                dialogueIDList.push(event.target.value)
             } else {
                 dialogueList.pop(event.target.id)
-                dialogueIDList.pop(event.target.id)
+                dialogueIDList.pop(event.target.value)
             }
             console.log(dialogueList)
             console.log(dialogueIDList)
             if (dialogueList.length === 0) {
                 $('#savePDFButton').attr('disabled', true)
                 $('#deleteDialogueButton').attr('disabled', true)
-            } else { 
+            } else {
                 // Enable the buttons
                 $('#savePDFButton').attr('disabled', false)
                 $('#deleteDialogueButton').attr('disabled', false)

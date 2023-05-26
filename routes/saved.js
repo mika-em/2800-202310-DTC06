@@ -67,10 +67,10 @@ router.post("/persona/saved-persona/delete-persona", async (req, res) => {
 router.post("/persona/saved-dialogue/delete-dialogue", async (req, res) => {
   const dialogueIDList = req.body.dialogueIDList;
   const parsedDialogueIDList = JSON.parse(dialogueIDList);
-  // console.log(parsedPersonaIDList);
+  console.log(parsedDialogueIDList);
 
   for (let i = 0; i < parsedDialogueIDList.length; i++) {
-    await Persona.deleteOne({
+    await Dialogue.deleteOne({
       _id: parsedDialogueIDList[i],
     });
   }
@@ -80,12 +80,12 @@ router.post("/persona/saved-dialogue/delete-dialogue", async (req, res) => {
   });
   const userID = currentUser._id;
 
-  const savedPersona = await Dialogue.find({
+  const savedDialogue = await Dialogue.find({
     userId: userID,
   });
 
-  res.render("./saved/saved-persona", {
-    savedPersona: savedPersona,
+  res.render("./saved/saved-dialogue", {
+    savedDialogue: savedDialogue,
   });
 });
 

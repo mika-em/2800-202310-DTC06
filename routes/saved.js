@@ -242,7 +242,7 @@ router.post("/saved/dialogue/save-as-pdf", async (req, res) => {
 });
 
 //saved dialogue
-router.get("/persona/saved-dialogue", async (req, res) => {
+router.get("/saved/saved-dialogue", async (req, res) => {
   const currentUser = await User.findOne({
     username: req.session.user.username,
   });
